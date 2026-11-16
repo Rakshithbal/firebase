@@ -1,19 +1,71 @@
 {
  "grade": "bw",
  "photos": [
-  {"id": "P01", "what": "First flight, Dec 17 1903", "kind": "photo", "commons": "File:First flight2.jpg"},
-  {"id": "P02", "what": "Orville Wright in the Wright Cycle Company shop, 1890s", "kind": "photo",
-   "commons": "File:Orville Wright in a work apron standing behind equipment at the Wright Cycle Company, c. 1890s. (a1895985-1dd8-b71b-0bd7-087631da420f).jpg"},
-  {"id": "P03", "what": "Wilbur Wright, 1905", "kind": "photo", "commons": "File:Wilbur Wright-crop.jpg", "crop": [0.04, 0.02, 0.96, 0.86]},
-  {"id": "P04", "what": "Orville Wright, 1905", "kind": "photo", "commons": "File:Orville Wright 1905-crop.jpg", "crop": [0.04, 0.02, 0.96, 0.86]},
-  {"id": "P05", "what": "Samuel P. Langley", "kind": "photo", "commons": "File:Samuel Pierpont Langley SI-87-17019h original.jpg", "crop": [0.0, 0.04, 1.0, 0.72]},
-  {"id": "P06", "what": "Langley's Aerodrome A on its houseboat, Oct 7 1903", "kind": "photo",
-   "commons": "File:Attempted Flight of Langley's Full Sized Plane, being readied for Launching, October 7th 1903. (50255040742).jpg",
-   "credit": "Photographer unknown (Commons upload via Flickr user tormentor4555)"},
-  {"id": "P07", "what": "Orville's telegram to his father, Dec 17 1903", "kind": "doc", "commons": "File:Telegram Orville Wright 17 dec 1903.jpg"}
+  {
+   "id": "P01",
+   "what": "First flight, Dec 17 1903",
+   "kind": "photo",
+   "real_photo_on_commons": "File:First flight2.jpg",
+   "file": "P01_ai.jpg",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  },
+  {
+   "id": "P02",
+   "what": "Orville Wright in the Wright Cycle Company shop, 1890s",
+   "kind": "photo",
+   "real_photo_on_commons": "File:Orville Wright in a work apron standing behind equipment at the Wright Cycle Company, c. 1890s. (a1895985-1dd8-b71b-0bd7-087631da420f).jpg",
+   "file": "P02_ai.jpg",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  },
+  {
+   "id": "P03",
+   "what": "Wilbur Wright, 1905",
+   "kind": "photo",
+   "real_photo_on_commons": "File:Wilbur Wright-crop.jpg",
+   "file": "P03_ai.jpg",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  },
+  {
+   "id": "P04",
+   "what": "Orville Wright, 1905",
+   "kind": "photo",
+   "real_photo_on_commons": "File:Orville Wright 1905-crop.jpg",
+   "file": "P04_ai.jpg",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  },
+  {
+   "id": "P05",
+   "what": "Samuel P. Langley",
+   "kind": "photo",
+   "real_photo_on_commons": "File:Samuel Pierpont Langley SI-87-17019h original.jpg",
+   "file": "P05_ai.jpg",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  },
+  {
+   "id": "P06",
+   "what": "Langley's Aerodrome A on its houseboat, Oct 7 1903",
+   "kind": "photo",
+   "credit": "AI illustration generated with Google Gemini, not a historical photograph",
+   "real_photo_on_commons": "File:Attempted Flight of Langley's Full Sized Plane, being readied for Launching, October 7th 1903. (50255040742).jpg",
+   "file": "P06_ai.jpg",
+   "license": "AI-generated (user supplied)",
+   "source": "User's Google Drive: Wright Brothers & Langley Photos"
+  }
  ],
  "recreations": [
   "Wilbur Wright's letter of May 30, 1899 to the Smithsonian: the sentence shown is quoted from the letter; the page is typeset in code.",
-  "New York Times editorial 'Flying Machines Which Do Not Fly', Oct 9, 1903: the quoted sentence is real; the page is typeset in code."
- ]
+  "New York Times editorial 'Flying Machines Which Do Not Fly', Oct 9, 1903: the quoted sentence is real; the page is typeset in code.",
+  "Orville Wright's telegram of Dec 17, 1903 to his father: the wording is the real telegram's; the form is typeset in code."
+ ],
+ "note": "P01-P06 are AI illustrations, labelled on screen. To use the real archive photos, put 'commons' back from 'real_photo_on_commons', remove 'file', and run fetch_commons.py get."
 }

@@ -30,16 +30,16 @@ def build_film(doc):
     film.add(RegionFill(us, ["North Carolina"], RUST, W(1, "beach"), to_rgb=MUSTARD, t_change=L(5) + 0.5))
     film.add(XMarker(*kdh, "KILL DEVIL HILLS, N.C.", t_in=W(1, "North"), side="left", **LBL))
 
+    title_t = E(4) + 0.45
     # 2 the photograph lands out past the coast, tied to the pin
-    photo = film.add(Print("P01", CX, 300, 2600, rot=-1.2, t_in=L(2) + 0.1, label="PHOTO: JOHN T. DANIELS", label_t=W(4, "took")))
+    photo = film.add(Print("P01", CX, 300, 2600, rot=-1.2, t_in=L(2) + 0.1, label="AI ILLUSTRATION", label_t=L(2) + 0.6))
+    film.add(BigText("PHOTOGRAPHER: JOHN T. DANIELS", CX, -1250, 230, W(4, "took") - 0.1, t_out=title_t, bar=HILITE, bar_h=0.92, rgb=(30, 26, 22), shadow=False))
     film.add(StringLine(kdh, (CX - 1250, -560), t_in=L(2) + 0.2, dur=0.7, sag=0.03, width=16, persist=True))
 
     # 3 two counters roll up under it
     c12 = film.add(Counter(CX - 1100, 2950, 760, 12, W(3, "Twelve") - 0.05, dur=0.8, caption="SECONDS"))
     film.add(Counter(CX + 1250, 2950, 760, 120, W(3, "hundred") - 0.15, dur=1.0, caption="FEET"))
 
-    # 4 the photographer's name bar (Print label), then the title
-    title_t = E(4) + 0.45
     film.add(BigText("TWELVE SECONDS", CX, -2300, 860, title_t, rgb=(244, 240, 232), hit=None))
     ring = film.add(PenMark("ellipse", CX, -2560, 7600, 1500, t_in=title_t + 0.35, dur=0.8, width=26, seed=4, rot=-2, rgb=(236, 230, 220)))
     cue("boom", title_t, 0.55)
@@ -64,9 +64,9 @@ def build_film(doc):
     film.add(StringLine((CX - 1250, -560), dayton, t_in=L(5) + 0.15, dur=1.2, sag=0.02, width=22))
     film.add(RegionFill(us, ["Ohio"], RUST, W(5, "Dayton") - 0.2, to_rgb=MUSTARD, t_change=L(14) + 0.6))
     film.add(XMarker(*dayton, "DAYTON", t_in=W(5, "Dayton"), side="right", **LBL))
-    shop = film.add(Print("P02", 9400, -7100, 2000, rot=1.5, t_in=W(5, "bicycle") - 0.1))
-    wil = film.add(Print("P03", 6500, -7350, 1700, rot=-2.0, t_in=W(6, "Wilbur") - 0.1, label="WILBUR WRIGHT", label_t=W(6, "Wilbur") + 0.1))
-    orv = film.add(Print("P04", 12350, -7350, 1700, rot=2.2, t_in=W(6, "Orville") - 0.1, label="ORVILLE WRIGHT", label_t=W(6, "Orville") + 0.1))
+    shop = film.add(Print("P02", 9400, -7100, 2000, rot=1.5, t_in=W(5, "bicycle") - 0.1, label="AI ILLUSTRATION", label_t=W(5, "bicycle") + 0.3))
+    wil = film.add(Print("P03", 6500, -7350, 1700, rot=-2.0, t_in=W(6, "Wilbur") - 0.1, label="WILBUR WRIGHT · AI ILLUSTRATION", label_t=W(6, "Wilbur") + 0.1))
+    orv = film.add(Print("P04", 12350, -7350, 1700, rot=2.2, t_in=W(6, "Orville") - 0.1, label="ORVILLE WRIGHT · AI ILLUSTRATION", label_t=W(6, "Orville") + 0.1))
     letter = film.add(PaperDoc(15900, -7500, 2500, 3200, rot=1.6, t_in=W(7, "wrote") - 0.1, rows=16, sentence_row=5, sentence_size=96,
                                header=(("WRIGHT CYCLE COMPANY", 130, "serif"), ("DAYTON, OHIO  ·  MAY 30, 1899", 78, "mono")),
                                sentence="I am an enthusiast, but not a crank in the sense that I have some pet theories as to the proper construction of a flying machine."))
@@ -92,10 +92,10 @@ def build_film(doc):
 
     # ============================================================ THE RIVAL (9-13)
     cue("riser", L(9) - 1.3, 0.5, dur=1.2)
-    lang = film.add(Print("P05", 20700, -7600, 1900, rot=-1.4, t_in=W(9, "Samuel") - 0.15, label="SAMUEL P. LANGLEY", label_t=W(9, "Samuel") + 0.1))
+    lang = film.add(Print("P05", 20700, -7600, 1900, rot=-1.4, t_in=W(9, "Samuel") - 0.15, label="SAMUEL P. LANGLEY · AI ILLUSTRATION", label_t=W(9, "Samuel") + 0.1))
     film.add(StringLine((17000, -8900), (20700, -8620), t_in=W(9, "charge") - 0.1, dur=0.7, sag=0.06, width=16))
     film.add(Counter(20700, -4750, 800, 50000, W(10, "fifty") - 0.15, dur=1.2, prefix="$", caption="WAR DEPARTMENT"))
-    boat = film.add(Print("P06", 25300, -7400, 2700, rot=1.2, t_in=W(11, "launched") - 0.15, label="OCTOBER 7, 1903", label_t=W(11, "October")))
+    boat = film.add(Print("P06", 25300, -7400, 2700, rot=1.2, t_in=W(11, "launched") - 0.15, label="OCT 7, 1903 · AI ILLUSTRATION", label_t=W(11, "October")))
     film.add(XMarker(*dc, "WASHINGTON", t_in=W(11, "Potomac") - 0.1, side="right", **LBL))
     film.add(StringLine(dc, (25300 - 900, -8350), t_in=W(11, "Potomac"), dur=0.8, sag=0.03, width=18))
     film.add(Stamp("FAILED", 25150, -7250, size=330, rot=-9, t_in=W(11, "river") - 0.1))
@@ -142,11 +142,20 @@ def build_film(doc):
     thousand = film.add(Counter(CX, 5000, 820, 1000, W(15, "less") - 0.1, dur=1.0, prefix="UNDER $", caption="1900 TO 1903, TRAVEL INCLUDED"))
     film.add(PenMark("underline", CX - 1100, 3200, 1500, 40, t_in=W(16, "Orville") - 0.1, dur=0.4, width=22, seed=12))
     film.add(Counter(CX + 4350, 2950, 760, 59, W(16, "fifty") - 0.1, dur=0.9, caption="SECONDS"))
-    tele = film.add(Print("P07", CX + 4350, -150, 2600, rot=1.4, t_in=L(17) + 0.05))
-    (sx, sy) = doc.on(tele, 0.08, 0.742)
-    (cx, cy) = doc.on(tele, 0.17, 0.942)
-    film.add(PenMark("highlight", sx, sy, 0.115 * 2600, 0, t_in=W(17, "Success") - 0.2, dur=0.3, width=95, rot=1.4))
-    film.add(PenMark("highlight", cx, cy, 0.29 * 2600, 0, t_in=W(17, "Christmas") - 0.45, dur=0.45, width=95, rot=1.4, seed=5))
+    # the telegram, typeset in code (a recreation) with its real wording
+    tele = film.add(PaperDoc(CX + 4350, -150, 2600, 2700, rot=1.4, t_in=L(17) + 0.05, rows=6, sentence_row=0, sentence_size=78, row_start=0.22,
+                             header=(("THE WESTERN UNION TELEGRAPH COMPANY", 84, "serif"),
+                                     ("KITTY HAWK, N.C.  ·  DEC 17, 1903  ·  TO MILTON WRIGHT, DAYTON", 46, "mono")),
+                             sentence="SUCCESS FOUR FLIGHTS THURSDAY MORNING ALL AGAINST TWENTY ONE MILE WIND STARTED FROM LEVEL "
+                                      "WITH ENGINE POWER ALONE AVERAGE SPEED THROUGH AIR THIRTY ONE MILES LONGEST 57 SECONDS "
+                                      "INFORM PRESS HOME CHRISTMAS. OREVELLE WRIGHT"))
+    (sx, sy), sw = tele.phrase_pos(res, "SUCCESS")
+    xs = tele.phrase_spans(res, "HOME CHRISTMAS.")
+    (cx, cy), cw = xs[0]
+    film.add(PenMark("highlight", sx, sy - 26, sw + 50, 0, t_in=W(17, "Success") - 0.2, dur=0.3, width=105, rot=1.4))
+    for k, ((hx, hy), hw) in enumerate(xs):
+        film.add(PenMark("highlight", hx, hy - 26, hw + 50, 0, t_in=W(17, "Christmas") - 0.45 + 0.2 * k, dur=0.4, width=105, rot=1.4, seed=5 + k))
+    film.add(BigText("RECREATION", CX + 4350, -1750, 120, L(17) + 0.4, t_out=E(17) + 1.0, rgb=(236, 230, 220), hit=None))
 
     cam(L(14) + 0.6, 17500, -2400, 0.19, 0.0)                       # wide: the route home to the beach
     cam(E(14) - 0.2, CX - 2500, -400, 0.34, -0.2)

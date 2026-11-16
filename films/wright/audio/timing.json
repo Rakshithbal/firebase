@@ -1,5 +1,5 @@
 {
-  "total_duration": 89.178,
+  "total_duration": 91.14,
   "lead_in": 0.9,
   "tail_out": 3.0,
   "tempo": 1.0,
@@ -34,19 +34,19 @@
     {
       "id": 4,
       "scene": "T01_cold_open",
-      "caption": "The man who took this picture had never taken one before.",
-      "vo": "The man who took this picture had never taken one before.",
+      "caption": "A man from the life-saving station took the photograph. He had never used a camera before.",
+      "vo": "A man from the life-saving station took the photograph. He had never used a camera before.",
       "start": 12.018,
-      "end": 15.353,
-      "duration": 3.335
+      "end": 17.316,
+      "duration": 5.298
     },
     {
       "id": 5,
       "scene": "T02_dayton",
       "caption": "Four years earlier, two brothers ran a bicycle shop in Dayton, Ohio.",
       "vo": "Four years earlier, two brothers ran a bicycle shop in Dayton, Ohio.",
-      "start": 16.553,
-      "end": 20.572,
+      "start": 18.516,
+      "end": 22.534,
       "duration": 4.019
     },
     {
@@ -54,8 +54,8 @@
       "scene": "T02_dayton",
       "caption": "Wilbur and Orville Wright. Neither had a high school diploma.",
       "vo": "Wilbur and Orville Wright. Neither had a high school diploma.",
-      "start": 21.021,
-      "end": 24.404,
+      "start": 22.984,
+      "end": 26.367,
       "duration": 3.382
     },
     {
@@ -63,8 +63,8 @@
       "scene": "T02_dayton",
       "caption": "In 1899, Wilbur wrote to the Smithsonian for everything it had on flight.",
       "vo": "In eighteen ninety-nine, Wilbur wrote to the Smithsonian for everything it had on flight.",
-      "start": 24.854,
-      "end": 29.564,
+      "start": 26.817,
+      "end": 31.527,
       "duration": 4.71
     },
     {
@@ -72,8 +72,8 @@
       "scene": "T02_dayton",
       "caption": "I am an enthusiast, he wrote, but not a crank.",
       "vo": "I am an enthusiast, he wrote, but not a crank.",
-      "start": 30.014,
-      "end": 32.849,
+      "start": 31.977,
+      "end": 34.812,
       "duration": 2.835
     },
     {
@@ -81,8 +81,8 @@
       "scene": "T03_the_rival",
       "caption": "The man in charge there, Samuel Langley, was building a flying machine of his own.",
       "vo": "The man in charge there, Samuel Langley, was building a flying machine of his own.",
-      "start": 33.849,
-      "end": 38.477,
+      "start": 35.812,
+      "end": 40.44,
       "duration": 4.628
     },
     {
@@ -90,8 +90,8 @@
       "scene": "T03_the_rival",
       "caption": "The War Department gave him fifty thousand dollars.",
       "vo": "The War Department gave him fifty thousand dollars.",
-      "start": 38.927,
-      "end": 41.765,
+      "start": 40.89,
+      "end": 43.727,
       "duration": 2.838
     },
     {
@@ -99,8 +99,8 @@
       "scene": "T03_the_rival",
       "caption": "On October 7th, 1903, it launched from a houseboat on the Potomac, and dropped straight into the river.",
       "vo": "On October seventh, nineteen oh three, it launched from a houseboat on the Potomac, and dropped straight into the river.",
-      "start": 42.215,
-      "end": 48.799,
+      "start": 44.177,
+      "end": 50.762,
       "duration": 6.585
     },
     {
@@ -108,8 +108,8 @@
       "scene": "T03_the_rival",
       "caption": "Two days later, The New York Times said a real flying machine might take one to ten million years.",
       "vo": "Two days later, The New York Times said a real flying machine might take one to ten million years.",
-      "start": 49.249,
-      "end": 54.833,
+      "start": 51.212,
+      "end": 56.796,
       "duration": 5.584
     },
     {
@@ -117,8 +117,8 @@
       "scene": "T03_the_rival",
       "caption": "On December 8th, Langley tried again. Same river. Same result.",
       "vo": "On December eighth, Langley tried again. Same river. Same result.",
-      "start": 55.283,
-      "end": 59.802,
+      "start": 57.246,
+      "end": 61.765,
       "duration": 4.519
     },
     {
@@ -126,8 +126,8 @@
       "scene": "T04_kitty_hawk",
       "caption": "Nine days later, the Wright brothers were back on that beach.",
       "vo": "Nine days later, the Wright brothers were back on that beach.",
-      "start": 60.802,
-      "end": 63.962,
+      "start": 62.765,
+      "end": 65.925,
       "duration": 3.16
     },
     {
@@ -135,8 +135,8 @@
       "scene": "T04_kitty_hawk",
       "caption": "Their whole effort had cost less than a thousand dollars.",
       "vo": "Their whole effort had cost less than a thousand dollars.",
-      "start": 64.412,
-      "end": 67.103,
+      "start": 66.375,
+      "end": 69.066,
       "duration": 2.691
     },
     {
@@ -144,8 +144,8 @@
       "scene": "T04_kitty_hawk",
       "caption": "Orville flew first. By noon, Wilbur stayed up for fifty-nine seconds.",
       "vo": "Orville flew first. By noon, Wilbur stayed up for fifty-nine seconds.",
-      "start": 67.553,
-      "end": 72.107,
+      "start": 69.516,
+      "end": 74.07,
       "duration": 4.554
     },
     {
@@ -153,8 +153,8 @@
       "scene": "T04_kitty_hawk",
       "caption": "They wired their father: Success. Four flights. Home for Christmas.",
       "vo": "They wired their father. Success. Four flights. Home for Christmas.",
-      "start": 72.557,
-      "end": 77.218,
+      "start": 74.52,
+      "end": 79.181,
       "duration": 4.661
     },
     {
@@ -162,8 +162,8 @@
       "scene": "T05_close",
       "caption": "The government spent fifty thousand dollars, and got a wreck in a river.",
       "vo": "The government spent fifty thousand dollars, and got a wreck in a river.",
-      "start": 78.218,
-      "end": 81.947,
+      "start": 80.181,
+      "end": 83.91,
       "duration": 3.729
     },
     {
@@ -171,8 +171,8 @@
       "scene": "T05_close",
       "caption": "Two bicycle mechanics spent less than a thousand, and got the sky.",
       "vo": "Two bicycle mechanics spent less than a thousand, and got the sky.",
-      "start": 82.397,
-      "end": 86.178,
+      "start": 84.36,
+      "end": 88.14,
       "duration": 3.78
     }
   ]

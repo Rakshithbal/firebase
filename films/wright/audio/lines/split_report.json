@@ -25,7 +25,7 @@
   "id": 3,
   "take": "T01_cold_open",
   "start": 7.744,
-  "end": 11.47,
+  "end": 11.464,
   "speech_s": 2.71,
   "letters": 36,
   "lps": 13.28,
@@ -35,12 +35,12 @@
  {
   "id": 4,
   "take": "T01_cold_open",
-  "start": 11.47,
-  "end": 15.187,
-  "speech_s": 3.34,
-  "letters": 46,
-  "lps": 13.79,
-  "text": "The man who took this picture had never taken one before.",
+  "start": 11.464,
+  "end": 17.143,
+  "speech_s": 4.96,
+  "letters": 72,
+  "lps": 14.52,
+  "text": "A man from the life-saving station took the photograph. He had never used a camera before.",
   "flag": false
  },
  {
