@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="lib.js"></script>
+<script>window.T = __TIMING__;</script>
+<script src="scenes/s1.js"></script><script src="scenes/s2.js"></script><script src="scenes/s3.js"></script><script src="scenes/s4.js"></script>
+<script src="scenes/s5.js"></script><script src="scenes/s6.js"></script><script src="scenes/s7.js"></script>
+<script>
+const ctx = document.getElementById('c').getContext('2d');
+const FADE = 0.28;
+function bg(t){
+  ctx.fillStyle = P.bg; ctx.fillRect(0,0,1080,1920);
+  const g = ctx.createRadialGradient(540,760,100,540,760,1200); g.addColorStop(0,'rgba(40,90,150,0.35)'); g.addColorStop(1,'rgba(0,0,0,0.35)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,1080,1920);
+  const off = (t*6)%40;
+  ctx.lineWidth = 1;
+  for(let x=-40+off;x<1120;x+=40){ ctx.strokeStyle = (Math.round((x-off)/40)%5===0)?P.gridMajor:P.grid; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,1920); ctx.stroke(); }
+  for(let y=-40+off;y<1960;y+=40){ ctx.strokeStyle = (Math.round((y-off)/40)%5===0)?P.gridMajor:P.grid; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(1080,y); ctx.stroke(); }
+}
+function header(t){
+  const a = L.easeOut(L.prog(t,0.1,0.6));
+  ctx.save(); ctx.globalAlpha = a;
+  L.tag(ctx,'BUILDPEDIA',540,175,30,P.bg,P.water);
+  ctx.restore();
+}
+function captions(t){
+  const line = T.lines.find(l => t >= l.start-0.05 && t <= l.end+0.15); if(!line) return;
+  // chunk words into groups of <=4 that break at punctuation
+  const chunks=[]; let cur=[];
+  line.words.forEach((w,i)=>{ cur.push(w); if(cur.length>=4 || /[.,?]$/.test(w.w) || i===line.words.length-1){ chunks.push(cur); cur=[]; }});
+  const ch = chunks.find(c => t < c[c.length-1].e+0.08) || chunks[chunks.length-1];
+  ctx.save(); ctx.font = `800 58px ${P.font}`; ctx.textBaseline='middle';
+  const parts = ch.map(w=>w.w); const sp = 18; const widths = parts.map(p=>ctx.measureText(p).width);
+  const total = widths.reduce((a,b)=>a+b,0)+sp*(parts.length-1); let x = 540-total/2; const y = 1470;
+  ctx.fillStyle='rgba(6,20,36,0.78)'; ctx.beginPath(); ctx.roundRect(540-total/2-34,y-52,total+68,104,24); ctx.fill();
+  parts.forEach((p,i)=>{ const w=ch[i]; const on = t>=w.s && t<w.e+0.05; ctx.fillStyle = on? P.accent : (t>=w.s? P.line : 'rgba(234,242,255,0.55)'); ctx.textAlign='left'; ctx.fillText(p,x,y+2); x+=widths[i]+sp; });
+  ctx.restore();
+}
+window.renderAt = function(t){
+  bg(t);
+  const S = SCENES.slice().sort((a,b)=>a.start-b.start);
+  for(const s of S){
+    if(t < s.start - FADE || t > s.end + FADE) continue;
+    let a = 1; if(t < s.start) a = (t-(s.start-FADE))/FADE; if(t > s.end) a = 1-(t-s.end)/FADE;
+    ctx.save(); ctx.globalAlpha = Math.max(0,Math.min(1,a)); s.draw(ctx, t, t - s.start, T); ctx.restore();
+  }
+  header(t); captions(t);
+};
+</script></body></html>
