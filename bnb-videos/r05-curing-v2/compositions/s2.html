@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s2 · Myth turned over · L02 "Concrete does not get strong by drying. It gets strong by curing." -->
+      <div id="root" data-composition-id="s2" data-duration="4.43">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s2-cam { position: absolute; inset: 0; transform-origin: 540px 930px; }
+          #s2-q { position: absolute; left: 0; top: 322px; width: 1080px; text-align: center; font-size: 50px; font-weight: 700; letter-spacing: 0.04em; color: rgba(234,242,255,0.86); }
+          #s2-q span { display: inline-block; margin: 0 6px; }
+          #s2-q .acc { color: #7ce0a3; }
+          /* strikethrough-replace (registry component), restyled for the blueprint */
+          #s2-dry { position: absolute; left: 0; top: 490px; width: 1080px; height: 220px; display: grid; place-items: center; }
+          .hf-catalog-strikethrough-replace { position: relative; display: inline-flex; align-items: center; gap: 30px;
+            padding: 22px 46px; border-radius: 28px; border: 2.5px dashed rgba(234,242,255,0.35); background: rgba(8,25,45,0.55); }
+          .hf-catalog-strikethrough-replace span { font-size: 150px; font-weight: 900; letter-spacing: -0.035em; line-height: 1; color: #eaf2ff; }
+          .hf-catalog-strikethrough-replace i { position: absolute; left: 150px; right: 40px; top: 50%; height: 16px; margin-top: -6px; border-radius: 999px;
+            background: #ff5a5a; box-shadow: 0 0 22px rgba(255,90,90,0.6); transform-origin: left center; }
+          #s2-heat { width: 92px; height: 120px; }
+          #s2-x { position: absolute; right: -34px; top: -34px; width: 76px; height: 76px; border-radius: 999px; background: #ff5a5a; display: grid; place-items: center;
+            box-shadow: 0 8px 26px rgba(255,90,90,0.45); }
+          #s2-arrow { position: absolute; left: 500px; top: 740px; width: 80px; height: 120px; overflow: visible; }
+          #s2-cure { position: absolute; left: 0; top: 880px; width: 1080px; height: 260px; display: grid; place-items: center; }
+          #s2-word { position: relative; font-size: 188px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; white-space: nowrap; }
+          #s2-word .l { display: inline-block; }
+          /* water fill rising inside the letters: gradient on the inner span */
+          #s2-word .f { display: inline-block; background-image: linear-gradient(to top, #4fc3f7 0%, #8fdcff 48%, rgba(234,242,255,0.18) 52%, rgba(234,242,255,0.18) 100%);
+            background-size: 100% 220%; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent; }
+          #s2-ripples { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; pointer-events: none; }
+          #s2-under { position: absolute; left: 230px; top: 1110px; width: 620px; height: 60px; overflow: visible; }
+        </style>
+        <div id="s2-cam">
+          <div id="s2-q"><span>WHAT</span><span>MAKES</span><span>IT</span><span class="acc">STRONG?</span></div>
+          <div id="s2-dry">
+            <div class="hf-catalog-strikethrough-replace" id="s2-strike">
+              <svg id="s2-heat" viewBox="0 0 92 120" fill="none" stroke="#ffb070" stroke-width="7" stroke-linecap="round">
+                <path d="M18 108 q16 -20 0 -40 q-16 -20 0 -40 q8 -10 8 -18" /><path d="M46 108 q16 -20 0 -40 q-16 -20 0 -40 q8 -10 8 -18" /><path d="M74 108 q16 -20 0 -40 q-16 -20 0 -40 q8 -10 8 -18" />
+              </svg>
+              <span id="s2-drying">DRYING</span><i id="s2-line"></i>
+              <div id="s2-x"><svg width="34" height="34" viewBox="0 0 34 34" stroke="#fff" stroke-width="6" stroke-linecap="round"><path d="M6 6L28 28M28 6L6 28" /></svg></div>
+            </div>
+          </div>
+          <svg id="s2-arrow" viewBox="0 0 80 120" fill="none" stroke="#4fc3f7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path id="s2-arrow-p" pathLength="1" d="M40 6V104M14 78L40 106L66 78" />
+          </svg>
+          <svg id="s2-ripples" viewBox="0 0 1080 1920" fill="none" stroke="#4fc3f7">
+            <ellipse opacity="0" id="s2-rip0" cx="540" cy="1080" rx="300" ry="38" stroke-width="4" />
+            <ellipse opacity="0" id="s2-rip1" cx="540" cy="1080" rx="300" ry="38" stroke-width="3" />
+          </svg>
+          <div id="s2-cure">
+            <div id="s2-word"><span class="l"><span class="f">C</span></span><span class="l"><span class="f">U</span></span><span class="l"><span class="f">R</span></span><span class="l"><span class="f">I</span></span><span class="l"><span class="f">N</span></span><span class="l"><span class="f">G</span></span></div>
+          </div>
+          <!-- hw-underline (registry component): a hand-drawn squiggle under the answer -->
+          <svg id="s2-under" viewBox="0 0 620 60" fill="none" stroke="#ff8a3d" stroke-width="10" stroke-linecap="round">
+            <path id="s2-under-p" pathLength="1" d="M10 34 C 120 14, 210 50, 320 30 S 520 16, 610 32" />
+          </svg>
+        </div>
+        <script>
+          (function () {
+            var T0 = 4.411;
+            var at = function (w, n) { return R05.at("L02", w, n) - T0; };
+            var tl = gsap.timeline({ paused: true });
+            // entrance: the question arrives word by word (blur, no translate)
+            tl.fromTo("#s2-q span", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out", stagger: 0.067 }, 0.05);
+            // DRYING blurs in on "strong"
+            tl.fromTo("#s2-strike", { opacity: 0, filter: "blur(8px)", scale: 1.04 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.2, ease: "power3.out" }, at("strong") - 0.1);
+            tl.fromTo("#s2-heat path", { y: 6, opacity: 0.4 }, { y: -6, opacity: 1, duration: 0.5, ease: "sine.inOut", stagger: 0.12, yoyo: true, repeat: 3 }, at("strong"));
+            // strike lands on "drying."
+            tl.fromTo("#s2-line", { scaleX: 0 }, { scaleX: 1, duration: 0.28, ease: "power2.out" }, at("drying"));
+            tl.to("#s2-drying, #s2-heat", { opacity: 0.38, duration: 0.25, ease: "power2.out" }, at("drying") + 0.22);
+            tl.fromTo("#s2-x", { scale: 0.4, opacity: 0, rotation: -40 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.3, ease: "back.out(1.6)" }, at("drying") + 0.24);
+            tl.to("#s2-strike", { y: -8, scale: 0.94, duration: 0.5, ease: "power2.inOut" }, at("it"));
+            tl.fromTo("#s2-arrow-p", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.5, ease: "power2.inOut" }, at("it") + 0.1);
+            // CURING: per letter, then water rises inside the letters, ripples spread under it
+            var cur = at("curing");
+            tl.fromTo("#s2-word .l", { opacity: 0, y: 40, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "expo.out", stagger: 0.045 }, cur - 0.06);
+            tl.fromTo("#s2-word .f", { backgroundPosition: "0% 0%" }, { backgroundPosition: "0% 100%", duration: 0.6, ease: "power2.out", stagger: 0.03 }, cur + 0.05);
+            [0, 1].forEach(function (i) {
+              tl.fromTo("#s2-rip" + i, { attr: { rx: 120, ry: 14 }, opacity: 0.9 }, { attr: { rx: 470, ry: 60 }, opacity: 0, duration: 0.9, ease: "power2.out", immediateRender: false }, cur + 0.05 + i * 0.22);
+            });
+            tl.fromTo("#s2-under-p", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, cur + 0.3);
+            // exit: zoom through the answer into the concrete
+            tl.to("#s2-cam", { scale: 1.5, opacity: 0, filter: "blur(14px)", duration: 0.26, ease: "power3.in" }, 4.17);
+            window.__timelines["s2"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

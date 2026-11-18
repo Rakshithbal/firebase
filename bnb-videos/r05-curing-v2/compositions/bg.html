@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- Ground: flat navy page + blueprint grid (aligned to the 72 px margin) + vignette. DESIGN.md §8 -->
+      <div id="root" data-composition-id="bg" data-duration="45.51">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; background: #0b2139; }
+          #bg-cam { position: absolute; inset: 0; }
+          /* minor 24 px at 3%, major 96 px at 6%; offset so a major line falls on x = 72 */
+          #bg-grid { position: absolute; left: -216px; top: -192px; width: 1512px; height: 2496px;
+            background-image:
+              linear-gradient(rgba(238,243,250,0.055) 1.5px, transparent 1.5px),
+              linear-gradient(90deg, rgba(238,243,250,0.055) 1.5px, transparent 1.5px),
+              linear-gradient(rgba(238,243,250,0.026) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(238,243,250,0.026) 1px, transparent 1px);
+            background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+            background-position: 0 0, 0 0, 0 0, 0 0; }
+          /* a soft lift behind the figure zone, then a gentle vignette to ink */
+          #bg-lift { position: absolute; inset: 0; background: radial-gradient(70% 38% at 50% 50%, rgba(22, 56, 96, 0.55) 0%, rgba(22, 56, 96, 0) 100%); }
+          #bg-vignette { position: absolute; inset: 0; background: radial-gradient(110% 75% at 50% 46%, rgba(6,22,42,0) 58%, rgba(6,22,42,0.72) 100%); }
+        </style>
+        <div id="bg-cam"><div id="bg-grid"></div></div>
+        <div id="bg-lift"></div>
+        <div id="bg-vignette"></div>
+        <script>
+          (function () {
+            var tl = gsap.timeline({ paused: true });
+            // constant, barely-there drift (linear is the point)
+            tl.fromTo("#bg-grid", { x: 0, y: 0 }, { x: -24, y: -72, duration: 45.51, ease: "none" }, 0);
+            // parallax nudge of the whole grid at each scene seam: the camera moves with the cut
+            tl.fromTo("#bg-cam", { x: 0, y: 0 }, { x: 0, y: 0, duration: 0.01 }, 0);
+            var cuts = [[4.411, 0, -24], [8.841, 0, 48], [14.944, 24, 0], [24.97, 0, -48], [32.304, -24, 0], [42.214, 0, -24]];
+            var cx = 0, cy = 0;
+            cuts.forEach(function (c) {
+              cx += c[1]; cy += c[2];
+              tl.to("#bg-cam", { x: cx, y: cy, duration: 0.8, ease: "power2.inOut" }, c[0] - 0.3);
+            });
+            window.__timelines["bg"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

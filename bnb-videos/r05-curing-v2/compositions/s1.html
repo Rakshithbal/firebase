@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s1 · 01 — The myth · L01 "Your slab looks dry and hard. That does not mean it is done."
+           GOLDEN REFERENCE SCENE: copy this file's structure for every scene (DESIGN.md §9). -->
+      <div id="root" data-composition-id="s1" data-duration="4.411">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
+          #s1-cam, #s1-zoom, #s1-shake { position: absolute; inset: 0; }
+          #s1-zoom { transform-origin: 540px 900px; }
+          /* headline: "Looks done." + inline check ring */
+          #s1-hl { display: flex; align-items: center; gap: 26px; white-space: nowrap; }
+          #s1-done { position: relative; display: inline-block; }
+          #s1-strike { position: absolute; left: -12px; top: 56%; width: calc(100% + 24px); height: 9px; border-radius: 5px; background: #ff8a3d; }
+          #s1-check { width: 96px; height: 96px; overflow: visible; flex: none; margin-top: 14px; }
+          /* the stamp: the film's only slam */
+          #s1-stamp-wrap { position: absolute; left: 0; top: 606px; width: 1080px; height: 180px; display: grid; place-items: center; }
+          #s1-stamp-box { position: relative; margin-right: 70px; }
+          #s1-stamp { padding: 18px 44px 14px; border: 8px solid #ff8a3d; outline: 2px solid #ff8a3d; outline-offset: -20px;
+            background: rgba(11, 33, 57, 0.94); color: #ff8a3d; white-space: nowrap;
+            font-family: "InterVar", Inter, sans-serif; font-weight: 800; font-size: 112px; line-height: 1; letter-spacing: 0.05em; text-transform: uppercase; }
+          #s1-stamp-ring { position: absolute; inset: 0; border: 3px solid #ff8a3d; }
+          #s1-figcap { top: 1218px; }
+        </style>
+
+        <div id="s1-cam" class="bnb-stage">
+          <div id="s1-zoom" class="bnb-stage">
+            <div id="s1-shake" class="bnb-stage">
+              <!-- FIGURE (built by script from BNB helpers; static geometry, animated below) -->
+              <svg id="s1-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+
+              <!-- HEADER: kicker / headline / deck -->
+              <header class="bnb-head" id="s1-head">
+                <div class="bnb-kicker" id="s1-kicker"><b>01</b> — The myth</div>
+                <h1 class="bnb-headline is-hero" id="s1-hl">
+                  <span id="s1-looks">Looks</span>
+                  <span id="s1-done">done.<i id="s1-strike"></i></span>
+                  <svg id="s1-check" viewBox="0 0 92 92"></svg>
+                </h1>
+                <p class="bnb-deck" id="s1-deck">The surface says it is finished.</p>
+              </header>
+
+              <!-- THE STAMP -->
+              <div id="s1-stamp-wrap">
+                <div id="s1-stamp-box"><div id="s1-stamp-ring"></div><div id="s1-stamp">Not yet</div></div>
+              </div>
+
+              <!-- FIGURE CAPTION -->
+              <div class="bnb-figcap" id="s1-figcap">
+                <div class="rule"></div>
+                <div class="txt"><span class="num">Fig. 1</span><span class="sep">·</span><span class="desc">Section through a fresh RCC slab</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[0];
+            var at = B.sceneAt(SC.start, "L01");
+            var svg = document.getElementById("s1-fig");
+
+            /* ---------- build the figure ---------- */
+            var fig = B.g(svg, { id: "s1-figure" });
+            var slab = B.slab(svg, fig, { id: "s1-slab", seed: 7 });            // canonical STAGE.slab geometry
+            var b = slab.bounds;
+            var span = B.dim(fig, { x1: b.x0, y1: 782, x2: b.x1, y2: 782, ext: 36, label: "Span" });
+            var depth = B.dim(fig, { x1: 990, y1: b.top, x2: 990, y2: b.bot, ext: -30, label: "Depth" });
+            var sun = B.sun(svg, fig, { cx: 936, cy: 636, r: 38 });
+            var wisps = B.wisps(fig, { x0: 560, x1: 900, y: b.top - 12, n: 4, h: 130, seed: 5 });
+            var surf = B.callout(fig, { ax: 430, ay: b.top + 1, lx: 72, ly: 676, w: 300, side: "left", head: "Surface", body: "Dry and hard" });
+            var core = B.callout(fig, { ax: 668, ay: b.top + 96, lx: 336, ly: 1052, w: 330, side: "left", head: "Core", body: "Still needs water", color: C.water });
+
+            // headline check ring (green = ok). Greys out when the claim is struck.
+            var chk = B.check(document.getElementById("s1-check"), { cx: 46, cy: 46, r: 40 });
+
+            // stamp texture: seeded ink knock-outs via an evenodd mask (no randomness at render)
+            (function () {
+              var r = B.rng(42), d = "M0 0H700V200H0Z";
+              for (var i = 0; i < 150; i++) {
+                var x = (r() * 700).toFixed(1), y = (r() * 200).toFixed(1), rr = (0.6 + r() * r() * 3.4).toFixed(1);
+                d += "M" + (x - rr) + " " + y + "a" + rr + " " + rr + " 0 1 0 " + 2 * rr + " 0a" + rr + " " + rr + " 0 1 0 " + -2 * rr + " 0";
+              }
+              var m = "url(\"data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 200' preserveAspectRatio='none'><path fill-rule='evenodd' d='" + d + "'/></svg>") + "\")";
+              var st = document.getElementById("s1-stamp").style;
+              st.webkitMaskImage = st.maskImage = m; st.webkitMaskSize = st.maskSize = "100% 100%";
+            })();
+
+            /* ---------- timeline (scene-local seconds) ---------- */
+            var tl = gsap.timeline({ paused: true });
+            var tSlab = at("slab"), tDry = at("dry"), tHard = at("hard"), tNot = at("not"), tMean = at("mean"), tDone = at("done");
+            var hit = tDone + 0.02;   // stamp impact frame, on "done."
+
+            // frame 0 = thumbnail: header + slab section already on the page; the camera settles in.
+            B.a.drift(tl, "#s1-cam", SC.dur, { y1: -12 });
+            tl.fromTo("#s1-zoom", { scale: 1.045 }, { scale: 1, duration: 1.8, ease: E.land }, 0);
+
+            // first second: the drawing comes alive (dimension, sun, rebar, wisps)
+            B.a.draw(tl, [span.ext, span.line], 0.05, 0.8);
+            tl.fromTo([span.ticks, span.label], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter }, 0.55);
+            B.a.draw(tl, [depth.ext, depth.line], 0.25, 0.7);
+            tl.fromTo([depth.ticks, depth.label], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter }, 0.7);
+            tl.fromTo([sun.disc, sun.ring], { opacity: 0 }, { opacity: 1, duration: 0.6, ease: E.enter }, 0);
+            B.a.draw(tl, sun.rays, 0.1, 0.9, E.enter);
+            tl.fromTo(sun.g, { rotation: 0, svgOrigin: "936 636" }, { rotation: 18, svgOrigin: "936 636", duration: SC.dur, ease: E.linear }, 0);
+            B.a.popIn(tl, slab.rebar, tSlab - 0.1, { stagger: 0.05, dur: 0.35 });
+            B.a.draw(tl, slab.dist, tSlab + 0.1, 0.6);
+            B.a.figcap(tl, document.getElementById("s1-figcap"), 0.15);
+
+            // evaporation: each wisp draws up, then drifts and thins (two waves, staggered)
+            wisps.forEach(function (w, i) {
+              [0.35, 1.9].forEach(function (t0, k) {
+                var t = t0 + i * 0.28;
+                tl.fromTo(w, { strokeDasharray: "1 1", strokeDashoffset: 1, opacity: 0, y: 0 },
+                  { strokeDashoffset: 0, opacity: 0.9, y: -22, duration: 0.9, ease: E.enter, immediateRender: k === 0 }, t);
+                tl.fromTo(w, { strokeDashoffset: 0, opacity: 0.9, y: -22 }, { strokeDashoffset: -1, opacity: 0, y: -48, duration: 0.7, ease: E.exit, immediateRender: false }, t + 0.9);
+              });
+            });
+
+            // "dry": the section pales to a finished-looking grey; the SURFACE claim is called out
+            tl.fromTo(slab.body, { attr: { fill: C.concrete } }, { attr: { fill: C.concreteDry }, duration: 0.8, ease: E.move }, tDry - 0.1);
+            tl.fromTo(slab.agg, { opacity: 1 }, { opacity: 0.55, duration: 0.8, ease: E.move }, tDry - 0.1);
+            B.a.callout(tl, surf, tDry);
+
+            // "hard.": the claim gets its check
+            B.a.draw(tl, chk.ring, tHard - 0.25, 0.45, E.enter);
+            B.a.draw(tl, chk.tick, tHard, 0.32, E.enter);
+
+            // "not": the claim is struck (orange = the point) and the check loses its colour
+            tl.fromTo("#s1-strike", { scaleX: 0, rotation: -3, transformOrigin: "0% 50%" }, { scaleX: 1, rotation: -3, transformOrigin: "0% 50%", duration: 0.38, ease: E.draw }, tNot - 0.04);
+            tl.to([chk.ring, chk.tick], { stroke: C.chalk3, duration: 0.3, ease: E.move }, tNot + 0.1);
+            tl.to("#s1-done", { color: "rgba(238,243,250,0.62)", duration: 0.3, ease: E.move }, tNot + 0.1);
+
+            // "mean": the reason — water still needed inside. Moisture appears from the centre out.
+            B.a.popIn(tl, slab.moist, tMean - 0.05, { stagger: 0.022, dur: 0.3 });
+            B.a.callout(tl, core, tMean - 0.15);
+
+            // "done.": NOT YET — the film's single slam. Accelerates in, hits, three-frame shake.
+            tl.to(surf.g, { opacity: 0, duration: 0.14, ease: E.exit }, hit - 0.2);
+            tl.fromTo("#s1-stamp-box", { scale: 2.1, rotation: -13, opacity: 0, filter: "blur(10px)" },
+              { scale: 1, rotation: -5, opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power4.in" }, hit - 0.16);
+            tl.to("#s1-shake", { x: 9, y: -5, duration: 1 / 30, ease: "none" }, hit);
+            tl.to("#s1-shake", { x: -6, y: 4, duration: 1 / 30, ease: "none" }, hit + 1 / 30);
+            tl.to("#s1-shake", { x: 0, y: 0, duration: 1 / 30, ease: "none" }, hit + 2 / 30);
+            tl.fromTo("#s1-stamp-ring", { scale: 1, opacity: 0 }, { scale: 1, opacity: 0.9, duration: 0.01 }, hit);
+            tl.fromTo("#s1-stamp-ring", { scale: 1, opacity: 0.9 }, { scale: 1.22, opacity: 0, duration: 0.55, ease: E.land, immediateRender: false }, hit + 0.01);
+            // focus pull: everything that is not the point steps back
+            tl.to(["#s1-deck", sun.g, wisps], { opacity: 0.3, duration: 0.35, ease: E.move }, hit + 0.05);
+
+            // exit: blur swap on one stage (the grid behind never cuts)
+            B.a.exit(tl, "#s1-cam", SC.dur - 0.22, 0.2);
+            window.__timelines["s1"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

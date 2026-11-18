@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s3 · Inside the concrete · L03 "Inside, the cement reacts with water. That reaction builds strength, slowly, day by day." -->
+      <div id="root" data-composition-id="s3" data-duration="6.103">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s3-cam { position: absolute; inset: 0; }
+          /* shared slab (same geometry as s4, scaled down here) */
+          .s3-slabwrap { position: absolute; left: 120px; top: 820px; width: 640px; height: 300px; overflow: visible; }
+          .s3-slabwrap svg { overflow: visible; }
+          #s3-lens { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+          .s3-pill { position: absolute; padding: 10px 22px; border-radius: 999px; font-size: 30px; font-weight: 900; letter-spacing: 0.08em; white-space: nowrap; }
+          #s3-cement { left: 120px; top: 300px; background: #eaf2ff; color: #0e2a47; }
+          #s3-water { left: 560px; top: 300px; background: #4fc3f7; color: #06233d; }
+          /* strength bar (shared with s4) */
+          #s3-bar { position: absolute; left: 850px; top: 440px; width: 50px; height: 460px; border-radius: 25px; border: 3px solid rgba(234,242,255,0.55); background: rgba(8,25,45,0.6); overflow: hidden; }
+          #s3-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; transform-origin: 50% 100%;
+            background: linear-gradient(to top, #3fae73, #7ce0a3); box-shadow: 0 0 30px rgba(124,224,163,0.6); }
+          #s3-barlabel { position: absolute; left: 790px; top: 918px; width: 170px; text-align: center; font-size: 28px; font-weight: 700; letter-spacing: 0.08em; color: #7ce0a3; }
+          /* icon-swap (registry pattern): sun / moon for "day by day" */
+          #s3-dial { position: absolute; left: 835px; top: 330px; width: 80px; height: 80px; border-radius: 999px; border: 2.5px solid rgba(234,242,255,0.35); background: rgba(8,25,45,0.6); }
+          .s3-ico { position: absolute; inset: 0; display: grid; place-items: center; }
+        </style>
+        <div id="s3-cam">
+          <svg id="s3-lens" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="s3-clip"><circle id="s3-clipc" cx="460" cy="1115" r="0" /></clipPath>
+              <radialGradient id="s3-inner"><stop offset="0.6" stop-color="#0b2340" stop-opacity="0.0" /><stop offset="1" stop-color="#030b16" stop-opacity="0.75" /></radialGradient>
+              <filter id="s3-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+            </defs>
+            <!-- view cone from the slab to the lens -->
+            <g id="s3-cone" stroke="rgba(234,242,255,0.45)" stroke-width="2.5" stroke-dasharray="10 10" fill="none">
+              <path id="s3-coneL" d="M460 1115L190 640" /><path id="s3-coneR" d="M460 1115L730 640" />
+            </g>
+            <g clip-path="url(#s3-clip)">
+              <circle cx="460" cy="640" r="300" fill="#13314f" />
+              <g id="s3-links" stroke="#eaf2ff" stroke-width="4.5" stroke-linecap="round" filter="url(#s3-glow)"></g>
+              <g id="s3-grains"></g>
+              <g id="s3-drops" fill="#4fc3f7"></g>
+              <circle cx="460" cy="640" r="300" fill="url(#s3-inner)" />
+            </g>
+            <circle id="s3-ring" cx="460" cy="1115" r="0" fill="none" stroke="#eaf2ff" stroke-width="7" />
+            <circle id="s3-ring2" cx="460" cy="1115" r="0" fill="none" stroke="rgba(79,195,247,0.6)" stroke-width="3" />
+            <g id="s3-leaders" stroke="rgba(234,242,255,0.8)" stroke-width="2.5" fill="none">
+              <path id="s3-leadC" pathLength="1" d="M260 352L330 500" /><path id="s3-leadW" pathLength="1" d="M660 352L600 470" stroke="#4fc3f7" />
+            </g>
+          </svg>
+          <div class="s3-slabwrap" id="s3-slabwrap">
+            <svg width="640" height="300" viewBox="0 0 640 300">
+              <defs><pattern id="s3-brick" width="40" height="24" patternUnits="userSpaceOnUse"><rect width="40" height="24" fill="#33465f" /><path d="M0 12H40M20 0V12M0 12V24M40 12V24" stroke="rgba(234,242,255,0.35)" stroke-width="2" fill="none" /></pattern></defs>
+              <rect x="0" y="0" width="640" height="100" rx="6" fill="#b9c2ce" stroke="#eaf2ff" stroke-width="4" />
+              <g fill="#0e2a47" stroke="#eaf2ff" stroke-width="3"><circle cx="40" cy="72" r="7" /><circle cx="120" cy="72" r="7" /><circle cx="200" cy="72" r="7" /><circle cx="280" cy="72" r="7" /><circle cx="360" cy="72" r="7" /><circle cx="440" cy="72" r="7" /><circle cx="520" cy="72" r="7" /><circle cx="600" cy="72" r="7" /></g>
+              <rect x="40" y="100" width="84" height="200" fill="url(#s3-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <rect x="516" y="100" width="84" height="200" fill="url(#s3-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <path d="M-50 300H690" stroke="#eaf2ff" stroke-width="4" />
+              <circle id="s3-spot" cx="320" cy="50" r="18" fill="none" stroke="#4fc3f7" stroke-width="5" />
+            </svg>
+          </div>
+          <div class="s3-pill" id="s3-cement">CEMENT</div>
+          <div class="s3-pill" id="s3-water">WATER</div>
+          <div id="s3-bar"><div id="s3-fill"></div></div>
+          <div id="s3-barlabel">STRENGTH</div>
+          <div id="s3-dial">
+            <div class="s3-ico" id="s3-sun"><svg width="54" height="54" viewBox="-27 -27 54 54"><circle r="11" fill="#ffb070" /><path d="M0 -17V-24M0 17V24M-17 0H-24M17 0H24M12 -12L17 -17M-12 12L-17 17M12 12L17 17M-12 -12L-17 -17" stroke="#ffb070" stroke-width="4" stroke-linecap="round" /></svg></div>
+            <div class="s3-ico" id="s3-moon"><svg width="54" height="54" viewBox="-27 -27 54 54"><path d="M8 -18 A 19 19 0 1 0 18 10 A 15 15 0 1 1 8 -18Z" fill="#cfe3ff" /></svg></div>
+          </div>
+        </div>
+        <script>
+          (function () {
+            var T0 = 8.841;
+            var at = function (w, n) { return R05.at("L03", w, n) - T0; };
+            var ns = "http://www.w3.org/2000/svg", rnd = R05.rng(7);
+            var CX = 460, CY = 640, R = 270;
+            // cement grains on a jittered hex grid inside the lens
+            var pts = [];
+            for (var j = -3; j <= 3; j++) for (var i = -3; i <= 3; i++) {
+              var x = CX + i * 108 + (j % 2 ? 54 : 0) + (rnd() - 0.5) * 26, y = CY + j * 94 + (rnd() - 0.5) * 22;
+              if (Math.hypot(x - CX, y - CY) < R - 30) pts.push([x, y]);
+            }
+            var gG = document.getElementById("s3-grains"), gL = document.getElementById("s3-links"), gD = document.getElementById("s3-drops");
+            pts.forEach(function (p, k) {
+              var n = 7, rr = 34 + rnd() * 12, d = "";
+              for (var v = 0; v < n; v++) {
+                var a = (v / n) * Math.PI * 2 + rnd() * 0.5, q = rr * (0.75 + rnd() * 0.35);
+                d += (v ? "L" : "M") + (p[0] + Math.cos(a) * q).toFixed(1) + " " + (p[1] + Math.sin(a) * q).toFixed(1);
+              }
+              var el = document.createElementNS(ns, "path");
+              el.setAttribute("d", d + "Z"); el.setAttribute("fill", k % 3 ? "#8f9bab" : "#a4afbd");
+              el.setAttribute("stroke", "#eaf2ff"); el.setAttribute("stroke-width", "3"); el.setAttribute("class", "s3-grain");
+              gG.appendChild(el);
+            });
+            // links between neighbours; water drops sit in the gaps
+            var links = 0, drops = 0;
+            for (var a = 0; a < pts.length; a++) for (var b = a + 1; b < pts.length; b++) {
+              var dd = Math.hypot(pts[a][0] - pts[b][0], pts[a][1] - pts[b][1]);
+              if (dd < 135) {
+                var ln = document.createElementNS(ns, "path");
+                var mx = (pts[a][0] + pts[b][0]) / 2 + (rnd() - 0.5) * 16, my = (pts[a][1] + pts[b][1]) / 2 + (rnd() - 0.5) * 16;
+                ln.setAttribute("d", "M" + pts[a][0].toFixed(1) + " " + pts[a][1].toFixed(1) + "L" + mx.toFixed(1) + " " + my.toFixed(1) + "L" + pts[b][0].toFixed(1) + " " + pts[b][1].toFixed(1));
+                ln.setAttribute("pathLength", "1"); ln.setAttribute("stroke-dasharray", "1 1"); ln.setAttribute("stroke-dashoffset", "1");
+                ln.setAttribute("class", "s3-link"); ln.setAttribute("fill", "none");
+                gL.appendChild(ln); links++;
+                var c = document.createElementNS(ns, "circle");
+                c.setAttribute("cx", mx.toFixed(1)); c.setAttribute("cy", my.toFixed(1)); c.setAttribute("r", (7 + rnd() * 4).toFixed(1));
+                c.setAttribute("class", "s3-drop"); gD.appendChild(c); drops++;
+              }
+            }
+            var tl = gsap.timeline({ paused: true });
+            // the slab arrives already in place (carried from the zoom-through) at s4's geometry, scaled
+            tl.fromTo("#s3-slabwrap", { x: 116, y: 260, scale: 0.7, transformOrigin: "0 0", opacity: 0, filter: "blur(10px)" },
+              { x: 116, y: 260, scale: 0.7, opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "power2.out" }, 0);
+            tl.fromTo("#s3-spot", { attr: { r: 6 }, opacity: 0 }, { attr: { r: 22 }, opacity: 1, duration: 0.3, ease: "power2.out" }, 0.05);
+            // "Inside,": the spot on the slab becomes the world (lens grows out of it)
+            var lens = { attr: { cx: 460, cy: 640, r: 280 }, duration: 0.75, ease: "expo.out" };
+            tl.fromTo("#s3-clipc", { attr: { cx: 460, cy: 1115, r: 0 } }, lens, 0.18);
+            tl.fromTo("#s3-ring", { attr: { cx: 460, cy: 1115, r: 0 } }, { attr: { cx: 460, cy: 640, r: 280 }, duration: 0.75, ease: "expo.out" }, 0.18);
+            tl.fromTo("#s3-ring2", { attr: { cx: 460, cy: 1115, r: 0 } }, { attr: { cx: 460, cy: 640, r: 296 }, duration: 0.8, ease: "expo.out" }, 0.2);
+            tl.fromTo("#s3-cone", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.35);
+            tl.fromTo("#s3-coneL", { attr: { d: "M460 1115L460 1115" } }, { attr: { d: "M460 1115L190 650" }, duration: 0.75, ease: "expo.out" }, 0.18);
+            tl.fromTo("#s3-coneR", { attr: { d: "M460 1115L460 1115" } }, { attr: { d: "M460 1115L730 650" }, duration: 0.75, ease: "expo.out" }, 0.18);
+            // cement grains settle in on "cement"
+            tl.fromTo(".s3-grain", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out", stagger: { each: 0.025, from: "center" } }, at("cement") - 0.15);
+            tl.fromTo("#s3-cement", { opacity: 0, filter: "blur(6px)", y: 0 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.18, ease: "power2.out" }, at("cement"));
+            tl.fromTo("#s3-leadC", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, at("cement") + 0.1);
+            // "reacts": a small shimmer through the grains
+            tl.fromTo(".s3-grain", { x: 0 }, { x: 2.5, duration: 0.06, ease: "none", yoyo: true, repeat: 5 }, at("reacts"));
+            // water flows into the gaps on "water."
+            tl.fromTo(".s3-drop", { x: 260, y: -300, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: { each: 0.018, from: "end" } }, at("water") - 0.35);
+            tl.fromTo("#s3-water", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, at("water"));
+            tl.fromTo("#s3-leadW", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, at("water") + 0.1);
+            // "That reaction builds strength, slowly, day by day": crystal links grow, water is used up, the bar climbs
+            var r0 = at("reaction"), r1 = 5.75;
+            tl.to(".s3-link", { attr: { "stroke-dashoffset": 0 }, duration: 0.9, ease: "power1.inOut", stagger: { each: (r1 - r0 - 0.9) / links, from: "random" } }, r0);
+            tl.to(".s3-drop", { scale: 0.35, opacity: 0.55, transformOrigin: "50% 50%", duration: 1.2, ease: "power1.inOut", stagger: { each: (r1 - r0 - 1.2) / drops, from: "random" } }, r0 + 0.3);
+            tl.to("#s3-cement, #s3-water, #s3-leaders", { opacity: 0.35, duration: 0.4 }, r0);
+            tl.fromTo("#s3-bar", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, at("builds") - 0.3);
+            tl.fromTo("#s3-barlabel", { opacity: 0 }, { opacity: 1, duration: 0.3 }, at("builds") - 0.1);
+            tl.fromTo("#s3-fill", { scaleY: 0 }, { scaleY: 0.42, duration: 6.103 - at("builds"), ease: "sine.inOut" }, at("builds"));
+            // day / moon / day on "day by day" (icon-swap: scale + blur)
+            tl.fromTo("#s3-dial", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, at("slowly"));
+            tl.fromTo("#s3-sun", { opacity: 1, scale: 1, filter: "blur(0px)" }, { opacity: 1, duration: 0.01 }, 0);
+            tl.fromTo("#s3-moon", { opacity: 0, scale: 0.6, filter: "blur(6px)" }, { opacity: 0, duration: 0.01 }, 0);
+            var swap = function (out, inn, t) {
+              tl.to(out, { opacity: 0, scale: 0.6, filter: "blur(6px)", duration: 0.14, ease: "power2.in" }, t);
+              tl.to(inn, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.18, ease: "power3.out" }, t + 0.08);
+            };
+            swap("#s3-sun", "#s3-moon", at("by") - 0.08);
+            swap("#s3-moon", "#s3-sun", at("day", 2) - 0.08);
+            // exit: the lens folds back into the slab (carry across into s4)
+            tl.to("#s3-clipc", { attr: { cx: 460, cy: 1115, r: 0 }, duration: 0.32, ease: "power3.in" }, 5.75);
+            tl.to("#s3-ring, #s3-ring2", { attr: { cx: 460, cy: 1115, r: 0 }, duration: 0.32, ease: "power3.in" }, 5.75);
+            tl.to("#s3-cone, #s3-cement, #s3-water, #s3-leaders, #s3-dial", { opacity: 0, duration: 0.2, ease: "power2.in" }, 5.75);
+            tl.to("#s3-spot", { opacity: 0, duration: 0.2 }, 5.85);
+            window.__timelines["s3"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

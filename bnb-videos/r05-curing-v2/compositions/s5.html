@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s5 · What curing looks like · L06 -->
+      <div id="root" data-composition-id="s5" data-duration="7.334">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s5-cam { position: absolute; inset: 0; }
+          #s5-t1 { position: absolute; left: 0; top: 284px; width: 1080px; text-align: center; font-size: 112px; font-weight: 900; letter-spacing: -0.035em; line-height: 1; white-space: nowrap; }
+          #s5-t1 .eq { color: #ff8a3d; margin-left: 18px; display: inline-block; }
+          #s5-t2 { position: absolute; left: 0; top: 418px; width: 1080px; display: flex; justify-content: center; align-items: center; gap: 22px; font-size: 64px; font-weight: 900; letter-spacing: -0.01em; white-space: nowrap; }
+          #s5-t2 > div { display: flex; align-items: center; gap: 14px; }
+          #s5-cards { position: absolute; inset: 0; perspective: 1400px; perspective-origin: 540px 800px; }
+          .s5-card { position: absolute; left: 100px; width: 840px; height: 238px; border-radius: 28px;
+            background: linear-gradient(160deg, rgba(20,52,88,0.95), rgba(8,25,45,0.95)); border: 2px solid rgba(234,242,255,0.22);
+            box-shadow: 0 26px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08); overflow: hidden; }
+          .s5-card .art { position: absolute; left: 24px; top: 19px; width: 300px; height: 200px; border-radius: 18px; background: rgba(4,14,28,0.55); }
+          .s5-card .txt { position: absolute; left: 356px; top: 0; height: 238px; display: flex; flex-direction: column; justify-content: center; }
+          .s5-card .name { font-size: 62px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.02; }
+          .s5-card .sub { margin-top: 10px; font-size: 32px; font-weight: 700; color: #4fc3f7; }
+          .s5-card .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: #4fc3f7; }
+          #s5-c1 { top: 540px; } #s5-c2 { top: 802px; } #s5-c3 { top: 1064px; }
+        </style>
+        <div id="s5-cam">
+          <div id="s5-t1"><span id="s5-curing">CURING</span><span class="eq" id="s5-eq">=</span></div>
+          <div id="s5-t2">
+            <div id="s5-wet"><svg width="50" height="62" viewBox="0 0 50 62"><path d="M25 2 C 36 18, 46 30, 46 40 A 21 21 0 0 1 4 40 C 4 30, 14 18, 25 2Z" fill="#4fc3f7" /></svg><span style="color:#4fc3f7">WET</span></div>
+            <div id="s5-plus" style="color:rgba(234,242,255,0.7)">+</div>
+            <div id="s5-cov"><svg width="66" height="50" viewBox="0 0 66 50"><path d="M4 36 Q 33 4, 62 36 L 62 46 L 4 46Z" fill="none" stroke="#ff8a3d" stroke-width="6" stroke-linejoin="round" /><path d="M14 30 L52 30" stroke="#ff8a3d" stroke-width="4" /></svg><span style="color:#ff8a3d">COVERED</span></div>
+          </div>
+          <div id="s5-cards">
+            <div class="s5-card" id="s5-c1"><div class="bar"></div>
+              <svg class="art" viewBox="0 0 300 200">
+                <defs><clipPath id="s5-pclip"><rect x="20" y="74" width="260" height="40" /></clipPath></defs>
+                <rect x="20" y="108" width="260" height="56" rx="4" fill="#b9c2ce" stroke="#eaf2ff" stroke-width="3" />
+                <rect x="20" y="92" width="260" height="18" fill="rgba(79,195,247,0.55)" />
+                <g clip-path="url(#s5-pclip)"><path id="s5-wave" d="M-20 94 q 10 -7 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" fill="none" stroke="#8fdcff" stroke-width="4" /></g>
+                <g fill="#8f9bab" stroke="#eaf2ff" stroke-width="2.5"><rect x="18" y="84" width="12" height="26" /><rect x="104" y="84" width="12" height="26" /><rect x="186" y="84" width="12" height="26" /><rect x="270" y="84" width="12" height="26" /></g>
+                <g id="s5-glints" fill="#eaf2ff"><circle cx="64" cy="98" r="2.5" /><circle cx="150" cy="99" r="2.5" /><circle cx="232" cy="97" r="2.5" /></g>
+              </svg>
+              <div class="txt"><div class="name">PONDING</div><div class="sub">on the slab</div></div>
+            </div>
+            <div class="s5-card" id="s5-c2"><div class="bar"></div>
+              <svg class="art" viewBox="0 0 300 200">
+                <defs><pattern id="s5-hess" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#7a5d3e" /><path d="M0 5H10M5 0V10" stroke="rgba(255,230,190,0.25)" stroke-width="1.5" /></pattern>
+                  <linearGradient id="s5-damp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fc3f7" stop-opacity="0.05" /><stop offset="1" stop-color="#4fc3f7" stop-opacity="0.45" /></linearGradient></defs>
+                <rect x="122" y="14" width="56" height="176" fill="#33465f" stroke="#eaf2ff" stroke-width="3" />
+                <rect x="108" y="44" width="84" height="120" rx="12" fill="url(#s5-hess)" stroke="#eaf2ff" stroke-width="3" />
+                <rect id="s5-dampr" x="108" y="44" width="84" height="120" rx="12" fill="url(#s5-damp)" />
+                <path d="M108 70H192M108 138H192" stroke="#e8d3b0" stroke-width="3" stroke-dasharray="6 5" />
+                <path d="M40 190H260" stroke="#eaf2ff" stroke-width="3" />
+                <g fill="#4fc3f7"><circle class="s5-drip" cx="118" cy="166" r="4.5" /><circle class="s5-drip" cx="150" cy="166" r="4.5" /><circle class="s5-drip" cx="182" cy="166" r="4.5" /></g>
+              </svg>
+              <div class="txt"><div class="name">WET SACKS</div><div class="sub">on columns</div></div>
+            </div>
+            <div class="s5-card" id="s5-c3"><div class="bar"></div>
+              <svg class="art" viewBox="0 0 300 200">
+                <defs><pattern id="s5-brick" width="28" height="18" patternUnits="userSpaceOnUse"><rect width="28" height="18" fill="#33465f" /><path d="M0 9H28M14 0V9M0 9V18M28 9V18" stroke="rgba(234,242,255,0.35)" stroke-width="1.5" fill="none" /></pattern></defs>
+                <rect x="206" y="14" width="74" height="176" fill="url(#s5-brick)" stroke="#eaf2ff" stroke-width="3" />
+                <rect id="s5-wetwall" x="206" y="40" width="74" height="120" fill="rgba(79,195,247,0.4)" />
+                <g fill="none" stroke="#8fdcff" stroke-width="5" stroke-linecap="round">
+                  <path class="s5-spray" pathLength="1" d="M74 104 L 202 46" /><path class="s5-spray" pathLength="1" d="M74 104 L 202 76" />
+                  <path class="s5-spray" pathLength="1" d="M74 104 L 202 104" /><path class="s5-spray" pathLength="1" d="M74 104 L 202 132" />
+                  <path class="s5-spray" pathLength="1" d="M74 104 L 202 160" />
+                </g>
+                <path d="M10 112 H44 L74 98 V110 L44 120 H10Z" fill="#8f9bab" stroke="#eaf2ff" stroke-width="3" stroke-linejoin="round" />
+                <path d="M10 116 C -10 130, 0 170, 30 190" fill="none" stroke="#7ce0a3" stroke-width="8" stroke-linecap="round" />
+              </svg>
+              <div class="txt"><div class="name">SPRAYING</div><div class="sub">on walls</div></div>
+            </div>
+          </div>
+        </div>
+        <script>
+          (function () {
+            var T0 = 24.97;
+            var at = function (w, n) { return R05.at("L06", w, n) - T0; };
+            var tl = gsap.timeline({ paused: true });
+            // whip landing from below (matches s4's exit direction)
+            tl.fromTo("#s5-cam", { y: 220, filter: "blur(14px)", opacity: 0 }, { y: 0, filter: "blur(0px)", opacity: 1, duration: 0.4, ease: "expo.out" }, 0);
+            tl.fromTo("#s5-curing", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, at("curing") - 0.05);
+            tl.fromTo("#s5-eq", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: "expo.out" }, at("means") - 0.05);
+            tl.fromTo("#s5-wet", { opacity: 0, filter: "blur(6px)", y: 0 }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, at("wet") - 0.05);
+            tl.fromTo("#s5-wet svg", { scale: 0.4, y: -30, transformOrigin: "50% 100%" }, { scale: 1, y: 0, duration: 0.4, ease: "expo.out" }, at("wet") - 0.05);
+            tl.fromTo("#s5-plus", { opacity: 0 }, { opacity: 1, duration: 0.15 }, at("and"));
+            tl.fromTo("#s5-cov", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, at("covered") - 0.05);
+            tl.fromTo("#s5-cov svg", { scaleY: 0.2, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.4, ease: "expo.out" }, at("covered") - 0.05);
+            // cards tip up out of the page, one per spoken method; the previous card steps back
+            var cards = [["#s5-c1", at("ponding")], ["#s5-c2", at("wet", 2)], ["#s5-c3", at("spraying")]];
+            cards.forEach(function (c, i) {
+              tl.fromTo(c[0], { opacity: 0, rotationX: -48, y: 110, z: -120, filter: "blur(10px)", transformOrigin: "50% 0%" },
+                { opacity: 1, rotationX: 0, y: 0, z: 0, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, c[1] - 0.12);
+              if (i > 0) tl.to(cards[i - 1][0], { opacity: 0.55, scale: 0.97, duration: 0.4, ease: "power2.out" }, c[1] - 0.05);
+            });
+            tl.to("#s5-c1, #s5-c2", { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, at("walls") + 0.1);
+            // the pictures act: water shimmers in the bunds, sacks drip, the spray hits the wall
+            tl.fromTo("#s5-wave", { x: 0 }, { x: -40, duration: 0.9, ease: "none", repeat: 6 }, at("ponding") - 0.1);
+            tl.fromTo("#s5-glints circle", { opacity: 0.2 }, { opacity: 1, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 7, stagger: 0.15 }, at("ponding"));
+            tl.fromTo(".s5-drip", { y: 0, opacity: 0 }, { y: 26, opacity: 1, duration: 0.55, ease: "power2.in", stagger: 0.18, repeat: 4, repeatDelay: 0.1 }, at("wet", 2) + 0.2);
+            tl.fromTo("#s5-dampr", { opacity: 0.3 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, at("wet", 2));
+            tl.fromTo(".s5-spray", { attr: { "stroke-dasharray": "0.06 0.08", "stroke-dashoffset": 0 } }, { attr: { "stroke-dashoffset": -0.7 }, duration: 0.5, ease: "none", repeat: 3, stagger: 0.04 }, at("spraying") - 0.05);
+            tl.fromTo("#s5-wetwall", { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, at("spraying") + 0.1);
+            // exit: blur swap
+            tl.to("#s5-cam", { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 7.12);
+            window.__timelines["s5"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

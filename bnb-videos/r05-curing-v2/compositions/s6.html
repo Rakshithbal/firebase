@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s6 · How many days? · L07 + L08 — never a fixed count -->
+      <div id="root" data-composition-id="s6" data-duration="9.91">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s6-cam, #s6-shake { position: absolute; inset: 0; }
+          #s6-head { position: absolute; left: 0; top: 300px; width: 1080px; display: flex; justify-content: center; align-items: baseline; gap: 26px; white-space: nowrap; line-height: 1; }
+          #s6-q { font-size: 150px; font-weight: 900; color: #ff8a3d; display: inline-block; text-shadow: 0 10px 40px rgba(255,138,61,0.35); }
+          #s6-days { font-size: 124px; font-weight: 900; letter-spacing: -0.03em; display: inline-block; }
+          #s6-board { position: absolute; left: 120px; top: 488px; width: 800px; height: 830px; border-radius: 34px;
+            background: linear-gradient(170deg, rgba(20,52,88,0.96), rgba(8,25,45,0.96)); border: 2.5px solid rgba(234,242,255,0.25);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+          #s6-clip { position: absolute; left: 300px; top: -26px; width: 200px; height: 52px; border-radius: 14px; background: #8f9bab; border: 3px solid #eaf2ff; }
+          .s6-row { position: absolute; left: 36px; width: 728px; height: 104px; display: flex; align-items: center; gap: 22px; border-bottom: 2px dashed rgba(234,242,255,0.18); }
+          .s6-row .ic { width: 64px; height: 64px; flex: none; }
+          .s6-row .lb { font-size: 44px; font-weight: 700; white-space: nowrap; }
+          .s6-row .blank { position: relative; margin-left: auto; width: 170px; height: 60px; flex: none; }
+          .s6-row .blank svg { position: absolute; left: 0; bottom: 6px; overflow: visible; }
+          #s6-r1 { top: 52px; } #s6-r2 { top: 160px; } #s6-r3 { top: 268px; } #s6-r4 { top: 376px; }
+          /* success-check (registry component), green, small */
+          .hf-transition-success-check { margin-left: auto; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 999px; flex: none;
+            background: rgba(124,224,163,0.18); color: #7ce0a3; }
+          .hf-transition-success-check svg { width: 50px; height: 50px; fill: none; stroke: currentColor; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+            filter: blur(var(--hf-check-blur, 0px)); transform: rotate(var(--hf-check-rotate, 0deg)) scale(var(--hf-check-scale, 1)); }
+          .hf-transition-success-check circle { opacity: 0.28; }
+          .hf-transition-success-check path { stroke-dasharray: 36; stroke-dashoffset: var(--hf-check-dash, 0); }
+          #s6-pencil { position: absolute; left: 0; top: 0; width: 56px; height: 56px; overflow: visible; }
+          #s6-every { position: absolute; left: 0; top: 520px; width: 800px; text-align: center; font-size: 30px; font-weight: 900; letter-spacing: 0.2em; color: #4fc3f7; }
+          #s6-strip { position: absolute; left: 30px; top: 580px; width: 740px; height: 170px; overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%); }
+          #s6-tape { position: absolute; left: 0; top: 30px; height: 120px; width: 3000px; }
+          .s6-day { position: absolute; top: 0; width: 92px; height: 104px; border-radius: 14px; border: 3px solid rgba(234,242,255,0.75); background: rgba(8,25,45,0.8); }
+          .s6-day::before { content: ""; position: absolute; left: -3px; right: -3px; top: -3px; height: 24px; border-radius: 14px 14px 0 0; background: rgba(79,195,247,0.55); }
+          .s6-day .tk { position: absolute; left: 20px; top: 34px; width: 52px; height: 52px; }
+          #s6-marker { position: absolute; left: 400px; top: 0; width: 0; height: 170px; }
+          #s6-marker svg { position: absolute; left: -16px; top: 0; }
+        </style>
+        <div id="s6-cam"><div id="s6-shake">
+          <div id="s6-head"><span id="s6-q">?</span><span id="s6-days">DAYS</span></div>
+          <div id="s6-board">
+            <div id="s6-clip"></div>
+            <div class="s6-row" id="s6-r1">
+              <svg class="ic" viewBox="0 0 64 64"><path d="M14 14 H50 L54 58 H10Z" fill="#8f9bab" stroke="#eaf2ff" stroke-width="3.5" stroke-linejoin="round" /><path d="M14 14 Q32 4 50 14" fill="none" stroke="#eaf2ff" stroke-width="3.5" /><path d="M20 34H44" stroke="#0e2a47" stroke-width="5" /></svg>
+              <div class="lb">Cement type</div>
+              <div class="hf-transition-success-check" id="s6-k1"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path d="M20 33.5l8 8L45 23" /></svg></div>
+            </div>
+            <div class="s6-row" id="s6-r2">
+              <svg class="ic" viewBox="0 0 64 64"><circle cx="24" cy="24" r="11" fill="#ffb070" /><path d="M24 6V2M24 46V42M6 24H2M42 24H46M11 11L8 8M37 11L40 8M11 37L8 40" stroke="#ffb070" stroke-width="3.5" stroke-linecap="round" /><path d="M22 52 A 11 11 0 0 1 30 34 A 14 14 0 0 1 56 40 A 8 8 0 0 1 54 56 H26 A 6 6 0 0 1 22 52Z" fill="#eaf2ff" /></svg>
+              <div class="lb">Weather</div>
+              <div class="hf-transition-success-check" id="s6-k2"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path d="M20 33.5l8 8L45 23" /></svg></div>
+            </div>
+            <div class="s6-row" id="s6-r3">
+              <svg class="ic" viewBox="0 0 64 64"><path d="M8 40 A 24 24 0 0 1 56 40Z" fill="#ff8a3d" stroke="#eaf2ff" stroke-width="3" /><rect x="4" y="40" width="56" height="8" rx="4" fill="#ff8a3d" stroke="#eaf2ff" stroke-width="3" /><path d="M32 16V26" stroke="#eaf2ff" stroke-width="4" /></svg>
+              <div class="lb">Engineer's number</div>
+              <div class="blank"><svg width="170" height="14" viewBox="0 0 170 14"><path id="s6-line3" pathLength="1" d="M4 8 C 50 4, 110 12, 166 7" fill="none" stroke="#ff8a3d" stroke-width="6" stroke-linecap="round" /></svg></div>
+            </div>
+            <div class="s6-row" id="s6-r4">
+              <svg class="ic" viewBox="0 0 64 64"><path d="M10 26 H40 L52 18 V24 L42 34 H10Z" fill="#8f9bab" stroke="#eaf2ff" stroke-width="3" stroke-linejoin="round" /><g fill="#4fc3f7"><circle cx="50" cy="40" r="3.5" /><circle cx="56" cy="48" r="3.5" /><circle cx="46" cy="52" r="3.5" /></g></svg>
+              <div class="lb" style="color:#4fc3f7">Who waters daily</div>
+              <div class="blank"><svg width="170" height="14" viewBox="0 0 170 14"><path id="s6-line4" pathLength="1" d="M4 8 C 50 4, 110 12, 166 7" fill="none" stroke="#ff8a3d" stroke-width="6" stroke-linecap="round" /></svg></div>
+            </div>
+            <svg id="s6-pencil" viewBox="0 0 56 56"><g transform="rotate(-40 28 28)"><rect x="22" y="2" width="12" height="40" rx="2" fill="#ffb070" stroke="#eaf2ff" stroke-width="2.5" /><path d="M22 42 L28 54 L34 42Z" fill="#eaf2ff" /></g></svg>
+            <div id="s6-every">EVERY DAY</div>
+            <div id="s6-strip">
+              <div id="s6-tape"></div>
+              <div id="s6-marker"><svg width="32" height="30" viewBox="0 0 32 30"><path d="M16 2 C 22 10, 28 15, 28 20 A 12 12 0 0 1 4 20 C 4 15, 10 10, 16 2Z" fill="#4fc3f7" /></svg></div>
+            </div>
+          </div>
+        </div></div>
+        <script>
+          (function () {
+            var T0 = 32.304;
+            var a7 = function (w, n) { return R05.at("L07", w, n) - T0; };
+            var a8 = function (w, n) { return R05.at("L08", w, n) - T0; };
+            // open-ended day strip: tiles run in from the right edge and off the left, never a countable row
+            var tape = document.getElementById("s6-tape"), PITCH = 116, NT = 22;
+            var V = 150, X0 = 400 - 3.5 * PITCH - 46, E0 = R05.at("L08", "every") - T0 - 0.35;
+            for (var i = 0; i < NT; i++) {
+              var d = document.createElement("div");
+              d.className = "s6-day"; d.style.left = i * PITCH + "px";
+              d.innerHTML = '<svg class="tk" viewBox="0 0 52 52"><path class="tkp" pathLength="1" d="M10 27 L21 38 L42 14" fill="none" stroke="#4fc3f7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 1" stroke-dashoffset="' + ((X0 + i * PITCH + 46) < 400 ? 0 : 1) + '" /></svg>';
+              tape.appendChild(d);
+            }
+            var tl = gsap.timeline({ paused: true });
+            // entrance + "? DAYS" (headline-slam recipe on the question mark)
+            tl.fromTo("#s6-cam", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 0);
+            tl.fromTo("#s6-q", { scale: 1.9, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.45, ease: "expo.out" }, a7("how") - 0.02);
+            tl.to("#s6-shake", { x: 7, y: -4, duration: 1 / 30 }, a7("how") + 0.3);
+            tl.to("#s6-shake", { x: -5, y: 3, duration: 1 / 30 }, a7("how") + 0.3 + 1 / 30);
+            tl.to("#s6-shake", { x: 0, y: 0, duration: 1 / 30 }, a7("how") + 0.3 + 2 / 30);
+            tl.fromTo("#s6-days", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, a7("days") - 0.05);
+            // "That depends on…": the board rises into place
+            tl.fromTo("#s6-board", { opacity: 0, y: 90, rotationX: -18, transformPerspective: 1600, transformOrigin: "50% 0%", filter: "blur(8px)" },
+              { opacity: 1, y: 0, rotationX: 0, filter: "blur(0px)", duration: 0.7, ease: "expo.out" }, a7("depends") - 0.15);
+            var rows = [["#s6-r1", a7("cement")], ["#s6-r2", a7("weather")], ["#s6-r3", a7("number")], ["#s6-r4", a8("who")]];
+            rows.forEach(function (r) {
+              tl.fromTo(r[0], { opacity: 0, x: -40, filter: "blur(6px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.45, ease: "expo.out" }, r[1] - 0.12);
+            });
+            [["#s6-k1", a7("cement") + 0.35], ["#s6-k2", a7("weather") + 0.3]].forEach(function (k) {
+              tl.fromTo(k[0] + " svg", { opacity: 0, "--hf-check-scale": 0.72, "--hf-check-rotate": "-18deg", "--hf-check-blur": "7px" },
+                { opacity: 1, "--hf-check-scale": 1, "--hf-check-rotate": "0deg", "--hf-check-blur": "0px", duration: 0.34, ease: "back.out(1.8)" }, k[1]);
+              tl.fromTo(k[0] + " path", { "--hf-check-dash": 36 }, { "--hf-check-dash": 0, duration: 0.42, ease: "power2.out" }, k[1] + 0.12);
+            });
+            // "write it down": a pencil draws the blank for the engineer's number
+            var w = a7("write");
+            tl.fromTo("#s6-line3", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.55, ease: "power1.inOut" }, w);
+            tl.fromTo("#s6-pencil", { x: 549, y: 289, opacity: 0 }, { x: 549, y: 289, opacity: 1, duration: 0.12 }, w - 0.12);
+            tl.to("#s6-pencil", { x: 719, y: 291, duration: 0.55, ease: "power1.inOut" }, w);
+            // "who waters it": the second blank, then the pencil steps away
+            var h = a8("waters");
+            tl.to("#s6-pencil", { x: 549, y: 397, duration: 0.3, ease: "power2.inOut" }, h - 0.35);
+            tl.fromTo("#s6-line4", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.55, ease: "power1.inOut" }, h);
+            tl.to("#s6-pencil", { x: 719, y: 399, duration: 0.55, ease: "power1.inOut" }, h);
+            tl.to("#s6-pencil", { opacity: 0, duration: 0.2 }, h + 0.6);
+            // "every single day": the strip runs past a water mark; each day that passes it gets a tick
+            var e = a8("every"), END = 9.91;
+            tl.fromTo("#s6-every", { opacity: 0, scale: 1.2, filter: "blur(6px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.4, ease: "expo.out" }, e - 0.25);
+            tl.fromTo("#s6-strip", { opacity: 0 }, { opacity: 1, duration: 0.3 }, e - 0.35);
+            tl.fromTo("#s6-tape", { x: X0 }, { x: X0 - V * (END - (e - 0.35)), duration: END - (e - 0.35), ease: "none" }, e - 0.35);
+            document.querySelectorAll("#s6-tape .tkp").forEach(function (p, i) {
+              var cx = i * PITCH + 46;                       // tile centre on the tape
+              var tCross = (e - 0.35) + (X0 + cx - 400) / V;  // when it reaches the marker
+              if (tCross > e - 0.35 && tCross < END - 0.2) {
+                tl.to(p, { attr: { "stroke-dashoffset": 0 }, duration: 0.25, ease: "power2.out" }, tCross);
+              }
+            });
+            // exit: blur swap
+            tl.to("#s6-cam", { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 9.7);
+            window.__timelines["s6"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

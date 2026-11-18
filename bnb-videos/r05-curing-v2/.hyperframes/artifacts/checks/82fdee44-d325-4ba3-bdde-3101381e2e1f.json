@@ -1,0 +1,1554 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "timeline_track_too_dense",
+        "severity": "warning",
+        "message": "This HTML file has 23 timed elements. Smaller sub-compositions keep timelines easier to read, iterate on, and diff.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/home/user/firebase/bnb-videos/r05-curing-v2/compositions/captions.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move coherent scene groups into smaller .html files and mount them from the parent with data-composition-src so the timeline stays easier to inspect, revise, and validate."
+      }
+    ],
+    "filesScanned": 11
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "gsap_tween_tail",
+        "severity": "warning",
+        "message": "In timeline \"main\", a tween on opacity of path ends at 4.340 s, 0.166 s after a later tween on opacity ends at 4.174 s. For that tail the earlier tween takes opacity back and leaves its own end value on screen, so the later tween's end never shows. End the earlier tween by 3.824 s, or add overwrite: \"auto\" to the later tween.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "45.51",
+          "data-fps": "30",
+          "data-width": "1080",
+          "data-height": "1920"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "time": 4.1739999999999995
+      }
+    ]
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 17,
+    "infoCount": 19,
+    "findings": [
+      {
+        "code": "container_overflow",
+        "severity": "warning",
+        "time": 7.585,
+        "selector": "#bg-cam",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 0,
+          "top": -24,
+          "right": 1080,
+          "bottom": 1896,
+          "width": 1080,
+          "height": 1920
+        },
+        "containerSelector": "#bg > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "top": 24
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/bg.html",
+        "bbox": {
+          "x": 0,
+          "y": -24,
+          "width": 1080,
+          "height": 1920
+        },
+        "firstSeen": 7.585,
+        "lastSeen": 42.982,
+        "occurrences": 8,
+        "heldMs": 0,
+        "times": [
+          7.585,
+          12.642,
+          17.698,
+          22.755,
+          27.812,
+          32.868,
+          37.925,
+          42.982
+        ]
+      },
+      {
+        "selector": "#s1-figure > g:nth-of-type(3) > g:nth-of-type(1) > text:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 973.5,
+          "y": 854.55,
+          "width": 32,
+          "height": 86.4
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 973.5,
+          "top": 854.55,
+          "right": 1005.5,
+          "bottom": 940.95,
+          "width": 32,
+          "height": 86.4
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Depth",
+        "message": "<text> \"Depth\" is outside the safe area: TikTok (right edge), YouTube Shorts (right edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-figure > g:nth-of-type(6) > text:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 642.75,
+          "width": 134.69,
+          "height": 34
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 642.75,
+          "right": 206.69,
+          "bottom": 676.75,
+          "width": 134.69,
+          "height": 34
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Surface",
+        "message": "<text> \"Surface\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-figure > g:nth-of-type(6) > text:nth-of-type(2)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 679.75,
+          "width": 180.7,
+          "height": 39
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 679.75,
+          "right": 252.7,
+          "bottom": 718.75,
+          "width": 180.7,
+          "height": 39
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Dry and hard",
+        "message": "<text> \"Dry and hard\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-kicker",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 340.75,
+          "width": 276.66,
+          "height": 37
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 340.75,
+          "right": 348.66,
+          "bottom": 377.75,
+          "width": 276.66,
+          "height": 37
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "— The myth 01",
+        "message": "<div> \"— The myth 01\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-looks",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 372.75,
+          "width": 301.23,
+          "height": 163
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 372.75,
+          "right": 373.23,
+          "bottom": 535.75,
+          "width": 301.23,
+          "height": 163
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Looks",
+        "message": "<span> \"Looks\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-deck",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 542.75,
+          "width": 459.72,
+          "height": 44
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 542.75,
+          "right": 531.72,
+          "bottom": 586.75,
+          "width": 459.72,
+          "height": 44
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "The surface says it is finished.",
+        "message": "<p> \"The surface says it is finished.\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#s1-figcap > div:nth-of-type(2)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 72,
+          "y": 1226.25,
+          "width": 557.13,
+          "height": 34
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 1226.25,
+          "right": 629.13,
+          "bottom": 1260.25,
+          "width": 557.13,
+          "height": 34
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Fig. 1 · Section through a fresh RCC slab",
+        "message": "<div> \"Fig. 1 · Section through a fresh RCC slab\" is outside the safe area: TikTok (left and bottom edges), Instagram Reels (bottom edge), YouTube Shorts (bottom edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "selector": "#chrome-series",
+        "dataAttributes": {
+          "data-var-text": "series"
+        },
+        "sourceFile": "compositions/chrome.html",
+        "bbox": {
+          "x": 72,
+          "y": 272.5,
+          "width": 176.02,
+          "height": 29
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 72,
+          "top": 272.5,
+          "right": 248.02,
+          "bottom": 301.5,
+          "width": 176.02,
+          "height": 29
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "Buildpedia",
+        "message": "<span> \"Buildpedia\" is outside the safe area: TikTok (left edge), YouTube Shorts (top edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 42.982,
+        "occurrences": 9,
+        "heldMs": 0,
+        "times": [
+          2.528,
+          7.585,
+          12.642,
+          17.698,
+          22.755,
+          27.812,
+          32.868,
+          37.925,
+          42.982
+        ]
+      },
+      {
+        "selector": "#chrome-title",
+        "dataAttributes": {
+          "data-var-text": "title"
+        },
+        "sourceFile": "compositions/chrome.html",
+        "bbox": {
+          "x": 282.02,
+          "y": 272.5,
+          "width": 299.2,
+          "height": 29
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 282.02,
+          "top": 272.5,
+          "right": 581.22,
+          "bottom": 301.5,
+          "width": 299.2,
+          "height": 29
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "What curing means",
+        "message": "<span> \"What curing means\" is outside the safe area: YouTube Shorts (top edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 42.982,
+        "occurrences": 9,
+        "heldMs": 0,
+        "times": [
+          2.528,
+          7.585,
+          12.642,
+          17.698,
+          22.755,
+          27.812,
+          32.868,
+          37.925,
+          42.982
+        ]
+      },
+      {
+        "selector": "#captions",
+        "dataAttributes": {
+          "data-composition-file": "compositions/captions.html",
+          "data-composition-id": "captions",
+          "data-start": "0",
+          "data-track-index": "3",
+          "data-track-kind": "captions",
+          "data-width": "1080",
+          "data-height": "1920",
+          "data-hf-authored-duration": "45.51"
+        },
+        "sourceFile": "compositions/captions.html",
+        "bbox": {
+          "x": 254.94,
+          "y": 1397,
+          "width": 570.12,
+          "height": 54
+        },
+        "time": 2.528,
+        "rect": {
+          "left": 254.94,
+          "top": 1397,
+          "right": 825.06,
+          "bottom": 1451,
+          "width": 570.12,
+          "height": 54
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "That does not mean it is done.",
+        "message": "<div> \"That does not mean it is done.\" is outside the safe area: TikTok (bottom edge), Instagram Reels (bottom edge), YouTube Shorts (bottom edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 2.528,
+        "lastSeen": 42.982,
+        "occurrences": 9,
+        "heldMs": 0,
+        "times": [
+          2.528,
+          7.585,
+          12.642,
+          17.698,
+          22.755,
+          27.812,
+          32.868,
+          37.925,
+          42.982
+        ]
+      },
+      {
+        "selector": "#s2-q",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s2.html",
+        "bbox": {
+          "x": 190.67,
+          "y": 322,
+          "width": 698.64,
+          "height": 60
+        },
+        "time": 7.585,
+        "rect": {
+          "left": 190.67,
+          "top": 322,
+          "right": 889.31,
+          "bottom": 382,
+          "width": 698.64,
+          "height": 60
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "WHAT MAKES IT STRONG?",
+        "message": "<div> \"WHAT MAKES IT STRONG?\" is outside the safe area: YouTube Shorts (right edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 7.585,
+        "lastSeen": 7.585,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          7.585
+        ]
+      },
+      {
+        "selector": "#s3-barlabel",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 790,
+          "y": 918,
+          "width": 171.25,
+          "height": 34
+        },
+        "time": 12.642,
+        "rect": {
+          "left": 790,
+          "top": 918,
+          "right": 961.25,
+          "bottom": 952,
+          "width": 171.25,
+          "height": 34
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "STRENGTH",
+        "message": "<div> \"STRENGTH\" is outside the safe area: TikTok (right edge), YouTube Shorts (right edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "selector": "#s4-barlabel",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4.html",
+        "bbox": {
+          "x": 790,
+          "y": 918,
+          "width": 171.25,
+          "height": 34
+        },
+        "time": 17.698,
+        "rect": {
+          "left": 790,
+          "top": 918,
+          "right": 961.25,
+          "bottom": 952,
+          "width": 171.25,
+          "height": 34
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "STRENGTH",
+        "message": "<div> \"STRENGTH\" is outside the safe area: TikTok (right edge), YouTube Shorts (right edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 17.698,
+        "lastSeen": 22.755,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          17.698,
+          22.755
+        ]
+      },
+      {
+        "selector": "#s4-weak",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s4.html",
+        "bbox": {
+          "x": 101.02,
+          "y": 1150,
+          "width": 299.87,
+          "height": 82
+        },
+        "time": 22.755,
+        "rect": {
+          "left": 101.02,
+          "top": 1150,
+          "right": 400.89,
+          "bottom": 1232,
+          "width": 299.87,
+          "height": 82
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "WEAKER",
+        "message": "<div> \"WEAKER\" is outside the safe area: TikTok (left edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 22.755,
+        "lastSeen": 22.755,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          22.755
+        ]
+      },
+      {
+        "selector": "#s5-t1",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s5.html",
+        "bbox": {
+          "x": 284.56,
+          "y": 272,
+          "width": 510.88,
+          "height": 136
+        },
+        "time": 27.812,
+        "rect": {
+          "left": 284.56,
+          "top": 272,
+          "right": 795.44,
+          "bottom": 408,
+          "width": 510.88,
+          "height": 136
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "CURING =",
+        "message": "<div> \"CURING =\" is outside the safe area: YouTube Shorts (top edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 27.812,
+        "lastSeen": 27.812,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          27.812
+        ]
+      },
+      {
+        "selector": "#s6-q",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s6.html",
+        "bbox": {
+          "x": 314.11,
+          "y": 284,
+          "width": 90.09,
+          "height": 181
+        },
+        "time": 32.868,
+        "rect": {
+          "left": 314.11,
+          "top": 284,
+          "right": 404.2,
+          "bottom": 465,
+          "width": 90.09,
+          "height": 181
+        },
+        "code": "outside_safe_zone",
+        "severity": "warning",
+        "text": "?",
+        "message": "<span> \"?\" is outside the safe area: YouTube Shorts (top edge).",
+        "fixHint": "Move the text inside the safe area, or mark text meant to sit there with data-layout-allow-safe-zone.",
+        "firstSeen": 32.868,
+        "lastSeen": 37.925,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          32.868,
+          37.925
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 2.528,
+        "selector": "#s1-cam",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 0,
+          "top": -7.25,
+          "right": 1080,
+          "bottom": 1912.75,
+          "width": 1080,
+          "height": 1920
+        },
+        "containerSelector": "#s1 > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "top": 7.25
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 0,
+          "y": -7.25,
+          "width": 1080,
+          "height": 1920
+        },
+        "firstSeen": 2.528,
+        "lastSeen": 2.528,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.528
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 7.585,
+        "selector": "#s2-drying",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 333.86,
+          "top": 506.46,
+          "right": 860.82,
+          "bottom": 676.6,
+          "width": 526.96,
+          "height": 170.14
+        },
+        "containerSelector": "#s2-line",
+        "text": "DRYING",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.33,
+        "dataAttributes": {},
+        "sourceFile": "compositions/s2.html",
+        "bbox": {
+          "x": 333.86,
+          "y": 506.46,
+          "width": 526.96,
+          "height": 170.14
+        },
+        "firstSeen": 7.585,
+        "lastSeen": 7.585,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          7.585
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(2)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 299.4,
+          "top": 462.5,
+          "right": 346.7,
+          "bottom": 548.7,
+          "width": 47.3,
+          "height": 86.2
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 299.4,
+          "y": 462.5,
+          "width": 47.3,
+          "height": 86.2
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(3)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 346.7,
+          "top": 462.5,
+          "right": 410.7,
+          "bottom": 556.3,
+          "width": 64,
+          "height": 93.8
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 346.7,
+          "y": 462.5,
+          "width": 64,
+          "height": 93.8
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(5)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 410.7,
+          "top": 460.3,
+          "right": 453.4,
+          "bottom": 556.3,
+          "width": 42.7,
+          "height": 96
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 410.7,
+          "y": 460.3,
+          "width": 42.7,
+          "height": 96
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(6)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 453.4,
+          "top": 460.3,
+          "right": 517.2,
+          "bottom": 555.3,
+          "width": 63.8,
+          "height": 95
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 453.4,
+          "y": 460.3,
+          "width": 63.8,
+          "height": 95
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(8)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 560,
+          "top": 444.2,
+          "right": 630.5,
+          "bottom": 535.9,
+          "width": 70.5,
+          "height": 91.7
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 560,
+          "y": 444.2,
+          "width": 70.5,
+          "height": 91.7
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(10)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 240.6,
+          "top": 548.7,
+          "right": 299.4,
+          "bottom": 638.4,
+          "width": 58.8,
+          "height": 89.7
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 240.6,
+          "y": 548.7,
+          "width": 58.8,
+          "height": 89.7
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(14)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 410.7,
+          "top": 556.3,
+          "right": 465.3,
+          "bottom": 644.1,
+          "width": 54.6,
+          "height": 87.8
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 410.7,
+          "y": 556.3,
+          "width": 54.6,
+          "height": 87.8
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(15)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 517.2,
+          "top": 535.9,
+          "right": 630.5,
+          "bottom": 555.3,
+          "width": 113.3,
+          "height": 19.4
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 517.2,
+          "y": 535.9,
+          "width": 113.3,
+          "height": 19.4
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(18)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 563.6,
+          "top": 535.9,
+          "right": 630.5,
+          "bottom": 636.8,
+          "width": 66.9,
+          "height": 100.9
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 563.6,
+          "y": 535.9,
+          "width": 66.9,
+          "height": 100.9
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(19)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 630.5,
+          "top": 535.9,
+          "right": 666.6,
+          "bottom": 631.9,
+          "width": 36.1,
+          "height": 96
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 630.5,
+          "y": 535.9,
+          "width": 36.1,
+          "height": 96
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(21)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 240.6,
+          "top": 638.4,
+          "right": 293.8,
+          "bottom": 724,
+          "width": 53.2,
+          "height": 85.6
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 240.6,
+          "y": 638.4,
+          "width": 53.2,
+          "height": 85.6
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(24)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 351.2,
+          "top": 649.8,
+          "right": 410.8,
+          "bottom": 743.3,
+          "width": 59.6,
+          "height": 93.5
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 351.2,
+          "y": 649.8,
+          "width": 59.6,
+          "height": 93.5
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(25)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 465.3,
+          "top": 636.8,
+          "right": 563.6,
+          "bottom": 644.1,
+          "width": 98.3,
+          "height": 7.3
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 465.3,
+          "y": 636.8,
+          "width": 98.3,
+          "height": 7.3
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(28)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 563.6,
+          "top": 631.9,
+          "right": 666.6,
+          "bottom": 636.8,
+          "width": 103,
+          "height": 4.9
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 563.6,
+          "y": 631.9,
+          "width": 103,
+          "height": 4.9
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(30)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 563.6,
+          "top": 636.8,
+          "right": 626,
+          "bottom": 743.2,
+          "width": 62.4,
+          "height": 106.4
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 563.6,
+          "y": 636.8,
+          "width": 62.4,
+          "height": 106.4
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(35)",
+        "message": "Connector shaft is visible while its endpoint #s1-stamp-wrap is not on stage.",
+        "rect": {
+          "left": 364.2,
+          "top": 743.3,
+          "right": 410.8,
+          "bottom": 829.1,
+          "width": 46.6,
+          "height": 85.8
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 364.2,
+          "y": 743.3,
+          "width": 46.6,
+          "height": 85.8
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(41)",
+        "message": "Connector shaft is visible while its endpoint #s1-stamp-box is not on stage.",
+        "rect": {
+          "left": 364.2,
+          "top": 817.1,
+          "right": 468.3,
+          "bottom": 829.1,
+          "width": 104.1,
+          "height": 12
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 364.2,
+          "y": 817.1,
+          "width": 104.1,
+          "height": 12
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      }
+    ],
+    "duration": 45.51,
+    "samples": [
+      2.528,
+      7.585,
+      12.642,
+      17.698,
+      22.755,
+      27.812,
+      32.868,
+      37.925,
+      42.982
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 36,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      2.528,
+      12.642,
+      22.755,
+      32.868,
+      42.982
+    ],
+    "checked": 66,
+    "passed": 66
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 3,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 2 text elements stay under it for 0.5 s or more, the smallest \"Buildpedia\" at 22 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "Buildpedia",
+        "selector": "#chrome-series",
+        "dataAttributes": {},
+        "sourceFile": "compositions/chrome.html",
+        "bbox": {
+          "x": 72,
+          "y": 272.5,
+          "width": 176.02,
+          "height": 29
+        },
+        "time": 0,
+        "times": [
+          0,
+          0
+        ],
+        "fontPx": 22,
+        "floorPx": 28,
+        "seconds": 45.51,
+        "elements": [
+          {
+            "selector": "#chrome-series",
+            "text": "Buildpedia",
+            "fontPx": 22,
+            "time": 0,
+            "seconds": 45.51
+          },
+          {
+            "selector": "#chrome-title",
+            "text": "What curing means",
+            "fontPx": 22,
+            "time": 0,
+            "seconds": 45.51
+          }
+        ]
+      },
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 5 text elements stay under it for 0.5 s or more, the smallest \"Fig. 1\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "Fig. 1",
+        "selector": "span.num",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 68.49,
+          "y": 1237.69,
+          "width": 107.36,
+          "height": 32.24
+        },
+        "time": 0.499,
+        "times": [
+          0.499,
+          0.623,
+          0.873,
+          1.87,
+          3.491
+        ],
+        "fontPx": 24,
+        "floorPx": 28,
+        "seconds": 3.99,
+        "elements": [
+          {
+            "selector": "span.num",
+            "text": "Fig. 1",
+            "fontPx": 24,
+            "time": 0.499,
+            "seconds": 3.99
+          },
+          {
+            "selector": "#s1-figure > g:nth-of-type(2) > g:nth-of-type(1) > text:nth-of-type(1)",
+            "text": "Span",
+            "fontPx": 24,
+            "time": 0.623,
+            "seconds": 3.866
+          },
+          {
+            "selector": "#s1-figure > g:nth-of-type(3) > g:nth-of-type(1) > text:nth-of-type(1)",
+            "text": "Depth",
+            "fontPx": 24,
+            "time": 0.873,
+            "seconds": 3.616
+          },
+          {
+            "selector": "#s1-figure > g:nth-of-type(6) > text:nth-of-type(1)",
+            "text": "Surface",
+            "fontPx": 26,
+            "time": 1.87,
+            "seconds": 1.871
+          },
+          {
+            "selector": "#s1-figure > g:nth-of-type(7) > text:nth-of-type(1)",
+            "text": "Core",
+            "fontPx": 26,
+            "time": 3.491,
+            "seconds": 0.998
+          }
+        ]
+      },
+      {
+        "code": "line_unread",
+        "severity": "warning",
+        "message": "\"Still needs water\" (3 words) is on screen 0.90 s (±0.01 s), under its 1.05 s floor: hold it about 0.5 s + 0.3 s a word (1.40 s here) before it leaves or changes; see references/motion.md.",
+        "text": "Still needs water",
+        "selector": "#s1-figure > g:nth-of-type(7) > text:nth-of-type(2)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 336,
+          "y": 1052.31,
+          "width": 231.13,
+          "height": 39
+        },
+        "time": 3.468,
+        "words": 3,
+        "seconds": 0.904,
+        "floorSeconds": 1.05,
+        "measured": [
+          {
+            "time": 3.117,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 3.242,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 3.366,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 3.491,
+            "opacity": 0.55,
+            "heightPx": 39
+          },
+          {
+            "time": 3.616,
+            "opacity": 0.93,
+            "heightPx": 39
+          },
+          {
+            "time": 3.741,
+            "opacity": 1,
+            "heightPx": 39
+          },
+          {
+            "time": 3.865,
+            "opacity": 1,
+            "heightPx": 39
+          },
+          {
+            "time": 3.99,
+            "opacity": 1,
+            "heightPx": 39
+          },
+          {
+            "time": 4.115,
+            "opacity": 1,
+            "heightPx": 39
+          },
+          {
+            "time": 4.239,
+            "opacity": 0.99,
+            "heightPx": 39
+          },
+          {
+            "time": 4.364,
+            "opacity": 0.64,
+            "heightPx": 39
+          },
+          {
+            "time": 4.489,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 4.613,
+            "opacity": null,
+            "heightPx": null
+          },
+          {
+            "time": 4.738,
+            "opacity": null,
+            "heightPx": null
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 365
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}
