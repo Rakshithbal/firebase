@@ -49,6 +49,7 @@
               var num = B.text(g, 72, top + 44, META[i][0], "s5-fignum");
               var head = B.text(g, 72, top + 96, META[i][1], "t-head", { fill: C.water });
               var body = B.text(g, 72, top + 138, META[i][2], "t-body");
+              head.style.fill = C.water;
               return { g: g, top: top, rule: rule, num: num, head: head, body: body, art: B.g(g, { class: "s5-art" }) };
             });
 
@@ -74,7 +75,7 @@
             B.path(aLab, "M626 " + (A.top + 46) + "L604 " + (aTop - 28), { stroke: C.blue, "stroke-width": B.LW.hair });
             B.text(aLab, 634, A.top + 44, "Bund", "t-data");
             B.path(aLab, "M836 " + (A.top + 46) + "L856 " + (aTop - WH + 4), { stroke: C.water, "stroke-width": B.LW.hair });
-            B.text(aLab, 828, A.top + 44, "Water", "t-data", { "text-anchor": "end", fill: C.water });
+            B.text(aLab, 828, A.top + 44, "Water", "t-data", { "text-anchor": "end" }).style.fill = C.water;
 
             /* ---------- 5b · Wet sacks: column elevation wrapped in hessian, tie bands, drips ---------- */
             function sackedColumn(parent, svgEl, o) {
@@ -155,6 +156,15 @@
               fly.push({ el: B.el("circle", { cx: TIPX, cy: TIPY, r: r1(2.2 + rs() * 1.6), fill: C.water, opacity: 0 }, flyG), dx: r1(Math.cos(a2) * d2), dy: r1(Math.sin(a2) * d2), ph: rs() });
             }
 
+
+            /* Shared BNB.hatch ids (bnb-hatch-*) also exist in other scenes' SVGs; url(#id) resolves to the first
+               one in the document, which can sit in a hidden scene and paint nothing. Give this scene its own copies. */
+            Array.prototype.forEach.call(svg.querySelectorAll("pattern[id^='bnb-']"), function (p) {
+              var old = p.id, nu = "s5-" + old;
+              p.id = nu;
+              Array.prototype.forEach.call(svg.querySelectorAll("[fill='url(#" + old + ")']"), function (e) { e.setAttribute("fill", "url(#" + nu + ")"); });
+            });
+
             /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
             var tWet = at("wet"), tPond = at("ponding"), tSlab = at("slab"), tWet2 = at("wet", 2), tSacks = at("sacks"), tCols = at("columns"), tSpray = at("spraying"), tWalls = at("walls");
@@ -169,13 +179,14 @@
               tl.fromTo(p.num, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E.enter }, 0.7 + i * 0.08);
             });
             B.a.figcap(tl, document.getElementById("s5-figcap"), 0.5);
+            [pslab.ground, bGround, cGround].forEach(function (gr, i) { B.a.draw(tl, [gr.line, gr.hatch], 0.75 + i * 0.12, 0.8); });
 
             // "wet": the idea word takes the point colour
             tl.to("#s5-em", { color: C.point, duration: 0.35, ease: E.move }, tWet + 0.02);
 
             function label(p, t) {
               tl.fromTo([p.head, p.body], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter, stagger: 0.08 }, t);
-              tl.to(p.num, { attr: { fill: C.chalk }, duration: 0.3, ease: E.move }, t);
+              tl.to(p.num, { fill: C.chalk, duration: 0.3, ease: E.move }, t);
             }
 
             // 5a "Ponding on the slab": section draws, bunds rise, water fills between them
@@ -183,7 +194,6 @@
             tl.fromTo([pslab.body, pslab.agg, pslab.sand, pslab.shade], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tPond - 0.15);
             tl.fromTo(pslab.piers.map(function (q) { return q.g; }), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tPond - 0.1);
             B.a.draw(tl, [pslab.outline, pslab.surface], tPond - 0.2, 0.6);
-            B.a.draw(tl, [pslab.ground.line, pslab.ground.hatch], tPond - 0.1, 0.6);
             B.a.popIn(tl, pslab.rebar, tPond + 0.1, { stagger: 0.04, dur: 0.3 });
             B.a.draw(tl, pslab.dist, tPond + 0.15, 0.5);
             bunds.forEach(function (bd, i) {
@@ -200,7 +210,6 @@
             label(Bp, tWet2);
             B.a.draw(tl, beamLines, tWet2 - 0.2, 0.6);
             tl.fromTo([beamFill, cols[0].col, cols[1].col], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tWet2 - 0.15);
-            B.a.draw(tl, [bGround.line, bGround.hatch], tWet2 - 0.1, 0.6);
             B.a.draw(tl, [cols[0].colLines, cols[1].colLines], tWet2 - 0.1, 0.5);
             cols.forEach(function (c, i) {
               var h = +c.clipR.getAttribute("height");
@@ -221,7 +230,6 @@
             // 5c "Spraying on walls": wall + nozzle draw, a fan of fine droplets reaches the wall, the patch darkens
             label(Cp, tSpray);
             tl.fromTo([wall.fill, wall.courses], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tSpray - 0.2);
-            B.a.draw(tl, [cGround.line, cGround.hatch], tSpray - 0.2, 0.6);
             B.a.draw(tl, [wall.outline, wallLine], tSpray - 0.25, 0.6);
             B.a.draw(tl, hose, tSpray - 0.15, 0.5, E.enter);
             tl.fromTo(nozzle, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: E.enter }, tSpray + 0.05);

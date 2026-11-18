@@ -230,8 +230,10 @@
             tl.fromTo(world, { x: 0, y: 0, scale: 1, svgOrigin: "0 0" }, { x: TX, y: TY, scale: K, svgOrigin: "0 0", duration: dz, ease: E.move }, tz);
             tl.fromTo(ring, { attr: { cx: P.x, cy: P.y, r: 22 } }, { attr: { cx: P2.x, cy: P2.y, r: 14 }, duration: dz, ease: E.move }, tz);
             tl.fromTo(ringDot, { attr: { cx: P.x, cy: P.y, r: 4 } }, { attr: { cx: P2.x, cy: P2.y, r: 3 }, duration: dz, ease: E.move }, tz);
-            tl.fromTo(lens, { x: P.x - L.x, y: P.y - L.y, scale: 22 / R, opacity: 0, svgOrigin: L.x + " " + L.y },
-              { x: 0, y: 0, scale: 1, opacity: 1, svgOrigin: L.x + " " + L.y, duration: dz, ease: E.move }, tz);
+            // (lens uses an attr transform string: GSAP's SVG transform parse mis-measures this group while the host is hidden)
+            var lt = function (cx, cy, k) { return "translate(" + cx + " " + cy + ") scale(" + k + ") translate(" + -L.x + " " + -L.y + ")"; };
+            tl.fromTo(lens, { attr: { transform: lt(P.x, P.y, r1(22 / R * 1000) / 1000) } }, { attr: { transform: lt(L.x, L.y, 1) }, duration: dz, ease: E.move }, tz);
+            tl.fromTo(lens, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: E.enter }, tz);
             B.a.draw(tl, cone.childNodes, tz + dz - 0.1, 0.45, E.enter);
 
             // "cement"

@@ -60,7 +60,7 @@
             slab.body.setAttribute("fill", C.concreteDry);
 
             // dry zone: hatched band under the surface (shading is hatch, never a gradient)
-            var dryFill = B.hatch(svg, { id: "s2-hatch-dry", angle: 45, gap: 8, color: "rgba(238,243,250,0.42)", width: 1.5 });
+            var dryFill = B.hatch(svg, { id: "s2-hatch-dry", angle: 45, gap: 8, color: "rgba(11,33,57,0.5)", width: 1.5 });
             var dryZone = B.g(fig, { id: "s2-dryzone" });
             B.el("rect", { x: b.x0, y: b.top, width: b.x1 - b.x0, height: 40, fill: dryFill }, dryZone);
             var dryEdge = B.line(dryZone, b.x0 + 4, b.top + 40, b.x1 - 4, b.top + 40, { stroke: C.chalk3, "stroke-width": B.LW.hair, "stroke-dasharray": "6 8" });
