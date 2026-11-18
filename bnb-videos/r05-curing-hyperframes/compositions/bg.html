@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <div id="root" data-composition-id="bg" data-duration="45.51">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; background: #0b2340; }
+          #bg-glow { position: absolute; inset: 0;
+            background: radial-gradient(120% 70% at 50% 38%, #164070 0%, #0e2a47 45%, #071829 100%); }
+          #bg-grid { position: absolute; left: -200px; top: -400px; width: 1480px; height: 2720px;
+            background-image:
+              linear-gradient(rgba(234,242,255,0.09) 1.5px, transparent 1.5px),
+              linear-gradient(90deg, rgba(234,242,255,0.09) 1.5px, transparent 1.5px),
+              linear-gradient(rgba(234,242,255,0.035) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(234,242,255,0.035) 1px, transparent 1px);
+            background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px; }
+          #bg-cam { position: absolute; inset: 0; }
+          #bg-vignette { position: absolute; inset: 0;
+            background: radial-gradient(90% 60% at 50% 42%, transparent 55%, rgba(3,10,20,0.55) 100%); }
+          .bg-mark { position: absolute; width: 46px; height: 46px; border-color: rgba(234,242,255,0.28); border-style: solid; }
+        </style>
+        <div id="bg-glow"></div>
+        <div id="bg-cam"><div id="bg-grid"></div></div>
+        <div id="bg-vignette"></div>
+        <!-- drafting registration marks at the corners of the safe area -->
+        <div class="bg-mark" style="left:48px;top:212px;border-width:2px 0 0 2px"></div>
+        <div class="bg-mark" style="right:48px;top:212px;border-width:2px 2px 0 0"></div>
+        <div class="bg-mark" style="left:48px;top:1330px;border-width:0 0 2px 2px"></div>
+        <div class="bg-mark" style="right:48px;top:1330px;border-width:0 2px 2px 0"></div>
+        <script>
+          (function () {
+            var tl = gsap.timeline({ paused: true });
+            // constant drift: the grid never stops (linear is the point here)
+            tl.fromTo("#bg-grid", { x: 0, y: 0 }, { x: -40, y: -120, duration: 45.51, ease: "none" }, 0);
+            // parallax nudges at the scene seams: the "camera" moves with each cut
+            var cuts = [[4.411, 0, 60], [8.841, 0, -90], [14.944, 30, 0], [24.97, 0, -200], [32.304, -40, 0], [42.214, 0, -80]];
+            tl.fromTo("#bg-glow", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+            var cx = 0, cy = 0;
+            tl.fromTo("#bg-cam", { x: 0, y: 0 }, { x: 0, y: 0, duration: 0.01 }, 0);
+            cuts.forEach(function (c, i) {
+              cx += c[1]; cy += c[2];
+              tl.to("#bg-cam", { x: cx, y: cy, duration: 0.55, ease: "power3.inOut" }, c[0] - 0.25);
+              tl.to("#bg-glow", { opacity: i % 2 ? 1 : 0.86, duration: 0.6, ease: "power2.inOut" }, c[0] - 0.2);
+            });
+            window.__timelines["bg"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

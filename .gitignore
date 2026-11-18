@@ -2,3 +2,4 @@ __pycache__/
 bnb-videos/**/frames/
 bnb-videos/**/stills/
 bnb-videos/**/_built_*.html
+bnb-videos/**/renders/

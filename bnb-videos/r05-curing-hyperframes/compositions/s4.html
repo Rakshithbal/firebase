@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s4 · Water leaves too early · L04 + L05 -->
+      <div id="root" data-composition-id="s4" data-duration="10.026">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s4-cam { position: absolute; inset: 0; }
+          #s4-sky { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+          .s4-slabwrap { position: absolute; left: 120px; top: 820px; width: 640px; height: 300px; overflow: visible; }
+          .s4-slabwrap svg { overflow: visible; }
+          #s4-bar { position: absolute; left: 850px; top: 440px; width: 50px; height: 460px; border-radius: 25px; border: 3px solid rgba(234,242,255,0.55); background: rgba(8,25,45,0.6); overflow: hidden; }
+          #s4-gap { position: absolute; left: 0; top: 0; width: 100%; height: 40%;
+            background: repeating-linear-gradient(135deg, rgba(255,138,61,0.55) 0 8px, rgba(255,138,61,0.12) 8px 16px); }
+          #s4-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; transform-origin: 50% 100%;
+            background: linear-gradient(to top, #3fae73, #7ce0a3); box-shadow: 0 0 30px rgba(124,224,163,0.6); }
+          #s4-barlabel { position: absolute; left: 790px; top: 918px; width: 170px; text-align: center; font-size: 28px; font-weight: 700; letter-spacing: 0.08em; color: #7ce0a3; }
+          #s4-design { position: absolute; left: 380px; top: 386px; width: 460px; text-align: right; font-size: 28px; font-weight: 900; letter-spacing: 0.08em; color: #eaf2ff; white-space: nowrap; }
+          #s4-weak { position: absolute; left: 0; top: 1150px; width: 1080px; text-align: center; font-size: 68px; font-weight: 900; letter-spacing: -0.02em; white-space: nowrap; }
+          #s4-weak span { display: inline-block; margin: 0 10px; }
+        </style>
+        <div id="s4-cam">
+          <svg id="s4-sky" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="s4-sunglow"><stop offset="0" stop-color="#ffb070" stop-opacity="0.55" /><stop offset="1" stop-color="#ff8a3d" stop-opacity="0" /></radialGradient>
+              <linearGradient id="s4-drop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fdcff" /><stop offset="1" stop-color="#4fc3f7" /></linearGradient>
+            </defs>
+            <!-- designed strength target line -->
+            <path id="s4-dline" pathLength="1" d="M560 440H930" stroke="#eaf2ff" stroke-width="4" stroke-dasharray="0.03 0.02" fill="none" />
+            <!-- gap bracket -->
+            <path id="s4-brk" pathLength="1" d="M836 446H824V622H836" stroke="#ff8a3d" stroke-width="5" fill="none" stroke-linecap="round" />
+            <g transform="translate(220 520)"><g id="s4-sun">
+              <circle r="150" fill="url(#s4-sunglow)" />
+              <g id="s4-rays" stroke="#ffb070" stroke-width="8" stroke-linecap="round">
+                <path d="M0 -80V-104M0 80V104M-80 0H-104M80 0H104M57 -57L73 -73M-57 57L-73 73M57 57L73 73M-57 -57L-73 -73" />
+              </g>
+              <circle r="56" fill="#ff9a52" stroke="#ffd2a8" stroke-width="4" />
+            </g></g>
+            <g id="s4-wind" fill="none" stroke="rgba(234,242,255,0.85)" stroke-width="5" stroke-linecap="round">
+              <path class="s4-w" pathLength="1" d="M40 650 C 200 620, 300 690, 470 650 S 700 600, 790 640" />
+              <path class="s4-w" pathLength="1" d="M20 715 C 180 690, 320 750, 500 712 S 720 690, 800 708" />
+              <path class="s4-w" pathLength="1" d="M60 770 C 220 750, 360 800, 540 768 S 700 740, 780 760" />
+              <path class="s4-w" pathLength="1" d="M300 600 C 420 580, 520 630, 640 600 S 760 570, 820 590" />
+            </g>
+            <g id="s4-drops"></g>
+          </svg>
+          <div class="s4-slabwrap" id="s4-slabwrap">
+            <svg width="640" height="300" viewBox="0 0 640 300">
+              <defs><pattern id="s4-brick" width="40" height="24" patternUnits="userSpaceOnUse"><rect width="40" height="24" fill="#33465f" /><path d="M0 12H40M20 0V12M0 12V24M40 12V24" stroke="rgba(234,242,255,0.35)" stroke-width="2" fill="none" /></pattern></defs>
+              <rect x="0" y="0" width="640" height="100" rx="6" fill="#b9c2ce" stroke="#eaf2ff" stroke-width="4" />
+              <rect id="s4-film" x="2" y="-6" width="636" height="14" rx="6" fill="#4fc3f7" />
+              <g fill="#0e2a47" stroke="#eaf2ff" stroke-width="3"><circle cx="40" cy="72" r="7" /><circle cx="120" cy="72" r="7" /><circle cx="200" cy="72" r="7" /><circle cx="280" cy="72" r="7" /><circle cx="360" cy="72" r="7" /><circle cx="440" cy="72" r="7" /><circle cx="520" cy="72" r="7" /><circle cx="600" cy="72" r="7" /></g>
+              <rect x="40" y="100" width="84" height="200" fill="url(#s4-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <rect x="516" y="100" width="84" height="200" fill="url(#s4-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <path d="M-50 300H690" stroke="#eaf2ff" stroke-width="4" />
+              <g id="s4-crack" fill="none" stroke="#ff5a5a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(255,90,90,0.8))">
+                <path id="s4-crack0" pathLength="1" d="M28 3 L78 16 L118 6 L160 30 L205 18 L250 42 L300 22 L345 48 L392 30 L440 54 L486 34 L530 60 L575 40 L614 52" />
+                <path id="s4-crack1" pathLength="1" d="M250 42 L262 74 L254 92" />
+                <path id="s4-crack2" pathLength="1" d="M440 54 L428 82" />
+              </g>
+            </svg>
+          </div>
+          <div id="s4-design">DESIGNED STRENGTH</div>
+          <div id="s4-bar"><div id="s4-gap"></div><div id="s4-fill"></div></div>
+          <div id="s4-barlabel">STRENGTH</div>
+          <div id="s4-weak"><span style="color:#ff8a3d">WEAKER</span><span>THAN</span><span>DESIGNED</span></div>
+        </div>
+        <script>
+          (function () {
+            var T0 = 14.944;
+            var a4 = function (w, n) { return R05.at("L04", w, n) - T0; };
+            var a5 = function (w, n) { return R05.at("L05", w, n) - T0; };
+            var ns = "http://www.w3.org/2000/svg", rnd = R05.rng(21), gD = document.getElementById("s4-drops");
+            var N = 18;
+            for (var i = 0; i < N; i++) {
+              var p = document.createElementNS(ns, "path");
+              var x = 150 + (i / (N - 1)) * 590 + (rnd() - 0.5) * 30, s = 0.8 + rnd() * 0.5;
+              p.setAttribute("d", "M0 -16 C 8 -4, 11 2, 11 7 A 11 11 0 0 1 -11 7 C -11 2, -8 -4, 0 -16Z");
+              p.setAttribute("fill", "url(#s4-drop)"); p.setAttribute("class", "s4-dr");
+              p.setAttribute("data-x", x.toFixed(1)); p.setAttribute("data-s", s.toFixed(2));
+              p.setAttribute("data-rise", (260 + rnd() * 200).toFixed(0)); p.setAttribute("data-drift", (40 + rnd() * 180).toFixed(0));
+              gD.appendChild(p);
+            }
+            var tl = gsap.timeline({ paused: true });
+            // carry across from s3: same slab, scaled up into the wide shot
+            tl.fromTo("#s4-slabwrap", { x: 116, y: 260, scale: 0.7, transformOrigin: "0 0" }, { x: 0, y: 0, scale: 1, duration: 0.8, ease: "power3.inOut" }, 0);
+            tl.fromTo("#s4-fill", { scaleY: 0.42 }, { scaleY: 0.6, duration: a4("down") + 0.1, ease: "power3.out" }, 0);
+            tl.fromTo("#s4-gap", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+            tl.fromTo("#s4-dline", { attr: { "stroke-dashoffset": 0 }, opacity: 0 }, { opacity: 0.85, duration: 0.4, ease: "power2.out" }, 0.55);
+            tl.fromTo("#s4-design", { opacity: 0, filter: "blur(6px)" }, { opacity: 0.85, filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 0.65);
+            // water film on the slab, then droplets leave it ("leaves too early")
+            tl.fromTo("#s4-film", { opacity: 0.9 }, { opacity: 0, duration: 3.4, ease: "power1.in" }, a4("leaves"));
+            document.querySelectorAll(".s4-dr").forEach(function (d, i) {
+              var x = +d.getAttribute("data-x"), s = +d.getAttribute("data-s"), rise = +d.getAttribute("data-rise"), drift = +d.getAttribute("data-drift");
+              var t = a4("leaves") - 0.3 + (i * 7 % N) * 0.17;
+              tl.fromTo(d, { x: x, y: 812, scale: s * 0.6, opacity: 0 }, { x: x + drift * 0.3, y: 812 - rise * 0.35, scale: s, opacity: 1, duration: 0.6, ease: "power2.out" }, t);
+              tl.to(d, { x: x + drift, y: 812 - rise, scale: s * 0.5, opacity: 0, duration: 1.4, ease: "power1.in" }, t + 0.6);
+            });
+            // sun on "sun", wind on "wind"
+            tl.fromTo("#s4-sun", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out" }, a4("sun") - 0.15);
+            tl.fromTo("#s4-rays", { rotation: 0, svgOrigin: "0 0" }, { rotation: 120, duration: 10, ease: "none" }, 0);
+            tl.fromTo(".s4-w", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, a4("wind") - 0.1);
+            document.querySelectorAll(".s4-w").forEach(function (w, i) {
+              tl.fromTo(w, { attr: { "stroke-dasharray": "0.28 0.72", "stroke-dashoffset": 0.3 } }, { attr: { "stroke-dashoffset": -1 }, duration: 1.3, ease: "power1.inOut", repeat: 3, repeatDelay: 0.25 }, a4("wind") - 0.1 + i * 0.16);
+            });
+            // the reaction slows: the bar stalls short of the line (eased into a stop above)
+            tl.fromTo("#s4-gap", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, a4("down"));
+            // L05 "The surface can crack": crack draws across the top, slab jolts three frames
+            var ck = a5("crack");
+            tl.to("#s4-sun, #s4-wind", { opacity: 0.35, duration: 0.5, ease: "power2.inOut" }, a5("surface") - 0.3);
+            tl.fromTo("#s4-crack0", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.38, ease: "power2.out" }, ck - 0.08);
+            tl.fromTo("#s4-crack1", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.2, ease: "power2.out" }, ck + 0.12);
+            tl.fromTo("#s4-crack2", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.2, ease: "power2.out" }, ck + 0.22);
+            tl.to("#s4-cam", { x: 7, duration: 1 / 30, ease: "none" }, ck + 0.1);
+            tl.to("#s4-cam", { x: -5, duration: 1 / 30, ease: "none" }, ck + 0.1 + 1 / 30);
+            tl.to("#s4-cam", { x: 0, duration: 1 / 30, ease: "none" }, ck + 0.1 + 2 / 30);
+            // "weaker than designed": per word, then the gap and the target take the light
+            var ww = [a5("weaker"), a5("than"), a5("designed")];
+            document.querySelectorAll("#s4-weak span").forEach(function (sp, i) {
+              tl.fromTo(sp, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power2.out" }, ww[i] - 0.04);
+            });
+            tl.fromTo("#s4-brk", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.35, ease: "power2.out" }, a5("weaker"));
+            tl.to("#s4-design", { color: "#ff8a3d", opacity: 1, duration: 0.25 }, a5("designed") - 0.04);
+            tl.to("#s4-dline", { attr: { stroke: "#ff8a3d" }, opacity: 1, duration: 0.25 }, a5("designed") - 0.04);
+            // exit: vertical whip up into the next beat
+            tl.to("#s4-cam", { y: -260, opacity: 0, filter: "blur(14px)", duration: 0.28, ease: "power3.in" }, 9.74);
+            window.__timelines["s4"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

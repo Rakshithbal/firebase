@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s1 · Hook · L01 "Your slab looks dry and hard. That does not mean it is done." -->
+      <div id="root" data-composition-id="s1" data-duration="4.411">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; font-family: Inter, sans-serif; color: #eaf2ff; }
+          #s1-cam, #s1-shake { position: absolute; inset: 0; }
+          #s1-head { position: absolute; left: 0; top: 318px; width: 1080px; display: flex; align-items: center; justify-content: center; gap: 26px; }
+          #s1-title { font-size: 112px; font-weight: 900; letter-spacing: -0.035em; line-height: 1; white-space: nowrap; }
+          #s1-title span { display: inline-block; }
+          /* success-check (registry component), green tint, large */
+          .hf-transition-success-check { display: grid; place-items: center; width: 116px; height: 116px; border-radius: 999px;
+            background: rgba(124, 224, 163, 0.18); color: #7ce0a3; box-shadow: 0 0 0 3px rgba(124,224,163,0.35) inset; }
+          .hf-transition-success-check svg { width: 92px; height: 92px; fill: none; stroke: currentColor; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+            filter: blur(var(--hf-check-blur, 0px)); transform: rotate(var(--hf-check-rotate, 0deg)) scale(var(--hf-check-scale, 1)); }
+          .hf-transition-success-check circle { opacity: 0.28; }
+          .hf-transition-success-check path { stroke-dasharray: 36; stroke-dashoffset: var(--hf-check-dash, 0); }
+          #s1-art { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+          /* stamp */
+          #s1-stamp-wrap { position: absolute; left: 0; top: 470px; width: 1080px; height: 220px; display: grid; place-items: center; }
+          #s1-stamp { padding: 18px 46px 20px; border: 9px solid #ff8a3d; border-radius: 22px; outline: 3px solid rgba(255,138,61,0.55); outline-offset: 9px;
+            background: rgba(255, 138, 61, 0.1); color: #ff8a3d; font-size: 148px; font-weight: 900; letter-spacing: -0.02em; line-height: 1; white-space: nowrap;
+            text-shadow: 0 10px 40px rgba(255, 138, 61, 0.35); }
+          .s1-ink { position: absolute; opacity: 0; width: 34px; height: 8px; border-radius: 4px; background: #ff8a3d; }
+          #s1-label { position: absolute; left: 0; top: 1062px; width: 1080px; text-align: center; }
+          #s1-label span { display: inline-block; padding: 9px 22px; border-radius: 999px; border: 2px solid rgba(234,242,255,0.5);
+            background: rgba(8, 25, 45, 0.7); font-size: 28px; font-weight: 700; letter-spacing: 0.12em; color: #eaf2ff; }
+        </style>
+        <div id="s1-cam">
+          <div id="s1-shake">
+            <svg id="s1-art" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="s1-brick" width="40" height="24" patternUnits="userSpaceOnUse">
+                  <rect width="40" height="24" fill="#33465f" />
+                  <path d="M0 12H40M20 0V12M0 12V24M40 12V24" stroke="rgba(234,242,255,0.35)" stroke-width="2" fill="none" />
+                </pattern>
+                <linearGradient id="s1-slabshade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.22" />
+                  <stop offset="1" stop-color="#000000" stop-opacity="0.18" />
+                </linearGradient>
+                <radialGradient id="s1-sunglow"><stop offset="0" stop-color="#ffb070" stop-opacity="0.6" /><stop offset="1" stop-color="#ff8a3d" stop-opacity="0" /></radialGradient>
+              </defs>
+              <!-- sun -->
+              <g id="s1-sun" transform="translate(890 600)">
+                <circle r="130" fill="url(#s1-sunglow)" />
+                <g id="s1-rays" stroke="#ffb070" stroke-width="7" stroke-linecap="round">
+                  <path d="M0 -78V-98M0 78V98M-78 0H-98M78 0H98M55 -55L69 -69M-55 55L-69 69M55 55L69 69M-55 -55L-69 -69" />
+                </g>
+                <circle r="52" fill="#ff9a52" stroke="#ffd2a8" stroke-width="4" />
+              </g>
+              <!-- heat shimmer -->
+              <g id="s1-heat" fill="none" stroke="rgba(255,176,112,0.55)" stroke-width="4" stroke-linecap="round">
+                <path class="s1-wave" d="M330 690 q14 -18 0 -36 q-14 -18 0 -36" />
+                <path class="s1-wave" d="M540 690 q14 -18 0 -36 q-14 -18 0 -36" />
+                <path class="s1-wave" d="M750 690 q14 -18 0 -36 q-14 -18 0 -36" />
+              </g>
+              <!-- dimension line -->
+              <g id="s1-dim" stroke="rgba(234,242,255,0.7)" stroke-width="2.5" fill="none">
+                <path pathLength="1" class="s1-draw" d="M170 712H910" />
+                <path d="M170 700V724M910 700V724" />
+              </g>
+              <!-- slab -->
+              <g id="s1-slab">
+                <rect id="s1-slabfill" x="170" y="738" width="740" height="118" rx="6" fill="#6f7c8e" />
+                <rect x="170" y="738" width="740" height="118" rx="6" fill="url(#s1-slabshade)" />
+                <g id="s1-speck" fill="rgba(20,35,55,0.55)"></g>
+                <g fill="#0e2a47" stroke="#eaf2ff" stroke-width="3">
+                  <circle cx="215" cy="826" r="8" /><circle cx="290" cy="826" r="8" /><circle cx="365" cy="826" r="8" /><circle cx="440" cy="826" r="8" />
+                  <circle cx="515" cy="826" r="8" /><circle cx="590" cy="826" r="8" /><circle cx="665" cy="826" r="8" /><circle cx="740" cy="826" r="8" />
+                  <circle cx="815" cy="826" r="8" /><circle cx="870" cy="826" r="8" />
+                </g>
+                <rect x="170" y="738" width="740" height="118" rx="6" fill="none" stroke="#eaf2ff" stroke-width="4" />
+                <rect id="s1-sheen" x="170" y="738" width="120" height="118" fill="rgba(255,255,255,0.22)" />
+              </g>
+              <!-- columns + ground -->
+              <rect x="212" y="856" width="96" height="182" fill="url(#s1-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <rect x="772" y="856" width="96" height="182" fill="url(#s1-brick)" stroke="#eaf2ff" stroke-width="4" />
+              <path d="M110 1038H970" stroke="#eaf2ff" stroke-width="4" />
+              <path d="M130 1038l-20 22M170 1038l-20 22M210 1038l-20 22M250 1038l-20 22M290 1038l-20 22M330 1038l-20 22M370 1038l-20 22M410 1038l-20 22M450 1038l-20 22M490 1038l-20 22M530 1038l-20 22M570 1038l-20 22M610 1038l-20 22M650 1038l-20 22M690 1038l-20 22M730 1038l-20 22M770 1038l-20 22M810 1038l-20 22M850 1038l-20 22M890 1038l-20 22M930 1038l-20 22M970 1038l-20 22" stroke="rgba(234,242,255,0.45)" stroke-width="2.5" />
+            </svg>
+            <div id="s1-label"><span>FRESH RCC SLAB</span></div>
+            <div id="s1-head">
+              <div id="s1-title"><span>LOOKS</span> <span>DONE</span></div>
+              <div class="hf-transition-success-check" id="s1-check" aria-label="Looks done">
+                <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" /><path d="M20 33.5l8 8L45 23" /></svg>
+              </div>
+            </div>
+            <div id="s1-stamp-wrap">
+              <div class="s1-ink" id="s1-ink0" style="left:170px;top:60px"></div>
+              <div class="s1-ink" id="s1-ink1" style="left:880px;top:40px"></div>
+              <div class="s1-ink" id="s1-ink2" style="left:150px;top:160px"></div>
+              <div class="s1-ink" id="s1-ink3" style="left:890px;top:170px"></div>
+              <div id="s1-stamp">NOT YET</div>
+            </div>
+          </div>
+        </div>
+        <script>
+          (function () {
+            var at = function (w, n) { return R05.at("L01", w, n); };
+            // aggregate speckle, seeded
+            var r = R05.rng(11), g = document.getElementById("s1-speck"), ns = "http://www.w3.org/2000/svg";
+            for (var i = 0; i < 70; i++) {
+              var c = document.createElementNS(ns, "circle");
+              c.setAttribute("cx", (182 + r() * 716).toFixed(1));
+              c.setAttribute("cy", (748 + r() * 60).toFixed(1));
+              c.setAttribute("r", (1.6 + r() * 3.2).toFixed(1));
+              g.appendChild(c);
+            }
+            var tl = gsap.timeline({ paused: true });
+            // frame 0 is the thumbnail: headline + slab already on screen
+            tl.fromTo("#s1-title span", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+            tl.fromTo("#s1-dim .s1-draw", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.9, ease: "power2.inOut" }, 0.15);
+            tl.fromTo("#s1-rays", { rotation: 0, svgOrigin: "0 0" }, { rotation: 40, duration: 4.4, ease: "none" }, 0);
+            tl.fromTo(".s1-wave", { y: 0, opacity: 0 }, { y: -40, opacity: 0.9, duration: 0.9, ease: "sine.out", stagger: 0.25, repeat: 3, repeatDelay: 0.05 }, 0.1);
+            // "dry and hard": the slab dries to a pale, finished-looking grey; a sheen sweeps it
+            tl.fromTo("#s1-slabfill", { attr: { fill: "#6f7c8e" } }, { attr: { fill: "#c4ccd7" }, duration: 0.9, ease: "power2.inOut" }, at("dry") - 0.3);
+            tl.fromTo("#s1-sheen", { x: 0, opacity: 0 }, { x: 620, opacity: 1, duration: 0.6, ease: "power2.inOut" }, at("hard") - 0.25);
+            tl.to("#s1-sheen", { opacity: 0, duration: 0.15 }, at("hard") + 0.35);
+            // check (success-check recipe) on "hard."
+            tl.fromTo("#s1-check svg", { opacity: 0, "--hf-check-scale": 0.72, "--hf-check-rotate": "-18deg", "--hf-check-blur": "7px" },
+              { opacity: 1, "--hf-check-scale": 1, "--hf-check-rotate": "0deg", "--hf-check-blur": "0px", duration: 0.34, ease: "back.out(1.8)" }, at("hard"));
+            tl.fromTo("#s1-check", { opacity: 0 }, { opacity: 1, duration: 0.12 }, at("hard"));
+            tl.fromTo("#s1-check path", { "--hf-check-dash": 36 }, { "--hf-check-dash": 0, duration: 0.42, ease: "power2.out" }, at("hard") + 0.12);
+            // "That does not mean…": the claim loses confidence
+            tl.to("#s1-title span", { opacity: 0.42, duration: 0.35, ease: "power2.inOut", stagger: 0.1 }, at("not"));
+            tl.to("#s1-check", { opacity: 0.35, filter: "grayscale(1)", duration: 0.35, ease: "power2.inOut" }, at("mean"));
+            tl.to("#s1-sun", { opacity: 0.45, duration: 0.3 }, at("it") );
+            // NOT YET: headline-slam recipe (scale-down slam, expo.out, three-frame shake) lands on "done."
+            var land = at("done") + 0.05;
+            tl.fromTo("#s1-stamp", { scale: 1.9, rotation: -14, opacity: 0, filter: "blur(10px)" },
+              { scale: 1, rotation: -7, opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, land - 0.2);
+            tl.to("#s1-shake", { x: 9, y: -5, duration: 1 / 30, ease: "power2.out" }, land);
+            tl.to("#s1-shake", { x: -6, y: 4, duration: 1 / 30, ease: "power2.out" }, land + 1 / 30);
+            tl.to("#s1-shake", { x: 0, y: 0, duration: 1 / 30, ease: "power2.out" }, land + 2 / 30);
+            [[-90, -50], [90, -60], [-110, 40], [100, 50]].forEach(function (d, i) {
+              tl.fromTo("#s1-ink" + i, { x: 0, y: 0, opacity: 1, rotation: Math.atan2(d[1], d[0]) * 57.3 },
+                { x: d[0], y: d[1], opacity: 0, duration: 0.4, ease: "expo.out" }, land);
+            });
+            // exit: blur swap on one stage (the grid behind never cuts)
+            tl.to("#s1-cam", { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 4.19);
+            window.__timelines["s1"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>
