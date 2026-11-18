@@ -61,10 +61,10 @@
               tl.to(pill, { opacity: 0, duration: 0.1, ease: "power2.in" }, g[1] - 0.1);
               g[2].forEach(function (w, wi) {
                 var hi = "#cap-" + gi + "-" + wi + " i", tx = "#cap-" + gi + "-" + wi + " b";
-                tl.fromTo(hi, { scaleX: 0, opacity: 1 }, { scaleX: 1, duration: 0.09, ease: "power2.out" }, w[0] - 0.03);
-                tl.fromTo(tx, { color: "rgba(234,242,255,0.66)" }, { color: "#0b2340", duration: 0.06, ease: "none" }, w[0] - 0.03);
-                tl.to(hi, { opacity: 0, duration: 0.08, ease: "none" }, w[1] - 0.03);
-                tl.to(tx, { color: "#eaf2ff", duration: 0.08, ease: "none" }, w[1] - 0.03);
+                tl.fromTo(hi, { scaleX: 0, opacity: 1 }, { scaleX: 1, duration: 0.08, ease: "power2.out" }, w[0]);
+                tl.fromTo(tx, { color: "rgba(234,242,255,0.66)" }, { color: "#0b2340", duration: 0.05, ease: "none" }, w[0]);
+                tl.to(hi, { opacity: 0, duration: 0.04, ease: "none" }, w[1] - 0.04);
+                tl.to(tx, { color: "#eaf2ff", duration: 0.04, ease: "none" }, w[1] - 0.04);
               });
             });
             window.__timelines["captions"] = tl;

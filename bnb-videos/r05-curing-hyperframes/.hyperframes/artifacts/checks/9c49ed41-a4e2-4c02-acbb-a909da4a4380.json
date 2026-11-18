@@ -38,7 +38,7 @@
     "ok": true,
     "errorCount": 0,
     "warningCount": 10,
-    "infoCount": 27,
+    "infoCount": 29,
     "findings": [
       {
         "code": "container_overflow",
@@ -444,6 +444,102 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(1)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 346.7,
+          "top": 460.3,
+          "right": 453.4,
+          "bottom": 462.5,
+          "width": 106.7,
+          "height": 2.2
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 346.7,
+          "y": 460.3,
+          "width": 106.7,
+          "height": 2.2
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(2)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 299.4,
+          "top": 462.5,
+          "right": 346.7,
+          "bottom": 548.7,
+          "width": 47.3,
+          "height": 86.2
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 299.4,
+          "y": 462.5,
+          "width": 47.3,
+          "height": 86.2
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(5)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 410.7,
+          "top": 460.3,
+          "right": 453.4,
+          "bottom": 556.3,
+          "width": 42.7,
+          "height": 96
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 410.7,
+          "y": 460.3,
+          "width": 42.7,
+          "height": 96
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
         "selector": "#s3-links > path:nth-of-type(7)",
         "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
@@ -508,57 +604,57 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(10)",
+        "selector": "#s3-links > path:nth-of-type(9)",
         "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
-          "left": 240.6,
+          "left": 299.4,
           "top": 548.7,
-          "right": 299.4,
-          "bottom": 638.4,
-          "width": 58.8,
-          "height": 89.7
-        },
-        "containerSelector": "#s3-lens",
-        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": 240.6,
-          "y": 548.7,
-          "width": 58.8,
-          "height": 89.7
-        },
-        "firstSeen": 12.642,
-        "lastSeen": 12.642,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          12.642
-        ]
-      },
-      {
-        "code": "connector_orphan",
-        "severity": "info",
-        "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(13)",
-        "message": "Connector shaft is visible while both endpoints are not on stage.",
-        "rect": {
-          "left": 351.2,
-          "top": 556.3,
           "right": 410.7,
+          "bottom": 556.3,
+          "width": 111.3,
+          "height": 7.6
+        },
+        "containerSelector": "#s3-lens",
+        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 299.4,
+          "y": 548.7,
+          "width": 111.3,
+          "height": 7.6
+        },
+        "firstSeen": 12.642,
+        "lastSeen": 12.642,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          12.642
+        ]
+      },
+      {
+        "code": "connector_orphan",
+        "severity": "info",
+        "time": 12.642,
+        "selector": "#s3-links > path:nth-of-type(11)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "rect": {
+          "left": 299.4,
+          "top": 548.7,
+          "right": 351.2,
           "bottom": 649.8,
-          "width": 59.5,
-          "height": 93.5
+          "width": 51.8,
+          "height": 101.1
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 351.2,
-          "y": 556.3,
-          "width": 59.5,
-          "height": 93.5
+          "x": 299.4,
+          "y": 548.7,
+          "width": 51.8,
+          "height": 101.1
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -572,25 +668,25 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(17)",
+        "selector": "#s3-links > path:nth-of-type(12)",
         "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
-          "left": 517.2,
+          "left": 410.7,
           "top": 555.3,
-          "right": 563.6,
-          "bottom": 636.8,
-          "width": 46.4,
-          "height": 81.5
+          "right": 517.2,
+          "bottom": 556.3,
+          "width": 106.5,
+          "height": 1
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 517.2,
+          "x": 410.7,
           "y": 555.3,
-          "width": 46.4,
-          "height": 81.5
+          "width": 106.5,
+          "height": 1
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -604,25 +700,25 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(18)",
+        "selector": "#s3-links > path:nth-of-type(19)",
         "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
-          "left": 563.6,
+          "left": 630.5,
           "top": 535.9,
-          "right": 630.5,
-          "bottom": 636.8,
-          "width": 66.9,
-          "height": 100.9
+          "right": 666.6,
+          "bottom": 631.9,
+          "width": 36.1,
+          "height": 96
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 563.6,
+          "x": 630.5,
           "y": 535.9,
-          "width": 66.9,
-          "height": 100.9
+          "width": 36.1,
+          "height": 96
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -764,57 +860,25 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(26)",
+        "selector": "#s3-links > path:nth-of-type(28)",
         "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
-          "left": 410.8,
-          "top": 644.1,
-          "right": 465.3,
-          "bottom": 743.3,
-          "width": 54.5,
-          "height": 99.2
+          "left": 563.6,
+          "top": 631.9,
+          "right": 666.6,
+          "bottom": 636.8,
+          "width": 103,
+          "height": 4.9
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 410.8,
-          "y": 644.1,
-          "width": 54.5,
-          "height": 99.2
-        },
-        "firstSeen": 12.642,
-        "lastSeen": 12.642,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          12.642
-        ]
-      },
-      {
-        "code": "connector_orphan",
-        "severity": "info",
-        "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(27)",
-        "message": "Connector shaft is visible while both endpoints are not on stage.",
-        "rect": {
-          "left": 465.3,
-          "top": 644.1,
-          "right": 515.2,
-          "bottom": 741.2,
-          "width": 49.9,
-          "height": 97.1
-        },
-        "containerSelector": "#s3-lens",
-        "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": 465.3,
-          "y": 644.1,
-          "width": 49.9,
-          "height": 97.1
+          "x": 563.6,
+          "y": 631.9,
+          "width": 103,
+          "height": 4.9
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -860,25 +924,25 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(36)",
-        "message": "Connector shaft is visible while its endpoint #s1-stamp is not on stage.",
+        "selector": "#s3-links > path:nth-of-type(31)",
+        "message": "Connector shaft is visible while both endpoints are not on stage.",
         "rect": {
-          "left": 410.8,
-          "top": 743.3,
-          "right": 468.3,
-          "bottom": 817.1,
-          "width": 57.5,
-          "height": 73.8
+          "left": 626,
+          "top": 631.9,
+          "right": 666.6,
+          "bottom": 743.2,
+          "width": 40.6,
+          "height": 111.3
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 410.8,
-          "y": 743.3,
-          "width": 57.5,
-          "height": 73.8
+          "x": 626,
+          "y": 631.9,
+          "width": 40.6,
+          "height": 111.3
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -892,25 +956,25 @@
         "code": "connector_orphan",
         "severity": "info",
         "time": 12.642,
-        "selector": "#s3-links > path:nth-of-type(37)",
-        "message": "Connector shaft is visible while both endpoints are not on stage.",
+        "selector": "#s3-links > path:nth-of-type(40)",
+        "message": "Connector shaft is visible while its endpoint #s1-stamp is not on stage.",
         "rect": {
-          "left": 515.2,
-          "top": 741.2,
+          "left": 568.4,
+          "top": 743.2,
           "right": 626,
-          "bottom": 743.2,
-          "width": 110.8,
-          "height": 2
+          "bottom": 824.2,
+          "width": 57.6,
+          "height": 81
         },
         "containerSelector": "#s3-lens",
         "fixHint": "Show the shaft only after both ends are on, and hide it with the earlier exit. Do not give the line its own clock.",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 515.2,
-          "y": 741.2,
-          "width": 110.8,
-          "height": 2
+          "x": 568.4,
+          "y": 743.2,
+          "width": 57.6,
+          "height": 81
         },
         "firstSeen": 12.642,
         "lastSeen": 12.642,
@@ -1299,7 +1363,7 @@
     "transitionSamples": [],
     "transitionSamplesDropped": 0,
     "tolerance": 2,
-    "totalIssueCount": 37,
+    "totalIssueCount": 39,
     "truncated": false
   },
   "motion": {
@@ -1314,57 +1378,32 @@
   "contrast": {
     "ok": true,
     "errorCount": 0,
-    "warningCount": 2,
+    "warningCount": 1,
     "infoCount": 0,
     "findings": [
       {
         "code": "contrast_aa_failure",
         "severity": "warning",
-        "message": "Contrast is 1.27:1; WCAG AA requires 3:1.",
-        "text": "That",
-        "fg": "rgb(106,123,145)",
-        "bg": "rgb(150,90,54)",
-        "ratio": 1.27,
+        "message": "Contrast is 1.42:1; WCAG AA requires 3:1.",
+        "text": "builds",
+        "fg": "rgb(80,99,123)",
+        "bg": "rgb(178,102,56)",
+        "ratio": 1.42,
         "requiredRatio": 3,
-        "suggestedColor": "rgb(184,192,203)",
+        "suggestedColor": "rgb(40,50,62)",
         "large": true,
-        "selector": "div > div:nth-of-type(10) > div > div:nth-of-type(3) > div > span:nth-of-type(1) > b",
+        "selector": "div > div:nth-of-type(10) > div > div:nth-of-type(10) > div > span:nth-of-type(3) > b",
         "dataAttributes": {},
         "sourceFile": "compositions/captions.html",
         "bbox": {
-          "x": 271.734375,
+          "x": 518.46875,
           "y": 1407,
-          "width": 118.640625,
+          "width": 157.984375,
           "height": 65
         },
-        "time": 2.528,
+        "time": 12.642,
         "times": [
-          2.528
-        ]
-      },
-      {
-        "code": "contrast_aa_failure",
-        "severity": "warning",
-        "message": "Contrast is 1.68:1; WCAG AA requires 3:1.",
-        "text": "does",
-        "fg": "rgb(130,127,134)",
-        "bg": "rgb(255,138,61)",
-        "ratio": 1.68,
-        "requiredRatio": 3,
-        "suggestedColor": "rgb(89,87,92)",
-        "large": true,
-        "selector": "div > div:nth-of-type(10) > div > div:nth-of-type(3) > div > span:nth-of-type(2) > b",
-        "dataAttributes": {},
-        "sourceFile": "compositions/captions.html",
-        "bbox": {
-          "x": 410.625,
-          "y": 1407,
-          "width": 127.421875,
-          "height": 65
-        },
-        "time": 2.528,
-        "times": [
-          2.528
+          12.642
         ]
       }
     ],
@@ -1377,7 +1416,7 @@
       42.982
     ],
     "checked": 38,
-    "passed": 36
+    "passed": 37
   },
   "craft": {
     "ok": true,
