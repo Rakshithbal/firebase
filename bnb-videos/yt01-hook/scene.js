@@ -25,7 +25,7 @@
   window.sceneSetup = function (T) {
     const wt = (id, w, n) => L.wordTime(T, id, w, n);
     const K = {
-      draw0: 0.0, draw1: 0.8,
+      draw0: -0.3, draw1: 0.7,
       d20: wt('H1', 'twenty'), d30: wt('H1', 'thirty'),
       six: wt('H1', 'six'), hundred: L.wordEnd(T, 'H1', 'hundred'), sq: wt('H1', 'square'),
       q: wt('H2', 'think'), small: wt('H2', 'too'), h2end: T.lines[1].end,
@@ -44,8 +44,8 @@
     const tp = L.easeInOut(L.prog(t, K.tilt0, K.tilt1));
     return {
       wx: 10, wy: 16,
-      s: L.lerp(25 + push, 25.5, tp),
-      yaw: L.lerp(0, -0.62, tp),
+      s: L.lerp(25 + push, 22, tp),
+      yaw: L.lerp(0, -0.62, tp) - 0.07 * L.easeOut(L.prog(t, K.tilt1, K.total)),
       pitch: L.lerp(0, 0.98, tp),
       tx: 960, ty: L.lerp(555, 470, tp),
     };
@@ -112,7 +112,7 @@
     ctx.globalAlpha = 1 - roomsOn * 0.55;
     // faint plot fill (pulses accent when 600 lands)
     const pulse = Math.exp(-Math.pow((t - K.hundred - 0.08) / 0.22, 2));
-    if (pDraw >= 1) { poly(ctx, plotPts.slice(0, 4)); ctx.fillStyle = `rgba(255,154,61,${0.03 + 0.14 * pulse})`; ctx.fill(); }
+    if (pDraw >= 1) { poly(ctx, plotPts.slice(0, 4)); ctx.fillStyle = `rgba(234,242,255,${0.03 + 0.07 * pulse})`; ctx.fill(); }
     // diagonal hatch lines inside the empty plot during the doubt beat
     const hatch = L.prog(t, K.q - 0.1, K.q + 0.4) * (1 - roomsOn);
     if (hatch > 0) {
@@ -120,6 +120,7 @@
       for (let k = -30; k < 50; k += 2.5) { const a = pr(k, 0), b = pr(k + 30, 30); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
       ctx.restore();
     }
+    if (pulse > 0.02) L.drawOn(ctx, plotPts.map((p) => [p[0], p[1]]), 1, `rgba(255,154,61,${0.8 * pulse})`, 14);
     L.drawOn(ctx, plotPts.map((p) => [p[0], p[1]]), pDraw, P.line, 6 - roomsOn * 3, roomsOn > 0.5 ? [14, 12] : null);
     // corner markers (survey pegs)
     if (pDraw > 0.95) for (const p of plotPts.slice(0, 4)) { ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(p[0], p[1], 7, 0, 7); ctx.fill(); }
@@ -175,7 +176,7 @@
       ctx.save(); ctx.globalAlpha = L.clamp(a * 1.6);
       poly(ctx, [q(x0, y0), q(x1, y0), q(x1, y1), q(x0, y1)]);
       ctx.fillStyle = P.floor; ctx.fill();
-      if (flash > 0.01) { ctx.fillStyle = `rgba(255,154,61,${0.35 * flash})`; ctx.fill(); }
+      if (flash > 0.01) { ctx.fillStyle = `rgba(234,242,255,${0.22 * flash})`; ctx.fill(); }
       if (a < 1) { ctx.strokeStyle = `rgba(255,154,61,${0.9 * (1 - a)})`; ctx.lineWidth = 3; ctx.stroke(); }
       // stairs treads
       if (R.stairs) {
@@ -229,15 +230,6 @@
       L.text(ctx, R.n, c[0], c[1] + 1, size, P.line, 800, 'center', a * labA, 2);
     });
 
-    // ---- small corner note (from the moment a layout is on screen)
-    const noteA = L.prog(t, K.roomT[0], K.roomT[0] + 0.4);
-    if (noteA > 0) {
-      ctx.save(); ctx.globalAlpha = noteA; ctx.font = `600 26px ${P.font}`;
-      const s = 'Example layout · check setbacks with your local authority'; const w = ctx.measureText(s).width;
-      ctx.fillStyle = 'rgba(8,27,48,0.75)'; ctx.beginPath(); ctx.roundRect(48, 1080 - 48 - 50, w + 36, 50, 10); ctx.fill();
-      ctx.fillStyle = P.dim; ctx.textBaseline = 'middle'; ctx.fillText(s, 66, 1080 - 48 - 24); ctx.restore();
-    }
-
     // ---- title card
     const ti = L.prog(t, K.title, K.title + 0.4);
     if (ti > 0) {
@@ -251,5 +243,14 @@
       ctx.beginPath(); ctx.moveTo(960 - 300 * t2, 948); ctx.lineTo(960 + 300 * t2, 948); ctx.stroke(); ctx.restore();
       L.text(ctx, 'LAYOUT IDEAS', 960, 996 + (1 - t2) * 20, 54, P.accent, 800, 'center', t2, 10);
     }
+    // ---- small corner note (from the moment a layout is on screen)
+    const noteA = L.prog(t, K.roomT[0], K.roomT[0] + 0.4);
+    if (noteA > 0) {
+      ctx.save(); ctx.globalAlpha = noteA; ctx.font = `600 26px ${P.font}`;
+      const s = 'Example layout · check setbacks with your local authority'; const w = ctx.measureText(s).width;
+      ctx.fillStyle = 'rgba(8,27,48,0.75)'; ctx.beginPath(); ctx.roundRect(1920 - 48 - w - 36, 44, w + 36, 50, 10); ctx.fill();
+      ctx.fillStyle = P.dim; ctx.textBaseline = 'middle'; ctx.fillText(s, 1920 - 48 - w - 18, 70); ctx.restore();
+    }
+
   };
 })();
