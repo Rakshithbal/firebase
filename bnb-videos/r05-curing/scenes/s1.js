@@ -137,7 +137,8 @@
     }
     // outline
     const r = 14;
-    L.drawOn(ctx, [[x + w / 2, bot], [x, bot], [x, top], [x + w, top], [x + w, bot], [x + w / 2, bot]], p, P.line, 6);
+    L.drawOn(ctx, [[x + w / 2, bot], [x, bot], [x, top], [x + w / 2, top]], p, P.line, 6);
+    L.drawOn(ctx, [[x + w / 2, bot], [x + w, bot], [x + w, top], [x + w / 2, top]], p, P.line, 6);
     if (o.label) L.text(ctx, 'STRENGTH', x + w / 2, bot + 48, 34, P.line, 800, 'center', o.label);
     ctx.restore();
   };
@@ -213,12 +214,12 @@
       const ga = L.easeOut(L.prog(t, 0.05, 0.9));
       const pulse = 1 + 0.06 * Math.sin(t * 2.4) + 0.15 * Math.exp(-Math.pow((t - tDry - 0.2) / 0.35, 2));
       ctx.save(); ctx.globalAlpha *= ga;
-      const gx = 985, gy = 290, gr = 460 * pulse;
+      const gx = 950, gy = 300, gr = 460 * pulse;
       const g = ctx.createRadialGradient(gx, gy, 20, gx, gy, gr);
       g.addColorStop(0, 'rgba(255,196,110,0.55)'); g.addColorStop(0.35, 'rgba(255,150,70,0.20)'); g.addColorStop(1, 'rgba(255,140,60,0)');
       ctx.fillStyle = g; ctx.fillRect(gx - gr, gy - gr, gr * 2, gr * 2);
       ctx.restore();
-      A.sun(ctx, 985, 290, 54, t, ga * 0.9, 0);
+      A.sun(ctx, 950, 300, 50, t, ga * 0.9, 0);
 
       // slab
       const sp = L.prog(t, 0, 0.85);

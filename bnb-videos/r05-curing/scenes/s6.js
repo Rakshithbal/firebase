@@ -114,7 +114,7 @@
         { t: tCem, label: 'Cement type', icon: (c) => bagIcon(c) },
         { t: tWea, label: 'Weather', icon: (c) => weatherIcon(c, t) },
         { t: tEng, label: "Engineer's number:", icon: (c) => hatIcon(c), blank: tNum, pen: tWrite },
-        { t: tDec, label: 'Who waters daily:', icon: (c) => canIcon(c, L.easeInOut(L.prog(t, tWat - 0.1, tWat + 0.3)) * 0.55 * (1 - L.prog(t, tEvery + 0.6, tEvery + 1.0)), t), blank: tDec + 0.35, color: P.water },
+        { t: tDec, label: 'Who waters daily:', icon: (c) => { c.translate(-12, 4); c.scale(0.92, 0.92); canIcon(c, L.easeInOut(L.prog(t, tWat - 0.1, tWat + 0.3)) * 0.42 * (1 - L.prog(t, tEvery + 0.6, tEvery + 1.0)), t); }, blank: tDec + 0.35, color: P.water },
       ];
       rows.forEach((rw, i) => {
         const y = ROW_Y[i];
