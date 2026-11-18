@@ -22,10 +22,10 @@
       // ---- sun (top-left) ----
       const sa = L.easeOut(L.prog(t, tSun - 0.1, tSun + 0.25));
       const flare = Math.exp(-Math.pow((t - tSun - 0.15) / 0.3, 2));
-      const sunFade = 1 - 0.5 * L.prog(t, 20.2, 21.0);
-      if (sa > 0) {
+      const sunFade = 1 - L.easeInOut(L.prog(t, 20.35, 20.7));
+      if (sa > 0 && sunFade > 0) {
         const s = L.backOut(L.prog(t, tSun - 0.1, tSun + 0.3));
-        ctx.save(); ctx.translate(190, 360); ctx.scale(s, s); A.sun(ctx, 0, 0, 62, t, sa * sunFade, flare); ctx.restore();
+        ctx.save(); ctx.translate(190, 360); ctx.scale(s * (0.6 + 0.4 * sunFade), s * (0.6 + 0.4 * sunFade)); A.sun(ctx, 0, 0, 62, t, sa * sunFade, flare); ctx.restore();
         // heat shimmer above slab
         ctx.save(); ctx.globalAlpha *= sa * 0.55 * (1 - L.prog(t, 19.6, 20.4)); ctx.strokeStyle = '#FFC261'; ctx.lineWidth = 4; ctx.lineCap = 'round';
         for (let i = 0; i < 5; i++) {
@@ -39,7 +39,7 @@
 
       // ---- slab with internal water draining ----
       const moist = 1 - L.easeInOut(L.prog(t, tWater + 0.2, 19.4));
-      A.slab(ctx, Object.assign({}, SL, { p: L.prog(t, t0 - 0.15, t0 + 0.55), moist, t }));
+      A.slab(ctx, Object.assign({}, SL, { p: L.prog(t, t0, t0 + 0.6), moist, t }));
 
       // ---- water droplets rising & evaporating ----
       if (t > tWater - 0.1) {
@@ -62,7 +62,7 @@
       // ---- wind lines sweeping across the slab surface ----
       for (let pass = 0; pass < 2; pass++) {
         for (let i = 0; i < 4; i++) {
-          const st = tWind - 0.1 + pass * 0.75 + i * 0.12, q = L.prog(t, st, st + 0.85);
+          const st = tWind - 0.1 + pass * 0.55 + i * 0.12, q = L.prog(t, st, st + 0.85);
           if (q <= 0 || q >= 1) continue;
           const yb = 700 + i * 28 + pass * 10, head = L.lerp(-60, 980, L.easeInOut(q)), len = 320;
           const pts = [];
@@ -101,7 +101,7 @@
       // weak top segment flashes orange
       const wk = L.prog(t, tWeaker - 0.05, tWeaker + 0.1);
       if (wk > 0) {
-        const fl = t < tWeaker + 0.75 ? 0.5 + 0.5 * Math.cos((t - tWeaker) * Math.PI * 2 / 0.25) : 0.75 + 0.1 * Math.sin(t * 4);
+        const fl = t < tWeaker + 0.75 ? 0.5 + 0.5 * Math.cos((t - tWeaker) * Math.PI * 2 / 0.25) : 0.9 + 0.1 * Math.sin(t * 4);
         const segBot = BAR.bot - H * (A.s3fill(t0) - 0.05);
         ctx.save(); ctx.globalAlpha *= wk * fl; ctx.fillStyle = P.accent;
         A.rr(ctx, BAR.x + 7, fy, BAR.w - 14, segBot - fy, 6); ctx.fill(); ctx.restore();

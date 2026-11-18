@@ -103,7 +103,7 @@
       }
 
       // ---- small slab (continuity) ----
-      const sp = L.prog(t, t0 - 0.1, t0 + 0.6);
+      const sp = L.prog(t, t0 - 0.3, t0 + 0.15);
       const film = L.easeOut(L.prog(t, tCuring + 0.2, tCuring + 0.8));
       A.slab(ctx, Object.assign({}, SMALL, { p: sp, film, t }));
       // drops falling onto slab after CURING
