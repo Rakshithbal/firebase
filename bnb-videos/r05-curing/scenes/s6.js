@@ -95,9 +95,9 @@
       const bp = L.easeInOut(L.prog(t, tDep - 0.05, tDep + 0.7));
       if (bp > 0) {
         const fillA = L.prog(t, tDep + 0.2, tDep + 0.7);
-        ctx.save(); ctx.globalAlpha *= fillA; ctx.beginPath(); ctx.roundRect(BX, BY, BW, BH, 30); ctx.fillStyle = 'rgba(8,26,48,0.78)'; ctx.fill(); ctx.restore();
-        const r = 30;
+        ctx.save(); ctx.globalAlpha *= fillA; const r = 30;
         const outline = [[540, BY], [BX + BW - r, BY], [BX + BW, BY + r], [BX + BW, BY + BH - r], [BX + BW - r, BY + BH], [BX + r, BY + BH], [BX, BY + BH - r], [BX, BY + r], [BX + r, BY], [540, BY]];
+        ctx.beginPath(); outline.forEach((q, qi) => (qi ? ctx.lineTo(...q) : ctx.moveTo(...q))); ctx.fillStyle = 'rgba(8,26,48,0.78)'; ctx.fill(); ctx.restore();
         L.drawOn(ctx, outline, bp, P.line, 6);
         // clip
         const cpp = pop(t, tDep + 0.35, 0.4);
@@ -140,39 +140,46 @@
         }
       });
 
-      // ---- calendar row: seven squares tick with drops
+      // ---- open-ended day strip: generic squares scroll left past a "watering point"; no fixed count, fades off the right edge
       const ca = L.prog(t, tEvery - 0.35, tEvery);
       if (ca > 0) {
-        const n = 7, sz = 82, gap = 18, tot = n * sz + (n - 1) * gap, x0 = 540 - tot / 2, cy = 1190;
-        L.text(ctx, 'EVERY DAY', 540, 1080, 38, P.water, 800, 'center', ca);
-        const span = Math.max(0.9, tDay + 0.15 - tEvery) / (n - 1);
-        for (let i = 0; i < n; i++) {
-          const x = x0 + i * (sz + gap);
-          const sp = pop(t, tEvery - 0.35 + i * 0.04, 0.35);
+        const sz = 82, step = 104, cy = 1196, DX = 540, speed = 330, X0 = DX + 100, t0s = tEvery - 0.35;
+        const clipL = BX + 24, clipR = BX + BW - 24;
+        L.text(ctx, 'EVERY DAY', 540, 1072, 38, P.water, 800, 'center', ca);
+        const scroll = speed * Math.max(0, t - t0s);
+        ctx.save(); ctx.beginPath(); ctx.rect(clipL, cy - 140, clipR - clipL, 240); ctx.clip();
+        const jMin = Math.max(0, Math.floor((scroll - (X0 - clipL) - sz) / step));
+        for (let j = jMin; j < jMin + 14; j++) {
+          const x = X0 + j * step - scroll;
+          if (x < clipL - sz || x > clipR + sz) continue;
+          const sp = pop(t, tEvery - 0.35 + j * 0.04, 0.35);
           if (sp <= 0) continue;
-          const ti = tEvery + 0.05 + i * span;
-          ctx.save(); ctx.translate(x + sz / 2, cy); ctx.scale(sp, sp);
-          const filled = L.easeOut(L.prog(t, ti + 0.18, ti + 0.35));
+          const fade = L.clamp(1 - (x - 690) / 200) * L.clamp((x - (clipL + 10)) / 70);
+          if (fade <= 0) continue;
+          const tj = t0s + (X0 + j * step - DX) / speed; // time this square reaches the watering point
+          ctx.save(); ctx.globalAlpha *= fade * ca; ctx.translate(x, cy); ctx.scale(sp, sp);
+          const filled = L.easeOut(L.prog(t, tj, tj + 0.15));
           ctx.beginPath(); ctx.roundRect(-sz / 2, -sz / 2, sz, sz, 12);
           ctx.fillStyle = `rgba(79,195,247,${0.08 + 0.35 * filled})`; ctx.fill();
           ctx.strokeStyle = filled > 0.5 ? P.water : P.dim; ctx.lineWidth = 5; ctx.stroke();
           ctx.fillStyle = filled > 0.5 ? P.water : P.dim; ctx.fillRect(-sz / 2, -sz / 2, sz, 14);
           ctx.strokeStyle = P.line; ctx.lineWidth = 4; ctx.lineCap = 'round';
           [-18, 18].forEach((rx) => { ctx.beginPath(); ctx.moveTo(rx, -sz / 2 - 10); ctx.lineTo(rx, -sz / 2 + 6); ctx.stroke(); });
-          // check
-          const ck = L.prog(t, ti + 0.2, ti + 0.4);
+          const ck = L.prog(t, tj + 0.03, tj + 0.2);
           if (ck > 0) L.drawOn(ctx, [[-18, 6], [-5, 20], [20, -8]], ck, P.line, 7);
           ctx.restore();
-          // falling drop
-          const fp = L.prog(t, ti - 0.05, ti + 0.22);
-          if (fp > 0 && fp < 1) dropShape(ctx, x + sz / 2, L.lerp(cy - 150, cy - 10, fp * fp), 1.1);
-          // splash
-          const sp2 = L.prog(t, ti + 0.2, ti + 0.55);
+          // drop falling onto this square as it passes
+          const fp = L.prog(t, tj - 0.2, tj);
+          if (fp > 0 && fp < 1) dropShape(ctx, DX, L.lerp(cy - 72, cy - 6, fp * fp), 1.0);
+          const sp2 = L.prog(t, tj, tj + 0.35);
           if (sp2 > 0 && sp2 < 1) {
-            ctx.save(); ctx.globalAlpha *= 1 - sp2; ctx.strokeStyle = P.water; ctx.lineWidth = 4;
-            ctx.beginPath(); ctx.ellipse(x + sz / 2, cy, 30 + sp2 * 26, 10 + sp2 * 8, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+            ctx.save(); ctx.globalAlpha *= (1 - sp2) * fade; ctx.strokeStyle = P.water; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.ellipse(x, cy, 30 + sp2 * 24, 10 + sp2 * 8, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
           }
         }
+        ctx.restore();
+        // continuation dots at the right edge
+        L.text(ctx, '…', clipR - 40, cy + 6, 70, P.dim, 800, 'center', ca * (0.7 + 0.3 * Math.sin(t * 4)));
       }
     },
   });

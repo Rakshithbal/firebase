@@ -106,7 +106,7 @@ def felt_piano(m, dur, vel=.6, bright=1.0):
     # damper after note-off
     d0 = int(dur * SR)
     if d0 < n: y[d0:] *= np.exp(-np.arange(n - d0) / SR / .28)
-    y = lp(y, (900 + 2600 * vel) * bright, 2)
+    y = lp(y, (1500 + 3800 * vel) * bright, 2)
     return fade_edges(y * vel, .0, .02)
 
 
@@ -114,7 +114,7 @@ def soft_pluck(m, dur, vel=.5):
     """Muted nylon-ish pluck for the pulse (Lemo pluck.py nylon_guitar if available)."""
     if P is not None:
         x = P.pluck('nylon_guitar', float(m), dur, vel=vel, release=.09, damp=.6, bright=.3).astype(np.float64)
-        return lp(x, 2600)
+        return lp(x, 3800)
     f0 = hz(m); tt = t_(dur + .1)
     x = (np.sin(2 * np.pi * f0 * tt) + .35 * np.sin(4 * np.pi * f0 * tt)) * np.exp(-tt / .09)
     return fade_edges(lp(x, 2200) * vel * .12, .002, .02)
@@ -134,7 +134,7 @@ def pad_voice(m, dur, att=1.0, rel=1.3, bright=1.0):
     env = np.minimum(1, t / att) ** 2
     d0 = int(dur * SR); env[d0:] *= np.cos(np.linspace(0, np.pi / 2, n - d0)) ** 2
     out *= env[:, None]
-    for c in range(2): out[:, c] = lp(out[:, c], 1100 * bright, 2)
+    for c in range(2): out[:, c] = lp(out[:, c], 1500 * bright, 2)
     return out
 
 
