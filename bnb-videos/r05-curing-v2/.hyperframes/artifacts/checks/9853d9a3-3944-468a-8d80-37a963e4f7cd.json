@@ -827,17 +827,17 @@
         "dataAttributes": {},
         "sourceFile": "compositions/s4.html",
         "bbox": {
-          "x": 782.88,
-          "y": 1132.6,
+          "x": 814.88,
+          "y": 1022.6,
           "width": 138.25,
           "height": 32
         },
         "time": 17.698,
         "rect": {
-          "left": 782.88,
-          "top": 1132.6,
-          "right": 921.13,
-          "bottom": 1164.6,
+          "left": 814.88,
+          "top": 1022.6,
+          "right": 953.13,
+          "bottom": 1054.6,
           "width": 138.25,
           "height": 32
         },
@@ -2194,30 +2194,37 @@
       {
         "code": "text_below_floor",
         "severity": "warning",
-        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 6 text elements stay under it for 0.5 s or more, the smallest \"Fig. 4\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
-        "text": "Fig. 4",
-        "selector": "#s4-figcap > div:nth-of-type(2) > span:nth-of-type(1)",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 6 text elements stay under it for 0.5 s or more, the smallest \"Strength\" at 24 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "Strength",
+        "selector": "#s4-figure > g:nth-of-type(5) > text:nth-of-type(1)",
         "dataAttributes": {},
         "sourceFile": "compositions/s4.html",
         "bbox": {
-          "x": 72,
-          "y": 1235.37,
-          "width": 106.56,
-          "height": 32
+          "x": 820.56,
+          "y": 1027.58,
+          "width": 141.12,
+          "height": 32.66
         },
-        "time": 15.586,
+        "time": 15.087,
         "times": [
+          15.087,
           15.586,
-          15.96,
-          16.209,
+          15.71,
           19.077,
           21.446,
           23.191
         ],
         "fontPx": 24,
         "floorPx": 28,
-        "seconds": 9.351,
+        "seconds": 9.85,
         "elements": [
+          {
+            "selector": "#s4-figure > g:nth-of-type(5) > text:nth-of-type(1)",
+            "text": "Strength",
+            "fontPx": 24,
+            "time": 15.087,
+            "seconds": 9.85
+          },
           {
             "selector": "#s4-figcap > div:nth-of-type(2) > span:nth-of-type(1)",
             "text": "Fig. 4",
@@ -2226,18 +2233,11 @@
             "seconds": 9.351
           },
           {
-            "selector": "#s4-figure > g:nth-of-type(5) > text:nth-of-type(1)",
-            "text": "Strength",
-            "fontPx": 24,
-            "time": 15.96,
-            "seconds": 8.977
-          },
-          {
             "selector": "g.s4-target > text:nth-of-type(1)",
             "text": "Designed strength",
             "fontPx": 24,
-            "time": 16.209,
-            "seconds": 8.728
+            "time": 15.71,
+            "seconds": 9.227
           },
           {
             "selector": "g.s4-slow > text:nth-of-type(1)",

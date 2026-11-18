@@ -156,15 +156,6 @@
               fly.push({ el: B.el("circle", { cx: TIPX, cy: TIPY, r: r1(2.2 + rs() * 1.6), fill: C.water, opacity: 0 }, flyG), dx: r1(Math.cos(a2) * d2), dy: r1(Math.sin(a2) * d2), ph: rs() });
             }
 
-
-            /* Shared BNB.hatch ids (bnb-hatch-*) also exist in other scenes' SVGs; url(#id) resolves to the first
-               one in the document, which can sit in a hidden scene and paint nothing. Give this scene its own copies. */
-            Array.prototype.forEach.call(svg.querySelectorAll("pattern[id^='bnb-']"), function (p) {
-              var old = p.id, nu = "s5-" + old;
-              p.id = nu;
-              Array.prototype.forEach.call(svg.querySelectorAll("[fill='url(#" + old + ")']"), function (e) { e.setAttribute("fill", "url(#" + nu + ")"); });
-            });
-
             /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
             var tWet = at("wet"), tPond = at("ponding"), tSlab = at("slab"), tWet2 = at("wet", 2), tSacks = at("sacks"), tCols = at("columns"), tSpray = at("spraying"), tWalls = at("walls");

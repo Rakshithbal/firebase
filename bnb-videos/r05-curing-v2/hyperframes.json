@@ -10,46 +10,5 @@
     "autoProxy": true
   },
   "authoringSkill": "hyperframes",
-  "registryItems": [
-    {
-      "name": "caption-pill-karaoke",
-      "type": "hyperframes:component",
-      "target": "compositions/components/caption-pill-karaoke.html"
-    },
-    {
-      "name": "headline-slam",
-      "type": "hyperframes:component",
-      "target": "compositions/components/headline-slam.html"
-    },
-    {
-      "name": "strikethrough-replace",
-      "type": "hyperframes:component",
-      "target": "compositions/components/strikethrough-replace.html"
-    },
-    {
-      "name": "success-check",
-      "type": "hyperframes:component",
-      "target": "compositions/components/success-check.html"
-    },
-    {
-      "name": "hw-underline",
-      "type": "hyperframes:component",
-      "target": "compositions/components/hw-underline.html"
-    },
-    {
-      "name": "grain-overlay",
-      "type": "hyperframes:component",
-      "target": "compositions/components/grain-overlay.html"
-    },
-    {
-      "name": "zoom-through-transition",
-      "type": "hyperframes:component",
-      "target": "compositions/components/zoom-through-transition.html"
-    },
-    {
-      "name": "text-state-swap",
-      "type": "hyperframes:component",
-      "target": "compositions/components/text-state-swap.html"
-    }
-  ]
+  "registryItems": []
 }

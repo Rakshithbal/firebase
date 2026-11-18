@@ -1,11 +1,1 @@
-{
-  "assets/fonts/Caveat-700-latin.woff2": "891951df5e8b5b0f0bc760d31375405e795c666b5add70437de12d4a6482b33f",
-  "compositions/components/caption-pill-karaoke.html": "cdbbc72af7fbac440c0bf5750cf9e3d4ded20f26588b00ac79399342ca60b3e3",
-  "compositions/components/grain-overlay.html": "97a0da8f26feca9574abcf08b8186cef10ea4819b2aeabc30547ae16ed9ae80d",
-  "compositions/components/headline-slam.html": "b16ac28b01bf7f352d6a3f267838253de85794cd9bedd8065b48d7675e9295cd",
-  "compositions/components/hw-underline.html": "2e4fdeac4c27f9c90bc6f87b4fee041426a095c9c4ad00b6cc0cf4005470e174",
-  "compositions/components/strikethrough-replace.html": "8ef7447fe6e1f122cec5f601b3388b8cb4c18eb0c7341dd7e5af3dac53e65e10",
-  "compositions/components/success-check.html": "49f306892b85ecdbe9510593b8dc8d76b2e3c7becfff06726d967407ff01c393",
-  "compositions/components/text-state-swap.html": "53eeedf34c11ee2f051e4efaafc0ae32e15f3f89bbcba2160ae026e4a36240fb",
-  "compositions/components/zoom-through-transition.html": "8201b6de2c2908e3c8d9ca8d36d1b55b8093484ec40bd37bdf7754ae7b61d97d"
-}
+{}

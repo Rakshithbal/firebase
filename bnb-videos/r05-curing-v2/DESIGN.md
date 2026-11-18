@@ -121,7 +121,7 @@ Staggers (`BNB.STAGGER`): words 0.06 · list items 0.08 · hatch strokes 0.012.
 
 Tokens: `BNB.C` (colours), `BNB.LW`, `BNB.E`, `BNB.D`, `BNB.STAGGER`, `BNB.STAGE`, `BNB.SCENES[i] = {id,start,dur,line,kicker}`.
 Timing: `BNB.at(line, word, n?)` (film s) · `BNB.sceneAt(sceneStart, line)` → `at(word, n?)` (scene s) · `BNB.rng(seed)`.
-SVG primitives: `BNB.el(tag, attrs, parent)` · `BNB.g(parent, attrs)` · `BNB.path(parent, d, attrs)` · `BNB.line(parent,x1,y1,x2,y2,attrs)` · `BNB.text(parent,x,y,str,cls,attrs)` · `BNB.defs(svg)` · `BNB.hatch(svg,{id,angle,gap,color,width,bg})` → `"url(#id)"`.
+SVG primitives: `BNB.el(tag, attrs, parent)` · `BNB.g(parent, attrs)` · `BNB.path(parent, d, attrs)` · `BNB.line(parent,x1,y1,x2,y2,attrs)` · `BNB.text(parent,x,y,str,cls,attrs)` · `BNB.defs(svg)` · `BNB.hatch(svg,{id,angle,gap,color,width,bg})` → `"url(#<svgId>-id)"` (pattern ids are prefixed with the owning svg's id so each scene has its own copy — always use the returned url). `BNB.text(…,{fill})` writes the fill inline so it beats the `.t-*` class colour.
 
 Builders (return element refs to animate):
 | call | returns |

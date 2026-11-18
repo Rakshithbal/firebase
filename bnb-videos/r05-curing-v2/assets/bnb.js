@@ -73,15 +73,20 @@
   B.line = function (parent, x1, y1, x2, y2, attrs) { return B.path(parent, "M" + x1 + " " + y1 + "L" + x2 + " " + y2, attrs); };
   B.text = function (parent, x, y, str, cls, attrs) {
     var t = B.el("text", Object.assign({ x: x, y: y, class: cls || "t-label" }, attrs || {}), parent);
+    // an explicit fill must beat the .t-* class fill (class CSS outranks the SVG presentation attribute)
+    if (attrs && attrs.fill) t.style.fill = attrs.fill;
     t.textContent = str;
     return t;
   };
   var r1 = function (v) { return Math.round(v * 10) / 10; };
 
-  /* Hatch pattern -> returns "url(#id)". angle in deg (45 = /), gap px, color, width */
+  /* Hatch pattern -> returns "url(#id)". angle in deg (45 = /), gap px, color, width.
+     The real pattern id is prefixed with the owning <svg>'s id, so every scene gets its own copy
+     (url(#id) resolves document-wide: a shared id could resolve into a hidden scene and paint nothing).
+     Always use the returned url, never hand-write url(#…) for a hatch. */
   B.hatch = function (svg, o) {
     var defs = svg.querySelector("defs") || svg.insertBefore(document.createElementNS(NS, "defs"), svg.firstChild);
-    var id = o.id, gap = o.gap || 10;
+    var id = (svg.id ? svg.id + "-" : "") + o.id, gap = o.gap || 10;
     if (svg.querySelector("#" + id)) return "url(#" + id + ")";
     var p = B.el("pattern", { id: id, width: gap, height: gap, patternUnits: "userSpaceOnUse", patternTransform: "rotate(" + (o.angle == null ? 45 : o.angle) + ")" }, defs);
     if (o.bg) B.el("rect", { width: gap, height: gap, fill: o.bg }, p);

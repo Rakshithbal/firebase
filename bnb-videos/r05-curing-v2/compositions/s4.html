@@ -123,15 +123,6 @@
             // class fills (.t-head/.t-data) beat SVG presentation attributes: colour these heads/labels inline
             crackCo.head.style.fill = C.red; weakCo.head.style.fill = C.point; tgtLabel.style.fill = C.chalk2;
 
-
-            /* Shared BNB.hatch ids (bnb-hatch-*) also exist in other scenes' SVGs; url(#id) resolves to the first
-               one in the document, which can sit in a hidden scene and paint nothing. Give this scene its own copies. */
-            Array.prototype.forEach.call(svg.querySelectorAll("pattern[id^='bnb-']"), function (p) {
-              var old = p.id, nu = "s4-" + old;
-              p.id = nu;
-              Array.prototype.forEach.call(svg.querySelectorAll("[fill='url(#" + old + ")']"), function (e) { e.setAttribute("fill", "url(#" + nu + ")"); });
-            });
-
             /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
             var tWater = at4("water"), tLeaves = at4("leaves"), tSun = at4("sun"), tWind = at4("wind"), tSlows = at4("slows");

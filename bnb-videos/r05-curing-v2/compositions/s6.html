@@ -116,10 +116,10 @@
             /* ---------- open-ended day strip (never a countable set) ---------- */
             var SY = 1090, SQ = 60, PITCH = 88, V = 200, MX = 540;
             var tEvery = at8("every"), tIn = tEvery - 0.3;
-            var grad = B.el("linearGradient", { id: "s6-fade-g", gradientUnits: "userSpaceOnUse", x1: 230, y1: 0, x2: 850, y2: 0 }, defs);
+            var grad = B.el("linearGradient", { id: "s6-fade-g", gradientUnits: "userSpaceOnUse", x1: 310, y1: 0, x2: 770, y2: 0 }, defs);
             [[0, 0], [0.42, 1], [0.58, 1], [1, 0]].forEach(function (s) { B.el("stop", { offset: s[0], "stop-color": "#fff", "stop-opacity": s[1] }, grad); });
             var mask = B.el("mask", { id: "s6-fade", maskUnits: "userSpaceOnUse", x: 0, y: SY - 20, width: 1080, height: SQ + 40 }, defs);
-            B.el("rect", { x: 230, y: SY - 20, width: 620, height: SQ + 40, fill: "url(#s6-fade-g)" }, mask);
+            B.el("rect", { x: 310, y: SY - 20, width: 460, height: SQ + 40, fill: "url(#s6-fade-g)" }, mask);
             var strip = B.g(fig, { id: "s6-strip" });
             var masked = B.g(strip, { mask: "url(#s6-fade)" });
             var tape = B.g(masked, { id: "s6-tape" });
@@ -134,8 +134,8 @@
               if (i >= 0 && tc < SC.dur - 0.25) newDrops.push({ el: d, t: tc });
               else if (i >= 0) d.setAttribute("opacity", 0);
             }
-            var ellL = B.text(strip, 214, SY + 38, "…", "s6-ell", { "text-anchor": "middle" });
-            var ellR = B.text(strip, 866, SY + 38, "…", "s6-ell", { "text-anchor": "middle" });
+            var ellL = B.text(strip, 296, SY + 38, "…", "s6-ell", { "text-anchor": "middle" });
+            var ellR = B.text(strip, 784, SY + 38, "…", "s6-ell", { "text-anchor": "middle" });
             // fixed watering marker
             var marker = B.g(fig, { id: "s6-marker" });
             var mLine = B.line(marker, MX, SY - 14, MX, SY + SQ + 14, { stroke: C.water, "stroke-width": 2, pathLength: 1 });
