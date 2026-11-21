@@ -8,7 +8,7 @@
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
           #s2-cam { position: absolute; inset: 0; }
-          #s2-card { position: absolute; left: 96px; top: 380px; width: 706px; height: 448px;
+          #s2-card { position: absolute; left: 96px; top: 380px; width: 764px; height: 448px;
             background: rgba(16, 41, 74, 0.62); box-shadow: inset 0 0 0 1.5px rgba(238,243,250,0.44); }
           #s2-card .hdr { position: absolute; left: 32px; right: 32px; top: 24px; display: flex; justify-content: space-between;
             font-family: var(--f-mono); font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase; }
@@ -81,8 +81,8 @@
             var axis = B.line(fig, X0, WY, X1, WY, { stroke: C.chalk4, "stroke-width": 1.5, pathLength: 1 });
 
             /* leader from script line 01 to the ruler start */
-            var leader = B.path(fig, "M806 676 H 900 L 960 604", { stroke: C.blue, "stroke-width": 2, pathLength: 1 });
-            var ldot = B.el("circle", { cx: 806, cy: 676, r: 6, fill: C.blue }, fig);
+            var leader = B.path(fig, "M860 660 H 912 L 962 604", { stroke: C.blue, "stroke-width": 2, pathLength: 1 });
+            var ldot = B.el("circle", { cx: 860, cy: 660, r: 6, fill: C.blue }, fig);
 
             /* the playhead: the scene's one orange idea */
             var ph = B.g(fig, { id: "s2-ph" });
@@ -108,7 +108,7 @@
             type(c1, 0.98); type(c2, 1.42); type(c3, 1.86);
             // line 01 is the one that becomes timing: the others step back
             tl.to(["#s2-v-l2", "#s2-v-l3", "#s2-v-title", "#s2-v-series"], { opacity: 0.42, duration: 0.4, ease: E.move }, 2.45);
-            tl.fromTo(ldot, { scale: 0, svgOrigin: "806 676" }, { scale: 1, svgOrigin: "806 676", duration: 0.25, ease: E.enter }, 2.35);
+            tl.fromTo(ldot, { scale: 0, svgOrigin: "860 660" }, { scale: 1, svgOrigin: "860 660", duration: 0.25, ease: E.enter }, 2.35);
             B.a.draw(tl, leader, 2.4, 0.5);
             B.a.draw(tl, ruler, 2.2, 0.7, E.land);
             tl.fromTo([rticks, lbl, axis], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E.enter }, 2.3);
@@ -124,7 +124,6 @@
               var t = P0 + ((+c.dataset.t - T0) / 2.0) * PD;
               tl.fromTo(c, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: E.enter }, t);
             });
-            tl.to(ph, { opacity: 0.0, duration: 0.3, ease: E.exit }, P0 + PD + 0.05);
             B.a.figcap(tl, document.getElementById("s2-figcap"), 3.05);
             B.a.exit(tl, "#s2-cam", SC.dur - 0.25, 0.22);
             window.__timelines["s2"] = tl;

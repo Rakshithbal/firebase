@@ -2,241 +2,129 @@
 <html lang="en">
   <body>
     <template>
-      <!-- s5 · 05 — How to cure · L06 "So curing means keeping it wet and covered. Ponding on the slab.
-           Wet sacks on columns. Spraying on walls."
-           Built on DESIGN.md §9 / s1. A small multiple: Fig. 5a / 5b / 5c, each lands on its spoken word.
-           The point (orange): "wet." in the headline. -->
-      <div id="root" data-composition-id="s5" data-duration="7.334">
+      <!-- s5 · 04 — Theming · "Any series. Any client." The same phone (match cut from s4) now shows a code-built page;
+           the series rail swaps BUILDPEDIA → LOAN LENS → FIX IT BEFORE IT SPREADS → YOUR BRAND and, on the last swap,
+           every token re-themes (ground, line, accent, wordmark). One orange idea: the accent swatch (it becomes the client's). -->
+      <div id="root" data-composition-id="s5" data-duration="4.375">
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
-          #s5-cam, #s5-zoom { position: absolute; inset: 0; }
-          #s5-zoom { transform-origin: 540px 900px; }
-          #s5-hl em { color: #eef3fa; }
-          .s5-fignum { font-family: var(--f-mono); font-weight: 600; font-size: 24px; letter-spacing: 0.14em; text-transform: uppercase; fill: rgba(238, 243, 250, 0.74); }
-          #s5-figcap { top: 1218px; }
+          #s5-cam, #s5-left { position: absolute; inset: 0; }
+          #s5-series { position: absolute; left: 96px; top: 556px; width: 960px; height: 120px; }
+          .s5-k { font-family: var(--f-mono); font-weight: 500; font-size: 26px; letter-spacing: 0.16em; text-transform: uppercase; color: #8fb3da; white-space: nowrap; }
+          .s5-sn { position: absolute; left: 0; top: 46px; font-family: var(--f-mono); font-weight: 600; font-size: 46px; line-height: 56px; letter-spacing: 0.08em; text-transform: uppercase; color: #eef3fa; white-space: nowrap; }
+          #s5-tokens { position: absolute; left: 96px; top: 742px; display: flex; gap: 24px; }
+          .s5-tok { width: 146px; }
+          .s5-sw { width: 96px; height: 96px; box-shadow: inset 0 0 0 1.5px rgba(238,243,250,0.44); }
+          .s5-tl { margin-top: 14px; font-family: var(--f-mono); font-weight: 500; font-size: 24px; letter-spacing: 0.12em; text-transform: uppercase; color: #8fb3da; white-space: nowrap; }
+
+          /* the page inside the phone: every colour is a token, so a client theme is a token swap */
+          #s5-page { position: absolute; inset: 0; --pg-ground: #0b2139; --pg-ink: #eef3fa; --pg-mid: #627387; --pg-accent: #ff8a3d; --pg-dot: #4fc3f7; --pg-grid: rgba(238,243,250,0.05);
+            background-color: var(--pg-ground);
+            background-image: linear-gradient(var(--pg-grid) 1px, transparent 1px), linear-gradient(90deg, var(--pg-grid) 1px, transparent 1px);
+            background-size: 30px 30px; background-position: 30px 0; }
+          .pg-rail { position: absolute; left: 30px; top: 64px; display: flex; align-items: center; gap: 9px; white-space: nowrap;
+            font-family: var(--f-mono); font-weight: 600; font-size: 15px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pg-ink); }
+          .pg-rail i { width: 5px; height: 5px; border-radius: 3px; background: var(--pg-dot); }
+          .pg-kick { position: absolute; left: 30px; top: 118px; font-family: var(--f-mono); font-weight: 500; font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pg-ink); opacity: 0.7; }
+          .pg-hl { position: absolute; left: 30px; top: 146px; width: 400px; font-family: var(--f-serif); font-weight: 560; font-size: 50px; line-height: 52px; letter-spacing: -0.025em;
+            font-variation-settings: "opsz" 144; color: var(--pg-ink); }
+          .pg-hl em { font-style: italic; font-weight: 500; color: var(--pg-accent); }
+          #s5-pgfig { position: absolute; left: 0; top: 0; width: 450px; height: 800px; overflow: visible; }
+          .pg-cap { position: absolute; left: 30px; top: 652px; width: 390px; border-top: 1.5px solid var(--pg-ink); padding-top: 10px; opacity: 0.6;
+            font-family: var(--f-mono); font-weight: 600; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pg-ink); white-space: nowrap; }
+          .pg-mark { position: absolute; left: 30px; top: 724px; white-space: nowrap; color: var(--pg-ink); }
+          #s5-mark1 { font-family: var(--f-mono); font-weight: 600; font-size: 16px; letter-spacing: 0.22em; }
+          #s5-mark2 { font-family: var(--f-serif); font-style: italic; font-weight: 600; font-size: 26px; letter-spacing: -0.01em; top: 716px; color: var(--pg-accent); }
         </style>
-
         <div id="s5-cam" class="bnb-stage">
-          <div id="s5-zoom" class="bnb-stage">
-            <svg id="s5-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
-
+          <div id="s5-left" class="bnb-stage">
             <header class="bnb-head" id="s5-head">
-              <div class="bnb-kicker" id="s5-kicker"><b>05</b> — How to cure</div>
-              <h1 class="bnb-headline" id="s5-hl">Keep it <em id="s5-em">wet.</em><br />Keep it covered.</h1>
+              <div class="bnb-kicker" id="s5-kicker"><b>04</b> — Theming</div>
+              <h1 class="bnb-headline" id="s5-hl">Any series.<br />Any client.</h1>
             </header>
+            <div id="s5-series">
+              <div class="s5-k" id="s5-series-k">Series</div>
+              <div class="s5-sn" id="s5-sn1">Buildpedia</div>
+              <div class="s5-sn" id="s5-sn2">Loan Lens</div>
+              <div class="s5-sn" id="s5-sn3">Fix it before it spreads</div>
+              <div class="s5-sn" id="s5-sn4">Your brand</div>
+            </div>
+            <div id="s5-tokens">
+              <div class="s5-tok"><div class="s5-sw" id="s5-sw-g" style="background-color:#0b2139"></div><div class="s5-tl">Ground</div></div>
+              <div class="s5-tok"><div class="s5-sw" id="s5-sw-i" style="background-color:#eef3fa"></div><div class="s5-tl">Line</div></div>
+              <div class="s5-tok"><div class="s5-sw" id="s5-sw-a" style="background-color:#ff8a3d"></div><div class="s5-tl">Accent</div></div>
+            </div>
+          </div>
 
-            <div class="bnb-figcap" id="s5-figcap">
-              <div class="rule"></div>
-              <div class="txt"><span class="num">Fig. 5</span><span class="sep">·</span><span class="desc">Three ways to keep fresh concrete wet</span></div>
+          <div class="bnb-phone" id="s5-phone">
+            <div class="screen">
+              <div id="s5-page">
+                <div class="pg-rail" id="s5-r1"><span>Buildpedia</span><i></i></div>
+                <div class="pg-rail" id="s5-r2"><span>Loan Lens</span><i></i></div>
+                <div class="pg-rail" id="s5-r3"><span>Fix it before it spreads</span><i></i></div>
+                <div class="pg-rail" id="s5-r4"><span>Your brand</span><i></i></div>
+                <div class="pg-kick" id="s5-pk">01 — Episode</div>
+                <div class="pg-hl" id="s5-h1">What <em>curing</em> means</div>
+                <div class="pg-hl" id="s5-h2">Loan <em>stages</em>, plainly</div>
+                <div class="pg-hl" id="s5-h3">Terrace <em>cracks</em></div>
+                <div class="pg-hl" id="s5-h4">Your topic, <em>your look</em></div>
+                <svg id="s5-pgfig" viewBox="0 0 450 800" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+                <div class="pg-cap" id="s5-cap">Fig. 1 · Section</div>
+                <div class="pg-mark" id="s5-mark1">BUYNBUILD</div>
+                <div class="pg-mark" id="s5-mark2">Your Brand</div>
+              </div>
             </div>
           </div>
         </div>
-
         <script>
           (function () {
-            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[4];
-            var at = B.sceneAt(SC.start, "L06");
-            var svg = document.getElementById("s5-fig");
-            var r1 = function (v) { return Math.round(v * 10) / 10; };
-            var fig = B.g(svg, { id: "s5-figure" });
+            var B = BNB, C = B.C, E = B.E, SC = B.scene("s5");
+            /* page figure: a small slab section on two piers over ground + a strength bar; colours read the page tokens */
+            var svg = document.getElementById("s5-pgfig"), g = B.g(svg, { id: "s5-pg" });
+            var ink = "var(--pg-ink)", acc = "var(--pg-accent)";
+            var st = function (e, s, w) { e.style.stroke = s; if (w) e.style.strokeWidth = w; return e; };
+            var body = B.el("rect", { x: 40, y: 452, width: 290, height: 62 }, g); body.style.fill = "var(--pg-mid)";
+            st(B.path(g, "M40 452H330V514H40Z", { "stroke-width": 3.5 }), ink);
+            for (var k = 0; k < 6; k++) { var c = B.el("circle", { cx: 62 + k * 49, cy: 497, r: 5.5, "stroke-width": 2.5 }, g); c.style.fill = "var(--pg-ground)"; st(c, ink); }
+            st(B.path(g, "M62 514V590H104V514M266 514V590H308V514", { "stroke-width": 2.5 }), ink);
+            st(B.path(g, "M24 590H350", { "stroke-width": 2.5 }), ink);
+            var gh = ""; for (var x = 30; x < 350; x += 14) gh += "M" + x + " 594l-10 14";
+            st(B.path(g, gh, { "stroke-width": 1.2, "stroke-opacity": 0.5 }), ink);
+            // strength bar with an accent shortfall bracket (the page's one accent idea)
+            st(B.path(g, "M374 590V420H404V590Z", { "stroke-width": 2.5 }), ink);
+            var fill = B.el("rect", { x: 379, y: 488, width: 20, height: 97 }, g); fill.style.fill = "var(--pg-ink)"; fill.style.fillOpacity = 0.35;
+            st(B.path(g, "M366 425H412", { "stroke-width": 2, "stroke-dasharray": "5 5" }), ink);
+            st(B.path(g, "M414 428H424V486H414", { "stroke-width": 3.5 }), acc);
 
-            /* ---------- small-multiple frame: three panels, text column left, drawing right ---------- */
-            var PT = [628, 820, 1012], PH = 176, IX0 = 420, IX1 = 948;
-            var META = [["Fig. 5a", "Ponding", "On the slab"], ["Fig. 5b", "Wet sacks", "On columns"], ["Fig. 5c", "Spraying", "On walls"]];
-            var panels = PT.map(function (top, i) {
-              var g = B.g(fig, { class: "s5-panel", id: "s5-panel-" + i });
-              var rule = B.line(g, 72, top, 1008, top, { stroke: C.chalk3, "stroke-width": B.LW.hair, pathLength: 1 });
-              var num = B.text(g, 72, top + 44, META[i][0], "s5-fignum");
-              var head = B.text(g, 72, top + 96, META[i][1], "t-head", { fill: C.water });
-              var body = B.text(g, 72, top + 138, META[i][2], "t-body");
-              head.style.fill = C.water;
-              return { g: g, top: top, rule: rule, num: num, head: head, body: body, art: B.g(g, { class: "s5-art" }) };
-            });
-
-            /* ---------- 5a · Ponding: slab section, mortar bunds hold a hatched water layer ---------- */
-            var A = panels[0], aTop = A.top + 88;
-            var pslab = B.slab(svg, A.art, { id: "s5-pslab", seed: 11, x0: IX0, x1: IX1, top: aTop, th: 50, ground: A.top + 168, rebar: { n: 6, r: 6 }, pier: { w: 56, inset: 30 } });
-            var WH = 18, bundX = [IX0 + 14, 600, 768, IX1 - 14];
-            var waterHatch = B.hatch(svg, { id: "s5-hatch-water", angle: 90, gap: 6, color: C.water, width: B.LW.hair });
-            var water = B.el("rect", { x: bundX[0], y: aTop, width: bundX[3] - bundX[0], height: 0, fill: C.water, "fill-opacity": 0.32 }, A.art);
-            var waterH = B.el("rect", { x: bundX[0], y: aTop, width: bundX[3] - bundX[0], height: 0, fill: waterHatch, opacity: 0.55 }, A.art);
-            var waterLine = B.line(A.art, bundX[0], aTop - WH, bundX[3], aTop - WH, { stroke: C.water, "stroke-width": 2.5, pathLength: 1 });
-            var ripples = B.path(A.art, "M470 " + (aTop - WH + 6) + "h26M532 " + (aTop - WH + 10) + "h18M650 " + (aTop - WH + 6) + "h30M700 " + (aTop - WH + 11) + "h16M818 " + (aTop - WH + 7) + "h26M880 " + (aTop - WH + 11) + "h18",
-              { stroke: C.chalk, "stroke-width": B.LW.hair, "stroke-opacity": 0.7 });
-            var bunds = bundX.map(function (x) {
-              var g = B.g(A.art, { class: "s5-bund" });
-              B.path(g, "M" + (x - 14) + " " + aTop + "L" + (x - 7) + " " + (aTop - 24) + "H" + (x + 7) + "L" + (x + 14) + " " + aTop + "Z",
-                { fill: C.concreteDry, stroke: C.chalk, "stroke-width": B.LW.std });
-              g.dataset.cx = x; g.dataset.cy = aTop;
-              return g;
-            });
-            // labels with hairline leaders
-            var aLab = B.g(A.art, { class: "s5-alab" });
-            B.path(aLab, "M626 " + (A.top + 46) + "L604 " + (aTop - 28), { stroke: C.blue, "stroke-width": B.LW.hair });
-            B.text(aLab, 634, A.top + 44, "Bund", "t-data");
-            B.path(aLab, "M836 " + (A.top + 46) + "L856 " + (aTop - WH + 4), { stroke: C.water, "stroke-width": B.LW.hair });
-            B.text(aLab, 828, A.top + 44, "Water", "t-data", { "text-anchor": "end" }).style.fill = C.water;
-
-            /* ---------- 5b · Wet sacks: column elevation wrapped in hessian, tie bands, drips ---------- */
-            function sackedColumn(parent, svgEl, o) {
-              var g = B.g(parent, { class: "s5-col" }), x = o.cx - o.w / 2;
-              var col = B.el("rect", { x: x, y: o.y0, width: o.w, height: o.y1 - o.y0, fill: C.concrete }, g);
-              var colLines = B.path(g, "M" + x + " " + o.y0 + "V" + o.y1 + "M" + (x + o.w) + " " + o.y0 + "V" + o.y1, { stroke: C.chalk, "stroke-width": B.LW.std, pathLength: 1 });
-              var cp = B.el("clipPath", { id: o.id + "-clip" }, B.defs(svgEl));
-              var clipR = B.el("rect", { x: o.cx - o.sw / 2 - 8, y: o.s0 - 4, width: o.sw + 16, height: o.s1 - o.s0 + 8 }, cp);
-              var wrap = B.g(g, { "clip-path": "url(#" + o.id + "-clip)" });
-              var sx = o.cx - o.sw / 2, sh = o.s1 - o.s0;
-              var soak = B.el("rect", { x: sx, y: o.s0, width: o.sw, height: sh, rx: 6, fill: C.water, "fill-opacity": 0.12 }, wrap);
-              B.el("rect", { x: sx, y: o.s0, width: o.sw, height: sh, rx: 6, fill: o.h1 }, wrap);
-              B.el("rect", { x: sx, y: o.s0, width: o.sw, height: sh, rx: 6, fill: o.h2 }, wrap);
-              // a few fold lines so it reads as cloth, not a box
-              B.path(wrap, "M" + (sx + 14) + " " + (o.s0 + 4) + "q-3 " + sh * 0.5 + " 2 " + (sh - 8) + "M" + (sx + o.sw - 18) + " " + (o.s0 + 4) + "q4 " + sh * 0.5 + " -1 " + (sh - 8),
-                { stroke: C.chalk3, "stroke-width": B.LW.hair });
-              B.el("rect", { x: sx, y: o.s0, width: o.sw, height: sh, rx: 6, fill: "none", stroke: C.chalk, "stroke-width": B.LW.std }, wrap);
-              var ties = o.ties.map(function (ty) { return B.line(g, sx - 5, ty, sx + o.sw + 5, ty, { stroke: C.chalk, "stroke-width": B.LW.std + 1, pathLength: 1 }); });
-              var drips = o.drips.map(function (dx) { return B.drop(g, { cx: o.cx + dx, cy: o.s1 + 12, r: 4.5 }); });
-              return { g: g, col: col, colLines: colLines, clipR: clipR, soak: soak, ties: ties, drips: drips, s0: o.s0, s1: o.s1 };
-            }
-            var Bp = panels[1], bTop = Bp.top;
-            var beam = B.g(Bp.art, { class: "s5-beam" });
-            var beamFill = B.el("rect", { x: IX0, y: bTop + 14, width: IX1 - IX0, height: 22, fill: C.concrete }, beam);
-            var beamLines = B.path(beam, "M" + IX0 + " " + (bTop + 14) + "H" + IX1 + "M" + IX0 + " " + (bTop + 36) + "H" + IX1, { stroke: C.chalk, "stroke-width": B.LW.heavy, pathLength: 1 });
-            var bGround = B.ground(Bp.art, { x0: IX0, x1: IX1, y: bTop + 164, len: 14, step: 16 });
-            var hx1 = B.hatch(svg, { id: "s5-hatch-hess1", angle: 45, gap: 9, color: "rgba(238,243,250,0.55)", width: B.LW.hair });
-            var hx2 = B.hatch(svg, { id: "s5-hatch-hess2", angle: -45, gap: 9, color: "rgba(238,243,250,0.55)", width: B.LW.hair });
-            var cols = [560, 808].map(function (cx, i) {
-              return sackedColumn(Bp.art, svg, { id: "s5-col" + i, cx: cx, w: 60, y0: bTop + 36, y1: bTop + 164, sw: 92, s0: bTop + 48, s1: bTop + 136,
-                ties: [bTop + 64, bTop + 120], drips: i ? [-26, 8, 30] : [-30, -4, 24], h1: hx1, h2: hx2 });
-            });
-            var bLab = B.g(Bp.art, { class: "s5-blab" });
-            B.path(bLab, "M626 " + (bTop + 94) + "H" + (560 + 46 + 4), { stroke: C.blue, "stroke-width": B.LW.hair });
-            B.text(bLab, 634, bTop + 102, "Hessian", "t-data");
-
-            /* ---------- 5c · Spraying: brick wall elevation, nozzle, fan of fine droplets, wet patch ---------- */
-            var Cp = panels[2], cTop = Cp.top, WX = 716, WY = cTop + 12, WW = IX1 - WX, WHH = 160;
-            var cGround = B.ground(Cp.art, { x0: IX0, x1: IX1, y: WY + WHH, len: 14, step: 16 });
-            var wall = B.brickPier(Cp.art, { x: WX, y: WY, w: WW, h: WHH, course: 20 });
-            var wcp = B.el("clipPath", { id: "s5-wall-clip" }, B.defs(svg));
-            B.el("rect", { x: WX, y: WY, width: WW, height: WHH }, wcp);
-            // wet patch: seeded blob, clipped to the wall; darkens as it soaks
-            var PX = 790, PY = WY + 74, rp = B.rng(57), pd = "", NP = 14;
-            for (var k = 0; k < NP; k++) {
-              var an = (k / NP) * Math.PI * 2, rr = 64 + rp() * 22;
-              pd += (k ? "L" : "M") + r1(PX + Math.cos(an) * rr * 1.05) + " " + r1(PY + Math.sin(an) * rr * 0.9);
-            }
-            var patchClip = B.g(Cp.art, { "clip-path": "url(#s5-wall-clip)" });
-            var patch = B.g(patchClip, { class: "s5-patch" });
-            var patchDark = B.path(patch, pd + "Z", { fill: C.ink, "fill-opacity": 0.42, stroke: "none" });
-            var patchWet = B.path(patch, pd + "Z", { fill: C.water, "fill-opacity": 0.2, stroke: "none" });
-            // re-draw the wall outline on top of the patch
-            var wallLine = B.path(Cp.art, "M" + WX + " " + (WY + WHH) + "V" + WY + "H" + (WX + WW) + "V" + (WY + WHH), { stroke: C.chalk, "stroke-width": B.LW.std + 0.5, pathLength: 1 });
-            // nozzle: hose in from the ground, a lance, a grip and a flared head (drawn level, then tilted)
-            var NZ = { x: 470, y: WY + 92, rot: -10 };
-            var hose = B.path(Cp.art, "M" + (NZ.x - 54) + " " + (WY + WHH) + "C" + (NZ.x - 44) + " " + (WY + 118) + " " + (NZ.x - 28) + " " + (NZ.y + 4) + " " + NZ.x + " " + NZ.y,
-              { stroke: C.chalk2, "stroke-width": B.LW.std + 1, pathLength: 1 });
-            var nozzle = B.g(Cp.art, { class: "s5-nozzle", transform: "rotate(" + NZ.rot + " " + NZ.x + " " + NZ.y + ")" });
-            B.line(nozzle, NZ.x, NZ.y, NZ.x + 84, NZ.y, { stroke: C.chalk, "stroke-width": B.LW.std + 1 });
-            B.el("rect", { x: NZ.x + 10, y: NZ.y - 9, width: 30, height: 18, rx: 3, fill: C.ground2, stroke: C.chalk, "stroke-width": B.LW.std }, nozzle);
-            B.path(nozzle, "M" + (NZ.x + 82) + " " + (NZ.y - 7) + "L" + (NZ.x + 106) + " " + (NZ.y - 14) + "V" + (NZ.y + 14) + "L" + (NZ.x + 82) + " " + (NZ.y + 7) + "Z",
-              { fill: C.ground2, stroke: C.chalk, "stroke-width": B.LW.std });
-            var ra = NZ.rot * Math.PI / 180, TIPX = r1(NZ.x + 108 * Math.cos(ra)), TIPY = r1(NZ.y + 108 * Math.sin(ra));
-            // spray fan: cone guides + a static mist of fine droplets + droplets in flight
-            var AIM = Math.atan2(PY - TIPY, WX - TIPX), SPR = 0.34, DX = WX - 4 - TIPX;
-            var cone = B.path(Cp.art, "M" + TIPX + " " + TIPY + "L" + (WX - 4) + " " + r1(TIPY + DX * Math.tan(AIM - SPR)) + "M" + TIPX + " " + TIPY + "L" + (WX - 4) + " " + r1(TIPY + DX * Math.tan(AIM + SPR)),
-              { stroke: C.water, "stroke-width": B.LW.hair, "stroke-opacity": 0.45, "stroke-dasharray": "4 7" });
-            var rs = B.rng(77), mist = [], fly = [];
-            var mistG = B.g(Cp.art, { class: "s5-mist" });
-            for (k = 0; k < 64; k++) {
-              var a = AIM + (rs() - 0.5) * 2 * SPR * 0.92, f = 0.18 + rs() * 0.8, dd = f * DX / Math.cos(a);
-              mist.push(B.el("circle", { cx: r1(TIPX + Math.cos(a) * dd), cy: r1(TIPY + Math.sin(a) * dd), r: r1(1.2 + rs() * 1.8 * f), fill: k % 5 ? C.water : C.chalk }, mistG));
-            }
-            var flyG = B.g(Cp.art, { class: "s5-fly" });
-            for (k = 0; k < 26; k++) {
-              var a2 = AIM + (rs() - 0.5) * 2 * SPR * 0.85, d2 = DX / Math.cos(a2);
-              fly.push({ el: B.el("circle", { cx: TIPX, cy: TIPY, r: r1(2.2 + rs() * 1.6), fill: C.water, opacity: 0 }, flyG), dx: r1(Math.cos(a2) * d2), dy: r1(Math.sin(a2) * d2), ph: rs() });
-            }
-
-            /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
-            var tWet = at("wet"), tPond = at("ponding"), tSlab = at("slab"), tWet2 = at("wet", 2), tSacks = at("sacks"), tCols = at("columns"), tSpray = at("spraying"), tWalls = at("walls");
+            B.a.drift(tl, "#s5-left", SC.dur, { y1: -10 });
+            B.a.kicker(tl, "#s5-kicker", 0.05);
+            B.a.words(tl, B.words(document.getElementById("s5-hl")), 0.12, { stagger: 0.08 });
+            // phone holds its place from s4; the page builds inside the screen
+            tl.fromTo("#s5-page", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter }, 0.0);
+            tl.fromTo(["#s5-pk", "#s5-pg", "#s5-mark1"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: E.enter, stagger: 0.06 }, 0.12);
+            tl.fromTo("#s5-cap", { opacity: 0 }, { opacity: 0.6, duration: 0.4, ease: E.enter, immediateRender: false }, 0.3);
+            tl.fromTo("#s5-series-k", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: E.enter }, 0.3);
+            tl.fromTo("#s5-tokens .s5-tok", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: E.enter, stagger: 0.07 }, 0.45);
 
-            B.a.drift(tl, "#s5-cam", SC.dur, { y1: -12 });
-
-            // entrance: header, then the empty small multiple (rules + figure numbers) waits to be filled
-            B.a.kicker(tl, document.getElementById("s5-kicker"), 0);
-            B.a.words(tl, B.words(document.getElementById("s5-hl")), 0.1);
-            panels.forEach(function (p, i) {
-              B.a.draw(tl, p.rule, 0.35 + i * 0.12, 0.8, E.land);
-              tl.fromTo(p.num, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E.enter }, 0.7 + i * 0.08);
+            // the series swaps (beat grid: 0.625 s): rail, page headline and the big series name change together
+            var T = [0.1, 0.95, 1.7, 2.5], dots = ["#4fc3f7", "#7ce0a3", "#f2c08a", "#0f7b6c"];
+            T.forEach(function (t, i) {
+              var n = i + 1, set = ["#s5-r" + n, "#s5-h" + n, "#s5-sn" + n];
+              tl.fromTo(set, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.32, ease: E.enter, stagger: 0.04 }, t);
+              if (i < 3) tl.to(set, { opacity: 0, filter: "blur(8px)", duration: 0.14, ease: E.exit }, T[i + 1] - 0.14);
+              if (i > 0 && i < 3) tl.to("#s5-page", { "--pg-dot": dots[i], duration: 0.3, ease: E.move }, t);
             });
-            B.a.figcap(tl, document.getElementById("s5-figcap"), 0.5);
-            [pslab.ground, bGround, cGround].forEach(function (gr, i) { B.a.draw(tl, [gr.line, gr.hatch], 0.75 + i * 0.12, 0.8); });
-
-            // "wet": the idea word takes the point colour
-            tl.to("#s5-em", { color: C.point, duration: 0.35, ease: E.move }, tWet + 0.02);
-
-            function label(p, t) {
-              tl.fromTo([p.head, p.body], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter, stagger: 0.08 }, t);
-              tl.to(p.num, { fill: C.chalk, duration: 0.3, ease: E.move }, t);
-            }
-
-            // 5a "Ponding on the slab": section draws, bunds rise, water fills between them
-            label(A, tPond);
-            tl.fromTo([pslab.body, pslab.agg, pslab.sand, pslab.shade], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tPond - 0.15);
-            tl.fromTo(pslab.piers.map(function (q) { return q.g; }), { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tPond - 0.1);
-            B.a.draw(tl, [pslab.outline, pslab.surface], tPond - 0.2, 0.6);
-            B.a.popIn(tl, pslab.rebar, tPond + 0.1, { stagger: 0.04, dur: 0.3 });
-            B.a.draw(tl, pslab.dist, tPond + 0.15, 0.5);
-            bunds.forEach(function (bd, i) {
-              var o = bd.dataset.cx + " " + bd.dataset.cy;
-              tl.fromTo(bd, { scaleY: 0, opacity: 0, svgOrigin: o }, { scaleY: 1, opacity: 1, svgOrigin: o, duration: 0.35, ease: E.enter }, tPond + 0.2 + i * 0.07);
-            });
-            tl.fromTo([water, waterH], { attr: { y: aTop, height: 0 } }, { attr: { y: aTop - WH, height: WH }, duration: 0.8, ease: E.move }, tPond + 0.45);
-            B.a.draw(tl, waterLine, tPond + 0.5, 0.8);
-            tl.fromTo(ripples, { opacity: 0, x: 0 }, { opacity: 1, x: 0, duration: 0.4, ease: E.enter }, tPond + 1.1);
-            tl.fromTo(ripples, { x: 0 }, { x: 14, duration: SC.dur - tPond - 1.1, ease: E.linear, immediateRender: false }, tPond + 1.1);
-            tl.fromTo(aLab, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, tSlab - 0.05);
-
-            // 5b "Wet sacks on columns": frame draws, hessian wraps top-down, ties cinch, it soaks and drips
-            label(Bp, tWet2);
-            B.a.draw(tl, beamLines, tWet2 - 0.2, 0.6);
-            tl.fromTo([beamFill, cols[0].col, cols[1].col], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tWet2 - 0.15);
-            B.a.draw(tl, [cols[0].colLines, cols[1].colLines], tWet2 - 0.1, 0.5);
-            cols.forEach(function (c, i) {
-              var h = +c.clipR.getAttribute("height");
-              tl.fromTo(c.clipR, { attr: { height: 0 } }, { attr: { height: h }, duration: 0.6, ease: E.move }, tSacks - 0.15 + i * 0.16);
-              B.a.draw(tl, c.ties, tSacks + 0.35 + i * 0.16, 0.35, E.enter);
-              tl.fromTo(c.soak, { attr: { "fill-opacity": 0.12 } }, { attr: { "fill-opacity": 0.42 }, duration: 1.2, ease: E.move }, tCols);
-              c.drips.forEach(function (d, j) {
-                var o = d.dataset.cx + " " + d.dataset.cy;
-                [0, 0.62, 1.24].forEach(function (dt, n) {
-                  var t = tCols + 0.05 + j * 0.19 + i * 0.09 + dt;
-                  tl.fromTo(d, { y: 0, opacity: 0, scale: 0.4, svgOrigin: o }, { y: 0, opacity: 1, scale: 1, svgOrigin: o, duration: 0.18, ease: E.enter, immediateRender: n === 0 }, t);
-                  tl.fromTo(d, { y: 0, opacity: 1 }, { y: 14, opacity: 0, duration: 0.36, ease: E.exit, immediateRender: false }, t + 0.18);
-                });
-              });
-            });
-            tl.fromTo(bLab, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, tCols);
-
-            // 5c "Spraying on walls": wall + nozzle draw, a fan of fine droplets reaches the wall, the patch darkens
-            label(Cp, tSpray);
-            tl.fromTo([wall.fill, wall.courses], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tSpray - 0.2);
-            B.a.draw(tl, [wall.outline, wallLine], tSpray - 0.25, 0.6);
-            B.a.draw(tl, hose, tSpray - 0.15, 0.5, E.enter);
-            tl.fromTo(nozzle, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: E.enter }, tSpray + 0.05);
-            tl.fromTo(cone, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E.enter }, tSpray + 0.2);
-            tl.fromTo(mist, { opacity: 0 }, { opacity: 0.75, duration: 0.3, ease: E.enter, stagger: 0.006 }, tSpray + 0.22);
-            fly.forEach(function (d, i) {
-              for (var n = 0; n < 3; n++) {
-                tl.fromTo(d.el, { x: 0, y: 0, opacity: 0.95 }, { x: d.dx, y: d.dy, opacity: 0, duration: 0.42, ease: E.enter, immediateRender: false },
-                  tSpray + 0.25 + d.ph * 0.4 + n * 0.42);
-              }
-            });
-            tl.fromTo(patch, { scale: 0.25, opacity: 0, svgOrigin: PX + " " + PY }, { scale: 1, opacity: 1, svgOrigin: PX + " " + PY, duration: 1.1, ease: E.enter }, tSpray + 0.45);
-            tl.fromTo(patchDark, { attr: { "fill-opacity": 0.2 } }, { attr: { "fill-opacity": 0.46 }, duration: 0.7, ease: E.move }, tWalls);
-
-            // exit: blur swap on one stage
-            B.a.exit(tl, "#s5-cam", SC.dur - 0.22, 0.2);
+            // client theme: every token moves at once on the last swap
+            var t4 = T[3];
+            tl.to("#s5-page", { "--pg-ground": "#f3eee4", "--pg-ink": "#1d2a36", "--pg-mid": "#c9c1b3", "--pg-accent": "#0f7b6c", "--pg-dot": "#0f7b6c",
+              "--pg-grid": "rgba(29,42,54,0.07)", duration: 0.6, ease: E.move }, t4);
+            tl.to("#s5-sw-g", { backgroundColor: "#f3eee4", duration: 0.6, ease: E.move }, t4 + 0.05);
+            tl.to("#s5-sw-i", { backgroundColor: "#1d2a36", duration: 0.6, ease: E.move }, t4 + 0.1);
+            tl.to("#s5-sw-a", { backgroundColor: "#0f7b6c", duration: 0.6, ease: E.move }, t4 + 0.15);
+            tl.to("#s5-mark1", { opacity: 0, filter: "blur(6px)", duration: 0.18, ease: E.exit }, t4);
+            tl.fromTo("#s5-mark2", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: E.enter }, t4 + 0.2);
+            B.a.exit(tl, "#s5-cam", SC.dur - 0.25, 0.22);
             window.__timelines["s5"] = tl;
           })();
         </script>

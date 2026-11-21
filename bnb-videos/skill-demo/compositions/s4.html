@@ -57,9 +57,9 @@
             var asp = B.dim(fig, { x1: 1622, y1: P.y, x2: 1622, y2: P.y + P.h, ext: -40, label: "9:16" });
             // callout leader: rule under the label → dot on the screen edge
             var rule = B.line(fig, 96, 718, 1010, 718, { stroke: C.chalk3, "stroke-width": 1.5, pathLength: 1 });
-            var lead = B.path(fig, "M1010 718 L 1104 718", { stroke: C.chalk, "stroke-width": 2, pathLength: 1 });
-            var halo = B.el("circle", { cx: 1104, cy: 718, r: 11, fill: C.ground, "fill-opacity": 0.85 }, fig);
-            var dot = B.el("circle", { cx: 1104, cy: 718, r: 6.5, fill: C.chalk }, fig);
+            var lead = B.path(fig, "M1010 718 L 1080 718", { stroke: C.chalk, "stroke-width": 2, pathLength: 1 });
+            var halo = B.el("circle", { cx: 1080, cy: 718, r: 11, fill: C.ground, "fill-opacity": 0.85 }, fig);
+            var dot = B.el("circle", { cx: 1080, cy: 718, r: 6.5, fill: C.chalk }, fig);
 
             var tl = gsap.timeline({ paused: true });
             B.a.drift(tl, "#s4-left", SC.dur, { y1: -12 });
@@ -71,7 +71,7 @@
             tl.fromTo([asp.ticks, asp.label], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter }, 0.9);
             B.a.draw(tl, rule, 0.45, 0.7, E.land);
             B.a.draw(tl, lead, 0.75, 0.35);
-            tl.fromTo([halo, dot], { scale: 0, svgOrigin: "1104 718" }, { scale: 1, svgOrigin: "1104 718", duration: 0.25, ease: E.enter }, 1.0);
+            tl.fromTo([halo, dot], { scale: 0, svgOrigin: "1080 718" }, { scale: 1, svgOrigin: "1080 718", duration: 0.25, ease: E.enter }, 1.0);
             tl.fromTo(".s4-seg", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter, stagger: 0.05 }, 0.6);
             tl.fromTo("#s4-seg-on", { opacity: 0, x: 0 }, { opacity: 1, x: 0, duration: 0.3, ease: E.enter }, 0.7);
 
