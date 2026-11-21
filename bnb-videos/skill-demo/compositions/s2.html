@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s2 · 02 — The truth · L02 "Concrete does not get strong by drying. It gets strong by curing."
+           Same canonical slab as s1. Drying (wisps, dry zone) is struck; curing holds water at the surface.
+           Exit: header + figcap step away, the slab (and the CURING callout) stay put = match cut into s3. -->
+      <div id="root" data-composition-id="s2" data-duration="4.43">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
+          #s2-cam, #s2-zoom { position: absolute; inset: 0; }
+          #s2-hl .ln { display: block; }
+          #s2-figcap { top: 1218px; }
+        </style>
+
+        <div id="s2-cam" class="bnb-stage">
+          <div id="s2-zoom" class="bnb-stage">
+            <!-- FIGURE -->
+            <svg id="s2-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+
+            <!-- HEADER -->
+            <header class="bnb-head" id="s2-head">
+              <div class="bnb-kicker" id="s2-kicker"><b>02</b> — The truth</div>
+              <h1 class="bnb-headline" id="s2-hl">
+                <span class="ln" id="s2-l1">Not drying.</span>
+                <span class="ln" id="s2-l2"><em>Curing.</em></span>
+              </h1>
+            </header>
+
+            <!-- FIGURE CAPTION -->
+            <div class="bnb-figcap" id="s2-figcap">
+              <div class="rule"></div>
+              <div class="txt"><span class="num">Fig. 2</span><span class="sep">·</span><span class="desc">The same slab: drying versus curing</span></div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[1];
+            var at = B.sceneAt(SC.start, "L02");
+            var svg = document.getElementById("s2-fig");
+
+            /* Surface beads: small drops resting on the water film. Same seed + geometry in s3 (match cut). */
+            function surfaceBeads(parent, b) {
+              var r = B.rng(212), g = B.g(parent, { class: "s2-beads" }), out = [];
+              var n = 9, filmTop = b.top - 16;
+              for (var i = 0; i < n; i++) {
+                var x = b.x0 + 70 + ((b.x1 - b.x0 - 140) * (i + 0.5)) / n + (r() - 0.5) * 40, rr = 6 + r() * 4;
+                out.push(B.drop(g, { cx: Math.round(x * 10) / 10, cy: Math.round((filmTop + 2 - rr) * 10) / 10, r: Math.round(rr * 10) / 10 }));
+              }
+              return out;
+            }
+
+            /* ---------- build the figure ---------- */
+            var fig = B.g(svg, { id: "s2-figure" });
+            var slab = B.slab(svg, fig, { id: "s2-slab", seed: 7 });   // canonical STAGE.slab, same seed as s1
+            var b = slab.bounds;
+            // open on s1's last state: surface-dry section, moisture still in the core
+            slab.body.setAttribute("fill", C.concreteDry);
+
+            // dry zone: hatched band under the surface (shading is hatch, never a gradient)
+            var dryFill = B.hatch(svg, { id: "s2-hatch-dry", angle: 45, gap: 8, color: "rgba(11,33,57,0.5)", width: 1.5 });
+            var dryZone = B.g(fig, { id: "s2-dryzone" });
+            B.el("rect", { x: b.x0, y: b.top, width: b.x1 - b.x0, height: 40, fill: dryFill }, dryZone);
+            var dryEdge = B.line(dryZone, b.x0 + 4, b.top + 40, b.x1 - 4, b.top + 40, { stroke: C.chalk3, "stroke-width": B.LW.hair, "stroke-dasharray": "6 8" });
+
+            // evaporation: water leaving the surface (right half, as in s1)
+            var wisps = B.wisps(fig, { x0: 540, x1: 900, y: b.top - 10, n: 4, h: 124, seed: 9 });
+
+            // curing: water held at the surface
+            var beads = surfaceBeads(fig, b);
+
+            // callouts. DRYING is the wrong idea (struck); CURING is the answer.
+            var dry = B.callout(fig, { ax: 452, ay: b.top + 22, lx: 72, ly: 690, w: 340, side: "left", head: "Drying", body: "Water escapes" });
+            var strike = B.g(fig, { id: "s2-strike" });
+            var sk1 = B.line(strike, 62, 684, 200, 678, { stroke: C.point, "stroke-width": 5, pathLength: 1 });
+            var sk2 = B.line(strike, 62, 725, 292, 717, { stroke: C.point, "stroke-width": 5, pathLength: 1 });
+            var cure = B.callout(fig, { ax: 600, ay: b.top - 9, lx: 508, ly: 690, w: 440, side: "right", head: "Curing", body: "Keep it wet, so it can react", color: C.water });
+
+            /* ---------- timeline (scene-local seconds) ---------- */
+            var tl = gsap.timeline({ paused: true });
+            var tDoes = at("does"), tNot = at("not"), tDrying = at("drying"), tIt = at("it"), tGets = at("gets"), tCuring = at("curing");
+
+            // camera: slow drift ends at -12; s3 opens at -12 so the slab does not jump on the cut
+            B.a.drift(tl, "#s2-cam", SC.dur, { y1: -12 });
+
+            // entrance: header type, caption. The slab is already on the page (continuity from s1).
+            B.a.kicker(tl, document.getElementById("s2-kicker"), 0);
+            B.a.figcap(tl, document.getElementById("s2-figcap"), 0.15);
+            tl.fromTo(slab.agg, { opacity: 0.55 }, { opacity: 0.55, duration: 0.01 }, 0);
+            tl.fromTo(slab.moist, { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
+
+            // "does … drying": evaporation diagram — wisps rise, the dry zone hatches in, moisture leaves the core
+            wisps.forEach(function (w, i) {
+              var t = 0.18 + i * 0.2;
+              tl.fromTo(w, { strokeDasharray: "1 1", strokeDashoffset: 1, opacity: 0, y: 0 },
+                { strokeDashoffset: 0, opacity: 0.9, y: -22, duration: 0.9, ease: E.enter }, t);
+              tl.fromTo(w, { y: -22 }, { y: -34, duration: tIt - (t + 0.9), ease: E.linear, immediateRender: false }, t + 0.9);
+              tl.fromTo(w, { strokeDashoffset: 0, opacity: 0.9, y: -34 }, { strokeDashoffset: -1, opacity: 0, y: -50, duration: 0.4, ease: E.exit, immediateRender: false }, tIt + i * 0.04);
+            });
+            tl.fromTo(dryZone, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: E.move }, tDoes);
+            tl.fromTo(slab.moist.slice().reverse(), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: E.exit, stagger: 0.02, immediateRender: false }, tDoes + 0.1);
+            B.a.callout(tl, dry, tNot);
+
+            // headline line 1 on "not"
+            B.a.words(tl, B.words(document.getElementById("s2-l1")), tNot - 0.04);
+
+            // "drying.": the wrong idea gets its calm orange strike
+            B.a.draw(tl, sk1, tDrying - 0.02, 0.34);
+            B.a.draw(tl, sk2, tDrying + 0.1, 0.38);
+
+            // "It gets strong by curing": evaporation stops, water is held on the surface, the section is damp again
+            tl.to(dry.g, { opacity: 0.5, duration: 0.4, ease: E.move }, tIt);
+            tl.to(dryZone, { opacity: 0, duration: 0.5, ease: E.move }, tIt);
+            B.a.words(tl, B.words(document.getElementById("s2-l2")), tIt);
+            tl.fromTo(slab.film, { attr: { y: b.top, height: 0 } }, { attr: { y: b.top - 16, height: 16 }, duration: 0.7, ease: E.move }, tIt + 0.05);
+            tl.fromTo(slab.body, { attr: { fill: C.concreteDry } }, { attr: { fill: C.concrete }, duration: 0.8, ease: E.move }, tGets - 0.05);
+            tl.fromTo(slab.agg, { opacity: 0.55 }, { opacity: 1, duration: 0.8, ease: E.move, immediateRender: false }, tGets - 0.05);
+            slab.moist.forEach(function (m, i) {
+              var c = m.getAttribute("cx") + " " + m.getAttribute("cy");
+              tl.fromTo(m, { opacity: 0, scale: 0.3, svgOrigin: c }, { opacity: 1, scale: 1, svgOrigin: c, duration: 0.3, ease: E.enter, immediateRender: false }, tGets + 0.1 + i * 0.012);
+            });
+            B.a.popIn(tl, beads, tGets + 0.2, { stagger: 0.05, dur: 0.35 });
+            // CURING callout: dot just before, text lands on "curing"
+            B.a.callout(tl, cure, tCuring - 0.38);
+
+            // exit: header, caption and the struck idea step away; the slab + CURING stay for the match cut into s3
+            tl.to(["#s2-head", "#s2-figcap"], { opacity: 0, filter: "blur(8px)", duration: 0.22, ease: E.exit }, SC.dur - 0.24);
+            tl.to([dry.g, strike], { opacity: 0, duration: 0.22, ease: E.exit }, SC.dur - 0.24);
+
+            window.__timelines["s2"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

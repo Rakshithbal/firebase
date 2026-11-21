@@ -1,0 +1,125 @@
+/* ==========================================================================
+   BNB editorial design system · tokens + type + layout classes
+   Source of truth: DESIGN.md. Loaded once by index.html; every scene uses
+   these classes and variables. @font-face lives in index.html (asset paths). Do not restyle them inside a scene: add a
+   scene-local class instead.
+   ========================================================================== */
+
+
+:root {
+  /* ---- ground ---- */
+  --ink: #06162a;          /* deepest: vignette corners, knock-outs */
+  --ground: #0b2139;       /* the page */
+  --ground-2: #10294a;     /* raised panels, label knock-out boxes */
+  --navy: #0e2a47;         /* BNB navy (brand reference) */
+
+  /* ---- linework + text ---- */
+  --chalk: #eef3fa;                    /* primary text + heavy linework */
+  --chalk-2: rgba(238, 243, 250, 0.74); /* deck, secondary text */
+  --chalk-3: rgba(238, 243, 250, 0.44); /* tertiary, hairlines, rules */
+  --chalk-4: rgba(238, 243, 250, 0.16); /* faint construction lines */
+  --blue: #8fb3da;                     /* blueprint: dims, labels, kickers */
+
+  /* ---- material fills (flat, never gradients) ---- */
+  --concrete: #627387;      /* concrete section, damp */
+  --concrete-dry: #a7b3c1;  /* concrete section, surface-dry (looks done) */
+  --aggregate: #3e4d60;     /* stone in section */
+  --brick: #a0624e;         /* masonry wash (used at 30-40%) */
+  --steel: #0b2139;         /* rebar core = ground colour */
+
+  /* ---- semantic colour: one meaning each ---- */
+  --point: #ff8a3d;  /* THE POINT. Max one element per scene. */
+  --water: #4fc3f7;  /* water, moisture, curing */
+  --green: #7ce0a3;  /* strength, ok */
+  --red: #ff5a5a;    /* crack / damage only */
+  --heat: #f2c08a;   /* sun + heat only (desaturated, never the point) */
+
+  /* ---- line weights (px at 1080 canvas) ---- */
+  --lw-hair: 1.5;
+  --lw-std: 3;
+  --lw-heavy: 5;
+
+  /* ---- type families ---- */
+  --f-serif: "Fraunces", Georgia, serif;
+  --f-sans: "InterVar", Inter, sans-serif;
+  --f-mono: "Plex Mono", "IBM Plex Mono", monospace;
+
+  /* ---- layout ---- */
+  --m: 96px;          /* side margin (16:9) */
+  --col: 1728px;      /* content width = 1920 - 2*96; 12 cols x 122 + 11 gutters x 24 */
+  --text-max: 1000px; /* headline measure: 7 columns */
+}
+
+/* ===================== type ===================== */
+
+/* Kicker: "01 — THE MYTH" */
+.bnb-kicker {
+  font-family: var(--f-mono); font-weight: 500; font-size: 26px; line-height: 32px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); white-space: nowrap;
+}
+.bnb-kicker b { font-weight: 600; color: var(--chalk); }
+
+/* Headline: sentence case, 1-2 lines */
+.bnb-headline {
+  font-family: var(--f-serif); font-weight: 560; font-size: 96px; line-height: 96px;
+  letter-spacing: -0.025em; color: var(--chalk); font-variation-settings: "opsz" 144;
+  max-width: var(--text-max); margin: 0;
+}
+.bnb-headline.is-hero { font-size: 136px; line-height: 128px; letter-spacing: -0.03em; }
+.bnb-headline em, .bnb-em {
+  font-style: italic; font-weight: 500; color: var(--point);
+}
+.bnb-headline .w { display: inline-block; }
+
+/* Deck / sub-head */
+.bnb-deck {
+  font-family: var(--f-sans); font-weight: 400; font-size: 34px; line-height: 46px;
+  letter-spacing: -0.005em; color: var(--chalk-2); max-width: 860px; margin: 0;
+}
+.bnb-deck .w { display: inline-block; }
+
+/* Figure caption block: rule + "FIG. 1" + description */
+.bnb-figcap { position: absolute; left: var(--m); width: var(--col); }
+.bnb-figcap .rule { height: 1.5px; background: var(--chalk-3); transform-origin: 0 50%; }
+.bnb-figcap .txt { margin-top: 14px; white-space: nowrap; }
+.bnb-figcap .num {
+  font-family: var(--f-mono); font-weight: 600; font-size: 24px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--chalk);
+}
+.bnb-figcap .sep { font-family: var(--f-mono); font-size: 24px; color: var(--chalk-3); margin: 0 12px; }
+.bnb-figcap .desc { font-family: var(--f-sans); font-weight: 400; font-size: 28px; color: var(--chalk-2); }
+
+/* Sign-off */
+.bnb-signoff {
+  font-family: var(--f-serif); font-weight: 560; font-size: 72px; line-height: 76px;
+  letter-spacing: -0.02em; color: var(--chalk); font-variation-settings: "opsz" 144;
+}
+.bnb-signoff-mark {
+  font-family: var(--f-mono); font-weight: 600; font-size: 24px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--chalk-2);
+}
+
+/* ---- SVG text classes (inside figures) ---- */
+.t-label  { font-family: var(--f-mono); font-weight: 500; font-size: 24px; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--blue); }
+.t-data   { font-family: var(--f-mono); font-weight: 500; font-size: 24px; letter-spacing: 0.12em; text-transform: uppercase; fill: var(--blue); }
+.t-head   { font-family: var(--f-mono); font-weight: 600; font-size: 26px; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--chalk); }
+.t-body   { font-family: var(--f-sans); font-weight: 500; font-size: 32px; letter-spacing: -0.005em; fill: var(--chalk); }
+
+/* ===================== layout anatomy ===================== */
+
+/* Every scene: <div id="sN-cam" class="bnb-stage"> holds everything that moves with the camera */
+.bnb-stage { position: absolute; inset: 0; }
+/* Header block (16:9): kicker at y 148, headline from y ~196 */
+.bnb-head { position: absolute; left: var(--m); top: 148px; width: var(--col); }
+.bnb-head .bnb-kicker { margin-bottom: 16px; }
+.bnb-head .bnb-deck { margin-top: 24px; }
+/* Full-canvas figure layer (viewBox = canvas, so coordinates are canvas px) */
+.bnb-fig { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+
+/* Phone frame (9:16 screen 450 x 800 inside a 12 px bezel) — shared by s4 and s5 so the cut matches */
+.bnb-phone { position: absolute; left: 1092px; top: 138px; width: 474px; height: 824px; border-radius: 58px;
+  background: #081a2e; box-shadow: inset 0 0 0 2px rgba(238,243,250,0.55); }
+.bnb-phone .screen { position: absolute; left: 12px; top: 12px; width: 450px; height: 800px; border-radius: 46px; overflow: hidden; background: #0b2139; }
+.bnb-phone .screen video { position: absolute; left: 0; top: 0; width: 450px; height: 800px; object-fit: cover; }
+.bnb-phone .speaker { position: absolute; left: 207px; top: 22px; width: 60px; height: 6px; border-radius: 3px; background: rgba(238,243,250,0.18); }
+.bnb-fig path, .bnb-fig line, .bnb-fig polyline { vector-effect: none; }
