@@ -1,3 +1,22 @@
+# skill-demo · 16:9 adaptation (read this first; the R05 v2 spec below still governs everything it doesn't override)
+
+30 s showcase for the `bnb-editorial-video` skill. 1920 × 1080, 30 fps, no voice: music + SFX (`audio/make_audio.py`).
+
+- **Grid:** 96 px margins, content 1728 px, 12 columns × 122 px with 24 px gutters (`B.col(i) = 96 + 146 i`, `B.colEnd(i)`).
+  Background grid 24/96 px with a major line on x = 96. Baseline unit 8 px.
+- **Anatomy:** rail y 56 (mono 22, `chrome.html`) + 5 chapter segments right · kicker y 148 · headline from y 196 ·
+  figure band y 380–900 · figure caption rule y 962. Nothing important below y 1010.
+- **Type scale (16:9):** kicker Plex Mono 26/32 0.16em · headline Fraunces 96/96 · hero 136/128 · deck Inter 34/46 ·
+  figure/data labels Plex Mono 24 · callout labels Inter 54/64 (s4) · end-card name Plex Mono 80, line Inter 42, mark Plex Mono 28.
+- **Phone frame** `.bnb-phone` (bnb.css): screen 450 × 800 at (1104, 150), 12 px bezel — shared by s4 and s5 so the cut matches.
+- **Scenes** (`BNB.SCENES`, 96 BPM beat grid, beat 0.625 s): s1 0–3.75 title · s2 3.75–8.4375 brief → word timing ·
+  s3 –13.125 design system · s4 –22.5 R05 reel in the phone (`assets/video/r05_cuts.mp4`, 5 pre-trimmed segments) ·
+  s5 –26.875 theming · s6 –30 end card. One orange idea per scene (s1 "built in code." · s2 playhead · s3 "The point" chip ·
+  s4 active recipe segment · s5 accent swatch · s6 rule under the name).
+- No captions, no timing.js (no voice); `BNB.rng` is built into bnb.js.
+
+---
+
 # BNB editorial design system — R05 v2 (house template)
 
 The look: a NYT / Bloomberg / Vox graphics explainer drawn on a BNB blueprint. Calm type, precise
