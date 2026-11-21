@@ -1,0 +1,13 @@
+{
+  "name": "bnb-editorial-project",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen": "python3 tools/gen.py",
+    "dev": "npx --yes hyperframes@0.9.58 preview",
+    "check": "npx --yes hyperframes@0.9.58 check",
+    "snapshot": "npx --yes hyperframes@0.9.58 snapshot",
+    "render": "npx --yes hyperframes@0.9.58 render",
+    "publish": "npx --yes hyperframes@0.9.58 publish"
+  }
+}

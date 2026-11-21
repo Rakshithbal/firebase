@@ -1,0 +1,185 @@
+/* ==========================================================================
+   BNB editorial design system · tokens + type + layout classes
+   Source of truth: DESIGN.md (skill: references/DESIGN.md). Loaded once by index.html.
+   Two formats share every class; only the variables change:
+     :root                       -> 9:16 reel, 1080 x 1920 (default)
+     :root[data-format="16x9"]   -> 16:9 YouTube, 1920 x 1080
+   Colours can be re-themed per client from project.json "theme" (tools/gen.py writes
+   assets/theme.css, loaded after this file). @font-face lives in index.html (generated).
+   Do not restyle these classes inside a scene: add a scene-local class instead.
+   ========================================================================== */
+
+:root {
+  /* ---- ground ---- */
+  --ink: #06162a;          /* deepest: vignette corners, knock-outs */
+  --ground: #0b2139;       /* the page */
+  --ground-2: #10294a;     /* raised panels, label knock-out boxes */
+  --navy: #0e2a47;         /* BNB navy (brand reference) */
+
+  /* ---- linework + text ---- */
+  --chalk: #eef3fa;                     /* primary text + heavy linework */
+  --chalk-2: rgba(238, 243, 250, 0.74); /* deck, secondary text */
+  --chalk-3: rgba(238, 243, 250, 0.44); /* tertiary, hairlines, rules */
+  --chalk-4: rgba(238, 243, 250, 0.16); /* faint construction lines */
+  --blue: #8fb3da;                      /* blueprint: dims, labels, kickers */
+  --cap-muted: #7d93ae;                 /* unspoken caption words */
+
+  /* ---- material fills (flat, never gradients) ---- */
+  --concrete: #627387;
+  --concrete-dry: #a7b3c1;
+  --aggregate: #3e4d60;
+  --brick: #a0624e;
+  --steel: #0b2139;
+
+  /* ---- semantic colour: one meaning each ---- */
+  --point: #ff8a3d;  /* THE POINT. Max one idea per scene. */
+  --water: #4fc3f7;  /* water, moisture, curing */
+  --green: #7ce0a3;  /* strength, ok, money in */
+  --red: #ff5a5a;    /* crack / damage only */
+  --heat: #f2c08a;   /* sun + heat only */
+
+  /* ---- line weights ---- */
+  --lw-hair: 1.5;
+  --lw-std: 3;
+  --lw-heavy: 5;
+
+  /* ---- type families ---- */
+  --f-serif: "Fraunces", Georgia, serif;
+  --f-sans: "InterVar", Inter, sans-serif;
+  --f-mono: "Plex Mono", "IBM Plex Mono", monospace;
+
+  /* ---- canvas + layout (9:16) ---- */
+  --W: 1080px;
+  --H: 1920px;
+  --m: 72px;            /* side margin */
+  --col: 936px;         /* text column = W - 2m */
+  --text-max: 888px;    /* keep text clear of the right IG rail (x > 960) */
+  --rail-top: 272px;
+  --head-top: 350px;
+  --head-left: 72px;
+  --head-w: 936px;
+  --figcap-left: 72px;
+  --figcap-top: 1218px;
+  --figcap-w: 936px;
+  --cap-top: 1396px;
+  --cap-w: 880px;
+
+  /* ---- type scale (9:16) ---- */
+  --kicker-size: 28px;  --kicker-lh: 34px;
+  --hl-size: 104px;     --hl-lh: 100px;
+  --hero-size: 132px;   --hero-lh: 124px;
+  --deck-size: 36px;    --deck-lh: 48px;   --deck-max: 780px;
+  --figcap-num: 24px;   --figcap-desc: 28px;
+  --label-size: 24px;   --head-size: 26px; --body-size: 32px;
+  --cap-size: 44px;     --cap-lh: 56px;
+  --signoff-size: 72px; --signoff-lh: 76px; --mark-size: 24px;
+  --rail-size: 22px;
+
+  /* ---- per-format layout knobs used by shared/template compositions. Sub-composition <style> blocks are
+     scoped by HyperFrames, so ":root[data-format=…] #x" selectors inside a scene never match: every format
+     difference lives HERE as a variable (or in script via BNB.LAND). ---- */
+  --end-hl-mt: 300px;                 /* end card: headline margin-top (clears the bookmark) */
+  --end-sign-left: 72px; --end-sign-top: 1136px; --end-sign-w: 936px;
+  --bg-lift: radial-gradient(70% 38% at 50% 50%, rgba(22, 56, 96, 0.55) 0%, rgba(22, 56, 96, 0) 100%);
+  --bg-vignette: radial-gradient(110% 75% at 50% 46%, rgba(6,22,42,0) 58%, rgba(6,22,42,0.72) 100%);
+  --bg-grid-left: -216px;
+}
+
+/* ---- 16:9 landscape (YouTube 1920 x 1080): text column left, figure right ---- */
+:root[data-format="16x9"] {
+  --W: 1920px;
+  --H: 1080px;
+  --m: 120px;
+  --col: 1680px;
+  --text-max: 686px;
+  --rail-top: 84px;
+  --head-top: 196px;
+  --head-left: 120px;
+  --head-w: 686px;
+  --figcap-left: 860px;
+  --figcap-top: 806px;
+  --figcap-w: 940px;
+  --cap-top: 872px;
+  --cap-w: 1360px;
+
+  --kicker-size: 24px;  --kicker-lh: 30px;
+  --hl-size: 80px;      --hl-lh: 80px;
+  --hero-size: 104px;   --hero-lh: 100px;
+  --deck-size: 32px;    --deck-lh: 44px;   --deck-max: 640px;
+  --figcap-num: 22px;   --figcap-desc: 26px;
+  --label-size: 22px;   --head-size: 24px; --body-size: 30px;
+  --cap-size: 38px;     --cap-lh: 48px;
+  --signoff-size: 64px; --signoff-lh: 68px; --mark-size: 22px;
+  --rail-size: 20px;
+
+  --end-hl-mt: 260px;
+  --end-sign-left: 860px; --end-sign-top: 724px; --end-sign-w: 940px;
+  --bg-lift: radial-gradient(44% 56% at 69% 46%, rgba(22, 56, 96, 0.55) 0%, rgba(22, 56, 96, 0) 100%);
+  --bg-vignette: radial-gradient(80% 110% at 50% 46%, rgba(6,22,42,0) 58%, rgba(6,22,42,0.72) 100%);
+  --bg-grid-left: -168px;
+}
+
+/* ===================== type ===================== */
+
+/* Kicker: "01 — THE MYTH" */
+.bnb-kicker {
+  font-family: var(--f-mono); font-weight: 500; font-size: var(--kicker-size); line-height: var(--kicker-lh);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue); white-space: nowrap;
+}
+.bnb-kicker b { font-weight: 600; color: var(--chalk); }
+
+/* Headline: sentence case, 1-2 lines (16:9: up to 3 short lines in the text column) */
+.bnb-headline {
+  font-family: var(--f-serif); font-weight: 560; font-size: var(--hl-size); line-height: var(--hl-lh);
+  letter-spacing: -0.025em; color: var(--chalk); font-variation-settings: "opsz" 144;
+  max-width: var(--text-max); margin: 0;
+}
+.bnb-headline.is-hero { font-size: var(--hero-size); line-height: var(--hero-lh); letter-spacing: -0.03em; }
+.bnb-headline em, .bnb-em { font-style: italic; font-weight: 500; color: var(--point); }
+.bnb-headline .w { display: inline-block; }
+
+/* Deck / sub-head */
+.bnb-deck {
+  font-family: var(--f-sans); font-weight: 400; font-size: var(--deck-size); line-height: var(--deck-lh);
+  letter-spacing: -0.005em; color: var(--chalk-2); max-width: var(--deck-max); margin: 0;
+}
+.bnb-deck .w { display: inline-block; }
+
+/* Figure caption block: rule + "FIG. 1" + description. Sits at --figcap-top by default; override with style="top:…". */
+.bnb-figcap { position: absolute; left: var(--figcap-left); top: var(--figcap-top); width: var(--figcap-w); }
+.bnb-figcap .rule { height: 1.5px; background: var(--chalk-3); transform-origin: 0 50%; }
+.bnb-figcap .txt { margin-top: 14px; white-space: nowrap; }
+.bnb-figcap .num {
+  font-family: var(--f-mono); font-weight: 600; font-size: var(--figcap-num); letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--chalk);
+}
+.bnb-figcap .sep { font-family: var(--f-mono); font-size: var(--figcap-num); color: var(--chalk-2); margin: 0 12px; }
+.bnb-figcap .desc { font-family: var(--f-sans); font-weight: 400; font-size: var(--figcap-desc); color: var(--chalk-2); }
+
+/* Sign-off */
+.bnb-signoff {
+  font-family: var(--f-serif); font-weight: 560; font-size: var(--signoff-size); line-height: var(--signoff-lh);
+  letter-spacing: -0.02em; color: var(--chalk); font-variation-settings: "opsz" 144;
+}
+.bnb-signoff-mark {
+  font-family: var(--f-mono); font-weight: 600; font-size: var(--mark-size); letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--chalk-2);
+}
+
+/* ---- SVG text classes (inside figures) ---- */
+.t-label { font-family: var(--f-mono); font-weight: 500; font-size: var(--label-size); letter-spacing: 0.14em; text-transform: uppercase; fill: var(--blue); }
+.t-data  { font-family: var(--f-mono); font-weight: 500; font-size: var(--label-size); letter-spacing: 0.12em; text-transform: uppercase; fill: var(--blue); }
+.t-head  { font-family: var(--f-mono); font-weight: 600; font-size: var(--head-size); letter-spacing: 0.14em; text-transform: uppercase; fill: var(--chalk); }
+.t-body  { font-family: var(--f-sans); font-weight: 500; font-size: var(--body-size); letter-spacing: -0.005em; fill: var(--chalk); }
+
+/* ===================== layout anatomy ===================== */
+
+/* Every scene: <div id="sN-cam" class="bnb-stage"> holds everything that moves with the camera */
+.bnb-stage { position: absolute; inset: 0; }
+/* Header block: kicker / headline / deck */
+.bnb-head { position: absolute; left: var(--head-left); top: var(--head-top); width: var(--head-w); }
+.bnb-head .bnb-kicker { margin-bottom: 16px; }
+.bnb-head .bnb-deck { margin-top: 24px; }
+/* Full-canvas figure layer (viewBox = canvas via BNB.fig(svg), so coordinates are canvas px) */
+.bnb-fig { position: absolute; left: 0; top: 0; width: var(--W); height: var(--H); overflow: visible; }
+.bnb-fig path, .bnb-fig line, .bnb-fig polyline { vector-effect: none; }

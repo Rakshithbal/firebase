@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s7 · 07 — Keep this · L09 "Save this before your slab day."
+           Editorial end card: a bookmark drawn in line (then filled), the sign-off line, a rule, the series mark.
+           Everything resolves by ~2.1 s (film 44.3 s) and holds still to the last frame (no exit: the film ends here). -->
+      <div id="root" data-composition-id="s7" data-duration="3.296">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
+          #s7-cam, #s7-zoom { position: absolute; inset: 0; }
+          #s7-zoom { transform-origin: 540px 800px; }
+          #s7-hl { margin-top: 300px; }
+          #s7-sign { position: absolute; left: 72px; top: 1136px; width: 936px; }
+          #s7-sign .rule { height: 1.5px; background: rgba(238, 243, 250, 0.44); transform-origin: 0 50%; }
+          #s7-mark { margin-top: 30px; display: block; }
+          #s7-tag { margin-top: 12px; font-family: var(--f-sans); font-weight: 400; font-size: 28px; line-height: 36px; color: rgba(238, 243, 250, 0.74); }
+        </style>
+
+        <div id="s7-cam" class="bnb-stage">
+          <div id="s7-zoom" class="bnb-stage">
+            <!-- the bookmark (built by script) -->
+            <svg id="s7-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+
+            <!-- HEADER: kicker + the sign-off line (hero size, it is the whole idea of this card) -->
+            <header class="bnb-head" id="s7-head">
+              <div class="bnb-kicker" id="s7-kicker"><b>07</b> — Keep this</div>
+              <h1 class="bnb-headline is-hero" id="s7-hl">Save this<br />before your<br /><em>slab day.</em></h1>
+            </header>
+
+            <!-- SIGN-OFF: rule + series mark + episode line -->
+            <div id="s7-sign">
+              <div class="rule"></div>
+              <div class="bnb-signoff-mark" id="s7-mark">BuyNBuild · Buildpedia</div>
+              <div id="s7-tag">What curing means, and why it can't be rushed.</div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, LW = B.LW, SC = B.SCENES[6];
+            var at = B.sceneAt(SC.start, "L09");
+            var svg = document.getElementById("s7-fig");
+            var defs = B.defs(svg);
+
+            /* ---------- the bookmark: ribbon with a notched tail, drawn in line then filled ---------- */
+            var BX = 72, BY = 428, BW = 96, BH = 164, NOTCH = 36;
+            var d = "M" + BX + " " + BY + "H" + (BX + BW) + "V" + (BY + BH) + "L" + (BX + BW / 2) + " " + (BY + BH - NOTCH) + "L" + BX + " " + (BY + BH) + "Z";
+            var mark = B.g(svg, { id: "s7-bookmark" });
+            var cp = B.el("clipPath", { id: "s7-fill-clip" }, defs);
+            var clipRect = B.el("rect", { x: BX - 10, y: BY - 10, width: BW + 20, height: 0 }, cp);
+            var fill = B.path(mark, d, { fill: C.chalk, stroke: "none", "clip-path": "url(#s7-fill-clip)" });
+            var outline = B.path(mark, d, { stroke: C.chalk, "stroke-width": LW.heavy, "stroke-linejoin": "miter", pathLength: 1 });
+            // fine construction: a hairline page edge the ribbon hangs from
+            var page = B.line(mark, BX - 24, BY, BX + BW + 120, BY, { stroke: C.chalk3, "stroke-width": LW.hair, pathLength: 1 });
+
+            /* ---------- timeline (scene-local seconds) ---------- */
+            var tl = gsap.timeline({ paused: true });
+            var tSave = at("save"), tThis = at("this"), tBefore = at("before"), tYour = at("your"), tSlab = at("slab"), tDay = at("day");
+
+            // entrance: blur swap in on the same stage; a slow drift, then a still hold
+            B.a.drift(tl, "#s7-cam", SC.dur, { y1: -12 });
+            tl.fromTo("#s7-zoom", { opacity: 0, filter: "blur(8px)", scale: 1.03 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.7, ease: E.land }, 0);
+            B.a.kicker(tl, document.getElementById("s7-kicker"), 0);
+
+            // "Save this": the bookmark draws, then fills from the top on "this"
+            B.a.draw(tl, page, 0, 0.6, E.land);
+            B.a.draw(tl, outline, tSave + 0.02, 0.55);
+            tl.fromTo(clipRect, { attr: { height: 0 } }, { attr: { height: BH + 20 }, duration: 0.5, ease: E.move }, tThis + 0.15);
+
+            // the line arrives word by word with the voice (blur, no translate)
+            var w = B.words(document.getElementById("s7-hl"));   // Save, this, before, your, slab, day.
+            [tSave, tThis, tBefore, tYour, tSlab, tDay].forEach(function (t, k) { B.a.words(tl, [w[k]], Math.max(0, t - 0.03)); });
+
+            // sign-off: rule, then the mark and the episode line; all resolved by ~2.1 s
+            tl.fromTo("#s7-sign .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: E.land }, tSlab);
+            tl.fromTo(["#s7-mark", "#s7-tag"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: E.enter, stagger: 0.08 }, tSlab + 0.2);
+
+            // no exit: the film ends on this card
+            window.__timelines["s7"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

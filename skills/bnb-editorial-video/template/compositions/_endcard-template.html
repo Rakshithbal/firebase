@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- __ID__ · __NN__ — __KICKER__ · __LINES__ "__VO__"
+           END CARD recipe (from R05 s7): a bookmark drawn in line then filled on the 2nd spoken word, the sign-off line
+           word by word with the voice (one orange idea: the <em>), a rule, the series mark and the episode line.
+           Everything resolves early and holds still to the last frame. No exit: the film ends here. -->
+      <div id="root" data-composition-id="__ID__" data-duration="__DUR__">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: var(--chalk); }
+          #__ID__-cam, #__ID__-zoom { position: absolute; inset: 0; }
+          #__ID__-hl { margin-top: var(--end-hl-mt); }
+          #__ID__-sign { position: absolute; left: var(--end-sign-left); top: var(--end-sign-top); width: var(--end-sign-w); }
+          #__ID__-sign .rule { height: 1.5px; background: var(--chalk-3); transform-origin: 0 50%; }
+          #__ID__-mark { margin-top: 30px; display: block; }
+          #__ID__-tag { margin-top: 12px; font-family: var(--f-sans); font-weight: 400; font-size: var(--figcap-desc); line-height: 1.3; color: var(--chalk-2); }
+        </style>
+
+        <div id="__ID__-cam" class="bnb-stage">
+          <div id="__ID__-zoom" class="bnb-stage">
+            <svg id="__ID__-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+            <header class="bnb-head" id="__ID__-head">
+              <div class="bnb-kicker" id="__ID__-kicker"><b>__NN__</b> — __KICKER__</div>
+              <!-- the sign-off line, hero size; put <br /> where the line should break; ONE <em> = the orange idea -->
+              <h1 class="bnb-headline is-hero" id="__ID__-hl">__HEADLINE__</h1>
+            </header>
+            <div id="__ID__-sign">
+              <div class="rule"></div>
+              <div class="bnb-signoff-mark" id="__ID__-mark">__SIGNOFF__</div>
+              <div id="__ID__-tag">__TAG__</div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, LW = B.LW, ST = B.STAGE;
+            var SC = B.scene("__ID__");
+            var at = B.sceneAt(SC.start, "__LINE__");
+            var line = window.TIMING.line("__LINE__");
+            var svg = B.fig("__ID__-fig");
+            var defs = B.defs(svg);
+
+            /* bookmark: ribbon with a notched tail, sits just above the headline, drawn in line then filled */
+            var BX = ST.headLeft, BY = ST.headTop + (B.LAND ? 70 : 78), BW = 96, BH = 164, NOTCH = 36;
+            var d = "M" + BX + " " + BY + "H" + (BX + BW) + "V" + (BY + BH) + "L" + (BX + BW / 2) + " " + (BY + BH - NOTCH) + "L" + BX + " " + (BY + BH) + "Z";
+            var mark = B.g(svg, { id: "__ID__-bookmark" });
+            var cp = B.el("clipPath", { id: "__ID__-fill-clip" }, defs);
+            var clipRect = B.el("rect", { x: BX - 10, y: BY - 10, width: BW + 20, height: 0 }, cp);
+            B.path(mark, d, { fill: C.chalk, stroke: "none", "clip-path": "url(#__ID__-fill-clip)" });
+            var outline = B.path(mark, d, { stroke: C.chalk, "stroke-width": LW.heavy, "stroke-linejoin": "miter", pathLength: 1 });
+            var page = B.line(mark, BX - 24, BY, BX + BW + 120, BY, { stroke: C.chalk3, "stroke-width": LW.hair, pathLength: 1 });
+
+            var tl = gsap.timeline({ paused: true });
+            B.a.drift(tl, "#__ID__-cam", SC.dur, { y1: -12 });
+            tl.fromTo("#__ID__-zoom", { opacity: 0, filter: "blur(8px)", scale: 1.03 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.7, ease: E.land }, 0);
+            B.a.kicker(tl, document.getElementById("__ID__-kicker"), 0);
+
+            // spoken word times (scene-local), one per VO word
+            var wt = line.words.map(function (w) { return Math.max(0, +(w[1] - SC.start).toFixed(3)); });
+            var t0 = wt[0] || 0.1, t1 = wt[1] || t0 + 0.3, tLate = wt[Math.max(0, wt.length - 2)] || t1 + 0.6;
+            var tSign = Math.max(t1 + 0.3, Math.min(tLate, SC.dur - 2.4));   // the sign-off must hold >= 2 s on screen
+            B.a.draw(tl, page, 0, 0.6, E.land);
+            B.a.draw(tl, outline, t0 + 0.02, 0.55);
+            tl.fromTo(clipRect, { attr: { height: 0 } }, { attr: { height: BH + 20 }, duration: 0.5, ease: E.move }, t1 + 0.15);
+
+            // headline words arrive with the voice; if the headline has more words than the VO line, the rest follow at 0.08 s
+            var w = B.words(document.getElementById("__ID__-hl"));
+            w.forEach(function (span, k) { B.a.words(tl, [span], Math.max(0, (k < wt.length ? wt[k] : wt[wt.length - 1] + 0.08 * (k - wt.length + 1)) - 0.03)); });
+
+            tl.fromTo("#__ID__-sign .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: E.land }, tSign);
+            tl.fromTo(["#__ID__-mark", "#__ID__-tag"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: E.enter, stagger: 0.08 }, tSign + 0.15);
+            window.__timelines["__ID__"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

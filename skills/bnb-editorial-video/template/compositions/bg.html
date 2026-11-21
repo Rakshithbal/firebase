@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- Ground: flat page + blueprint grid (a major line on the left margin) + lift + vignette. DESIGN.md §8.
+           Format-agnostic: sizes come from CSS vars (--W/--H/--m), seams from BNB.SCENES. Shared file: scene agents do not edit. -->
+      <div id="root" data-composition-id="bg" data-duration="10">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; background: var(--ground); }
+          #bg-cam { position: absolute; inset: 0; }
+          /* minor 24 px, major 96 px; offset (--bg-grid-left) so a major line falls on x = --m (72 portrait, 120 landscape) */
+          #bg-grid { position: absolute; left: var(--bg-grid-left); top: -192px; width: calc(var(--W) + 432px); height: calc(var(--H) + 576px);
+            background-image:
+              linear-gradient(rgba(238,243,250,0.055) 1.5px, transparent 1.5px),
+              linear-gradient(90deg, rgba(238,243,250,0.055) 1.5px, transparent 1.5px),
+              linear-gradient(rgba(238,243,250,0.026) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(238,243,250,0.026) 1px, transparent 1px);
+            background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px; }
+          /* a soft lift behind the figure zone, then a gentle vignette to ink */
+          #bg-lift { position: absolute; inset: 0; background: var(--bg-lift); }
+          #bg-vignette { position: absolute; inset: 0; background: var(--bg-vignette); }
+        </style>
+        <div id="bg-cam"><div id="bg-grid"></div></div>
+        <div id="bg-lift"></div>
+        <div id="bg-vignette"></div>
+        <script>
+          (function () {
+            var B = BNB, T = window.TIMING.total;
+            var tl = gsap.timeline({ paused: true });
+            // constant, barely-there drift (linear is the point)
+            tl.fromTo("#bg-grid", { x: 0, y: 0 }, { x: -24, y: -72, duration: T, ease: "none" }, 0);
+            // parallax nudge of the whole grid at each scene seam: the camera moves with the cut
+            tl.fromTo("#bg-cam", { x: 0, y: 0 }, { x: 0, y: 0, duration: 0.01 }, 0);
+            var nudges = [[0, -24], [0, 48], [24, 0], [0, -48], [-24, 0], [0, -24]], cx = 0, cy = 0;
+            B.SCENES.slice(1).forEach(function (s, i) {
+              var n = nudges[i % nudges.length]; cx += n[0]; cy += n[1];
+              tl.to("#bg-cam", { x: cx, y: cy, duration: 0.8, ease: "power2.inOut" }, Math.max(0, s.start - 0.3));
+            });
+            window.__timelines["bg"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

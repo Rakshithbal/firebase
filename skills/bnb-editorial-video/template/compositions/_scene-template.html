@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- __ID__ · __NN__ — __KICKER__ · __LINES__ "__VO__"
+           Scene file contract (DESIGN.md §9). Created by tools/gen.py from compositions/_scene-template.html.
+           A scene agent edits ONLY this file. Everything below is scene-local and every id is prefixed "__ID__-".
+
+           Anatomy (positions come from bnb.css vars + BNB.STAGE, so the same file works in 9:16 and 16:9):
+             chrome rail + chapter progress  -> chrome.html (never repeat it here)
+             .bnb-head   kicker / headline / deck  (top of the text column)
+             .bnb-fig    full-canvas SVG figure, viewBox = canvas px (BNB.fig sets it); draw inside BNB.STAGE.fig
+             .bnb-figcap rule + "Fig. N · description" (sits at --figcap-top)
+             captions band -> captions.html (generated; never put anything there) -->
+      <div id="root" data-composition-id="__ID__" data-duration="__DUR__">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: var(--chalk); }
+          #__ID__-cam, #__ID__-zoom { position: absolute; inset: 0; }
+          /* scene-local rules go here; prefix every selector with #__ID__- . Never restyle .bnb-* classes. */
+        </style>
+
+        <div id="__ID__-cam" class="bnb-stage">
+          <div id="__ID__-zoom" class="bnb-stage">
+            <!-- FIGURE: built by the script below from BNB helpers (static, seeded geometry), animated on the timeline -->
+            <svg id="__ID__-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+
+            <!-- HEADER. Headline = the editorial claim (sentence case, <= ~6 words, never the VO verbatim).
+                 Wrap at most ONE idea in <em> (it turns --point orange and is this scene's one orange thing). -->
+            <header class="bnb-head" id="__ID__-head">
+              <div class="bnb-kicker" id="__ID__-kicker"><b>__NN__</b> — __KICKER__</div>
+              <h1 class="bnb-headline" id="__ID__-hl">__HEADLINE__</h1>
+              <p class="bnb-deck" id="__ID__-deck">__DECK__</p>
+            </header>
+
+            <!-- FIGURE CAPTION (Fig. N = scene number; 3a/3b if the scene shows two figures) -->
+            <div class="bnb-figcap" id="__ID__-figcap">
+              <div class="rule"></div>
+              <div class="txt"><span class="num">Fig. __N__</span><span class="sep">·</span><span class="desc">__FIGCAP__</span></div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, LW = B.LW, ST = B.STAGE;
+            var SC = B.scene("__ID__");                 // {id, n, start, dur, lines, kicker}
+            var at = B.sceneAt(SC.start, "__LINE__");   // at("word", nth?) -> scene-local seconds of that spoken word
+            var svg = B.fig("__ID__-fig");              // sets viewBox to the format's canvas
+            var fig = B.g(svg, { id: "__ID__-figure" });
+            var F = ST.fig;                             // figure box {x0,x1,y0,y1,cx,cy} for this format
+
+            /* ---------- 1. BUILD (once, at init; deterministic; ids prefixed __ID__-) ----------
+               Pick builders from DESIGN.md §6 / references/scene-recipes.md. Examples:
+                 var slab = B.slab(svg, fig, { id: "__ID__-slab", seed: 7 });   // canonical ST.slab geometry (match cuts!)
+                 var dim  = B.dim(fig, { x1: slab.bounds.x0, y1: slab.bounds.top - 48, x2: slab.bounds.x1, y2: slab.bounds.top - 48, ext: 36, label: "Span" });
+                 var co   = B.callout(fig, { ax: F.cx, ay: F.cy, lx: F.x0, ly: F.y0 + 40, w: 300, side: "left", head: "Surface", body: "Dry and hard" });
+                 var bar  = B.strengthBar(svg, fig, { x: F.x1 - 120, top: F.y0, h: 420, w: 52, target: 0.8 });
+               Hatch fills: always use the url B.hatch() returns (ids are per-svg). Text with a custom colour: B.text(..., {fill}).
+               A new drawing (sack, nozzle, lens…) is a local function here; promote to bnb.js only when a 2nd scene needs it. */
+
+            /* ---------- 2. TIMELINE (scene-local seconds, paused, registered at the end) ---------- */
+            var tl = gsap.timeline({ paused: true });
+            B.a.drift(tl, "#__ID__-cam", SC.dur, { y1: -12 });                       // slow camera drift, whole scene
+            tl.fromTo("#__ID__-zoom", { opacity: 0, filter: "blur(8px)", scale: 1.03 },   // entrance = blur swap in on one stage
+              { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: E.land }, 0);
+            B.a.kicker(tl, document.getElementById("__ID__-kicker"), 0);
+            B.a.words(tl, B.words(document.getElementById("__ID__-hl")), 0.15);
+            var deck = document.getElementById("__ID__-deck");
+            if (deck) B.a.words(tl, B.words(deck), 0.45, { stagger: 0.03 });
+            B.a.figcap(tl, document.getElementById("__ID__-figcap"), 0.3);
+
+            /* 3. BEATS: land each visual on its spoken word, 0-0.1 s after the word starts:
+                 B.a.draw(tl, [dim.ext, dim.line], at("span") - 0.2);
+                 B.a.callout(tl, co, at("dry"));
+               One emphatic moment max, and it is a state change (strike, fill, colour), never a slam/shake. */
+
+            /* 4. EXIT: blur swap in the last 0.22 s (delete for the final scene: the film ends on it) */
+            __EXIT__
+            window.__timelines["__ID__"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <template>
+      <!-- s3 · 03 — Inside the slab · L03 "Inside, the cement reacts with water. That reaction builds strength, slowly, day by day."
+           Opens on s2's last frame (match cut on the slab). A point in the slab becomes the world: the slab shrinks to a
+           locator, a lens opens on a magnified section. Water meets cement grains (hydration rims), crystal links grow
+           between grains, denser through "day by day"; a strength bar fills steadily with a tick on each "day/by/day". -->
+      <div id="root" data-composition-id="s3" data-duration="6.103">
+        <style>
+          #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
+          #s3-cam, #s3-zoom { position: absolute; inset: 0; }
+          #s3-em { color: #eef3fa; }
+          #s3-figcap { top: 1218px; }
+        </style>
+
+        <div id="s3-cam" class="bnb-stage">
+          <div id="s3-zoom" class="bnb-stage">
+            <!-- FIGURE -->
+            <svg id="s3-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+
+            <!-- HEADER -->
+            <header class="bnb-head" id="s3-head">
+              <div class="bnb-kicker" id="s3-kicker"><b>03</b> — Inside the slab</div>
+              <h1 class="bnb-headline" id="s3-hl">A <em id="s3-em">slow</em> reaction.</h1>
+            </header>
+
+            <!-- FIGURE CAPTION -->
+            <div class="bnb-figcap" id="s3-figcap">
+              <div class="rule"></div>
+              <div class="txt"><span class="num">Fig. 3</span><span class="sep">·</span><span class="desc">Inside the slab: cement reacting with water</span></div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function () {
+            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[2];
+            var at = B.sceneAt(SC.start, "L03");
+            var svg = document.getElementById("s3-fig");
+            var r1 = function (v) { return Math.round(v * 10) / 10; };
+
+            /* Same beads as s2 (same seed + geometry) so the cut matches. */
+            function surfaceBeads(parent, b) {
+              var r = B.rng(212), g = B.g(parent, { class: "s3-beads" }), out = [];
+              var n = 9, filmTop = b.top - 16;
+              for (var i = 0; i < n; i++) {
+                var x = b.x0 + 70 + ((b.x1 - b.x0 - 140) * (i + 0.5)) / n + (r() - 0.5) * 40, rr = 6 + r() * 4;
+                out.push(B.drop(g, { cx: r1(x), cy: r1(filmTop + 2 - rr), r: r1(rr) }));
+              }
+              return out;
+            }
+
+            /* Irregular cement grain outline (seeded polygon) around (x,y), radius r, scale s about its centre. */
+            function grainD(gr, s) {
+              var d = "";
+              gr.vs.forEach(function (v, k) { d += (k ? "L" : "M") + r1(gr.x + Math.cos(v[0]) * v[1] * s) + " " + r1(gr.y + Math.sin(v[0]) * v[1] * s); });
+              return d + "Z";
+            }
+
+            /* ---------- 1. the world: canonical slab exactly as s2 left it ---------- */
+            var fig = B.g(svg, { id: "s3-figure" });
+            var world = B.g(fig, { id: "s3-world" });
+            var slab = B.slab(svg, world, { id: "s3-slab", seed: 7 });
+            var b = slab.bounds;
+            slab.film.setAttribute("y", b.top - 16); slab.film.setAttribute("height", 16);
+            slab.moist.forEach(function (m) { m.setAttribute("opacity", 1); });
+            surfaceBeads(world, b);
+            var cure = B.callout(world, { ax: 600, ay: b.top - 9, lx: 508, ly: 690, w: 440, side: "right", head: "Curing", body: "Keep it wet, so it can react", color: C.water });
+
+            // locator: the slab shrinks to a key plan bottom-left (uniform scale, transform x' = K·x + T)
+            var K = 0.34, TX = 72 - b.x0 * K, TY = 1080 - b.top * K;
+            var P = { x: 640, y: 900 };                       // the point we look into (mid-depth, between bars)
+            var P2 = { x: r1(P.x * K + TX), y: r1(P.y * K + TY) };
+
+            /* ---------- 2. the lens ---------- */
+            var L = { x: 420, y: 790 }, R = 240;
+            var cone = B.g(fig, { id: "s3-cone" });
+            var lens = B.g(fig, { id: "s3-lens" });
+            var defs = B.defs(svg);
+            var lcp = B.el("clipPath", { id: "s3-lens-clip" }, defs);
+            B.el("circle", { cx: L.x, cy: L.y, r: R }, lcp);
+            B.el("circle", { cx: L.x, cy: L.y, r: R, fill: C.ground2 }, lens);
+            var inner = B.g(lens, { "clip-path": "url(#s3-lens-clip)" });
+
+            // paste specks
+            var rs = B.rng(31), sp = B.g(inner, { fill: C.chalk, "fill-opacity": 0.12 });
+            for (var i = 0; i < 170; i++) B.el("circle", { cx: r1(L.x - R + rs() * 2 * R), cy: r1(L.y - R + rs() * 2 * R), r: r1(0.9 + rs() * 1.6) }, sp);
+
+            // cement grains: 15 large (ported layout from v1, scaled to this lens) + seeded fines in the gaps
+            var BIG = [[-132, -124, 40], [0, -155, 37], [124, -108, 43], [-178, 8, 39], [-46, -31, 43], [85, 8, 39], [194, 31, 36],
+              [-124, 124, 42], [23, 116, 40], [147, 139, 37], [-23, 232, 39], [-224, -147, 34], [232, -147, 34], [-224, 178, 34], [232, 209, 34]];
+            var rg = B.rng(303), grains = [];
+            function mkGrain(x, y, r) {
+              var vs = [], n = r > 25 ? 9 : 7, rot = rg() * 6.28;
+              for (var k = 0; k < n; k++) vs.push([(k / n) * Math.PI * 2 + rot + (rg() - 0.5) * 0.4, r * (0.78 + rg() * 0.34)]);
+              return { x: x, y: y, r: r, vs: vs };
+            }
+            BIG.forEach(function (q) { grains.push(mkGrain(L.x + q[0], L.y + q[1], q[2])); });
+            // static water drops (never absorbed): one is the WATER callout's subject
+            var still = [{ x: L.x + 178, y: L.y + 92, r: 13 }, { x: L.x - 92, y: L.y + 62, r: 11 }, { x: L.x + 64, y: L.y - 205, r: 11 }];
+            function free(x, y, r, pad) {
+              if (Math.hypot(x - L.x, y - L.y) > R - 10) return false;
+              for (var j = 0; j < grains.length; j++) if (Math.hypot(x - grains[j].x, y - grains[j].y) < r + grains[j].r + pad) return false;
+              for (j = 0; j < still.length; j++) if (Math.hypot(x - still[j].x, y - still[j].y) < r + still[j].r + pad) return false;
+              return true;
+            }
+            var rf = B.rng(404), tries = 0, nf = 0;
+            while (nf < 16 && tries < 2000) {
+              tries++;
+              var fx = L.x - R + rf() * 2 * R, fy = L.y - R + rf() * 2 * R, fr = 11 + rf() * 9;
+              if (free(fx, fy, fr, 14)) { grains.push(mkGrain(r1(fx), r1(fy), r1(fr))); nf++; }
+            }
+            // moving drops: sit in gaps, travel to the nearest grain, are taken up (hydration)
+            var rd = B.rng(515), drops = []; tries = 0;
+            while (drops.length < 11 && tries < 3000) {
+              tries++;
+              var dx = L.x - R + 30 + rd() * (2 * R - 60), dy = L.y - R + 30 + rd() * (2 * R - 60), dr = 10 + rd() * 4;
+              if (!free(dx, dy, dr + 4, 10)) continue;
+              var ok = true;
+              for (var j = 0; j < drops.length; j++) if (Math.hypot(dx - drops[j].x, dy - drops[j].y) < 46) ok = false;
+              if (!ok) continue;
+              var best = -1, bd = 1e9;
+              grains.forEach(function (g, gi) { var d = Math.hypot(g.x - dx, g.y - dy) - g.r; if (g.r > 25 && d < bd) { bd = d; best = gi; } });
+              var gg = grains[best], an = Math.atan2(dy - gg.y, dx - gg.x);
+              drops.push({ x: r1(dx), y: r1(dy), r: r1(dr), g: best, tx: r1(gg.x + Math.cos(an) * (gg.r + dr * 0.5)), ty: r1(gg.y + Math.sin(an) * (gg.r + dr * 0.5)) });
+            }
+            // react order: centre first
+            drops.sort(function (a, c) { return Math.hypot(a.x - L.x, a.y - L.y) - Math.hypot(c.x - L.x, c.y - L.y); });
+
+            // crystal links between neighbouring grains (behind the grains). Three passes = denser with time.
+            var links = [];
+            for (i = 0; i < grains.length; i++) for (j = i + 1; j < grains.length; j++) {
+              var ga = grains[i], gb = grains[j], gap = Math.hypot(ga.x - gb.x, ga.y - gb.y) - ga.r - gb.r;
+              if (gap > 2 && gap < 62) links.push([i, j]);
+            }
+            var mid = function (lk) { var a = grains[lk[0]], c = grains[lk[1]]; return Math.hypot((a.x + c.x) / 2 - L.x, (a.y + c.y) / 2 - L.y); };
+            links.sort(function (p, q) { return mid(p) - mid(q); });
+            var strandsG = B.g(inner, { id: "s3-strands" }), rk = B.rng(77), passes = [[], [], []];
+            [0, -0.32, 0.32].forEach(function (off, pass) {
+              links.forEach(function (lk, m) {
+                if (pass === 2 && m % 3 === 2) return;
+                var a = grains[lk[0]], c = grains[lk[1]], ang = Math.atan2(c.y - a.y, c.x - a.x);
+                var ax = a.x + Math.cos(ang + off) * a.r * 0.82, ay = a.y + Math.sin(ang + off) * a.r * 0.82;
+                var bx = c.x + Math.cos(ang + Math.PI - off) * c.r * 0.82, by = c.y + Math.sin(ang + Math.PI - off) * c.r * 0.82;
+                var kink = (rk() - 0.5) * 14, nx = -Math.sin(ang), ny = Math.cos(ang);
+                var mx = (ax + bx) / 2 + nx * kink, my = (ay + by) / 2 + ny * kink;
+                var d = "M" + r1(ax) + " " + r1(ay) + "L" + r1(mx) + " " + r1(my) + "L" + r1(bx) + " " + r1(by);
+                // two short needles off the strand (crystal habit)
+                [0.32, 0.7].forEach(function (f, k) {
+                  var px = ax + (bx - ax) * f, py = ay + (by - ay) * f, s = k ? -1 : 1, l = 7 + rk() * 5;
+                  d += "M" + r1(px) + " " + r1(py) + "l" + r1(Math.cos(ang + s * 0.9) * l) + " " + r1(Math.sin(ang + s * 0.9) * l);
+                });
+                passes[pass].push(B.path(strandsG, d, { stroke: C.chalk, "stroke-width": pass ? B.LW.hair : 2, "stroke-opacity": pass ? 0.62 : 0.85, pathLength: 1 }));
+              });
+            });
+
+            // grains: flat fill + hatched shade on the lower-right (clip per grain) + chalk outline
+            var shadeFill = B.hatch(svg, { id: "s3-hatch-gshade", angle: 45, gap: 6, color: "rgba(11,33,57,0.55)", width: 1.5 });
+            var tints = ["#a7b3c1", "#9eabba", "#b1bcc9"], grainsG = B.g(inner, { id: "s3-grains" }), rims = {};
+            grains.forEach(function (gr, gi) {
+              var d = grainD(gr, 1), gid = "s3-gclip-" + gi;
+              var cp = B.el("clipPath", { id: gid }, defs); B.el("path", { d: d }, cp);
+              var g = B.g(grainsG, {});
+              B.el("path", { d: d, fill: tints[gi % 3] }, g);
+              B.el("circle", { cx: r1(gr.x + gr.r * 0.42), cy: r1(gr.y + gr.r * 0.42), r: r1(gr.r * 0.95), fill: shadeFill, "clip-path": "url(#" + gid + ")" }, g);
+              B.el("path", { d: d, fill: "none", stroke: C.chalk, "stroke-width": gr.r > 25 ? B.LW.std : 2, "stroke-linejoin": "round" }, g);
+            });
+            // hydration rims (water-coloured halo where a drop has been taken up)
+            var rimsG = B.g(inner, { id: "s3-rims" });
+            drops.forEach(function (dp) {
+              if (rims[dp.g]) return;
+              rims[dp.g] = B.path(rimsG, grainD(grains[dp.g], 1.13), { stroke: C.water, "stroke-width": 3, opacity: 0 });
+            });
+            // drops
+            var dropsG = B.g(inner, { id: "s3-drops" });
+            var dropEls = drops.map(function (dp) { return B.drop(dropsG, { cx: dp.x, cy: dp.y, r: dp.r }); });
+            var stillEls = still.map(function (dp) { return B.drop(dropsG, { cx: dp.x, cy: dp.y, r: dp.r }); });
+
+            // lens rim + reticle ticks
+            B.el("circle", { cx: L.x, cy: L.y, r: R, fill: "none", stroke: C.chalk, "stroke-width": B.LW.heavy }, lens);
+            B.el("circle", { cx: L.x, cy: L.y, r: R + 14, fill: "none", stroke: C.blue, "stroke-width": B.LW.hair, "stroke-opacity": 0.6 }, lens);
+            var td = "";
+            [0, 90, 180, 270].forEach(function (deg) {
+              var a = deg * Math.PI / 180;
+              td += "M" + r1(L.x + Math.cos(a) * (R + 8)) + " " + r1(L.y + Math.sin(a) * (R + 8)) + "L" + r1(L.x + Math.cos(a) * (R + 24)) + " " + r1(L.y + Math.sin(a) * (R + 24));
+            });
+            B.path(lens, td, { stroke: C.blue, "stroke-width": 2 });
+
+            // focus ring on the slab + the two tangent leaders from it to the lens
+            var ring = B.el("circle", { cx: P.x, cy: P.y, r: 22, fill: "none", stroke: C.chalk, "stroke-width": B.LW.std }, fig);
+            var ringDot = B.el("circle", { cx: P.x, cy: P.y, r: 4, fill: C.chalk }, fig);
+            (function () {
+              var rr = 14, dx = L.x - P2.x, dy = L.y - P2.y, D = Math.hypot(dx, dy), base = Math.atan2(dy, dx), th = Math.acos((rr - R) / D);
+              [1, -1].forEach(function (s) {
+                var a = base + s * th;
+                B.line(cone, r1(P2.x + Math.cos(a) * rr), r1(P2.y + Math.sin(a) * rr), r1(L.x + Math.cos(a) * R), r1(L.y + Math.sin(a) * R),
+                  { stroke: C.chalk3, "stroke-width": 2, pathLength: 1 });
+              });
+            })();
+
+            // callouts on the subjects inside the lens
+            var g2 = grains[2];
+            var cem = B.callout(fig, { ax: g2.x + 6, ay: g2.y - 4, lx: 690, ly: 640, w: 130, side: "right", head: "Cement" });
+            var wat = B.callout(fig, { ax: still[0].x, ay: still[0].y - 2, lx: 690, ly: 900, w: 130, side: "right", head: "Water", color: C.water });
+
+            // strength bar: no scale, no numbers. Ticks mark "day … by … day".
+            var bar = B.strengthBar(svg, fig, { x: 858, top: 590, h: 420, w: 52, label: "Strength" });
+            var ticksG = B.g(fig, { id: "s3-ticks" });
+
+            /* ---------- timeline (scene-local seconds) ---------- */
+            var tl = gsap.timeline({ paused: true });
+            var tCement = at("cement"), tReacts = at("reacts"), tWater = at("water"), tThat = at("that"), tReaction = at("reaction"),
+              tBuilds = at("builds"), tSlowly = at("slowly"), tDay1 = at("day", 1), tBy = at("by"), tDay2 = at("day", 2);
+            var tEnd = SC.dur - 0.22, FMAX = 0.62;
+            var fillAt = function (t) { return FMAX * Math.max(0, Math.min(1, (t - tBuilds) / (tEnd - tBuilds))); };
+
+            // camera: continues s2's drift (starts at -12, the cut frame)
+            B.a.drift(tl, "#s3-cam", SC.dur, { y0: -12, y1: -26 });
+
+            // header + caption
+            B.a.kicker(tl, document.getElementById("s3-kicker"), 0);
+            B.a.words(tl, B.words(document.getElementById("s3-hl")), 0.08);
+            B.a.figcap(tl, document.getElementById("s3-figcap"), 0.2);
+
+            // "Inside,": mark a point in the slab, then the slab steps back to a locator while the lens opens from that point
+            var tz = 0.1, dz = 0.85;
+            tl.fromTo(cure.g, { opacity: 1 }, { opacity: 0, duration: 0.24, ease: E.exit }, 0.02);
+            tl.fromTo([ring, ringDot], { opacity: 0, scale: 0, svgOrigin: P.x + " " + P.y }, { opacity: 1, scale: 1, svgOrigin: P.x + " " + P.y, duration: B.D.tick, ease: E.enter }, 0);
+            tl.fromTo(world, { x: 0, y: 0, scale: 1, svgOrigin: "0 0" }, { x: TX, y: TY, scale: K, svgOrigin: "0 0", duration: dz, ease: E.move }, tz);
+            tl.fromTo(ring, { attr: { cx: P.x, cy: P.y, r: 22 } }, { attr: { cx: P2.x, cy: P2.y, r: 14 }, duration: dz, ease: E.move }, tz);
+            tl.fromTo(ringDot, { attr: { cx: P.x, cy: P.y, r: 4 } }, { attr: { cx: P2.x, cy: P2.y, r: 3 }, duration: dz, ease: E.move }, tz);
+            // (lens uses an attr transform string: GSAP's SVG transform parse mis-measures this group while the host is hidden)
+            var lt = function (cx, cy, k) { return "translate(" + cx + " " + cy + ") scale(" + k + ") translate(" + -L.x + " " + -L.y + ")"; };
+            tl.fromTo(lens, { attr: { transform: lt(P.x, P.y, r1(22 / R * 1000) / 1000) } }, { attr: { transform: lt(L.x, L.y, 1) }, duration: dz, ease: E.move }, tz);
+            tl.fromTo(lens, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: E.enter }, tz);
+            B.a.draw(tl, cone.childNodes, tz + dz - 0.1, 0.45, E.enter);
+
+            // "cement"
+            B.a.callout(tl, cem, tCement + 0.08);
+
+            // "reacts with water": drops travel to the nearest grain, are taken up, and leave a hydration rim
+            drops.forEach(function (dp, m) {
+              var el = dropEls[m], t = tReacts - 0.05 + m * 0.075, c = dp.x + " " + (dp.y - dp.r * 0.4);
+              tl.fromTo(el, { x: 0, y: 0 }, { x: dp.tx - dp.x, y: dp.ty - dp.y, duration: 0.45, ease: E.move }, t);
+              tl.fromTo(el, { scale: 1, opacity: 1, svgOrigin: c }, { scale: 0.25, opacity: 0, svgOrigin: c, duration: 0.4, ease: E.exit }, t + 0.42);
+            });
+            Object.keys(rims).forEach(function (gi) {
+              var m = 0; drops.forEach(function (dp, k) { if (String(dp.g) === gi && !m) m = k + 1; });
+              var t = tReacts - 0.05 + (m - 1) * 0.075 + 0.5;
+              tl.fromTo(rims[gi], { opacity: 0 }, { opacity: 0.95, duration: 0.35, ease: E.enter }, t);
+              tl.to(rims[gi], { opacity: 0.55, duration: 0.8, ease: E.move }, t + 0.6);
+            });
+            B.a.callout(tl, wat, tWater + 0.04);
+
+            // "That reaction builds strength … day by day": crystal links grow, denser with each pass
+            var win = [[tThat + 0.1, tBuilds + 0.5], [tBuilds + 0.3, tDay1 + 0.1], [tSlowly + 0.2, tDay2 + 0.15]];
+            passes.forEach(function (ps, k) {
+              ps.forEach(function (p, m) {
+                var t = win[k][0] + (win[k][1] - win[k][0]) * (m / Math.max(1, ps.length - 1));
+                B.a.draw(tl, p, t, 0.55, E.enter);
+              });
+            });
+
+            // strength bar: frame on "reaction", steady fill from "builds"
+            B.a.draw(tl, bar.outline, tReaction - 0.2, 0.7);
+            tl.fromTo(bar.label, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, tReaction + 0.1);
+            tl.fromTo(bar.fill, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: FMAX, transformOrigin: "50% 100%", duration: tEnd - tBuilds, ease: E.linear }, tBuilds);
+            [tDay1, tBy, tDay2].forEach(function (t) {
+              var y = r1(bar.bounds.bot - 6 - (bar.bounds.bot - bar.bounds.top - 12) * fillAt(t + 0.05)), x = bar.bounds.x + bar.bounds.w;
+              var tk = B.line(ticksG, x + 8, y, x + 30, y, { stroke: C.chalk, "stroke-width": B.LW.std, pathLength: 1 });
+              B.a.draw(tl, tk, t + 0.03, B.D.tick, E.enter);
+            });
+
+            // "slowly": the one orange moment — the claim's key word takes the point colour
+            tl.fromTo("#s3-em", { color: C.chalk }, { color: C.point, duration: 0.5, ease: E.move }, tSlowly);
+
+            // exit: blur swap on one stage
+            B.a.exit(tl, "#s3-cam", tEnd, 0.2);
+            window.__timelines["s3"] = tl;
+          })();
+        </script>
+      </div>
+    </template>
+  </body>
+</html>

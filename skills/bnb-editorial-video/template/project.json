@@ -1,0 +1,15 @@
+{
+  "slug": "rXX-topic",
+  "format": "9:16",
+  "fps": 30,
+  "series": "Buildpedia",
+  "title": "Episode title",
+  "brand": { "name": "BuyNBuild", "signoff": "BuyNBuild · Buildpedia" },
+  "voice": { "engine": "kokoro", "voice": "hm_omega", "speed": 1.05, "lead": 0.4, "gap": 0.4, "tail": 1.4 },
+  "audio": "assets/audio/final_mix.wav",
+  "theme": {},
+  "scenes": [
+    { "id": "s1", "kicker": "The myth", "lines": ["L01"], "headline": "Looks <em>done.</em>", "deck": "", "figcap": "Section through the subject" },
+    { "id": "s2", "kicker": "Keep this", "lines": ["L02"], "type": "endcard", "headline": "Save this<br />before your<br /><em>slab day.</em>", "tag": "Episode title, in one plain sentence." }
+  ]
+}
