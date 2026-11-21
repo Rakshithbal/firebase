@@ -2,133 +2,131 @@
 <html lang="en">
   <body>
     <template>
-      <!-- s2 · 02 — The truth · L02 "Concrete does not get strong by drying. It gets strong by curing."
-           Same canonical slab as s1. Drying (wisps, dry zone) is struck; curing holds water at the surface.
-           Exit: header + figcap step away, the slab (and the CURING callout) stay put = match cut into s3. -->
-      <div id="root" data-composition-id="s2" data-duration="4.43">
+      <!-- s2 · 01 — Brief · "One brief in." A brief card types; script line 1 splits into words on a timing ruler,
+           its real voice waveform (R05 narration, 0.3–2.3 s) draws beneath. One orange idea: the playhead. -->
+      <div id="root" data-composition-id="s2" data-duration="4.6875">
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
-          #s2-cam, #s2-zoom { position: absolute; inset: 0; }
-          #s2-hl .ln { display: block; }
-          #s2-figcap { top: 1218px; }
+          #s2-cam { position: absolute; inset: 0; }
+          #s2-card { position: absolute; left: 96px; top: 380px; width: 706px; height: 448px;
+            background: rgba(16, 41, 74, 0.62); box-shadow: inset 0 0 0 1.5px rgba(238,243,250,0.44); }
+          #s2-card .hdr { position: absolute; left: 32px; right: 32px; top: 24px; display: flex; justify-content: space-between;
+            font-family: var(--f-mono); font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase; }
+          #s2-card .hdr b { font-weight: 600; color: #eef3fa; } #s2-card .hdr span { color: #8fb3da; font-weight: 500; }
+          #s2-card .hr { position: absolute; left: 32px; right: 32px; height: 1.5px; background: rgba(238,243,250,0.24); transform-origin: 0 50%; }
+          .s2-row { position: absolute; left: 32px; right: 32px; display: flex; align-items: baseline; white-space: nowrap; }
+          .s2-k { width: 150px; flex: none; font-family: var(--f-mono); font-weight: 500; font-size: 24px; letter-spacing: 0.14em; text-transform: uppercase; color: #8fb3da; }
+          .s2-v { font-family: var(--f-sans); font-weight: 500; font-size: 30px; letter-spacing: -0.005em; color: #eef3fa; }
+          .s2-v.serif { font-family: var(--f-serif); font-weight: 560; font-size: 40px; font-variation-settings: "opsz" 144; letter-spacing: -0.015em; }
+          .s2-n { width: 44px; flex: none; font-family: var(--f-mono); font-weight: 500; font-size: 24px; color: rgba(238,243,250,0.44); }
+          .s2-v .c { opacity: 0; }
+          #s2-figcap { top: 962px; }
         </style>
-
         <div id="s2-cam" class="bnb-stage">
-          <div id="s2-zoom" class="bnb-stage">
-            <!-- FIGURE -->
-            <svg id="s2-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+          <svg id="s2-fig" class="bnb-fig" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+          <header class="bnb-head" id="s2-head">
+            <div class="bnb-kicker" id="s2-kicker"><b>01</b> — Brief</div>
+            <h1 class="bnb-headline" id="s2-hl">One brief in.</h1>
+          </header>
 
-            <!-- HEADER -->
-            <header class="bnb-head" id="s2-head">
-              <div class="bnb-kicker" id="s2-kicker"><b>02</b> — The truth</div>
-              <h1 class="bnb-headline" id="s2-hl">
-                <span class="ln" id="s2-l1">Not drying.</span>
-                <span class="ln" id="s2-l2"><em>Curing.</em></span>
-              </h1>
-            </header>
+          <div id="s2-card">
+            <div class="hdr" id="s2-card-hdr"><b>Brief</b><span>Episode R05</span></div>
+            <div class="hr" id="s2-hr1" style="top: 74px"></div>
+            <div class="s2-row" style="top: 104px"><div class="s2-k">Title</div><div class="s2-v serif" id="s2-v-title">What curing means</div></div>
+            <div class="s2-row" style="top: 170px"><div class="s2-k">Series</div><div class="s2-v" id="s2-v-series">Buildpedia</div></div>
+            <div class="hr" id="s2-hr2" style="top: 232px"></div>
+            <div class="s2-row" style="top: 262px"><div class="s2-k">Script</div><div class="s2-n">01</div><div class="s2-v" id="s2-v-l1">Your slab looks dry and hard.</div></div>
+            <div class="s2-row" style="top: 318px"><div class="s2-k"></div><div class="s2-n">02</div><div class="s2-v" id="s2-v-l2">That does not mean it is done.</div></div>
+            <div class="s2-row" style="top: 374px"><div class="s2-k"></div><div class="s2-n">03</div><div class="s2-v" id="s2-v-l3">Inside, the cement reacts with water.</div></div>
+          </div>
 
-            <!-- FIGURE CAPTION -->
-            <div class="bnb-figcap" id="s2-figcap">
-              <div class="rule"></div>
-              <div class="txt"><span class="num">Fig. 2</span><span class="sep">·</span><span class="desc">The same slab: drying versus curing</span></div>
-            </div>
+          <div class="bnb-figcap" id="s2-figcap">
+            <div class="rule"></div>
+            <div class="txt"><span class="num">Pipeline</span><span class="sep">·</span><span class="desc">Script → voice → word timing</span></div>
           </div>
         </div>
-
         <script>
           (function () {
-            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[1];
-            var at = B.sceneAt(SC.start, "L02");
-            var svg = document.getElementById("s2-fig");
+            var B = BNB, C = B.C, E = B.E, SC = B.scene("s2");
+            var svg = document.getElementById("s2-fig"), fig = B.g(svg, { id: "s2-figure" });
 
-            /* Surface beads: small drops resting on the water film. Same seed + geometry in s3 (match cut). */
-            function surfaceBeads(parent, b) {
-              var r = B.rng(212), g = B.g(parent, { class: "s2-beads" }), out = [];
-              var n = 9, filmTop = b.top - 16;
-              for (var i = 0; i < n; i++) {
-                var x = b.x0 + 70 + ((b.x1 - b.x0 - 140) * (i + 0.5)) / n + (r() - 0.5) * 40, rr = 6 + r() * 4;
-                out.push(B.drop(g, { cx: Math.round(x * 10) / 10, cy: Math.round((filmTop + 2 - rr) * 10) / 10, r: Math.round(rr * 10) / 10 }));
-              }
-              return out;
+            /* ---------- timing ruler (0.3–2.3 s of the R05 narration mapped onto x 972–1824) ---------- */
+            var X0 = 972, X1 = 1824, T0 = 0.3, PX = (X1 - X0) / 2.0, RY = 600;
+            var tx = function (s) { return X0 + (s - T0) * PX; };
+            var ruler = B.line(fig, X0, RY, X1, RY, { stroke: C.chalk3, "stroke-width": 1.5, pathLength: 1 });
+            var td = "";
+            for (var k = 0; k <= 20; k++) { var x = X0 + k * (X1 - X0) / 20, h = k % 5 === 0 ? 14 : 7; td += "M" + x + " " + RY + "v" + h; }
+            var rticks = B.path(fig, td, { stroke: C.chalk3, "stroke-width": 1.5 });
+            var lbl = B.text(fig, X0, 430, "Voice · word timing", "t-label");
+
+            /* word chips: real word timings of R05 line L01 */
+            var W = [["Your", 0.4, 0.707], ["slab", 0.707, 1.015], ["looks", 1.015, 1.378], ["dry", 1.378, 1.63], ["and", 1.63, 1.881], ["hard.", 1.881, 2.189]];
+            var chips = W.map(function (w, i) {
+              var x0 = tx(w[1]) + 3, x1 = tx(w[2]) - 3, g = B.g(fig, {});
+              B.el("rect", { x: x0, y: 508, width: x1 - x0, height: 62, fill: C.ground2, stroke: C.chalk3, "stroke-width": 1.5 }, g);
+              B.line(g, x0 - 3, 570, x0 - 3, RY, { stroke: C.blue, "stroke-width": 2 });
+              B.text(g, (x0 + x1) / 2, 550, w[0], "t-body", { "text-anchor": "middle", fill: C.chalk });
+              g.dataset.t = w[1];
+              return g;
+            });
+
+            /* waveform: RMS envelope of the real narration (92 frames, 21.7 ms each) */
+            var ENV = [0.0, 0.0, 0.0, 0.0, 0.0, 0.062, 0.328, 0.602, 0.943, 1.0, 0.744, 0.492, 0.199, 0.143, 0.159, 0.13, 0.113, 0.062, 0.058, 0.272, 0.439, 0.578, 0.623, 0.566, 0.484, 0.472, 0.495, 0.535, 0.311, 0.236, 0.262, 0.379, 0.405, 0.382, 0.864, 0.914, 0.156, 0.055, 0.023, 0.068, 0.067, 0.03, 0.004, 0.002, 0.002, 0.003, 0.022, 0.116, 0.297, 0.476, 0.528, 0.499, 0.457, 0.435, 0.48, 0.517, 0.568, 0.637, 0.623, 0.659, 0.445, 0.326, 0.084, 0.028, 0.017, 0.089, 0.306, 0.455, 0.46, 0.375, 0.289, 0.133, 0.046, 0.078, 0.248, 0.418, 0.551, 0.629, 0.581, 0.58, 0.385, 0.308, 0.223, 0.179, 0.14, 0.124, 0.106, 0.058, 0.039, 0.01, 0.011, 0.005];
+            var WY = 730, pitch = (X1 - X0) / ENV.length, bars = [];
+            var wave = B.g(fig, {});
+            ENV.forEach(function (v, i) {
+              var h = Math.max(2, Math.round(v * 92)), x = X0 + i * pitch + pitch / 2;
+              bars.push(B.line(wave, +x.toFixed(1), WY - h, +x.toFixed(1), WY + h, { stroke: C.blue, "stroke-width": 4.5, "stroke-linecap": "round" }));
+            });
+            var axis = B.line(fig, X0, WY, X1, WY, { stroke: C.chalk4, "stroke-width": 1.5, pathLength: 1 });
+
+            /* leader from script line 01 to the ruler start */
+            var leader = B.path(fig, "M806 676 H 900 L 960 604", { stroke: C.blue, "stroke-width": 2, pathLength: 1 });
+            var ldot = B.el("circle", { cx: 806, cy: 676, r: 6, fill: C.blue }, fig);
+
+            /* the playhead: the scene's one orange idea */
+            var ph = B.g(fig, { id: "s2-ph" });
+            B.line(ph, X0, 488, X0, 842, { stroke: C.point, "stroke-width": 3 });
+            B.path(ph, "M" + (X0 - 10) + " 476 H" + (X0 + 10) + " L" + X0 + " 490 Z", { fill: C.point, stroke: "none" });
+
+            /* typing: every character its own span */
+            function chars(id) {
+              var el = document.getElementById(id), s = el.textContent; el.textContent = "";
+              return s.split("").map(function (ch) { var c = document.createElement("span"); c.className = "c"; c.textContent = ch; el.appendChild(c); return c; });
             }
+            var cT = chars("s2-v-title"), cS = chars("s2-v-series"), c1 = chars("s2-v-l1"), c2 = chars("s2-v-l2"), c3 = chars("s2-v-l3");
+            var hlw = B.words(document.getElementById("s2-hl"));
 
-            /* ---------- build the figure ---------- */
-            var fig = B.g(svg, { id: "s2-figure" });
-            var slab = B.slab(svg, fig, { id: "s2-slab", seed: 7 });   // canonical STAGE.slab, same seed as s1
-            var b = slab.bounds;
-            // open on s1's last state: surface-dry section, moisture still in the core
-            slab.body.setAttribute("fill", C.concreteDry);
-
-            // dry zone: hatched band under the surface (shading is hatch, never a gradient)
-            var dryFill = B.hatch(svg, { id: "s2-hatch-dry", angle: 45, gap: 8, color: "rgba(11,33,57,0.5)", width: 1.5 });
-            var dryZone = B.g(fig, { id: "s2-dryzone" });
-            B.el("rect", { x: b.x0, y: b.top, width: b.x1 - b.x0, height: 40, fill: dryFill }, dryZone);
-            var dryEdge = B.line(dryZone, b.x0 + 4, b.top + 40, b.x1 - 4, b.top + 40, { stroke: C.chalk3, "stroke-width": B.LW.hair, "stroke-dasharray": "6 8" });
-
-            // evaporation: water leaving the surface (right half, as in s1)
-            var wisps = B.wisps(fig, { x0: 540, x1: 900, y: b.top - 10, n: 4, h: 124, seed: 9 });
-
-            // curing: water held at the surface
-            var beads = surfaceBeads(fig, b);
-
-            // callouts. DRYING is the wrong idea (struck); CURING is the answer.
-            var dry = B.callout(fig, { ax: 452, ay: b.top + 22, lx: 72, ly: 690, w: 340, side: "left", head: "Drying", body: "Water escapes" });
-            var strike = B.g(fig, { id: "s2-strike" });
-            var sk1 = B.line(strike, 62, 684, 200, 678, { stroke: C.point, "stroke-width": 5, pathLength: 1 });
-            var sk2 = B.line(strike, 62, 725, 292, 717, { stroke: C.point, "stroke-width": 5, pathLength: 1 });
-            var cure = B.callout(fig, { ax: 600, ay: b.top - 9, lx: 508, ly: 690, w: 440, side: "right", head: "Curing", body: "Keep it wet, so it can react", color: C.water });
-
-            /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
-            var tDoes = at("does"), tNot = at("not"), tDrying = at("drying"), tIt = at("it"), tGets = at("gets"), tCuring = at("curing");
-
-            // camera: slow drift ends at -12; s3 opens at -12 so the slab does not jump on the cut
-            B.a.drift(tl, "#s2-cam", SC.dur, { y1: -12 });
-
-            // entrance: header type, caption. The slab is already on the page (continuity from s1).
-            B.a.kicker(tl, document.getElementById("s2-kicker"), 0);
-            B.a.figcap(tl, document.getElementById("s2-figcap"), 0.15);
-            tl.fromTo(slab.agg, { opacity: 0.55 }, { opacity: 0.55, duration: 0.01 }, 0);
-            tl.fromTo(slab.moist, { opacity: 1 }, { opacity: 1, duration: 0.01 }, 0);
-
-            // "does … drying": evaporation diagram — wisps rise, the dry zone hatches in, moisture leaves the core
-            wisps.forEach(function (w, i) {
-              var t = 0.18 + i * 0.2;
-              tl.fromTo(w, { strokeDasharray: "1 1", strokeDashoffset: 1, opacity: 0, y: 0 },
-                { strokeDashoffset: 0, opacity: 0.9, y: -22, duration: 0.9, ease: E.enter }, t);
-              tl.fromTo(w, { y: -22 }, { y: -34, duration: tIt - (t + 0.9), ease: E.linear, immediateRender: false }, t + 0.9);
-              tl.fromTo(w, { strokeDashoffset: 0, opacity: 0.9, y: -34 }, { strokeDashoffset: -1, opacity: 0, y: -50, duration: 0.4, ease: E.exit, immediateRender: false }, tIt + i * 0.04);
+            B.a.drift(tl, "#s2-cam", SC.dur, { y1: -10 });
+            B.a.kicker(tl, "#s2-kicker", 0.05);
+            B.a.words(tl, hlw, 0.12, { stagger: 0.08 });
+            tl.fromTo("#s2-card", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, 0.22);
+            tl.fromTo(["#s2-hr1", "#s2-hr2"], { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: E.land, stagger: 0.1 }, 0.3);
+            var type = function (cs, at, rate) { tl.fromTo(cs, { opacity: 0 }, { opacity: 1, duration: 0.01, ease: "none", stagger: rate || 0.014 }, at); };
+            type(cT, 0.45, 0.016); type(cS, 0.78, 0.016);
+            type(c1, 0.98); type(c2, 1.42); type(c3, 1.86);
+            // line 01 is the one that becomes timing: the others step back
+            tl.to(["#s2-v-l2", "#s2-v-l3", "#s2-v-title", "#s2-v-series"], { opacity: 0.42, duration: 0.4, ease: E.move }, 2.45);
+            tl.fromTo(ldot, { scale: 0, svgOrigin: "806 676" }, { scale: 1, svgOrigin: "806 676", duration: 0.25, ease: E.enter }, 2.35);
+            B.a.draw(tl, leader, 2.4, 0.5);
+            B.a.draw(tl, ruler, 2.2, 0.7, E.land);
+            tl.fromTo([rticks, lbl, axis], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E.enter }, 2.3);
+            // playhead sweeps the 2 s of speech in 1.3 s; each bar + chip lands as it passes
+            var P0 = 2.6, PD = 1.3;
+            tl.fromTo(ph, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: E.enter }, P0 - 0.1);
+            tl.fromTo(ph, { x: 0 }, { x: X1 - X0, duration: PD, ease: "none" }, P0);
+            bars.forEach(function (b, i) {
+              tl.fromTo(b, { opacity: 0, scaleY: 0.2, svgOrigin: b.getAttribute("d").match(/^M([\d.]+)/)[1] + " " + WY },
+                { opacity: 1, scaleY: 1, svgOrigin: b.getAttribute("d").match(/^M([\d.]+)/)[1] + " " + WY, duration: 0.18, ease: E.enter }, P0 + (i / bars.length) * PD);
             });
-            tl.fromTo(dryZone, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: E.move }, tDoes);
-            tl.fromTo(slab.moist.slice().reverse(), { opacity: 1 }, { opacity: 0, duration: 0.3, ease: E.exit, stagger: 0.02, immediateRender: false }, tDoes + 0.1);
-            B.a.callout(tl, dry, tNot);
-
-            // headline line 1 on "not"
-            B.a.words(tl, B.words(document.getElementById("s2-l1")), tNot - 0.04);
-
-            // "drying.": the wrong idea gets its calm orange strike
-            B.a.draw(tl, sk1, tDrying - 0.02, 0.34);
-            B.a.draw(tl, sk2, tDrying + 0.1, 0.38);
-
-            // "It gets strong by curing": evaporation stops, water is held on the surface, the section is damp again
-            tl.to(dry.g, { opacity: 0.5, duration: 0.4, ease: E.move }, tIt);
-            tl.to(dryZone, { opacity: 0, duration: 0.5, ease: E.move }, tIt);
-            B.a.words(tl, B.words(document.getElementById("s2-l2")), tIt);
-            tl.fromTo(slab.film, { attr: { y: b.top, height: 0 } }, { attr: { y: b.top - 16, height: 16 }, duration: 0.7, ease: E.move }, tIt + 0.05);
-            tl.fromTo(slab.body, { attr: { fill: C.concreteDry } }, { attr: { fill: C.concrete }, duration: 0.8, ease: E.move }, tGets - 0.05);
-            tl.fromTo(slab.agg, { opacity: 0.55 }, { opacity: 1, duration: 0.8, ease: E.move, immediateRender: false }, tGets - 0.05);
-            slab.moist.forEach(function (m, i) {
-              var c = m.getAttribute("cx") + " " + m.getAttribute("cy");
-              tl.fromTo(m, { opacity: 0, scale: 0.3, svgOrigin: c }, { opacity: 1, scale: 1, svgOrigin: c, duration: 0.3, ease: E.enter, immediateRender: false }, tGets + 0.1 + i * 0.012);
+            chips.forEach(function (c) {
+              var t = P0 + ((+c.dataset.t - T0) / 2.0) * PD;
+              tl.fromTo(c, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3, ease: E.enter }, t);
             });
-            B.a.popIn(tl, beads, tGets + 0.2, { stagger: 0.05, dur: 0.35 });
-            // CURING callout: dot just before, text lands on "curing"
-            B.a.callout(tl, cure, tCuring - 0.38);
-
-            // exit: header, caption and the struck idea step away; the slab + CURING stay for the match cut into s3
-            tl.to(["#s2-head", "#s2-figcap"], { opacity: 0, filter: "blur(8px)", duration: 0.22, ease: E.exit }, SC.dur - 0.24);
-            tl.to([dry.g, strike], { opacity: 0, duration: 0.22, ease: E.exit }, SC.dur - 0.24);
-
+            tl.to(ph, { opacity: 0.0, duration: 0.3, ease: E.exit }, P0 + PD + 0.05);
+            B.a.figcap(tl, document.getElementById("s2-figcap"), 3.05);
+            B.a.exit(tl, "#s2-cam", SC.dur - 0.25, 0.22);
             window.__timelines["s2"] = tl;
           })();
         </script>

@@ -2,200 +2,90 @@
 <html lang="en">
   <body>
     <template>
-      <!-- s4 · 04 — What goes wrong · L04 "If the water leaves too early, from sun or wind, the reaction slows down."
-           + L05 "The surface can crack, and the concrete can end up weaker than it was designed to be."
-           Built on DESIGN.md §9 / s1. The point (orange): the gap between the bar and the designed line. -->
-      <div id="root" data-composition-id="s4" data-duration="10.026">
+      <!-- s4 · 03 — Scenes · "Every frame drawn in code." The real R05 v2 reel (muted, pre-trimmed to five beats) plays in a
+           9:16 phone frame; a mono index + callout names each scene recipe as it plays. One orange idea: the active index segment. -->
+      <div id="root" data-composition-id="s4" data-duration="9.375">
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
-          #s4-cam, #s4-zoom { position: absolute; inset: 0; }
-          #s4-zoom { transform-origin: 540px 900px; }
-          /* the headline's claim turns orange only when the gap is shown ("weaker") */
-          #s4-hl em { color: #eef3fa; }
-          #s4-figcap { top: 1218px; }
+          #s4-cam, #s4-left { position: absolute; inset: 0; }
+          #s4-labels { position: absolute; left: 96px; top: 560px; width: 900px; height: 140px; }
+          .s4-idx { position: absolute; left: 0; top: 0; font-family: var(--f-mono); font-weight: 500; font-size: 26px; letter-spacing: 0.16em; text-transform: uppercase; color: #8fb3da; white-space: nowrap; }
+          .s4-idx b { color: #eef3fa; font-weight: 600; }
+          .s4-lab { position: absolute; left: 0; top: 50px; font-family: var(--f-sans); font-weight: 500; font-size: 54px; line-height: 64px; letter-spacing: -0.015em; color: #eef3fa; white-space: nowrap; }
+          #s4-segs { position: absolute; left: 96px; top: 760px; display: flex; gap: 8px; }
+          .s4-seg { width: 56px; height: 4px; background: rgba(238,243,250,0.2); }
+          #s4-seg-on { position: absolute; left: 96px; top: 760px; width: 56px; height: 4px; background: #ff8a3d; }
+          #s4-cover { position: absolute; inset: 0; background: #0b2139; opacity: 0; }
         </style>
-
         <div id="s4-cam" class="bnb-stage">
-          <div id="s4-zoom" class="bnb-stage">
-            <!-- FIGURE (built by script) -->
-            <svg id="s4-fig" class="bnb-fig" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
-
-            <!-- HEADER -->
+          <div id="s4-left" class="bnb-stage">
+            <svg id="s4-fig" class="bnb-fig" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
             <header class="bnb-head" id="s4-head">
-              <div class="bnb-kicker" id="s4-kicker"><b>04</b> — What goes wrong</div>
-              <h1 class="bnb-headline" id="s4-hl">Too early, and it<br /><em id="s4-em">stops short.</em></h1>
+              <div class="bnb-kicker" id="s4-kicker"><b>03</b> — Scenes</div>
+              <h1 class="bnb-headline" id="s4-hl">Every frame<br />drawn in code.</h1>
             </header>
+            <div id="s4-labels">
+              <div class="s4-idx" id="s4-i1">Recipe <b>01</b> / 05</div>
+              <div class="s4-idx" id="s4-i2">Recipe <b>02</b> / 05</div>
+              <div class="s4-idx" id="s4-i3">Recipe <b>03</b> / 05</div>
+              <div class="s4-idx" id="s4-i4">Recipe <b>04</b> / 05</div>
+              <div class="s4-idx" id="s4-i5">Recipe <b>05</b> / 05</div>
+              <div class="s4-lab" id="s4-l1">Stamp · one slam per film</div>
+              <div class="s4-lab" id="s4-l2">Magnifier lens</div>
+              <div class="s4-lab" id="s4-l3">Strength shortfall</div>
+              <div class="s4-lab" id="s4-l4">Small multiples</div>
+              <div class="s4-lab" id="s4-l5">Site record</div>
+            </div>
+            <div id="s4-segs"><div class="s4-seg"></div><div class="s4-seg"></div><div class="s4-seg"></div><div class="s4-seg"></div><div class="s4-seg"></div></div>
+            <div id="s4-seg-on"></div>
+          </div>
 
-            <!-- FIGURE CAPTION -->
-            <div class="bnb-figcap" id="s4-figcap">
-              <div class="rule"></div>
-              <div class="txt"><span class="num">Fig. 4</span><span class="sep">·</span><span class="desc">The slab dries too early and stops gaining strength</span></div>
+          <div class="bnb-phone" id="s4-phone">
+            <div class="screen" id="s4-screen">
+              <video id="s4-video" class="clip" src="assets/video/r05_cuts.mp4" data-start="0" data-duration="9.375"
+                data-track-index="0" muted playsinline></video>
+              <div id="s4-cover"></div>
             </div>
           </div>
         </div>
-
         <script>
           (function () {
-            var B = BNB, C = B.C, E = B.E, SC = B.SCENES[3];
-            var at4 = B.sceneAt(SC.start, "L04"), at5 = B.sceneAt(SC.start, "L05");
-            var svg = document.getElementById("s4-fig");
-            var r1 = function (v) { return Math.round(v * 10) / 10; };
+            var B = BNB, C = B.C, E = B.E, SC = B.scene("s4");
+            var svg = document.getElementById("s4-fig"), fig = B.g(svg, { id: "s4-figure" });
+            var P = B.STAGE.phone;   // screen x 1104–1554, y 150–950
+            // aspect dimension on the right of the phone
+            var asp = B.dim(fig, { x1: 1622, y1: P.y, x2: 1622, y2: P.y + P.h, ext: -40, label: "9:16" });
+            // callout leader: rule under the label → dot on the screen edge
+            var rule = B.line(fig, 96, 718, 1010, 718, { stroke: C.chalk3, "stroke-width": 1.5, pathLength: 1 });
+            var lead = B.path(fig, "M1010 718 L 1104 718", { stroke: C.chalk, "stroke-width": 2, pathLength: 1 });
+            var halo = B.el("circle", { cx: 1104, cy: 718, r: 11, fill: C.ground, "fill-opacity": 0.85 }, fig);
+            var dot = B.el("circle", { cx: 1104, cy: 718, r: 6.5, fill: C.chalk }, fig);
 
-            /* ---------- layout ----------
-               The canonical slab at a uniform 0.78 scale, anchored on the left margin and the STAGE ground line,
-               leaves room for the strength bar, which holds s3's exact bar geometry and end fill (0.62) so the
-               bar carries across the cut. K/TX/TY map canonical slab coords to canvas px. */
-            var K = 0.78, S0 = B.STAGE.slab, TX = r1(B.STAGE.m - K * S0.x0), TY = r1(S0.ground - K * S0.ground);
-            var M = function (x, y) { return [r1(K * x + TX), r1(K * y + TY)]; };
-            var TOP = M(0, S0.top)[1];                              // slab top on canvas once settled (≈ 904)
-
-            var fig = B.g(svg, { id: "s4-figure" });
-            var slabG = B.g(fig, { id: "s4-slabg", transform: "translate(" + TX + " " + TY + ") scale(" + K + ")" });
-            var slab = B.slab(svg, slabG, { id: "s4-slab", seed: 7 });
-            var b = slab.bounds;
-
-            /* crack: a jagged red line along the top surface + fine branches into the section (local helper) */
-            function crack(parent, o) {
-              var g = B.g(parent, { class: "s4-crack" }), r = B.rng(o.seed), pts = [], d = "";
-              for (var x = o.x0, k = 0; x <= o.x1; x += 18 + r() * 22, k++) pts.push([r1(x), r1(o.y + 2 + (k % 2 ? 6 + r() * 9 : r() * 4))]);
-              pts.forEach(function (p, i) { d += (i ? "L" : "M") + p[0] + " " + p[1]; });
-              var main = B.path(g, d, { stroke: C.red, "stroke-width": B.LW.heavy, pathLength: 1 });
-              var branches = [];
-              o.at.forEach(function (idx, j) {
-                var p = pts[Math.min(idx, pts.length - 1)], bx = p[0], by = p[1], bd = "M" + bx + " " + by, len = 3 + Math.floor(r() * 2);
-                var side = j % 2 ? 1 : -1, sub = "";
-                for (var s = 0; s < len; s++) {
-                  bx += side * (4 + r() * 9) * (s % 2 ? -1 : 1); by += 11 + r() * 12;
-                  bd += "L" + r1(bx) + " " + r1(by);
-                  if (s === 1) sub = "M" + r1(bx) + " " + r1(by) + "l" + r1(side * (12 + r() * 8)) + " " + r1(6 + r() * 8) + "l" + r1(side * (6 + r() * 6)) + " " + r1(8 + r() * 6);
-                }
-                branches.push(B.path(g, bd, { stroke: C.red, "stroke-width": B.LW.std, pathLength: 1 }));
-                branches.push(B.path(g, sub, { stroke: C.red, "stroke-width": B.LW.hair + 0.5, pathLength: 1 }));
-              });
-              return { g: g, main: main, branches: branches, pts: pts };
-            }
-            var ck = crack(slabG, { x0: b.x0 + 46, x1: b.x1 - 40, y: b.top, seed: 404, at: [4, 9, 15, 21, 27] });
-
-            /* evaporation: wisps rising off the settled slab top (canvas coords) */
-            var wisps = B.wisps(fig, { x0: 120, x1: 520, y: TOP - 10, n: 4, h: 118, seed: 9 });
-
-            /* sun (heat colour) top-left, clear of the headline */
-            var sun = B.sun(svg, fig, { cx: 168, cy: 706, r: 38 });
-
-            /* wind: calm streamlines with a curl at the head (local helper). Dash-travel animation. */
-            function windLine(parent, x0, x1, y, amp, curl) {
-              var L = x1 - x0, d = "M" + x0 + " " + y + "C" + r1(x0 + L * 0.3) + " " + (y - amp) + " " + r1(x0 + L * 0.62) + " " + (y + amp) + " " + x1 + " " + y;
-              if (curl) d += "c18 -2 30 -14 22 -28c-6 -10 -22 -8 -22 4";
-              return B.path(parent, d, { stroke: C.chalk, "stroke-width": B.LW.std - 0.5, pathLength: 1 });
-            }
-            var windG = B.g(fig, { class: "s4-wind" });
-            var wind = [
-              windLine(windG, 64, 560, 776, 12, true),
-              windLine(windG, 30, 470, 812, 9, false),
-              windLine(windG, 96, 640, 846, 11, true),
-              windLine(windG, 52, 420, 876, 7, false),
-            ];
-
-            /* strength bar (no scale, no numbers). Designed-strength target drawn locally so its label
-               sits left of the bar and never crosses it. */
-            var BAR = { x: 858, top: 590, h: 420, w: 52 }, F0 = 0.62, F1 = 0.73, TGT = 0.9;
-            var bar = B.strengthBar(svg, fig, { x: BAR.x, top: BAR.top, h: BAR.h, w: BAR.w, label: "Strength" });
-            var fb = BAR.top + BAR.h - 6, fh = BAR.h - 12, fcx = BAR.x + BAR.w / 2;
-            var yF1 = r1(fb - fh * F1), yT = r1(fb - fh * TGT);
-            var tgt = B.g(fig, { class: "s4-target" });
-            var tgtLine = B.line(tgt, 560, yT, BAR.x + BAR.w + 12, yT, { stroke: C.chalk2, "stroke-width": 2, "stroke-dasharray": "8 8" });
-            var tgtLabel = B.text(tgt, BAR.x - 16, yT - 14, "Designed strength", "t-data", { "text-anchor": "end", fill: C.chalk2 });
-            // the shortfall: orange hatch inside the bar between where it stopped and where it should be
-            var gapFill = B.hatch(svg, { id: "s4-hatch-gap", angle: -45, gap: 10, color: C.point, width: 2 });
-            var gap = B.el("rect", { x: BAR.x + 6, y: yT, width: BAR.w - 12, height: r1(yF1 - yT), fill: gapFill }, fig);
-            var bx = BAR.x - 14;
-            var brk = B.path(fig, "M" + (bx + 10) + " " + yT + "H" + bx + "V" + yF1 + "H" + (bx + 10), { stroke: C.point, "stroke-width": B.LW.std, pathLength: 1 });
-            // "reaction slows": a tick at the height the bar stalls at
-            var slow = B.g(fig, { class: "s4-slow" });
-            var slowTick = B.line(slow, BAR.x - 22, yF1, BAR.x - 4, yF1, { stroke: C.blue, "stroke-width": 2, pathLength: 1 });
-            var slowLabel = B.text(slow, BAR.x - 32, yF1 + 8, "Reaction slows", "t-data", { "text-anchor": "end" });
-
-            /* callouts */
-            var cp = ck.pts[9], cA = M(cp[0], cp[1]);
-            var crackCo = B.callout(fig, { ax: cA[0], ay: cA[1], lx: 72, ly: 800, w: 280, side: "left", head: "Surface", body: "Cracks open", color: C.red });
-            var weakCo = B.callout(fig, { ax: bx, ay: r1((yT + yF1) / 2), lx: 440, ly: 724, w: 350, side: "left", head: "Strength", body: "Weaker than designed", color: C.point });
-
-            // class fills (.t-head/.t-data) beat SVG presentation attributes: colour these heads/labels inline
-            crackCo.head.style.fill = C.red; weakCo.head.style.fill = C.point; tgtLabel.style.fill = C.chalk2;
-
-            /* ---------- timeline (scene-local seconds) ---------- */
             var tl = gsap.timeline({ paused: true });
-            var tWater = at4("water"), tLeaves = at4("leaves"), tSun = at4("sun"), tWind = at4("wind"), tSlows = at4("slows");
-            var tSurface = at5("surface"), tCrack = at5("crack"), tWeaker = at5("weaker"), tDesigned = at5("designed");
+            B.a.drift(tl, "#s4-left", SC.dur, { y1: -12 });
+            B.a.kicker(tl, "#s4-kicker", 0.05);
+            B.a.words(tl, B.words(document.getElementById("s4-hl")), 0.12, { stagger: 0.07 });
+            // the phone arrives (calm: blur + a small settle, no slide)
+            tl.fromTo("#s4-phone", { opacity: 0, scale: 0.965, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: E.land }, 0.0);
+            B.a.draw(tl, [asp.ext, asp.line], 0.5, 0.7);
+            tl.fromTo([asp.ticks, asp.label], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter }, 0.9);
+            B.a.draw(tl, rule, 0.45, 0.7, E.land);
+            B.a.draw(tl, lead, 0.75, 0.35);
+            tl.fromTo([halo, dot], { scale: 0, svgOrigin: "1104 718" }, { scale: 1, svgOrigin: "1104 718", duration: 0.25, ease: E.enter }, 1.0);
+            tl.fromTo(".s4-seg", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: E.enter, stagger: 0.05 }, 0.6);
+            tl.fromTo("#s4-seg-on", { opacity: 0, x: 0 }, { opacity: 1, x: 0, duration: 0.3, ease: E.enter }, 0.7);
 
-            B.a.drift(tl, "#s4-cam", SC.dur, { y1: -14 });
-
-            // entrance: header writes on; slab + bar are on the page from frame 0, the camera settles in
-            tl.fromTo("#s4-zoom", { scale: 1.035 }, { scale: 1, duration: 1.6, ease: E.land }, 0);
-            B.a.kicker(tl, document.getElementById("s4-kicker"), 0);
-            B.a.words(tl, B.words(document.getElementById("s4-hl")), 0.08);
-            B.a.figcap(tl, document.getElementById("s4-figcap"), 0.3);
-            tl.fromTo(tgtLine, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, 0.5);
-            tl.fromTo(tgtLabel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, 0.6);
-
-            // the slab starts wet: a film on top and moisture through the section
-            tl.fromTo(slab.film, { attr: { y: b.top - 8, height: 8 } }, { attr: { y: b.top, height: 0 }, duration: 1.2, ease: E.move }, tWater);
-            var moist = slab.moist.slice().sort(function (p, q) { return +p.getAttribute("cy") - +q.getAttribute("cy"); });
-            moist.forEach(function (m, i) {
-              var o = m.getAttribute("cx") + " " + m.getAttribute("cy");
-              tl.fromTo(m, { opacity: 0.9, scale: 1, y: 0, svgOrigin: o }, { opacity: 0, scale: 0.3, y: -10, svgOrigin: o, duration: 0.5, ease: E.exit }, tLeaves - 0.05 + i * 0.042);
+            // cuts in the reel (frames 56, 112, 169, 225 of the pre-trimmed clip)
+            var cuts = [0, 56 / 30, 112 / 30, 169 / 30, 225 / 30];
+            cuts.forEach(function (t, i) {
+              var n = i + 1, tin = i === 0 ? 0.45 : t;
+              tl.fromTo(["#s4-i" + n, "#s4-l" + n], { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.35, ease: E.enter, stagger: 0.05 }, tin);
+              if (i < 4) tl.to(["#s4-i" + n, "#s4-l" + n], { opacity: 0, filter: "blur(8px)", duration: 0.16, ease: E.exit }, cuts[i + 1] - 0.16);
+              if (i > 0) tl.to("#s4-seg-on", { x: i * 64, duration: 0.35, ease: E.move }, t - 0.05);
             });
-            // the section pales as it dries out
-            tl.fromTo(slab.body, { attr: { fill: C.concrete } }, { attr: { fill: C.concreteDry }, duration: 3.0, ease: E.move }, tLeaves);
-            tl.fromTo(slab.agg, { opacity: 1 }, { opacity: 0.6, duration: 3.0, ease: E.move }, tLeaves);
-
-            // evaporation: two waves of wisps
-            wisps.forEach(function (w, i) {
-              [tLeaves, tLeaves + 1.7].forEach(function (t0, k) {
-                var t = t0 + i * 0.24;
-                tl.fromTo(w, { strokeDasharray: "1 1", strokeDashoffset: 1, opacity: 0, y: 0 },
-                  { strokeDashoffset: 0, opacity: 0.9, y: -20, duration: 0.9, ease: E.enter, immediateRender: k === 0 }, t);
-                tl.fromTo(w, { strokeDashoffset: 0, opacity: 0.9, y: -20 }, { strokeDashoffset: -1, opacity: 0, y: -46, duration: 0.7, ease: E.exit, immediateRender: false }, t + 0.9);
-              });
-            });
-
-            // "sun": the cause arrives
-            tl.fromTo([sun.disc, sun.ring], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: E.enter }, tSun - 0.1);
-            B.a.draw(tl, sun.rays, tSun - 0.15, 0.7, E.enter);
-            tl.fromTo(sun.g, { rotation: 0, svgOrigin: "168 706" }, { rotation: 24, svgOrigin: "168 706", duration: SC.dur - tSun, ease: E.linear }, tSun - 0.15);
-
-            // "wind": calm streamlines travel across the slab, two passes
-            wind.forEach(function (w, i) {
-              [0, 0.85].forEach(function (dt, k) {
-                tl.fromTo(w, { strokeDasharray: "0.42 1.4", strokeDashoffset: 0.46, opacity: k ? 0.85 : 0 },
-                  { strokeDashoffset: -1.06, opacity: 0.85, duration: 1.35, ease: E.move, immediateRender: k === 0 }, tWind - 0.15 + i * 0.12 + dt);
-              });
-            });
-
-            // "reaction slows down": the bar fills, decelerates and stops short of the designed line
-            tl.fromTo(bar.fill, { scaleY: F0, svgOrigin: fcx + " " + fb }, { scaleY: F1, svgOrigin: fcx + " " + fb, duration: tSlows + 0.5 - 0.3, ease: E.enter }, 0.3);
-            B.a.draw(tl, slowTick, tSlows, 0.3, E.enter);
-            tl.fromTo(slowLabel, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: E.enter }, tSlows + 0.05);
-
-            // "surface … crack": causes step back, a red crack runs along the top surface (no shake)
-            tl.to([sun.g, windG], { opacity: 0.3, duration: 0.5, ease: E.move }, tSurface - 0.2);
-            B.a.draw(tl, ck.main, tCrack - 0.12, 0.55, E.enter);
-            ck.branches.forEach(function (p, i) { B.a.draw(tl, p, tCrack + 0.12 + Math.floor(i / 2) * 0.07 + (i % 2) * 0.12, 0.3, E.enter); });
-            B.a.callout(tl, crackCo, tCrack + 0.15);
-
-            // "weaker than designed": the shortfall is bracketed in orange — the point
-            tl.to(slow, { opacity: 0, duration: 0.25, ease: E.exit }, tWeaker - 0.35);
-            tl.to([crackCo.g], { opacity: 0.55, duration: 0.4, ease: E.move }, tWeaker - 0.1);
-            B.a.draw(tl, brk, tWeaker - 0.08, 0.45);
-            tl.fromTo(gap, { scaleY: 0, svgOrigin: fcx + " " + yF1 }, { scaleY: 1, svgOrigin: fcx + " " + yF1, duration: 0.6, ease: E.land }, tWeaker);
-            B.a.callout(tl, weakCo, tWeaker);
-            tl.to("#s4-em", { color: C.point, duration: 0.4, ease: E.move }, tWeaker + 0.05);
-            // "designed": the target line takes full weight
-            tl.to(tgtLine, { attr: { stroke: C.chalk }, duration: 0.35, ease: E.move }, tDesigned);
-            tl.to(tgtLabel, { fill: C.chalk, duration: 0.35, ease: E.move }, tDesigned);
-
-            // exit: blur swap on one stage
-            B.a.exit(tl, "#s4-cam", SC.dur - 0.22, 0.2);
+            // exit: the left column blurs out; the phone holds still (s5 picks it up in place); the screen dips to ground
+            tl.to("#s4-cover", { opacity: 1, duration: 0.25, ease: E.exit }, SC.dur - 0.28);
+            B.a.exit(tl, "#s4-left", SC.dur - 0.28, 0.24);
             window.__timelines["s4"] = tl;
           })();
         </script>
