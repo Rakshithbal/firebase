@@ -177,8 +177,10 @@ words = [{"t": w["w"], "s": w["s"], "e": w["e"], "line": l["id"]} for l in T["li
 groups, cur = [], []
 for i, w in enumerate(words):
     cur.append(w); nxt = words[i + 1] if i + 1 < len(words) else None
-    if re.search(r"[.?!]$", w["t"]) or (w["t"].endswith(",") and len(cur) >= 4) or len(cur) >= MAXW or nxt is None or nxt["line"] != w["line"]:
-        groups.append(cur); cur = []
+    if re.search(r"[.?!]$", w["t"]) or (w["t"].endswith(",") and len(cur) >= 4) or nxt is None or nxt["line"] != w["line"]:
+        k = -(-len(cur) // MAXW)                     # too long: split into k balanced parts (no orphan last word)
+        for j in range(k): groups.append(cur[j * len(cur) // k:(j + 1) * len(cur) // k])
+        cur = []
 cap = []
 for gi, g in enumerate(groups):
     start = max(0.12, g[0]["s"] - 0.08); end = g[-1]["e"] + 0.6

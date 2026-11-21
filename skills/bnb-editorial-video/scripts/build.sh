@@ -21,18 +21,9 @@ mkdir -p renders out
 echo "== gen";   python3 tools/gen.py
 echo "== check"
 $HF check --json > renders/check.json 2>/dev/null || true
-ERR=$(python3 -c "import json,sys
+ERR=$(python3 -c "import json
 d=json.load(open('renders/check.json'))
-def walk(x):
-    n=0
-    if isinstance(x,dict):
-        if x.get('severity')=='error' or x.get('level')=='error': n+=1
-        for v in x.values(): n+=walk(v)
-    elif isinstance(x,list):
-        for v in x: n+=walk(v)
-    return n
-e=d.get('errorCount', d.get('errors') if isinstance(d.get('errors'),int) else None)
-print(e if isinstance(e,int) else walk(d))" 2>/dev/null || echo "?")
+print(0 if d.get('ok') else sum(v.get('errorCount',0) for v in d.values() if isinstance(v,dict)) or 'failed')" 2>/dev/null || echo "unreadable")
 echo "check errors: $ERR"
 if [ "$ERR" != "0" ]; then $HF check || true; echo "build.sh: fix check errors first (see renders/check.json)"; exit 1; fi
 RAW="renders/${SLUG}_raw.mp4"
