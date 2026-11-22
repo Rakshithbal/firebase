@@ -167,7 +167,7 @@ function kalasha(c, p, t) {   // a brass pot with mango leaves and a coconut: My
 // ---------- rangoli at the threshold (dot grid + loops, grows from the centre) ----------
 const RC = [HX, 1240];
 function rangoli(p) {
-  if (p <= 0) return; ctx.save(); ctx.translate(RC[0], RC[1]); ctx.scale(1, .5); const sp = 34;
+  if (p <= 0) return; ctx.save(); ctx.translate(RC[0], RC[1]); ctx.scale(1.05, .6); const sp = 34;
   const pts = []; for (let i = -3; i <= 3; i++) for (let j = -3; j <= 3; j++) if (Math.abs(i) + Math.abs(j) <= 4) pts.push([i * sp, j * sp]);
   pts.sort((a, b) => Math.hypot(...a) - Math.hypot(...b));
   ctx.fillStyle = C.paste; const nd = Math.floor(L.clamp(p / .35) * pts.length);
@@ -187,8 +187,8 @@ function rangoli(p) {
 const PATH = L.resample(L.smooth([[HX + 150, 1300], [HX + 40, 1272], [HX, 1180], [HX, 1080], [HX - 20, 1010], [HX - 120, 1040], [HX - 170, 950], [HX - 120, 875], [HX + 10, 890], [HX + 120, 870], [HX + 175, 950], [HX + 130, 1050], [HX + 40, 1085], [HX + 30, 1150], [HX + 90, 1240], [HX + 200, 1285], [HX + 280, 1290]], 10), 21);
 function path(t) {
   const t0 = 4.1, t1 = 5.7; const p = L.prog(t, t0, t1); if (p <= 0) return; const n = Math.floor(L.eio(p) * (PATH.length - 1));
-  for (let k = 0; k <= n; k++) { const q = PATH[k]; ctx.beginPath(); ctx.arc(q[0], q[1], 7.5, 0, 6.29); ctx.fillStyle = 'rgba(126,50,32,.85)'; ctx.fill();
-    const tw = .75 + .25 * Math.sin(t * 5 + k * .9); ctx.beginPath(); ctx.arc(q[0], q[1], 4.4, 0, 6.29); ctx.fillStyle = C.paste; ctx.globalAlpha = tw; ctx.fill(); ctx.globalAlpha = 1; }
+  for (let k = 0; k <= n; k++) { const q = PATH[k]; ctx.beginPath(); ctx.arc(q[0], q[1], 9, 0, 6.29); ctx.fillStyle = 'rgba(60,20,12,.9)'; ctx.fill();
+    const tw = .75 + .25 * Math.sin(t * 5 + k * .9); ctx.beginPath(); ctx.arc(q[0], q[1], 5.6, 0, 6.29); ctx.fillStyle = C.goldL; ctx.globalAlpha = tw; ctx.fill(); ctx.globalAlpha = 1; }
   if (p < 1) { const h = PATH[n]; goldDot(h, 9, t); }
   else { const k = Math.floor((t - t1) * 14) % PATH.length; goldDot(PATH[k], 6, t); }
 }
