@@ -799,3 +799,18 @@ Format per style: Aliases · Source (where it was seen) · Lemo-Opuscar (matchin
 - **Signature:** glowing core with trailing orbits
 - **Avoid:** cluttered labels
 - **Build with:** Three.js + bloom, or canvas additive
+
+## Karnataka Heritage (Chittara × Mysore)
+> **Needs a native Karnataka reviewer before publishing** (motif accuracy, cultural respect, Kannada usage).
+- **Aliases:** chittara, karnataka folk, mysore painting, gruhapravesha, south indian folk art, red earth & rice paste
+- **Source:** new recipe (BNB style sample 09); inspired by Chittara wall art of the Malnad region (Deevaru community tradition) and the palette of Mysore painting
+- **Lemo-Opuscar:** — (none; closest grammar: `papercut-red` for ground-and-line economy, `marker-paper` for draw-on strokes)
+- **Palette:** red-earth ground #A2472B (darker #7E3220), rice-paste white #F5EDDD, ochre #D9A441, near-black outline #2A1A14; Mysore accents: deep red #7E1C18, leaf green #2E5A36 / #4E7D45, gold leaf #C9A240 (light #F1D98A, dark #8F6A1E)
+- **Shape & line:** flat folk geometry; white lines 2.5–4.5 px, near-constant, slightly irregular; multi-band borders (double rules, sawtooth triangles, dot rows, corner rosettes); dense fills of dots, small diamonds, scallop tiles, lattice (jali); figures with hourglass (two-triangle) torsos, single-line limbs, plain disc heads, faceless
+- **Texture:** hand-plastered earth wall (mottling, broad trowel sweeps, fine grain), paste lines with a soft soaked edge; gold areas as flat gradient "leaf" with fine dark outline
+- **Lighting:** none in the picture (flat); a gentle edge darkening of the wall; light lives only in sparing gold-leaf glints
+- **Type:** classical serif with Indic warmth (e.g. Marcellus) for captions on a deep-green cartouche with gold double rule; small tracked sans for labels; Kannada only with native review
+- **Motion:** draw-on like paste being laid: border first (rules, then sawtooth, then dots), then outlines, then pattern infill rising; drawings change on twos (12–15 fps) with a ≤1 px boil; motifs (leaves, kalasha) pop with a small back-ease; a slow 3 % push over the whole film
+- **Signature:** a white Chittara border frame drawing on around a flat folk-art house on red earth, with mango-leaf toran, brass kalasha and a rangoli (kolam dot-grid) growing at the threshold; gold glints used sparingly
+- **Avoid:** deities, religious figures or temple/community symbols beyond toran/kalasha/rangoli; caricature or faces; neon or glossy 3D; overusing gold; mixing in North-Indian or generic "ethnic" clip-art; sacred motifs as decoration without review
+- **Build with:** canvas 2D draw-on strokes (seeded wobble, reveal by length) + Playwright frame capture; audio: tanpura-style drone + veena-like plucks with slides, soft hand-drum, synthesized (reference build: bnb-videos/style-samples/09-karnataka-heritage)

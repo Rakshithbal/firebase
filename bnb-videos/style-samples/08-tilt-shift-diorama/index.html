@@ -1,0 +1,226 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>STYLE 08 · Tilt-shift clay diorama</title>
+<link rel="stylesheet" href="/core/fonts/fonts.css">
+<style>html,body{margin:0;background:#E9DCD2;overflow:hidden}canvas{display:block}</style>
+</head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from '/node_modules/three/build/three.module.js';
+import { RoundedBoxGeometry } from '/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js';
+const W = 1080, H = 1920;
+const TM = await (await fetch('timing.json')).json();
+window.DUR = TM.total;
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lin = (t, a, b) => cl((t - a) / (b - a));
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const eout = x => 1 - Math.pow(1 - x, 3);
+const back = (x, s = 2.2) => { x = cl(x); const c = s + 1; return 1 + c * Math.pow(x - 1, 3) + s * Math.pow(x - 1, 2); };
+const hsh = n => { const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+
+// ---------- renderer + tilt-shift post ----------
+const gl = document.createElement('canvas'); gl.width = W; gl.height = H;
+const R = new THREE.WebGLRenderer({ canvas: gl, antialias: false, preserveDrawingBuffer: true });
+R.setPixelRatio(1); R.setSize(W, H, false);
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+const RT = new THREE.WebGLRenderTarget(W, H, { samples: 4, type: THREE.HalfFloatType });
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xE7D6CB);
+const post = new THREE.ShaderMaterial({
+  uniforms: { tex: { value: RT.texture }, res: { value: new THREE.Vector2(W, H) }, bandY: { value: .58 }, bw: { value: .085 }, amp: { value: 30 } },
+  vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }`,
+  fragmentShader: `uniform sampler2D tex; uniform vec2 res; uniform float bandY, bw, amp; varying vec2 vUv;
+  vec3 srgb(vec3 c){ c = clamp(c, 0., 1.); return mix(c * 12.92, 1.055 * pow(c, vec3(1. / 2.4)) - .055, step(.0031308, c)); }
+  void main(){
+    float dy = abs(vUv.y - bandY); float r = min(amp * pow(max(0., dy - bw) / .5, 1.15), 26.);
+    float rot = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) * 6.283;
+    vec3 acc = vec3(0.);
+    for (int i = 0; i < 40; i++) { float a = float(i) * 2.39996 + rot; float rr = sqrt((float(i) + .5) / 40.) * r;
+      acc += texture2D(tex, vUv + vec2(cos(a), sin(a)) * rr / res).rgb; }
+    vec3 c = acc / 40.;
+    c = c / (1. + c * .18) * 1.12;                      // soft shoulder
+    c = srgb(c);
+    float l = dot(c, vec3(.299, .587, .114)); c = mix(vec3(l), c, 1.22);   // model-paint saturation
+    c = mix(c, c * c * (3. - 2. * c), .25);                               // soft added contrast
+    c *= vec3(1.02, 1.0, .97);
+    vec2 q = vUv - .5; c *= 1. - .32 * dot(q * vec2(1.3, 1.), q * vec2(1.3, 1.));   // vignette
+    gl_FragColor = vec4(c, 1.); }`,
+  depthTest: false, depthWrite: false });
+const pq = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), post); const pscene = new THREE.Scene(); pscene.add(pq); const pcam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+// ---------- clay: fingerprint / lump bump map, matte sheen ----------
+function clayTex(seed) {
+  const c = document.createElement('canvas'); c.width = c.height = 512; const x = c.getContext('2d');
+  x.fillStyle = '#808080'; x.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 260; i++) {   // soft lumps
+    const px = hsh(seed + i) * 512, py = hsh(seed + i * 3.1) * 512, r = 10 + hsh(seed + i * 7.7) * 40, v = hsh(seed + i * 1.9) > .5 ? 255 : 0;
+    const gr = x.createRadialGradient(px, py, 0, px, py, r); gr.addColorStop(0, `rgba(${v},${v},${v},.10)`); gr.addColorStop(1, 'rgba(128,128,128,0)'); x.fillStyle = gr; x.fillRect(px - r, py - r, 2 * r, 2 * r);
+  }
+  for (let f = 0; f < 5; f++) {     // fingerprint arcs
+    const px = hsh(seed + f * 11) * 512, py = hsh(seed + f * 13) * 512; x.lineWidth = 1.6;
+    for (let k = 0; k < 14; k++) { x.strokeStyle = `rgba(${k % 2 ? 40 : 220},${k % 2 ? 40 : 220},${k % 2 ? 40 : 220},.10)`; x.beginPath(); x.ellipse(px, py, 6 + k * 4, 9 + k * 5, hsh(f + seed), .3, 2.6); x.stroke(); }
+  }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(1.5, 1.5); return t;
+}
+const BUMP = clayTex(3);
+const clay = (hex, rough = .82) => new THREE.MeshPhysicalMaterial({ color: hex, roughness: rough, sheen: .5, sheenRoughness: .8, sheenColor: 0xffffff, bumpMap: BUMP, bumpScale: 1.6 });
+const C = { wood: clay(0x8D6E63, .7), woodTop: clay(0xA1887F, .75), grass: clay(0x9CC58C), earth: clay(0xC9A07A), concrete: clay(0xBDB7AE), plinth: clay(0xA7A29A),
+  brick: clay(0xE58C6E), slab: clay(0xC9C3BA), paint: clay(0xF6D08A), glass: clay(0x7FB7BE, .5), door: clay(0x9B6B52), tree: clay(0x6FAE72), trunk: clay(0x8D6E63),
+  pink: clay(0xF28482), blue: clay(0x7FB7BE), yellow: clay(0xF6BD60), white: clay(0xF5EFE8), path: clay(0xE8D9C4), green: clay(0x58B26A) };
+const RB = {}; const rbox = (sx, sy, sz, r = .04) => { const k = [sx, sy, sz, r].join(); return RB[k] || (RB[k] = new RoundedBoxGeometry(sx, sy, sz, 3, Math.min(r, sx / 2.1, sy / 2.1, sz / 2.1))); };
+function mk(geo, mat, x, y, z, parent = scene) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; parent.add(m); m.userData.p = [x, y, z]; return m; }
+
+// light: studio softbox above, warm key / cool fill, soft contact shadows
+scene.add(new THREE.HemisphereLight(0xfff3e6, 0x9c8a80, 1.1));
+const key = new THREE.DirectionalLight(0xfff0dd, 2.4); key.position.set(-4, 9, 5); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: 1, far: 25 }); key.shadow.radius = 6; key.shadow.bias = -.0008; key.shadow.normalBias = .02;
+scene.add(key);
+const fillL = new THREE.DirectionalLight(0xcfe0ff, .55); fillL.position.set(5, 3, -3); scene.add(fillL);
+
+// ---------- the set ----------
+const BR = 3.0;
+mk(new THREE.CylinderGeometry(BR + .08, BR + .18, .42, 96), C.wood, 0, -.21, 0);
+mk(new THREE.CylinderGeometry(BR, BR, .06, 96), C.grass, 0, .01, 0);
+const studio = mk(new THREE.CylinderGeometry(14, 14, .1, 64), clay(0xE2CFC3, .95), 0, -.47, 0); studio.castShadow = false;
+mk(rbox(2.3, .05, 2.8, .02), C.earth, 0, .05, -.05);
+// props around the plot: trees, brick stack, sand heap
+const tree = (x, z, s) => { const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g); mk(new THREE.CylinderGeometry(.05 * s, .07 * s, .45 * s, 10), C.trunk, 0, .22 * s, 0, g);
+  mk(new THREE.IcosahedronGeometry(.34 * s, 1), C.tree, 0, .6 * s, 0, g); mk(new THREE.IcosahedronGeometry(.24 * s, 1), C.tree, .14 * s, .82 * s, .06 * s, g); return g; };
+tree(-2.1, -1.3, 1.1); tree(2.0, -1.7, .95); tree(-2.2, 1.5, .85); tree(2.35, .6, .75);
+for (let i = 0; i < 9; i++) mk(rbox(.2, .08, .1, .025), C.brick, 1.75 + (i % 3) * .21 - .2, .1 + Math.floor(i / 3) * .085, 1.65 + ((i / 3 | 0) % 2) * .05);
+mk(new THREE.SphereGeometry(.3, 20, 12, 0, 6.29, 0, 1.4), clay(0xE3C79A), -1.75, .03, 1.95).scale.set(1, .55, 1);
+
+// house parts
+const HX = .8, HZ = 1.0, PH = .2, WH = .9, WT = .12;
+const pads = [[-HX, -HZ], [HX, -HZ], [-HX, HZ], [HX, HZ], [-HX, 0], [HX, 0]].map(([x, z]) => mk(rbox(.34, .16, .34, .04), C.concrete, x, .02, z));
+const plinth = mk(rbox(2 * HX + .14, PH, 2 * HZ + .14, .05), C.plinth, 0, PH / 2, 0);
+const wallDefs = [[0, -HZ, 2 * HX, WT], [-HX, 0, WT, 2 * HZ], [HX, 0, WT, 2 * HZ], [-.5 * HX - .1, HZ, HX - .2, WT], [.5 * HX + .1, HZ, HX - .2, WT]];
+const walls = wallDefs.map(([x, z, sx, sz]) => mk(rbox(sx, WH, sz, .035), C.brick, x, PH + WH / 2, z));
+const lintel = mk(rbox(.42, .22, WT, .03), C.brick, 0, PH + WH - .11, HZ);
+const slab = mk(rbox(2 * HX + .34, .14, 2 * HZ + .34, .05), C.slab, 0, PH + WH + .07, 0);
+const fin = [];   // finishing: windows, door, sunshades
+for (const z of [-.45, .45]) { fin.push(mk(rbox(.06, .32, .34, .025), C.glass, HX + .05, PH + .52, z)); fin.push(mk(rbox(.16, .05, .44, .02), C.white, HX + .1, PH + .74, z)); }
+for (const x of [-.5]) { fin.push(mk(rbox(.36, .32, .06, .025), C.glass, x, PH + .52, HZ + .05)); fin.push(mk(rbox(.46, .05, .16, .02), C.white, x, PH + .74, HZ + .1)); }
+fin.push(mk(rbox(.34, .64, .05, .02), C.door, 0, PH + .32, HZ));
+fin.push(mk(rbox(.5, .05, .2, .02), C.white, .5, PH + .74, HZ + .1)); fin.push(mk(rbox(.36, .32, .06, .025), C.glass, .5, PH + .52, HZ + .05));
+// handover: path, bushes, flag on the roof, two small figures (no faces)
+const hand = [];
+hand.push(mk(rbox(.36, .03, .9, .015), C.path, 0, .07, HZ + .55));
+for (const [x, z, m] of [[-.42, HZ + .32, C.pink], [.42, HZ + .32, C.yellow], [-.62, HZ + .32, C.tree], [.62, HZ + .32, C.tree]]) hand.push(mk(new THREE.IcosahedronGeometry(.11, 1), m, x, .14, z));
+const flag = new THREE.Group(); flag.position.set(HX - .1, PH + WH + .14, -HZ + .15); scene.add(flag);
+mk(new THREE.CylinderGeometry(.015, .015, .5, 8), C.white, 0, .25, 0, flag);
+const fl = mk(new THREE.BoxGeometry(.24, .15, .02), C.green, .12, .41, 0, flag); hand.push(flag);
+const person = (col, hat) => { const g = new THREE.Group(); scene.add(g); mk(new THREE.CapsuleGeometry(.055, .12, 4, 10), col, 0, .14, 0, g); mk(new THREE.SphereGeometry(.05, 14, 10), C.white, 0, .29, 0, g);
+  if (hat) mk(new THREE.SphereGeometry(.058, 14, 8, 0, 6.29, 0, 1.6), C.yellow, 0, .305, 0, g); return g; };
+const w1 = person(C.blue, true), w2 = person(C.pink, true), owner = person(C.yellow, false), owner2 = person(C.blue, false);
+
+// ---------- stages ----------
+const STAGES = ['Foundation', 'Plinth', 'Walls', 'Slab', 'Finishing', 'Handover'];
+const ST = [2.0, 3.05, 4.1, 5.15, 6.2, 7.25];   // check lands at ST[i] + .1 (matches the audio)
+const BUILD = .62;
+const sp = (i, ts) => lin(ts, ST[i] - BUILD - .05, ST[i] - .05);
+function pose(t) {
+  const ts = Math.floor(t * 12) / 12, step = Math.floor(t * 12);   // stop-motion on twos (12 fps); camera stays smooth
+  const boil = (m, id, a = .006) => { const p = m.userData.p; m.position.set(p[0] + (hsh(step * 3.1 + id) - .5) * a, m.position.y, p[2] + (hsh(step * 7.3 + id) - .5) * a); };
+  pads.forEach((m, i) => { const p = back(lin(ts, ST[0] - BUILD + i * .07, ST[0] - .2 + i * .07)); m.position.y = -.12 + .2 * p; m.visible = p > 0; boil(m, i); });
+  const pp = back(sp(1, ts), 1.6); plinth.visible = pp > 0; plinth.scale.y = Math.max(pp, .001); plinth.position.y = PH / 2 * Math.max(pp, .001) + .0;
+  walls.forEach((m, i) => { const p = back(lin(ts, ST[2] - BUILD + i * .06, ST[2] - .1 + i * .02), 1.3); m.visible = p > 0; m.scale.y = Math.max(p, .001); m.position.y = PH + WH / 2 * Math.max(p, .001); boil(m, 20 + i, .004); });
+  const lp = back(lin(ts, ST[2] - .3, ST[2] - .05)); lintel.visible = lp > 0; lintel.scale.y = Math.max(lp, .001);
+  const s3 = sp(3, ts); slab.visible = s3 > 0; slab.position.y = PH + WH + .07 + 1.6 * Math.pow(1 - s3, 2);
+  const sq = ts > ST[3] - .05 ? Math.exp(-(ts - ST[3] + .05) * 8) * Math.sin((ts - ST[3]) * 22) * .25 : 0; slab.scale.set(1 + sq * .3, 1 - sq, 1 + sq * .3);
+  // finishing: plaster + paint replaces the bare brick, windows and door pop in
+  const s4 = sp(4, ts); const col = new THREE.Color(0xE58C6E).lerp(new THREE.Color(0xF6D08A), eio(cl(s4 * 1.6)));
+  for (const m of [...walls, lintel]) m.material = s4 > 0 ? (m.userData.pm || (m.userData.pm = clay(0xF6D08A))) : C.brick;
+  if (s4 > 0) walls[0].userData.pm.color.copy(col), walls.forEach(m => m.userData.pm.color.copy(col)), lintel.userData.pm.color.copy(col);
+  fin.forEach((m, i) => { const p = back(lin(ts, ST[4] - .4 + i * .04, ST[4] - .1 + i * .04)); m.visible = p > 0; m.scale.setScalar(Math.max(p, .001)); });
+  const s5 = sp(5, ts);
+  hand.forEach((m, i) => { const p = back(lin(ts, ST[5] - BUILD + i * .08, ST[5] - .25 + i * .08)); m.visible = p > 0; if (m !== flag) m.scale.setScalar(Math.max(p, .001)); else m.scale.set(1, Math.max(p, .001), 1); });
+  fl.rotation.y = .25 * Math.sin(ts * 5); fl.scale.x = 1 + .08 * Math.sin(ts * 9);
+  // workers hop between positions per stage (stop-motion), then step aside; owners arrive at handover
+  const wp = [[[-1.3, 1.2], [1.3, -1.25]], [[-1.2, -1.3], [1.35, .2]], [[1.25, 1.25], [-1.3, .1]], [[-1.25, 1.35], [1.3, -1.2]], [[1.3, .5], [-1.35, -.9]], [[1.6, 1.0], [1.85, .75]]];
+  const si = Math.min(5, Math.max(0, ST.findIndex(s => ts < s - BUILD) - 1 < 0 ? 5 : ST.findIndex(s => ts < s - BUILD) - 1));
+  const k = ts < ST[0] - BUILD ? 0 : si;
+  [w1, w2].forEach((w, j) => { const [x, z] = wp[k][j]; w.position.set(x, .04 + Math.abs(Math.sin(step * 1.7 + j)) * .025, z); w.rotation.y = Math.atan2(-x, -z); });
+  const op = lin(ts, ST[5] - .5, ST[5] + .3);
+  owner.visible = owner2.visible = op > 0;
+  owner.position.set(-.12, .06, HZ + 1.25 - .5 * eout(op)); owner2.position.set(.13, .06, HZ + 1.3 - .5 * eout(op));
+  owner.rotation.y = owner2.rotation.y = Math.PI;
+}
+
+// camera: high oblique, slow orbit, smooth every frame
+const cam = new THREE.PerspectiveCamera(26, W / H, .1, 80);
+const TGT = new THREE.Vector3(0, .55, 0);
+function setCam(t) {
+  const u = t / DUR, az = THREE.MathUtils.degToRad(28 + 40 * eio(u * .9 + .05) - 20), el = THREE.MathUtils.degToRad(41 - 3 * u), d = 12.8 - 1.0 * eio(u);
+  cam.position.set(TGT.x + d * Math.cos(el) * Math.sin(az), TGT.y + d * Math.sin(el), TGT.z + d * Math.cos(el) * Math.cos(az)); cam.lookAt(TGT);
+  cam.setViewOffset(W, H, 60, 140, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+}
+const P = new THREE.Vector3();
+const scr = (x, y, z) => { P.set(x, y, z).project(cam); return [(P.x + 1) / 2 * W, (1 - P.y) / 2 * H]; };
+
+// ---------- 2D: puffy clay labels, green checks, caption ----------
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const FR = (s) => `500 ${s}px Fredoka, sans-serif`;
+function puff(x, y, w, h, fill, r = h / 2) {   // a soft clay chip with contact shadow
+  g.save(); g.shadowColor = 'rgba(80,50,40,.28)'; g.shadowBlur = 16; g.shadowOffsetY = 7; g.fillStyle = fill; g.beginPath(); g.roundRect(x, y, w, h, r); g.fill(); g.restore();
+  const hl = g.createLinearGradient(0, y, 0, y + h); hl.addColorStop(0, 'rgba(255,255,255,.35)'); hl.addColorStop(.5, 'rgba(255,255,255,0)'); hl.addColorStop(1, 'rgba(0,0,0,.08)');
+  g.fillStyle = hl; g.beginPath(); g.roundRect(x, y, w, h, r); g.fill();
+}
+function check(x, y, s, p) {   // green clay check: squash on landing
+  if (p <= 0) return; const b = back(p, 2.6), sq = 1 + .18 * Math.sin(Math.min(1, p) * Math.PI) * (p < 1 ? 1 : 0);
+  g.save(); g.translate(x, y); g.scale(b * sq, b / sq);
+  g.shadowColor = 'rgba(40,80,40,.3)'; g.shadowBlur = 10; g.shadowOffsetY = 4; g.fillStyle = '#4DB36A'; g.beginPath(); g.arc(0, 0, s, 0, 7); g.fill(); g.shadowColor = 'transparent';
+  const hl = g.createRadialGradient(-s * .35, -s * .4, 0, 0, 0, s); hl.addColorStop(0, 'rgba(255,255,255,.4)'); hl.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = hl; g.beginPath(); g.arc(0, 0, s, 0, 7); g.fill();
+  g.strokeStyle = '#FFFDF6'; g.lineWidth = s * .26; g.lineCap = g.lineJoin = 'round'; g.beginPath(); g.moveTo(-s * .42, s * .02); g.lineTo(-s * .12, s * .32); g.lineTo(s * .45, -s * .3); g.stroke(); g.restore();
+}
+function caption(t) {
+  const ws = TM.words, a = ws[0].s - .12, b = Math.max(ws.at(-1).e + .9, a + 2.2); if (t < a || t > b) return;
+  const lines = [ws.slice(0, 4), ws.slice(4)]; const al = Math.min(lin(t, a, a + .2), 1 - lin(t, b - .25, b));
+  g.save(); g.globalAlpha = al; g.font = FR(46);
+  const wd = lines.map(l => g.measureText(l.map(w => w.w).join(' ')).width), bw = Math.max(...wd) + 80;
+  puff(480 - bw / 2, 1378, bw, 168, '#FFF8EE', 40);
+  lines.forEach((l, i) => { let x = 480 - wd[i] / 2; g.textAlign = 'left'; g.textBaseline = 'middle';
+    for (const w of l) { g.fillStyle = t >= w.s - .05 ? '#5A3E36' : 'rgba(90,62,54,.3)'; g.fillText(w.w, x, 1432 + i * 58); x += g.measureText(w.w + ' ').width; } });
+  g.restore();
+}
+
+window.render = t => {
+  pose(t); setCam(t); scene.updateMatrixWorld(true);
+  // keep the sharp band on the house
+  const hy = scr(0, .6, 0)[1]; post.uniforms.bandY.value = 1 - hy / H;
+  R.setRenderTarget(RT); R.render(scene, cam); R.setRenderTarget(null); R.render(pscene, pcam);
+  g.drawImage(gl, 0, 0);
+  // style label
+  g.save(); g.font = '600 25px Inter, sans-serif'; g.letterSpacing = '3px'; g.fillStyle = 'rgba(70,46,40,.75)'; g.textBaseline = 'middle'; g.fillText('STYLE 08 · TILT-SHIFT CLAY DIORAMA', 64, 166); g.restore();
+  // current stage sign (clay chip) at the top of the content area
+  const ts = Math.floor(t * 12) / 12;
+  let cur = -1; for (let i = 0; i < 6; i++) if (ts >= ST[i] - BUILD - .1) cur = i;
+  if (cur >= 0) {
+    const pin = back(lin(ts, ST[cur] - BUILD - .1, ST[cur] - BUILD + .15), 2);
+    g.save(); g.translate(480, 292); g.scale(pin, pin); g.font = FR(58); const tw = g.measureText(STAGES[cur]).width;
+    puff(-tw / 2 - 44, -50, tw + 88, 100, '#FFF8EE');
+    g.fillStyle = '#5A3E36'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(STAGES[cur], 0, 3); g.restore();
+  }
+  // big check pops beside the house as each stage passes
+  for (let i = 0; i < 6; i++) {
+    const p = lin(ts, ST[i] + .1, ST[i] + .45), q = 1 - lin(ts, ST[i] + .85, ST[i] + 1.0);
+    if (p > 0 && q > 0) { const [x, y] = scr(HX + .3, PH + WH + .55, -HZ); check(x + 40, y - 40, 44 * q, p); }
+  }
+  // stage tracker: six small clay chips, each gets its green check
+  g.font = FR(29);
+  for (let i = 0; i < 6; i++) {
+    const col = i % 3, row = i / 3 | 0, cx = 170 + col * 310, cy = 1180 + row * 84;
+    const ap = back(lin(t, .35 + i * .08, .75 + i * .08));
+    if (ap <= 0) continue;
+    const done = ts >= ST[i] + .1, active = i === cur && !done;
+    g.save(); g.translate(cx, cy); g.scale(ap, ap);
+    puff(-136, -31, 272, 62, done ? '#E5F3E2' : active ? '#FFF8EE' : 'rgba(255,248,238,.72)');
+    g.fillStyle = done || active ? '#5A3E36' : 'rgba(90,62,54,.55)'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText(STAGES[i], -84, 2);
+    g.strokeStyle = 'rgba(90,62,54,.25)'; g.lineWidth = 3; g.beginPath(); g.arc(-108, 0, 15, 0, 7); g.stroke();
+    check(-108, 0, 19, lin(ts, ST[i] + .1, ST[i] + .4));
+    g.restore();
+  }
+  caption(t);
+};
+await document.fonts.load(FR(40)); await document.fonts.load('600 25px Inter');
+window.render(0); window.READY = true;
+</script></body></html>
