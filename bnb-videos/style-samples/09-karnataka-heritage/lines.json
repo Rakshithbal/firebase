@@ -1,0 +1,17 @@
+[
+ {
+  "id": "L01",
+  "text": "Before your Gruha-pravesha,",
+  "voice": "hm_omega",
+  "speed": 1.0,
+  "lang": "en-us",
+  "caption": "Before your Gruhapravesha,"
+ },
+ {
+  "id": "L02",
+  "text": "walk the house once with your engineer.",
+  "voice": "hm_omega",
+  "speed": 1.0,
+  "lang": "en-us"
+ }
+]

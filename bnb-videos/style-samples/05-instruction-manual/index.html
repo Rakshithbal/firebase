@@ -1,0 +1,238 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Instruction Manual</title>
+<style>@font-face{font-family:Inter;font-weight:100 900;src:url(../fonts/Inter-var.woff)}html,body{margin:0;background:#222}canvas{display:block}</style>
+</head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../tools/lib.js"></script>
+<script>
+const T = __TIMING__;
+const W = 1080, H = 1920, cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const PAL = { paper: '#F4F1EA', ink: '#1E1D1B', w0: '#FFFFFF', w1: '#ECE8DF', w2: '#DCD7CC', y0: '#F7D35A', y1: '#F2C230', y2: '#DEAA1F',
+  g0: '#CFCBC2', g1: '#9C988F', g2: '#6B6862', red: '#D23A2E', blue: '#2C66AC', paint: '#D3DEE8', paint2: '#C2D0DD', patch: '#E4DFD3' };
+const EV = []; window.EV = EV;
+const PANELS = [[90, 345], [535, 345], [90, 850], [535, 850]], PW = 415, PH = 470;
+const pc = i => [PANELS[i][0] + PW / 2, PANELS[i][1] + PH / 2];
+let LW = 2.6;
+
+// ---------- paper ----------
+let paper;
+function bakePaper() {
+  paper = document.createElement('canvas'); paper.width = W; paper.height = H; const g = paper.getContext('2d'); const r = L.rng(5);
+  g.fillStyle = PAL.paper; g.fillRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(120,110,95,.09)'; g.lineWidth = .8;
+  for (let i = 0; i < 900; i++) { const x = r() * W, y = r() * H, a = r() * 6.28, l = 3 + r() * 9; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); }
+  g.globalAlpha = .035; g.drawImage(L.noiseCanvas(540, 960, 2, 90, 128), 0, 0, W, H); g.globalAlpha = 1;
+}
+
+// ---------- drawing primitives (page units) ----------
+function poly(pts, fill, close = true) { ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); if (close) ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW; ctx.lineJoin = 'round'; ctx.stroke(); }
+function line(a, b, w = LW, col = PAL.ink, dash) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]); }
+function disc(c, r, fill, stroke = true) { ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, 6.2832); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW; ctx.stroke(); } }
+function bar(a, b, w, col) { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.stroke(); }
+function arrowFlat(a, b, w = 14, col = PAL.ink, p = 1) {   // a flat manual arrow, drawn shaft-first
+  const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy), ux = dx / l, uy = dy / l, nx = -uy, ny = ux; const hl = w * 1.8, e = l * p;
+  const tip = [a[0] + ux * e, a[1] + uy * e]; ctx.fillStyle = col; ctx.beginPath();
+  const s = Math.max(0, e - hl);
+  ctx.moveTo(a[0] + nx * w / 2, a[1] + ny * w / 2); ctx.lineTo(a[0] + ux * s + nx * w / 2, a[1] + uy * s + ny * w / 2); ctx.lineTo(a[0] + ux * s + nx * w * 1.3, a[1] + uy * s + ny * w * 1.3);
+  ctx.lineTo(tip[0], tip[1]); ctx.lineTo(a[0] + ux * s - nx * w * 1.3, a[1] + uy * s - ny * w * 1.3); ctx.lineTo(a[0] + ux * s - nx * w / 2, a[1] + uy * s - ny * w / 2); ctx.lineTo(a[0] - nx * w / 2, a[1] - ny * w / 2); ctx.closePath(); ctx.fill();
+}
+function tick(c, s, col, p = 1) { ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = col; ctx.lineWidth = s * .2; ctx.beginPath();
+  const pts = [[c[0] - s * .42, c[1] + s * .02], [c[0] - s * .12, c[1] + s * .32], [c[0] + s * .45, c[1] - s * .34]]; const st = new L.Stroke(pts, { smooth: false, wob: 0, trem: 0, boil: 0, step: 2 }); st.path(ctx, p, 0); ctx.stroke(); ctx.restore(); }
+function cross(c, s, col, p = 1) { ctx.save(); ctx.lineCap = 'round'; ctx.strokeStyle = col; ctx.lineWidth = s * .2; const q1 = L.clamp(p * 2), q2 = L.clamp(p * 2 - 1);
+  ctx.beginPath(); ctx.moveTo(c[0] - s * .36, c[1] - s * .36); ctx.lineTo(c[0] - s * .36 + s * .72 * q1, c[1] - s * .36 + s * .72 * q1); ctx.stroke();
+  if (q2 > 0) { ctx.beginPath(); ctx.moveTo(c[0] + s * .36, c[1] - s * .36); ctx.lineTo(c[0] + s * .36 - s * .72 * q2, c[1] - s * .36 + s * .72 * q2); ctx.stroke(); } ctx.restore(); }
+function badge(c, r, kind, p) {   // white disc, red ✗ or blue ✓ (stamped)
+  if (p <= 0) return; const sc = p < .3 ? L.eback(p / .3) : 1; ctx.save(); ctx.translate(c[0], c[1]); ctx.scale(sc, sc);
+  disc([0, 0], r, PAL.w0); if (kind === 'x') cross([0, 0], r * 1.5, PAL.red, L.prog(p, .1, .6)); else tick([0, 0], r * 1.5, PAL.blue, L.prog(p, .1, .6)); ctx.restore(); }
+
+// ---------- iso wall in a panel ----------
+const C30 = Math.cos(Math.PI / 6), S30 = .5;
+function isoP(o, u, v, h) { return [o[0] + (u - v) * C30, o[1] + (u + v) * S30 - h]; }
+function wall(o, U, Hh, Tk = 16) {
+  // top surface, left end, face (v=0 plane, seen from the front-left)
+  poly([isoP(o, 0, 0, Hh), isoP(o, U, 0, Hh), isoP(o, U, -Tk, Hh), isoP(o, 0, -Tk, Hh)], PAL.w0);
+  poly([isoP(o, 0, 0, 0), isoP(o, 0, 0, Hh), isoP(o, 0, -Tk, Hh), isoP(o, 0, -Tk, 0)], PAL.w2);
+  poly([isoP(o, 0, 0, 0), isoP(o, U, 0, 0), isoP(o, U, 0, Hh), isoP(o, 0, 0, Hh)], PAL.w1);
+}
+function floorLine(o, U) { line(isoP(o, -40, 0, 0), isoP(o, U + 30, 0, 0), LW); line(isoP(o, -10, 150, 0), isoP(o, U + 10, 150, 0), LW * .8, PAL.g0, [2, 9]); }
+function wallEllipse(o, uc, hc, r, a0 = 0, a1 = 6.2832, n = 60) { const pts = []; for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; pts.push(isoP(o, uc + r * Math.cos(a), 0, hc + r * Math.sin(a) * 1.0)); } return pts; }
+
+// ---------- pictogram figure (flat, faceless, round-capped bars) ----------
+function ik(sh, tg, l1, l2, bendSign = 1) {
+  let dx = tg[0] - sh[0], dy = tg[1] - sh[1]; let d = Math.hypot(dx, dy); const dd = Math.min(d, l1 + l2 - .01);
+  const a = Math.atan2(dy, dx), c = (l1 * l1 + dd * dd - l2 * l2) / (2 * l1 * dd), b = Math.acos(L.clamp(c, -1, 1));
+  const e = [sh[0] + l1 * Math.cos(a + bendSign * b), sh[1] + l1 * Math.sin(a + bendSign * b)]; const hnd = [sh[0] + dd * Math.cos(a), sh[1] + dd * Math.sin(a)]; return [e, hnd];
+}
+function figure(F, hand, o = {}) {
+  const s = o.s || 1, col = PAL.g2, far = '#A9A59C', k = (x, y) => [F[0] + x * s, F[1] + y * s];
+  const hip = k(-2, -86), neck = k(4, -152), sh = k(6, -144), head = k(8, -178);
+  // far leg + far arm (lighter)
+  bar(hip, k(10, -44), 22 * s, far); bar(k(10, -44), k(14, 0), 20 * s, far); bar(k(14, 0), k(30, 0), 14 * s, far);
+  bar(sh, k(-6, -104), 17 * s, far); bar(k(-6, -104), k(4, -70), 16 * s, far);
+  // torso
+  bar(neck, hip, 32 * s, col);
+  // near leg
+  bar(hip, k(-10, -44), 23 * s, col); bar(k(-10, -44), k(-16, 0), 21 * s, col); bar(k(-16, 0), k(2, 0), 15 * s, col);
+  // head
+  disc(head, 19 * s, col, false);
+  // near arm to hand target
+  const [el, hn] = ik(sh, hand, 52 * s, 50 * s, o.bend || 1);
+  bar(sh, el, 18 * s, col); bar(el, hn, 17 * s, col);
+  disc(hn, 12 * s, o.handCol || col, false);
+  if (o.tool) o.tool(hn);
+  return hn;
+}
+
+// ---------- the four steps ----------
+const P1 = { t0: 1.15 }, P2 = { t0: 3.3 }, P3 = { t0: 5.6 }, P4 = { t0: 7.3 };
+const TAPS = [1.62, 1.98, 2.34];
+const wallO = i => [PANELS[i][0] + 150, PANELS[i][1] + 292];
+const SPOT = { u: 108, h: 112, r: 30 };
+function scene(i, t, appear, opts = {}) {
+  const o = wallO(i);
+  ctx.globalAlpha = appear; floorLine(o, 200); wall(o, 200, 210); ctx.globalAlpha = 1;
+  return o;
+}
+function step1(t) {
+  const i = 0; if (t < P1.t0) return; const ap = L.prog(t, P1.t0, P1.t0 + .25); const o = scene(i, t, ap);
+  const tp = isoP(o, 92, 0, 112); // tap point on the wall face
+  // arrow first: a small flat arrow toward the wall
+  const ar = L.prog(t, P1.t0 + .2, P1.t0 + .42); if (ar > 0 && t < TAPS[2] + .5) arrowFlat([tp[0] - 92, tp[1] - 56], [tp[0] - 40, tp[1] - 26], 9, PAL.ink, L.eo(ar));
+  // hand: pull back and tap
+  let back = 22; for (const tt of TAPS) { const d = t - tt; if (d > -.16 && d < .14) back = d < 0 ? 22 * (-d / .16) : 22 * (d / .14); }
+  if (t < TAPS[0] - .16) back = 22 + 30 * (1 - L.eo(L.prog(t, P1.t0 + .1, TAPS[0] - .2)));
+  const F = isoP(o, 96, 124, 0); const dir = [-C30, -S30 * .6];
+  ctx.globalAlpha = ap; figure([F[0] - 6, F[1]], [tp[0] + dir[0] * (back + 11), tp[1] + dir[1] * (back + 11) + 4], { handCol: PAL.y1, bend: 1 }); ctx.globalAlpha = 1;
+  for (const tt of TAPS) { const d = t - tt; if (d > 0 && d < .32) { const k = L.eo(d / .32); ctx.globalAlpha = 1 - k * .6;
+    for (const a of [-.9, -.3, .3]) { const r0 = 18 + 6 * k, r1 = 34 + 14 * k; line([tp[0] + Math.cos(a - .6) * r0 * .3 + 6, tp[1] - 14 + Math.sin(a - .6) * r0], [tp[0] + Math.cos(a - .6) * r1 * .3 + 12, tp[1] - 14 + Math.sin(a - .6) * r1], LW * 1.2); }
+    ctx.globalAlpha = 1; } }
+}
+function crossSection(c, hollow, ap) {     // magnifier: plaster on brick; hollow has a gap behind the plaster
+  const R = 80; ctx.save(); ctx.globalAlpha = ap; ctx.beginPath(); ctx.arc(c[0], c[1], R, 0, 6.2832); ctx.fillStyle = PAL.w0; ctx.fill(); ctx.clip();
+  // brick (right), mortar joints
+  ctx.fillStyle = PAL.g0; ctx.fillRect(c[0] + 6, c[1] - R, R, 2 * R);
+  for (let k = -3; k <= 3; k++) { line([c[0] + 6, c[1] + k * 34], [c[0] + R, c[1] + k * 34], LW * .8, PAL.g1); line([c[0] + 6 + ((k + 10) % 2 ? 26 : 52), c[1] + k * 34], [c[0] + 6 + ((k + 10) % 2 ? 26 : 52), c[1] + k * 34 + 34], LW * .8, PAL.g1); }
+  line([c[0] + 6, c[1] - R], [c[0] + 6, c[1] + R], LW);
+  // plaster layer (left of brick)
+  ctx.fillStyle = PAL.w1;
+  if (hollow) { ctx.beginPath(); ctx.moveTo(c[0] - 30, c[1] - R); ctx.lineTo(c[0] - 10, c[1] - R); ctx.lineTo(c[0] - 10, c[1] - 34); ctx.quadraticCurveTo(c[0] - 18, c[1], c[0] - 10, c[1] + 34); ctx.lineTo(c[0] - 10, c[1] + R); ctx.lineTo(c[0] - 30, c[1] + R); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.setLineDash([3, 6]); ctx.beginPath(); ctx.moveTo(c[0] - 4, c[1] - 30); ctx.quadraticCurveTo(c[0] + 2, c[1], c[0] - 4, c[1] + 30); ctx.strokeStyle = PAL.g1; ctx.stroke(); ctx.setLineDash([]); }
+  else { ctx.fillRect(c[0] - 30, c[1] - R, 36, 2 * R); line([c[0] - 30, c[1] - R], [c[0] - 30, c[1] + R]); }
+  if (hollow) line([c[0] - 30, c[1] - R], [c[0] - 30, c[1] + R]);
+  ctx.restore(); ctx.globalAlpha = ap; disc(c, R, null); ctx.globalAlpha = 1;
+}
+function step2(t) {
+  if (t < P2.t0) return; const [x0, y0] = PANELS[1]; const ap = L.prog(t, P2.t0, P2.t0 + .3);
+  const cA = [x0 + 108, y0 + 175], cB = [x0 + 308, y0 + 175];
+  crossSection(cA, true, ap); crossSection(cB, false, ap);
+  // divider
+  ctx.globalAlpha = ap; line([x0 + 207, y0 + 90], [x0 + 207, y0 + 430], LW * .8, PAL.g1, [3, 8]); ctx.globalAlpha = 1;
+  const tapA = P2.t0 + .55, tapB = P2.t0 + 1.25;
+  // knuckle taps (yellow fist + short arm from the left edge of each lens)
+  for (const [c, tt] of [[cA, tapA], [cB, tapB]]) { if (t < tt - .4) continue; const d = t - tt; let back = d < 0 ? 26 * (-d / .4) : Math.min(26, d * 90); if (d > .5) back = 26;
+    ctx.globalAlpha = ap; bar([c[0] - 108, c[1] + 40], [c[0] - 54 - back, c[1] + 4], 15, PAL.g2); disc([c[0] - 44 - back, c[1]], 11, PAL.y1, false); ctx.globalAlpha = 1; }
+  // sound: hollow rings on (wide wavy arcs that keep echoing), solid is one short dull mark
+  const sy = y0 + 330;
+  // speaker-less sound pictograms: a source dot + arcs
+  ctx.globalAlpha = ap; disc([cA[0] - 50, sy], 8, PAL.ink, false); disc([cB[0] - 50, sy], 8, PAL.ink, false); ctx.globalAlpha = 1;
+  if (t > tapA) { const d = t - tapA; for (let k = 0; k < 4; k++) { const ph = d * 2.4 - k * .22; if (ph <= 0) continue; const r = 18 + k * 20; const a = L.clamp(ph * 3) * (k < 3 ? 1 : .5);
+      ctx.globalAlpha = a; ctx.beginPath(); for (let j = 0; j <= 30; j++) { const an = -.75 + 1.5 * j / 30, rr = r + 3.2 * Math.sin(j * 1.3 + d * 18); const p = [cA[0] - 50 + Math.cos(an) * rr, sy + Math.sin(an) * rr]; j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+      ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW * 1.3; ctx.stroke(); ctx.globalAlpha = 1; } }
+  if (t > tapB) { const a = L.prog(t, tapB, tapB + .12); ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(cB[0] - 50, sy, 20, -.7, .7); ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW * 2.2; ctx.stroke();
+    line([cB[0] - 18, sy], [cB[0] + 14, sy], LW * 2.2); ctx.globalAlpha = 1; }
+  badge([cA[0] + 46, sy + 4], 28, 'x', L.prog(t, tapA + .55, tapA + 1.0));
+  badge([cB[0] + 46, sy + 4], 28, 'v', L.prog(t, tapB + .35, tapB + .8));
+}
+function hollowHint(o, a) { if (a <= 0) return; ctx.save(); ctx.globalAlpha = a * .8; ctx.setLineDash([2, 7]); ctx.beginPath(); wallEllipse(o, SPOT.u, SPOT.h, SPOT.r * .62).forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.strokeStyle = PAL.g1; ctx.lineWidth = LW; ctx.stroke(); ctx.restore(); }
+function step3(t) {
+  const i = 2; if (t < P3.t0) return; const ap = L.prog(t, P3.t0, P3.t0 + .25); const o = scene(i, t, ap);
+  hollowHint(o, ap);
+  const m0 = P3.t0 + .45, m1 = P3.t0 + 1.15, p = L.prog(t, m0, m1);
+  const E = wallEllipse(o, SPOT.u, SPOT.h, SPOT.r, -2.2, -2.2 + 6.2832 * 1.06, 80);
+  const hd = p > 0 ? E[Math.min(E.length - 1, Math.floor(L.eio(p) * (E.length - 1)))] : E[0];
+  if (p > 0) { ctx.beginPath(); const n = Math.floor(L.eio(p) * (E.length - 1)); for (let j = 0; j <= n; j++) j ? ctx.lineTo(E[j][0], E[j][1]) : ctx.moveTo(E[j][0], E[j][1]); ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW * 1.6; ctx.lineCap = 'round'; ctx.stroke(); }
+  const F = isoP(o, 112, 124, 0); const reach = p > 0 && p < 1 ? hd : L.lerp2(isoP(o, 92, 30, 100), hd, p >= 1 ? 1 - L.prog(t, m1 + .1, m1 + .5) : L.prog(t, P3.t0 + .1, m0));
+  ctx.globalAlpha = ap; figure([F[0] - 6, F[1]], [reach[0] - 20, reach[1] + 6], { handCol: PAL.g2, tool: hn => { bar([hn[0], hn[1]], [hn[0] + 22, hn[1] - 4], 9, PAL.y1); } }); ctx.globalAlpha = 1;
+}
+L.lerp2 = (a, b, k) => [L.lerp(a[0], b[0], k), L.lerp(a[1], b[1], k)];
+function step4(t) {
+  const i = 3; if (t < P4.t0) return; const ap = L.prog(t, P4.t0, P4.t0 + .25); const o = scene(i, t, ap);
+  const E = wallEllipse(o, SPOT.u, SPOT.h, SPOT.r);
+  const tr0 = P4.t0 + .3, tr1 = P4.t0 + .65, scr = [P4.t0 + .65, P4.t0 + 1.15], ok = P4.t0 + 1.2, ro0 = P4.t0 + 1.35, ro1 = P4.t0 + 1.65, roll = [P4.t0 + 1.65, P4.t0 + 2.3];
+  const patched = L.prog(t, scr[0], scr[1]);
+  // the patch fills in as the trowel works
+  ctx.globalAlpha = ap; ctx.beginPath(); E.forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
+  ctx.fillStyle = patched > 0 ? PAL.patch : PAL.w1; ctx.fill();
+  if (patched < 1) { ctx.save(); ctx.clip(); ctx.globalAlpha = (1 - patched) * ap; for (let k = -6; k < 7; k++) line([E[0][0] - 90, E[15][1] + k * 9 - 40], [E[0][0] + 20, E[15][1] + k * 9 + 20], 1.4, PAL.g1); ctx.restore(); }
+  ctx.globalAlpha = ap; ctx.setLineDash(patched >= 1 ? [] : [7, 6]); ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW * 1.6; ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+  const spot = isoP(o, SPOT.u, 0, SPOT.h);
+  // painted band: the roller only comes after the patch is done
+  const rp = L.prog(t, roll[0], roll[1]);
+  if (rp > 0) { const top = 196, bot = 24, cur = L.lerp(top, bot, L.eio(rp)); ctx.save(); ctx.globalAlpha = .9;
+    ctx.beginPath(); [[SPOT.u - 44, top], [SPOT.u + 44, top], [SPOT.u + 44, cur], [SPOT.u - 44, cur]].forEach(([u, h], j) => { const p = isoP(o, u, 0, h); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.closePath(); ctx.fillStyle = PAL.paint; ctx.fill(); ctx.restore(); }
+  // trowel along its dotted guide (1)
+  const trS = [spot[0] - 120, spot[1] + 60], trE = [spot[0] - 8, spot[1] + 6];
+  if (t > tr0 - .2 && t < ok + .3) {
+    const g = L.prog(t, tr0 - .2, tr0); ctx.globalAlpha = ap * (t > ok ? 1 - L.prog(t, ok, ok + .3) : 1); line(trS, L.lerp2(trS, trE, g), LW, PAL.g1, [2, 8]);
+    let pp = L.lerp2(trS, trE, L.eo(L.prog(t, tr0, tr1))); if (t > scr[0]) { const sw = Math.sin((t - scr[0]) * 6.2832 * 2.2) * 22 * (1 - patched * .6); pp = [trE[0] + sw * C30, trE[1] + sw * S30]; }
+    if (t > ok) pp = L.lerp2(trE, trS, L.eo(L.prog(t, ok, ok + .3)));
+    // trowel: flat blade + handle (yellow = what you act with)
+    ctx.save(); ctx.translate(pp[0], pp[1]); poly([[-6, -30], [30, -12], [30, 30], [-6, 12]], PAL.y0); bar([-4, -8], [-36, -26], 11, PAL.y2); ctx.restore(); ctx.globalAlpha = 1;
+  }
+  badge([spot[0] + 78, spot[1] + 58], 24, 'v', L.prog(t, ok, ok + .4));
+  // roller along its dotted guide (2): only after the ✓
+  const rTop = isoP(o, SPOT.u, 0, 200), rS = [rTop[0] + 150, rTop[1] - 30], rBot = isoP(o, SPOT.u, 0, 30);
+  if (t > ro0 - .25) { const g = L.prog(t, ro0 - .25, ro0); line(rS, L.lerp2(rS, rTop, g), LW, PAL.g1, [2, 8]);
+    let rpnt = L.lerp2(rS, rTop, L.eo(L.prog(t, ro0, ro1))); if (rp > 0) rpnt = L.lerp2(rTop, rBot, L.eio(rp)); if (t > roll[1]) rpnt = L.lerp2(rBot, isoP(o, SPOT.u, 0, 110), L.eio(L.prog(t, roll[1] + .1, roll[1] + .6)));
+    ctx.save(); ctx.translate(rpnt[0], rpnt[1]);
+    // roller drum lies across the wall face (along u), handle comes toward the viewer
+    const a = [-44 * C30, -44 * S30], b = [44 * C30, 44 * S30];
+    bar(a, b, 30, PAL.ink); bar(a, b, 25, t > roll[0] ? PAL.paint2 : PAL.y0); bar([0, 0], [-28, 34], 6, PAL.g2); bar([-28, 34], [-52, 78], 12, PAL.y2); ctx.restore(); }
+  // circled order numbers by each tool
+  ctx.globalAlpha = ap * L.prog(t, tr0 - .2, tr0); num([trS[0] - 10, trS[1] + 40], 1); ctx.globalAlpha = L.prog(t, ro0 - .25, ro0); num([rS[0] + 10, rS[1] - 40], 2); ctx.globalAlpha = 1;
+}
+function num(c, n) { disc(c, 19, PAL.w0); ctx.fillStyle = PAL.ink; ctx.font = '700 22px Inter'; ctx.textAlign = 'center'; ctx.fillText(n, c[0], c[1] + 8); ctx.textAlign = 'left'; }
+
+// ---------- page ----------
+function page(t) {
+  // title printed on the page like a manual cover line
+  ctx.fillStyle = PAL.ink; ctx.font = '800 58px Inter'; ctx.letterSpacing = '1px'; ctx.fillText('TAP TEST · BEFORE PAINT', 90, 300); ctx.letterSpacing = '0px';
+  ctx.fillRect(90, 318, 860, 3);
+  PANELS.forEach(([x, y], i) => { ctx.strokeStyle = PAL.ink; ctx.lineWidth = LW * .9; ctx.beginPath(); ctx.roundRect(x, y + 14, PW, PH - 14, 14); ctx.stroke();
+    ctx.fillStyle = PAL.ink; ctx.font = '700 64px Inter'; ctx.fillText(String(i + 1), x + 22, y + 82); });
+  step1(t); step2(t); step3(t); step4(t);
+}
+// camera keys: [t, z, fx, fy]
+const PAGE = [540, 790];
+const K = [[0, 1, ...PAGE], [.75, 1, ...PAGE], [1.15, 1.8, ...pc(0)], [2.9, 1.8, ...pc(0)], [3.3, 1.8, ...pc(1)], [5.2, 1.8, ...pc(1)], [5.6, 1.8, ...pc(2)],
+  [6.95, 1.8, ...pc(2)], [7.3, 1.8, ...pc(3)], [9.0, 1.8, ...pc(3)], [9.55, 1, ...PAGE], [10, 1, ...PAGE]];
+function cam(t) { for (let i = 0; i < K.length - 1; i++) { const [a, b] = [K[i], K[i + 1]]; if (t <= b[0]) { const k = L.eio(L.prog(t, a[0], b[0])); const lz = L.lerp(Math.log(a[1]), Math.log(b[1]), k);
+  return [Math.exp(lz), L.lerp(a[2], b[2], k), L.lerp(a[3], b[3], k)]; } } const l = K[K.length - 1]; return [l[1], l[2], l[3]]; }
+const SC = [540, 790];
+function renderAt(t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = PAL.paper; ctx.fillRect(0, 0, W, H);
+  const [z, fx, fy] = cam(t); LW = 2.6 * Math.pow(z, .55) / z;
+  ctx.setTransform(z, 0, 0, z, SC[0] - fx * z, SC[1] - fy * z);
+  ctx.drawImage(paper, -400, -400, W + 800, H + 800); ctx.drawImage(paper, 0, 0);
+  page(t);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  // screen-space: style label + step progress (numbers only)
+  ctx.fillStyle = 'rgba(244,241,234,.92)'; ctx.fillRect(0, 100, W, 100);
+  ctx.fillStyle = 'rgba(30,29,27,.62)'; ctx.font = '600 25px Inter'; ctx.letterSpacing = '4px'; ctx.fillText('STYLE 05 · INSTRUCTION MANUAL', 90, 140);
+  ctx.fillStyle = 'rgba(30,29,27,.42)'; ctx.font = '500 21px Inter'; ctx.letterSpacing = '3px'; ctx.fillText('SERIES: CHECK BEFORE YOU PAY', 90, 176); ctx.letterSpacing = '0px';
+  const cur = t < 1.1 ? -1 : t < 3.1 ? 0 : t < 5.4 ? 1 : t < 7.1 ? 2 : t < 9.2 ? 3 : 4;
+  for (let i = 0; i < 4; i++) { const c = [366 + i * 96, 1462]; ctx.globalAlpha = cur === i ? 1 : cur > i ? .55 : .25; LW = 2.6;
+    if (cur === i) { disc(c, 26, PAL.ink, false); ctx.fillStyle = PAL.paper; } else { disc(c, 26, PAL.paper); ctx.fillStyle = PAL.ink; }
+    ctx.font = '700 26px Inter'; ctx.textAlign = 'center'; ctx.fillText(i + 1, c[0], c[1] + 9); ctx.textAlign = 'left'; if (i < 3) { ctx.globalAlpha = .3; line([c[0] + 34, c[1]], [c[0] + 62, c[1]], 2.4, PAL.ink); } ctx.globalAlpha = 1; }
+}
+// sound cues for the mix
+function cues() {
+  TAPS.forEach(t => EV.push({ t, kind: 'knock' }));
+  EV.push({ t: P2.t0 + .55, kind: 'knock_hollow' }, { t: P2.t0 + 1.1, kind: 'stamp_x' }, { t: P2.t0 + 1.25, kind: 'knock_solid' }, { t: P2.t0 + 1.6, kind: 'stamp_v' },
+    { t: P3.t0 + .45, d: .7, kind: 'chalk' }, { t: P4.t0 + .3, kind: 'slide' }, { t: P4.t0 + .65, d: .5, kind: 'scrape' }, { t: P4.t0 + 1.2, kind: 'stamp_v' },
+    { t: P4.t0 + 1.35, kind: 'slide' }, { t: P4.t0 + 1.65, d: .65, kind: 'roll' });
+  [[.75, 1.15], [2.9, 3.3], [5.2, 5.6], [6.95, 7.3], [9.0, 9.55]].forEach(([a, b]) => EV.push({ t: a, d: b - a, kind: 'pan' }));
+  EV.push({ t: 9.55, kind: 'end' });
+}
+window.ready = (async () => { await document.fonts.load('700 50px Inter'); bakePaper(); cues(); renderAt(0); })();
+window.renderAt = renderAt;
+</script></body></html>

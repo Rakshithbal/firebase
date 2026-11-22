@@ -1,0 +1,6 @@
+Fontconfig warning: "/usr/share/fontconfig/conf.avail/05-reset-dirs-sample.conf", line 6: unknown element "reset-dirs"
+wrote out/video_noaudio.mp4
+
+real	1m53.693s
+user	2m28.458s
+sys	0m2.042s

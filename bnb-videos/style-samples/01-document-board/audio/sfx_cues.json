@@ -1,0 +1,74 @@
+[
+ {
+  "type": "pop",
+  "t": 0.12,
+  "gain": 0.7
+ },
+ {
+  "type": "pencil",
+  "t": 1.962,
+  "gain": 0.6,
+  "dur": 0.5
+ },
+ {
+  "type": "whoosh",
+  "t": 2.5,
+  "gain": 0.8
+ },
+ {
+  "type": "pop",
+  "t": 2.598,
+  "gain": 0.8
+ },
+ {
+  "type": "pencil",
+  "t": 3.214,
+  "gain": 0.6,
+  "dur": 0.4
+ },
+ {
+  "type": "whoosh",
+  "t": 3.933,
+  "gain": 0.6
+ },
+ {
+  "type": "pop",
+  "t": 3.97,
+  "gain": 0.8
+ },
+ {
+  "type": "marker",
+  "t": 4.81,
+  "gain": 0.8
+ },
+ {
+  "type": "slide",
+  "t": 5.227,
+  "gain": 0.5
+ },
+ {
+  "type": "whoosh",
+  "t": 5.333,
+  "gain": 0.55
+ },
+ {
+  "type": "stamp",
+  "t": 5.684,
+  "gain": 1.0
+ },
+ {
+  "type": "marker",
+  "t": 6.218,
+  "gain": 0.8
+ },
+ {
+  "type": "whoosh",
+  "t": 6.767,
+  "gain": 0.49
+ },
+ {
+  "type": "slide",
+  "t": 7.244,
+  "gain": 0.7
+ }
+]

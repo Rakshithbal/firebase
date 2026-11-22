@@ -1,0 +1,181 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>STYLE 03 · Exploded teardown</title>
+<style>html,body{margin:0;background:#121315;overflow:hidden}canvas{display:block}</style>
+</head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+import * as THREE from '/node_modules/three/build/three.module.js';
+const W = 1080, H = 1920, SS = 1.5;
+const TM = await (await fetch('timing.json')).json();
+window.DUR = TM.total;
+const INK = '#F1EFE9', ACC = '#FF6B3D';
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lin = (t, a, b) => cl((t - a) / (b - a));
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const eout = x => 1 - Math.pow(1 - x, 3);
+
+// ---------- renderer ----------
+const gl = document.createElement('canvas'); gl.width = W * SS; gl.height = H * SS;
+const R = new THREE.WebGLRenderer({ canvas: gl, antialias: true, alpha: true, preserveDrawingBuffer: true });
+R.setPixelRatio(1); R.setSize(W * SS, H * SS, false); R.setClearColor(0, 0);
+R.toneMapping = THREE.NeutralToneMapping; R.toneMappingExposure = 1.14;
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xdfe6f0, 0x2a2622, 1.05));
+const key = new THREE.DirectionalLight(0xfff1e2, 2.6); key.position.set(-2.2, 4.2, 3.4); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -2.6, right: 2.6, top: 2.6, bottom: -2.6, near: .5, far: 12 }); key.shadow.radius = 5; key.shadow.bias = -.0006;
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xbcd2ff, 1.6); rim.position.set(2.5, 2.2, -3.5); scene.add(rim);
+const fill = new THREE.DirectionalLight(0xffffff, .45); fill.position.set(3, 1, 3); scene.add(fill);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: .42 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+// white model, the unit layer carries a faint tint (light, not paint) so the two materials can be told apart
+const M = {
+  plaster: new THREE.MeshStandardMaterial({ color: 0xf7f7f5, roughness: .92 }),
+  mortar: new THREE.MeshStandardMaterial({ color: 0xb9b5ae, roughness: .95 }),
+  brick: new THREE.MeshStandardMaterial({ color: 0xf0c7b6, roughness: .85 }),
+  aac: new THREE.MeshStandardMaterial({ color: 0xcfd8e2, roughness: .9 }),
+};
+const UB = new THREE.BoxGeometry(1, 1, 1);
+function bx(mat, cx, cy, cz, sx, sy, sz, parent) {
+  const m = new THREE.Mesh(UB, mat); m.position.set(cx, cy, cz); m.scale.set(sx, sy, sz); m.castShadow = m.receiveShadow = true; parent.add(m); return m;
+}
+const WW = .78, HH = 1.12, T = .2, PL = .028;
+// build one wall: returns its four layer groups (front plaster, units, mortar joints, back plaster)
+function wall(kind) {
+  const g = new THREE.Group(); scene.add(g);
+  const L = [0, 1, 2, 3].map(() => { const q = new THREE.Group(); g.add(q); return q; });
+  bx(M.plaster, 0, HH / 2, 0, WW, HH, PL, L[0]); bx(M.plaster, 0, HH / 2, 0, WW, HH, PL, L[3]);
+  const brick = kind === 'brick';
+  const uh = brick ? .068 : .216, ul = brick ? .215 : .6, j = brick ? .012 : .008, rows = Math.round(HH / (uh + j));
+  for (let r = 0; r < rows; r++) {
+    const y0 = r * (uh + j) + j;   // bed joint under each course
+    bx(M.mortar, 0, y0 - j / 2, 0, WW, j, T, L[2]);
+    let x = -WW / 2 - (r % 2 ? (ul + j) / 2 : 0);
+    while (x < WW / 2) {
+      const a = Math.max(x, -WW / 2), b = Math.min(x + ul, WW / 2);
+      if (b - a > .01) bx(brick ? M.brick : M.aac, (a + b) / 2, y0 + uh / 2, 0, b - a, uh, T, L[1]);
+      const pa = x + ul, pb = pa + j;   // perpend joint
+      if (pa > -WW / 2 && pb < WW / 2) bx(M.mortar, (pa + pb) / 2, y0 + uh / 2, 0, j, uh, T, L[2]);
+      x += ul + j;
+    }
+  }
+  return { g, L };
+}
+const A = wall('brick'), B = wall('aac');
+const XA = -.5, XB = .5;
+A.g.position.x = XA; B.g.position.x = XB;
+const NAMES = { brick: ['Plaster', 'Brick units', 'Mortar joints', 'Plaster'], aac: ['Plaster', 'AAC blocks', 'Mortar joints', 'Plaster'] };
+// exploded offsets along the wall normal (+z = toward camera): front plaster, units, mortar, back plaster
+const OFF = [.66, .22, -.22, -.66];
+const BASE = [T / 2 + PL / 2, 0, 0, -(T / 2 + PL / 2)];
+
+const cam = new THREE.PerspectiveCamera(20, W / H, .1, 60);
+function setCam(t) {
+  const u = eio(lin(t, 0, 10));
+  const az = THREE.MathUtils.degToRad(-9 + 16 * u), el = THREE.MathUtils.degToRad(40 + 4 * u), dist = 12.7 - .7 * u;
+  const tgt = new THREE.Vector3(0, .55, -.02);
+  cam.position.set(tgt.x + dist * Math.cos(el) * Math.sin(az), tgt.y + dist * Math.sin(el), tgt.z + dist * Math.cos(el) * Math.cos(az));
+  cam.lookAt(tgt);
+  // shift the projection so the pair sits in the usable area (x 0..960) instead of moving the object
+  cam.setViewOffset(W, H, 88, 95, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+}
+const P = new THREE.Vector3();
+const scr = (o, x, y, z) => { P.set(x, y, z); o.localToWorld(P); P.project(cam); return [(P.x + 1) / 2 * W, (1 - P.y) / 2 * H]; };
+
+function pose(t) {
+  for (const [Wl, k] of [[A, 0], [B, 1]]) {
+    const land = lin(t, .15 + k * .15, .5 + k * .15); Wl.g.position.y = .35 * (1 - eout(land)) ** 2;
+    Wl.L.forEach((q, i) => {
+      // separation: front first, .17 s apart, ease-in-out cubed with a long settle; then a few mm of float
+      const p = eio(lin(t, 5.15 + i * .17 + k * .09, 6.35 + i * .17 + k * .09));
+      const fl = p * .006 * Math.sin(t * 1.7 + i * 1.3 + k);
+      q.position.z = BASE[i] + OFF[i] * p; q.position.y = fl;
+    });
+  }
+}
+
+// ---------- 2D ----------
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const F = (w, s, f = 'Inter') => `${w} ${s}px ${f}, sans-serif`;
+function bg() {
+  const rg = g.createRadialGradient(480, 820, 80, 480, 900, 1250); rg.addColorStop(0, '#3a3c41'); rg.addColorStop(.55, '#1f2023'); rg.addColorStop(1, '#0c0d0f');
+  g.fillStyle = rg; g.fillRect(0, 0, W, H);
+}
+function txt(s, x, y, font, col, align = 'left', track = 0) { g.font = font; g.textAlign = align; g.textBaseline = 'middle'; g.letterSpacing = track + 'px'; g.fillStyle = col; g.fillText(s, x, y); g.letterSpacing = '0px'; }
+// a leader: anchor dot on the part -> line -> name. side -1 = label on the left
+function leader(a, b, name, p, side) {
+  if (p <= 0) return;
+  const e = eout(cl(p / .55));
+  g.strokeStyle = 'rgba(241,239,233,.85)'; g.lineWidth = 1.6;
+  g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e); g.stroke();
+  g.fillStyle = ACC; g.beginPath(); g.arc(a[0], a[1], 5.5 * cl(p / .2), 0, 7); g.fill();
+  const tp = lin(p, .45, 1); if (tp <= 0) return;
+  g.save(); g.globalAlpha = eout(tp); txt(name, b[0] + side * (10 - 10 * eout(tp)) + side * 10, b[1], F(500, 29), INK, side < 0 ? 'right' : 'left'); g.restore();
+}
+function plate(a, name, p) {
+  if (p <= 0) return;
+  const e = eout(cl(p / .5)), L = 26 * e;
+  g.strokeStyle = 'rgba(241,239,233,.9)'; g.lineWidth = 1.6; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(a[0] + L, a[1]); g.stroke();
+  g.fillStyle = ACC; g.beginPath(); g.arc(a[0], a[1], 6 * cl(p / .2), 0, 7); g.fill(); g.strokeStyle = 'rgba(20,20,22,.6)'; g.lineWidth = 1.5; g.stroke();
+  const tp = lin(p, .4, 1); if (tp <= 0) return;
+  g.save(); g.globalAlpha = eout(tp); g.font = F(500, 27); const w = g.measureText(name).width + 28, x = a[0] + 26 + 10 * (1 - eout(tp));
+  g.fillStyle = 'rgba(14,15,17,.82)'; g.beginPath(); g.roundRect(x, a[1] - 22, w, 44, 6); g.fill();
+  txt(name, x + 14, a[1] + 1, F(500, 27), INK); g.restore();
+}
+function tag(cx, y, l1, p) {
+  if (p <= 0) return; g.save(); g.globalAlpha = eout(p);
+  g.font = F(500, 26); const w = g.measureText(l1).width + 58;
+  g.fillStyle = 'rgba(10,11,12,.72)'; g.beginPath(); g.roundRect(cx - w / 2, y - 26 + 8 * (1 - eout(p)), w, 52, 26); g.fill();
+  g.strokeStyle = 'rgba(241,239,233,.25)'; g.lineWidth = 1.2; g.stroke();
+  g.fillStyle = ACC; g.beginPath(); g.arc(cx - w / 2 + 24, y + 8 * (1 - eout(p)), 5, 0, 7); g.fill();
+  txt(l1, cx - w / 2 + 40, y + 1 + 8 * (1 - eout(p)), F(500, 26), INK); g.restore();
+}
+function caption(t) {
+  const ws = TM.words, cut = 5; const chunks = [ws.slice(0, cut), ws.slice(cut)];
+  const spans = [[chunks[0][0].s - .1, chunks[1][0].s - .12], [chunks[1][0].s - .12, Math.max(chunks[1].at(-1).e + .8, chunks[1][0].s + 2.2)]];
+  for (let i = 0; i < 2; i++) {
+    const [a, b] = spans[i]; if (t < a || t > b) continue;
+    const al = Math.min(lin(t, a, a + .18), 1 - lin(t, b - .2, b));
+    const s = chunks[i].map(w => w.w).join(' ');
+    g.save(); g.globalAlpha = al; g.shadowColor = 'rgba(0,0,0,.75)'; g.shadowBlur = 18;
+    g.font = F(500, 46); const tw = g.measureText(s).width; let x = 480 - tw / 2;
+    g.textAlign = 'left'; g.textBaseline = 'middle';
+    for (const w of chunks[i]) { g.fillStyle = t >= w.s - .05 ? INK : 'rgba(241,239,233,.38)'; g.fillText(w.w, x, 1470); x += g.measureText(w.w + ' ').width; }
+    g.restore();
+  }
+}
+
+window.render = t => {
+  pose(t); setCam(t); scene.updateMatrixWorld(true);
+  R.render(scene, cam);
+  bg(); g.drawImage(gl, 0, 0, W, H);
+  // vignette
+  const vg = g.createRadialGradient(480, 860, 500, 480, 860, 1300); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.5)'); g.fillStyle = vg; g.fillRect(0, 0, W, H);
+  // headers over each wall
+  for (const [Wl, name, k] of [[A, 'RED BRICK', 0], [B, 'AAC BLOCK', 1]]) {
+    const top = scr(Wl.g, 0, HH, 0);
+    const p = lin(t, .9 + k * .25, 1.5 + k * .25); if (p <= 0) continue;
+    g.save(); g.globalAlpha = eout(p); const y = 278;
+    txt(name, top[0], y, F(600, 34), INK, 'center', 5);
+    g.fillStyle = ACC; g.fillRect(top[0] - 22 * eout(p), y + 30, 44 * eout(p), 3); g.restore();
+  }
+  // layer labels: an accent dot on the part's visible strip, a hairline, the name on a small dark plate
+  const lp0 = 6.15;
+  for (const [Wl, kind, k] of [[A, 'brick', 0], [B, 'aac', 1]]) {
+    Wl.L.forEach((q, i) => {
+      const zf = (i === 0 || i === 3) ? PL / 2 : T / 2;
+      const a = scr(q, -WW / 2 + .07, HH * (i === 0 ? .7 : .9), zf);
+      const p = lin(t, lp0 + (i * 2 + k) * .16, lp0 + (i * 2 + k) * .16 + .7);
+      plate(a, NAMES[kind][i], p);
+    });
+  }
+  tag(scr(A.g, 0, 0, 0)[0], 1345, 'Smaller units · more joints', lin(t, 8.0, 8.45));
+  tag(scr(B.g, 0, 0, 0)[0], 1345, 'Larger blocks · fewer joints', lin(t, 8.25, 8.7));
+  // style label
+  txt('STYLE 03 · EXPLODED TEARDOWN · WHITE MODEL', 64, 166, F(500, 23, 'JetBrains Mono'), 'rgba(241,239,233,.72)', 'left', 1.5);
+  g.fillStyle = ACC; g.fillRect(64, 192, 36, 3);
+  caption(t);
+};
+await document.fonts.load('500 30px Inter'); await document.fonts.load('600 30px Inter'); await document.fonts.load('500 23px "JetBrains Mono"');
+window.render(0); window.READY = true;
+</script></body></html>
