@@ -80,7 +80,7 @@ const fillL = new THREE.DirectionalLight(0xcfe0ff, .55); fillL.position.set(5, 3
 const BR = 3.0;
 mk(new THREE.CylinderGeometry(BR + .08, BR + .18, .42, 96), C.wood, 0, -.21, 0);
 mk(new THREE.CylinderGeometry(BR, BR, .06, 96), C.grass, 0, .01, 0);
-const studio = mk(new THREE.CylinderGeometry(14, 14, .1, 64), clay(0xE2CFC3, .95), 0, -.47, 0); studio.castShadow = false;
+const studio = mk(new THREE.CylinderGeometry(40, 40, .1, 64), clay(0xE2CFC3, .95), 0, -.47, 0); studio.castShadow = false;
 mk(rbox(2.3, .05, 2.8, .02), C.earth, 0, .05, -.05);
 // props around the plot: trees, brick stack, sand heap
 const tree = (x, z, s) => { const g = new THREE.Group(); g.position.set(x, 0, z); scene.add(g); mk(new THREE.CylinderGeometry(.05 * s, .07 * s, .45 * s, 10), C.trunk, 0, .22 * s, 0, g);
@@ -121,19 +121,19 @@ const sp = (i, ts) => lin(ts, ST[i] - BUILD - .05, ST[i] - .05);
 function pose(t) {
   const ts = Math.floor(t * 12) / 12, step = Math.floor(t * 12);   // stop-motion on twos (12 fps); camera stays smooth
   const boil = (m, id, a = .006) => { const p = m.userData.p; m.position.set(p[0] + (hsh(step * 3.1 + id) - .5) * a, m.position.y, p[2] + (hsh(step * 7.3 + id) - .5) * a); };
-  pads.forEach((m, i) => { const p = back(lin(ts, ST[0] - BUILD + i * .07, ST[0] - .2 + i * .07)); m.position.y = -.12 + .2 * p; m.visible = p > 0; boil(m, i); });
-  const pp = back(sp(1, ts), 1.6); plinth.visible = pp > 0; plinth.scale.y = Math.max(pp, .001); plinth.position.y = PH / 2 * Math.max(pp, .001) + .0;
-  walls.forEach((m, i) => { const p = back(lin(ts, ST[2] - BUILD + i * .06, ST[2] - .1 + i * .02), 1.3); m.visible = p > 0; m.scale.y = Math.max(p, .001); m.position.y = PH + WH / 2 * Math.max(p, .001); boil(m, 20 + i, .004); });
-  const lp = back(lin(ts, ST[2] - .3, ST[2] - .05)); lintel.visible = lp > 0; lintel.scale.y = Math.max(lp, .001);
-  const s3 = sp(3, ts); slab.visible = s3 > 0; slab.position.y = PH + WH + .07 + 1.6 * Math.pow(1 - s3, 2);
+  pads.forEach((m, i) => { const p = back(lin(ts, ST[0] - BUILD + i * .07, ST[0] - .2 + i * .07)); m.position.y = -.12 + .2 * p; m.visible = p > .01; boil(m, i); });
+  const pp = back(sp(1, ts), 1.6); plinth.visible = pp > .01; plinth.scale.y = Math.max(pp, .001); plinth.position.y = PH / 2 * Math.max(pp, .001) + .0;
+  walls.forEach((m, i) => { const p = back(lin(ts, ST[2] - BUILD + i * .06, ST[2] - .1 + i * .02), 1.3); m.visible = p > .01; m.scale.y = Math.max(p, .001); m.position.y = PH + WH / 2 * Math.max(p, .001); boil(m, 20 + i, .004); });
+  const lp = back(lin(ts, ST[2] - .3, ST[2] - .05)); lintel.visible = lp > .01; lintel.scale.y = Math.max(lp, .001);
+  const s3 = sp(3, ts); slab.visible = s3 > .001; slab.position.y = PH + WH + .07 + 1.6 * Math.pow(1 - s3, 2);
   const sq = ts > ST[3] - .05 ? Math.exp(-(ts - ST[3] + .05) * 8) * Math.sin((ts - ST[3]) * 22) * .25 : 0; slab.scale.set(1 + sq * .3, 1 - sq, 1 + sq * .3);
   // finishing: plaster + paint replaces the bare brick, windows and door pop in
   const s4 = sp(4, ts); const col = new THREE.Color(0xE58C6E).lerp(new THREE.Color(0xF6D08A), eio(cl(s4 * 1.6)));
   for (const m of [...walls, lintel]) m.material = s4 > 0 ? (m.userData.pm || (m.userData.pm = clay(0xF6D08A))) : C.brick;
   if (s4 > 0) walls[0].userData.pm.color.copy(col), walls.forEach(m => m.userData.pm.color.copy(col)), lintel.userData.pm.color.copy(col);
-  fin.forEach((m, i) => { const p = back(lin(ts, ST[4] - .4 + i * .04, ST[4] - .1 + i * .04)); m.visible = p > 0; m.scale.setScalar(Math.max(p, .001)); });
+  fin.forEach((m, i) => { const p = back(lin(ts, ST[4] - .4 + i * .04, ST[4] - .1 + i * .04)); m.visible = p > .01; m.scale.setScalar(Math.max(p, .001)); });
   const s5 = sp(5, ts);
-  hand.forEach((m, i) => { const p = back(lin(ts, ST[5] - BUILD + i * .08, ST[5] - .25 + i * .08)); m.visible = p > 0; if (m !== flag) m.scale.setScalar(Math.max(p, .001)); else m.scale.set(1, Math.max(p, .001), 1); });
+  hand.forEach((m, i) => { const p = back(lin(ts, ST[5] - BUILD + i * .08, ST[5] - .25 + i * .08)); m.visible = p > .01; if (m !== flag) m.scale.setScalar(Math.max(p, .001)); else m.scale.set(1, Math.max(p, .001), 1); });
   fl.rotation.y = .25 * Math.sin(ts * 5); fl.scale.x = 1 + .08 * Math.sin(ts * 9);
   // workers hop between positions per stage (stop-motion), then step aside; owners arrive at handover
   const wp = [[[-1.3, 1.2], [1.3, -1.25]], [[-1.2, -1.3], [1.35, .2]], [[1.25, 1.25], [-1.3, .1]], [[-1.25, 1.35], [1.3, -1.2]], [[1.3, .5], [-1.35, -.9]], [[1.6, 1.0], [1.85, .75]]];
@@ -147,12 +147,12 @@ function pose(t) {
 }
 
 // camera: high oblique, slow orbit, smooth every frame
-const cam = new THREE.PerspectiveCamera(26, W / H, .1, 80);
-const TGT = new THREE.Vector3(0, .55, 0);
+const cam = new THREE.PerspectiveCamera(22, W / H, .5, 120);
+const TGT = new THREE.Vector3(0, .3, .2);
 function setCam(t) {
-  const u = t / DUR, az = THREE.MathUtils.degToRad(28 + 40 * eio(u * .9 + .05) - 20), el = THREE.MathUtils.degToRad(41 - 3 * u), d = 12.8 - 1.0 * eio(u);
+  const u = t / DUR, az = THREE.MathUtils.degToRad(28 + 40 * eio(u * .9 + .05) - 20), el = THREE.MathUtils.degToRad(41 - 3 * u), d = 33 - 2.5 * eio(u);
   cam.position.set(TGT.x + d * Math.cos(el) * Math.sin(az), TGT.y + d * Math.sin(el), TGT.z + d * Math.cos(el) * Math.cos(az)); cam.lookAt(TGT);
-  cam.setViewOffset(W, H, 60, 140, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+  cam.setViewOffset(W, H, 60, 150, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
 }
 const P = new THREE.Vector3();
 const scr = (x, y, z) => { P.set(x, y, z).project(cam); return [(P.x + 1) / 2 * W, (1 - P.y) / 2 * H]; };
