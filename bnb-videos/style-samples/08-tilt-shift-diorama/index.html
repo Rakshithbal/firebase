@@ -26,7 +26,7 @@ const RT = new THREE.WebGLRenderTarget(W, H, { samples: 4, type: THREE.HalfFloat
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xE7D6CB);
 const post = new THREE.ShaderMaterial({
-  uniforms: { tex: { value: RT.texture }, res: { value: new THREE.Vector2(W, H) }, bandY: { value: .58 }, bw: { value: .085 }, amp: { value: 30 } },
+  uniforms: { tex: { value: RT.texture }, res: { value: new THREE.Vector2(W, H) }, bandY: { value: .58 }, bw: { value: .03 }, amp: { value: 95 } },
   vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }`,
   fragmentShader: `uniform sampler2D tex; uniform vec2 res; uniform float bandY, bw, amp; varying vec2 vUv;
   vec3 srgb(vec3 c){ c = clamp(c, 0., 1.); return mix(c * 12.92, 1.055 * pow(c, vec3(1. / 2.4)) - .055, step(.0031308, c)); }
@@ -150,9 +150,9 @@ function pose(t) {
 const cam = new THREE.PerspectiveCamera(22, W / H, .5, 120);
 const TGT = new THREE.Vector3(0, .3, .2);
 function setCam(t) {
-  const u = t / DUR, az = THREE.MathUtils.degToRad(28 + 40 * eio(u * .9 + .05) - 20), el = THREE.MathUtils.degToRad(41 - 3 * u), d = 33 - 2.5 * eio(u);
+  const u = t / DUR, az = THREE.MathUtils.degToRad(28 + 40 * eio(u * .9 + .05) - 20), el = THREE.MathUtils.degToRad(41 - 3 * u), d = 31.8 - 2.6 * eio(u);
   cam.position.set(TGT.x + d * Math.cos(el) * Math.sin(az), TGT.y + d * Math.sin(el), TGT.z + d * Math.cos(el) * Math.cos(az)); cam.lookAt(TGT);
-  cam.setViewOffset(W, H, 60, 150, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+  cam.setViewOffset(W, H, 60, 215, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
 }
 const P = new THREE.Vector3();
 const scr = (x, y, z) => { P.set(x, y, z).project(cam); return [(P.x + 1) / 2 * W, (1 - P.y) / 2 * H]; };
@@ -208,13 +208,13 @@ window.render = t => {
   // stage tracker: six small clay chips, each gets its green check
   g.font = FR(29);
   for (let i = 0; i < 6; i++) {
-    const col = i % 3, row = i / 3 | 0, cx = 170 + col * 310, cy = 1180 + row * 84;
+    const col = i % 3, row = i / 3 | 0, cx = 170 + col * 310, cy = 1238 + row * 80;
     const ap = back(lin(t, .35 + i * .08, .75 + i * .08));
     if (ap <= 0) continue;
     const done = ts >= ST[i] + .1, active = i === cur && !done;
     g.save(); g.translate(cx, cy); g.scale(ap, ap);
     puff(-136, -31, 272, 62, done ? '#E5F3E2' : active ? '#FFF8EE' : 'rgba(255,248,238,.72)');
-    g.fillStyle = done || active ? '#5A3E36' : 'rgba(90,62,54,.55)'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText(STAGES[i], -84, 2);
+    g.fillStyle = done || active ? '#5A3E36' : 'rgba(90,62,54,.55)'; g.textAlign = 'left'; g.textBaseline = 'middle'; g.fillText(STAGES[i], -76, 2);
     g.strokeStyle = 'rgba(90,62,54,.25)'; g.lineWidth = 3; g.beginPath(); g.arc(-108, 0, 15, 0, 7); g.stroke();
     check(-108, 0, 19, lin(ts, ST[i] + .1, ST[i] + .4));
     g.restore();
