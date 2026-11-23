@@ -33,7 +33,7 @@
   }
 
   SCENES.push({
-    id: 's7', start: 35.318, end: 40.572,
+    id: 's7', start: L.cut(window.T, 'L08'), end: L.cut(window.T, 'L09'),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L08', w);
       const t0 = this.start, tAsk = W('ask'), tEng = W('engineer'), tWhich = W('which'), tGrade = W('grade'), tWhere = W('where');

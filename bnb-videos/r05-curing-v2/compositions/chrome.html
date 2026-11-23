@@ -3,7 +3,7 @@
   <body>
     <template>
       <!-- Film chrome: series rail (top-left), chapter progress (top-right), grain. Owned by the art director. DESIGN.md §2, §8 -->
-      <div id="root" data-composition-id="chrome" data-duration="45.51">
+      <div id="root" data-composition-id="chrome" data-duration="47.73">
         <style>
           #root { position: absolute; inset: 0; pointer-events: none; }
           #chrome-rail { position: absolute; left: 72px; top: 272px; height: 30px; display: flex; align-items: center; gap: 14px; white-space: nowrap;
@@ -18,7 +18,10 @@
           #chrome-grain { position: absolute; left: -128px; top: -128px; width: 1336px; height: 2176px; opacity: 0.07; mix-blend-mode: soft-light;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 256px 256px; }
+          /* BNB brand mark: small persistent watermark, top-right above the chapter progress (clear of rail y 272-302) */
+          #chrome-mark { position: absolute; left: 898px; top: 156px; width: 92px; height: auto; opacity: 0.85; }
         </style>
+        <img id="chrome-mark" src="assets/brand/bnb_mark_white.png" alt="BNB" />
         <div id="chrome-rail">
           <span id="chrome-series" data-var-text="series">Buildpedia</span><span id="chrome-dot"></span><span id="chrome-title" data-var-text="title">What curing means</span>
         </div>
@@ -37,11 +40,13 @@
             });
             // grain jitter: a deterministic hash of the 2-frame step index picks the tile offset
             var grain = document.getElementById("chrome-grain"), st = { k: 0 };
-            tl.fromTo(st, { k: 0 }, { k: Math.floor(45.51 * 15), duration: 45.51, ease: "none",
+            tl.fromTo(st, { k: 0 }, { k: Math.floor(window.R05.total * 15), duration: window.R05.total, ease: "none",
               onUpdate: function () {
                 var k = Math.floor(st.k), h = Math.imul(k + 1, 2654435761) >>> 0;
                 grain.style.transform = "translate(" + ((h & 255) - 128) * 0.5 + "px," + (((h >>> 8) & 255) - 128) * 0.5 + "px)";
               } }, 0);
+            // the corner mark steps aside as the full-logo end card arrives (s7)
+            tl.to("#chrome-mark", { opacity: 0, duration: 0.4, ease: BNB.E.exit }, BNB.ENDCARD);
             window.__timelines["chrome"] = tl;
           })();
         </script>

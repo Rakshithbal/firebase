@@ -5,13 +5,15 @@
       <!-- s7 · 07 — Keep this · L09 "Save this before your slab day."
            Editorial end card: a bookmark drawn in line (then filled), the sign-off line, a rule, the series mark.
            Everything resolves by ~2.1 s (film 44.3 s) and holds still to the last frame (no exit: the film ends here). -->
-      <div id="root" data-composition-id="s7" data-duration="3.296">
+      <div id="root" data-composition-id="s7" data-duration="3.272">
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; color: #eef3fa; }
           #s7-cam, #s7-zoom { position: absolute; inset: 0; }
           #s7-zoom { transform-origin: 540px 800px; }
           #s7-hl { margin-top: 300px; }
-          #s7-sign { position: absolute; left: 72px; top: 1136px; width: 936px; }
+          #s7-sign { position: absolute; left: 72px; top: 1104px; width: 936px; }
+          /* brand end card: full white BNB logo with tagline, centred, last 2.5 s (replaces the text series mark) */
+          #s7-logo { position: absolute; left: 315px; top: 1124px; width: 450px; height: auto; }
           #s7-sign .rule { height: 1.5px; background: rgba(238, 243, 250, 0.44); transform-origin: 0 50%; }
           #s7-mark { margin-top: 30px; display: block; }
           #s7-tag { margin-top: 12px; font-family: var(--f-sans); font-weight: 400; font-size: 28px; line-height: 36px; color: rgba(238, 243, 250, 0.74); }
@@ -31,9 +33,8 @@
             <!-- SIGN-OFF: rule + series mark + episode line -->
             <div id="s7-sign">
               <div class="rule"></div>
-              <div class="bnb-signoff-mark" id="s7-mark">BuyNBuild · Buildpedia</div>
-              <div id="s7-tag">What curing means, and why it can't be rushed.</div>
             </div>
+            <img id="s7-logo" src="assets/brand/bnb_logo_white.png" alt="BUYNBUILD — Building better futures" />
           </div>
         </div>
 
@@ -73,9 +74,10 @@
             var w = B.words(document.getElementById("s7-hl"));   // Save, this, before, your, slab, day.
             [tSave, tThis, tBefore, tYour, tSlab, tDay].forEach(function (t, k) { B.a.words(tl, [w[k]], Math.max(0, t - 0.03)); });
 
-            // sign-off: rule, then the mark and the episode line; all resolved by ~2.1 s
-            tl.fromTo("#s7-sign .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: E.land }, tSlab);
-            tl.fromTo(["#s7-mark", "#s7-tag"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: E.enter, stagger: 0.08 }, tSlab + 0.2);
+            // brand end card (last 2.5 s): the rule draws, the full logo settles in (blur + 4% scale, no overshoot)
+            var tLogo = +(B.ENDCARD - SC.start).toFixed(3);
+            tl.fromTo("#s7-sign .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: E.land }, tLogo);
+            tl.fromTo("#s7-logo", { opacity: 0, filter: "blur(8px)", scale: 0.96 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.9, ease: E.land, transformOrigin: "50% 50%" }, tLogo + 0.1);
 
             // no exit: the film ends on this card
             window.__timelines["s7"] = tl;

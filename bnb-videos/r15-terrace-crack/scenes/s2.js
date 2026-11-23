@@ -179,7 +179,7 @@
   }
 
   SCENES.push({
-    id: 's2', start: 5.95, end: 17.07,
+    id: 's2', start: RT(5.95), end: RT(17.07),
     draw(ctx, t, lt, T) {
       const W3 = (w) => L.wordTime(T, 'L03', w), W4 = (w) => L.wordTime(T, 'L04', w);
       const tSeeps = W3('seeps'), tReaches = W3('reaches'), tSlab = W3('slab'), tDamp = W3('damp'), tCeiling = W3('ceiling'), tBelow = W3('below');
@@ -187,12 +187,12 @@
       const zp = L.easeInOut(L.prog(t, tOver - 0.15, tOver + 0.75));
       const o = {
         p: L.prog(t, this.start - 0.2, this.start + 0.55),
-        film: 1 - 0.5 * L.prog(t, 10, 12),
+        film: 1 - 0.5 * L.prog(t, RT(10), RT(12)),
         fill: L.easeInOut(L.prog(t, tSeeps - 0.05, tReaches + 0.1)),
         wet: L.easeInOut(L.prog(t, tReaches, tBelow)) * 0.75 + 0.25 * L.easeInOut(L.prog(t, tMoist - 0.1, tSteel + 0.2)),
         stain: L.easeOut(L.prog(t, tDamp - 0.1, tBelow + 0.6)),
         drip: L.prog(t, tCeiling, tCeiling + 1.1),
-        rust: L.easeInOut(L.prog(t, tSteel + 0.15, 16.9)),
+        rust: L.easeInOut(L.prog(t, tSteel + 0.15, RT(16.9))),
         calloutA: 1 - L.prog(t, tOver - 0.3, tOver + 0.05),
       };
 
@@ -200,7 +200,7 @@
       // frame clip (keeps the zoomed shot inside the safe area)
       ctx.beginPath(); ctx.roundRect(60, 232, 960, 1108, 28); ctx.clip();
       // rain above the slab, easing off
-      const ra = (1 - L.prog(t, 9.5, 11.6)) * L.prog(t, this.start - 0.3, this.start + 0.2);
+      const ra = (1 - L.prog(t, RT(9.5), RT(11.6))) * L.prog(t, this.start - 0.3, this.start + 0.2);
       ctx.save();
       const zs = L.lerp(1, 2.2, zp);
       ctx.translate(L.lerp(F[0], 540, zp), L.lerp(F[1], 760, zp)); ctx.scale(zs, zs); ctx.translate(-F[0], -F[1]);
@@ -210,7 +210,7 @@
 
       // moisture particles flowing to the steel (screen space, zoomed shot)
       if (zp > 0.6) {
-        const pa = L.prog(t, tMoist - 0.1, tMoist + 0.3) * (1 - 0.6 * L.prog(t, 16, 16.9));
+        const pa = L.prog(t, tMoist - 0.1, tMoist + 0.3) * (1 - 0.6 * L.prog(t, RT(16), RT(16.9)));
         const map = ([x, y]) => [540 + (x - F[0]) * zs, 760 + (y - F[1]) * zs];
         const pts = PATH.slice(0, 4).map(map);
         for (let k = 0; k < 9; k++) {

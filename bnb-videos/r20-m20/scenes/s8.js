@@ -13,7 +13,7 @@
   }
 
   SCENES.push({
-    id: 's8', start: 40.572, end: 44.41,
+    id: 's8', start: L.cut(window.T, 'L09'), end: window.T.total,
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L09', w);
       const tSend = W('send'), tBuild = W('building');
@@ -75,11 +75,11 @@
         L.drawOn(ctx, [[x0, 1128], [x0 + wb, 1128]], ul, P.accent, 8);
       }
 
-      // ---- sign-off
-      const so = L.easeOut(L.prog(t, tBuild - 0.05, tBuild + 0.4));
-      if (so > 0) {
-        L.drawOn(ctx, [[440, 1206], [640, 1206]], so, 'rgba(143,179,218,0.5)', 3);
-        L.text(ctx, 'BUYNBUILD · Buildpedia', 540, 1262 + (1 - so) * 12, 40, P.dim, 800, 'center', so);
+      // ---- brand end card (last 2.5 s): full white BNB logo + tagline, centred, replaces the text sign-off
+      const lp = L.easeOut(L.prog(t, window.ENDCARD, window.ENDCARD + 0.7));
+      if (lp > 0 && window.BRAND.logo.complete) {
+        const w = 400 * L.lerp(0.94, 1, lp), h = w * 525 / 945;
+        ctx.save(); ctx.globalAlpha *= lp; ctx.drawImage(window.BRAND.logo, 540 - w / 2, 1290 - h / 2, w, h); ctx.restore();
       }
     },
   });

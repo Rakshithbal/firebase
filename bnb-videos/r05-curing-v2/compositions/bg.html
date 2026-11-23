@@ -3,7 +3,7 @@
   <body>
     <template>
       <!-- Ground: flat navy page + blueprint grid (aligned to the 72 px margin) + vignette. DESIGN.md §8 -->
-      <div id="root" data-composition-id="bg" data-duration="45.51">
+      <div id="root" data-composition-id="bg" data-duration="47.73">
         <style>
           #root { position: absolute; inset: 0; overflow: hidden; background: #0b2139; }
           #bg-cam { position: absolute; inset: 0; }
@@ -27,7 +27,7 @@
           (function () {
             var tl = gsap.timeline({ paused: true });
             // constant, barely-there drift (linear is the point)
-            tl.fromTo("#bg-grid", { x: 0, y: 0 }, { x: -24, y: -72, duration: 45.51, ease: "none" }, 0);
+            tl.fromTo("#bg-grid", { x: 0, y: 0 }, { x: -24, y: -72, duration: window.R05.total, ease: "none" }, 0);
             // parallax nudge of the whole grid at each scene seam: the camera moves with the cut
             tl.fromTo("#bg-cam", { x: 0, y: 0 }, { x: 0, y: 0, duration: 0.01 }, 0);
             var cuts = [[4.411, 0, -24], [8.841, 0, 48], [14.944, 24, 0], [24.97, 0, -48], [32.304, -24, 0], [42.214, 0, -24]];

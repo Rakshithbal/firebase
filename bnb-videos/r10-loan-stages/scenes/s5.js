@@ -1,7 +1,7 @@
 // s5 — L08: plan your own cash for each gap (orange gap boxes filled with green "your cash"), then a
 // "Confirm with your bank or CA" note card.
 (function () {
-  const START = 32.35, END = 37.95;
+  const START = RT(32.35), END = RT(37.95);
   const XS = [210, 430, 650, 870], BW = 150, BASE = 1010;
   const HS = [340, 430, 300, 390];   // illustrative only, no values
   const NAMES = ['PLINTH', 'SLAB', 'WALLS', 'FINISHING'];

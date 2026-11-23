@@ -193,5 +193,5 @@ re-positioned every 2 frames from a hash of the frame step (seek-safe). Scenes a
 
 No number of days, no percentages, no MPa, no quantities or figures of any kind. The only digits allowed on
 screen are editorial indices: kicker `0N` and `Fig. N`. Strength is shown as a bar with no scale.
-No logos (the mono word BUYNBUILD in the sign-off mark is type, not a logo). No faces, no people, no hands.
+Brand logo (michael re-export): only the white BNB mark as a corner watermark (`chrome.html`, x 898–990, y 156–198, 85%) and the full white logo + tagline on the s7 end card (last 2.5 s, `BNB.ENDCARD`), from `assets/brand/`. No other logos. No faces, no people, no hands.
 No AI imagery, no photos, no stock icons — everything is drawn in the system above.

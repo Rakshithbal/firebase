@@ -89,7 +89,7 @@
   }
 
   SCENES.push({
-    id: 's4', start: 19.597, end: 24.407,
+    id: 's4', start: L.cut(window.T, 'L05'), end: L.cut(window.T, 'L06'),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L05', w);
       const t0 = this.start, tEng = W('engineer'), tPicks = W('picks'), tGrade = W('grade'), tEach = W('each'), tPart = W('part');

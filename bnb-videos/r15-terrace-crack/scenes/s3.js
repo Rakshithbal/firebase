@@ -2,7 +2,7 @@
 (function () {
   const A = window.R15A;
   SCENES.push({
-    id: 's3', start: 17.07, end: 19.64,
+    id: 's3', start: RT(17.07), end: RT(19.64),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L05', w);
       const tCheck = W('check'), tIt = W('it'), tNow = W('now'), tDry = W('dry');

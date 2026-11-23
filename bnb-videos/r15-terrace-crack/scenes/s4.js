@@ -75,7 +75,7 @@
     if (rainP > 0) {
       const r = L.rng(66);
       for (let k = 0; k < 6; k++) {
-        const st = 24.7 + k * 0.17 + r() * 0.1, q = L.prog(t, st, st + 0.7), x = PUDDLE[0] - 70 + r() * 140, y = PUDDLE[1] - 40 + r() * 80;
+        const st = RT(24.7) + k * 0.17 + r() * 0.1, q = L.prog(t, st, st + 0.7), x = PUDDLE[0] - 70 + r() * 140, y = PUDDLE[1] - 40 + r() * 80;
         if (q <= 0 || q >= 1) continue;
         ctx.save(); ctx.globalAlpha *= (1 - q); ctx.strokeStyle = P.line; ctx.lineWidth = 3;
         ctx.beginPath(); ctx.ellipse(x, y, 6 + q * 30, (6 + q * 30) * 0.6, 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
@@ -93,7 +93,7 @@
   }
 
   SCENES.push({
-    id: 's4', start: 19.64, end: 25.71,
+    id: 's4', start: RT(19.64), end: RT(25.71),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L06', w);
       const tWalk = W('walk'), tLook = W('look'), tPar = W('parapet'), tPipes = W('pipes'), tWater = W('water'), tStands = W('stands'), tAfter = W('after');

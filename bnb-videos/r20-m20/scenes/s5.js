@@ -97,7 +97,7 @@
   }
 
   SCENES.push({
-    id: 's5', start: 24.407, end: 31.994,
+    id: 's5', start: L.cut(window.T, 'L06'), end: L.cut(window.T, 'L07'),
     draw(ctx, t, lt, T) {
       const W = (w, n = 0) => A.wt(T, 'L06', w, n);
       const t0 = this.start, tSite = W('site'), tGrade = W('grade'), tHolds = W('holds'), tIf = W('if'), tMix = W('mix'), tRight = W('right');

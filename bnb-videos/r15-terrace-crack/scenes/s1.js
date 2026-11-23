@@ -89,7 +89,7 @@
   }
 
   SCENES.push({
-    id: 's1', start: 0, end: 5.95,
+    id: 's1', start: 0, end: RT(5.95),
     draw(ctx, t, lt, T) {
       const W1 = (w) => L.wordTime(T, 'L01', w), W2 = (w) => L.wordTime(T, 'L02', w);
       const tCrack = W1('crack'), tLooks = W1('looks'), tSummer = W1('summer');

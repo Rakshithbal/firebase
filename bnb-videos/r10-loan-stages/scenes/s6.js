@@ -1,6 +1,6 @@
 // s6 — CTA (L09): paper plane flies in on "Send", headline word by word, BUYNBUILD · Loan Lens sign-off.
 (function () {
-  const START = 37.95, END = 41.93;
+  const START = RT(37.95), END = RT(41.93);
 
   function plane(ctx, s) {
     ctx.save(); ctx.scale(s, s); ctx.lineJoin = 'round';
@@ -63,7 +63,9 @@
 
       // ---- sign-off
       const so = L.easeOut(L.prog(t, W('year') + 0.2, W('year') + 0.7));
-      if (so > 0) {
+      if (so > 0 && window.BRAND) { // logo end card replaces the BUYNBUILD sign-off; keep the series name small
+        L.text(ctx, 'LOAN LENS', 540, 1495, 34, P.dim, 800, 'center', L.easeOut(L.prog(t, T.lines[T.lines.length - 1].end + 0.6, T.lines[T.lines.length - 1].end + 1.2)));
+      } else if (so > 0) {
         L.drawOn(ctx, [[540, 1240], [300, 1240]], so, 'rgba(143,179,218,0.6)', 3);
         L.drawOn(ctx, [[540, 1240], [780, 1240]], so, 'rgba(143,179,218,0.6)', 3);
         L.text(ctx, 'BUYNBUILD · Loan Lens', 540, 1290, 40, P.line, 800, 'center', so);

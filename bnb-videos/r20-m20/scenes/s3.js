@@ -22,7 +22,7 @@
   }
 
   SCENES.push({
-    id: 's3', start: 15.225, end: 19.597,
+    id: 's3', start: L.cut(window.T, 'L04'), end: L.cut(window.T, 'L05'),
     draw(ctx, t, lt, T) {
       const W = (w, n = 0) => A.wt(T, 'L04', w, n);
       const t0 = this.start, tHigher = W('higher'), tNum = W('number'), tStr = W('stronger'), tMix = W('mix');

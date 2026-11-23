@@ -1,7 +1,7 @@
 // s1 — HOOK: one big rupee bag ("ONE BIG AMOUNT?") does NOT come down in one go; it splits into smaller packets.
 // Exports window.R10.row (packet positions at the end of s1) so s2 can pick the packets up from there.
 (function () {
-  const START = 0, END = 3.85;
+  const START = 0, END = RT(3.85);
   window.R10 = window.R10 || {};
   const ROW = (window.R10.row = { xs: [195, 425, 655, 885], y: 760, s: 1.25 });
 

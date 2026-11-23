@@ -2,7 +2,7 @@
 (function () {
   const A = window.R15A;
   SCENES.push({
-    id: 's7', start: 35.24, end: 38.95,
+    id: 's7', start: RT(35.24), end: RT(38.95),
     draw(ctx, t, lt, T) {
       const wt = (w) => L.wordTime(T, 'L09', w);
       const tSave = wt('save');
@@ -64,7 +64,9 @@
 
       // sign-off
       const so = L.easeOut(L.prog(t, words[5].t - 0.1, words[5].t + 0.35));
-      if (so > 0) {
+      if (so > 0 && window.BRAND) { // logo end card replaces the BUYNBUILD sign-off; keep the series name small
+        L.text(ctx, 'FIX IT BEFORE IT SPREADS', 540, 1495, 32, P.dim, 800, 'center', L.easeOut(L.prog(t, T.lines[T.lines.length - 1].end + 0.6, T.lines[T.lines.length - 1].end + 1.2)));
+      } else if (so > 0) {
         L.drawOn(ctx, [[440, 1176], [640, 1176]], so, 'rgba(143,179,218,0.5)', 3);
         L.text(ctx, 'BUYNBUILD · Fix It Before It Spreads', 540, 1232 + (1 - so) * 12, 38, P.dim, 800, 'center', so);
       }

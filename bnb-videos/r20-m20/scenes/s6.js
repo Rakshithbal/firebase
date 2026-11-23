@@ -49,7 +49,7 @@
   }
 
   SCENES.push({
-    id: 's6', start: 31.994, end: 35.318,
+    id: 's6', start: L.cut(window.T, 'L07'), end: L.cut(window.T, 'L08'),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L07', w);
       const t0 = this.start, tExtra = W('extra'), tWater = W('water'), tEasier = W('easier'), tPour = W('pour'), tBut = W('but'), tWeak = W('weaker');

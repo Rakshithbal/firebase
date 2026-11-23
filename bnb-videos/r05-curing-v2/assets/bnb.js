@@ -34,15 +34,24 @@
   /* Canonical stage geometry: the slab lives HERE in every scene that shows it,
      so cuts between scenes can match on it. */
   /* Scene slots (film seconds). Kicker text is fixed per scene (DESIGN.md §2). */
-  B.SCENES = [
-    { id: "s1", start: 0, dur: 4.411, line: "L01", kicker: "01 — The myth" },
-    { id: "s2", start: 4.411, dur: 4.43, line: "L02", kicker: "02 — The truth" },
-    { id: "s3", start: 8.841, dur: 6.103, line: "L03", kicker: "03 — Inside the slab" },
-    { id: "s4", start: 14.944, dur: 10.026, line: "L04+L05", kicker: "04 — What goes wrong" },
-    { id: "s5", start: 24.97, dur: 7.334, line: "L06", kicker: "05 — How to cure" },
-    { id: "s6", start: 32.304, dur: 9.91, line: "L07+L08", kicker: "06 — How long" },
-    { id: "s7", start: 42.214, dur: 3.296, line: "L09", kicker: "07 — Keep this" },
-  ];
+  /* Scene slots (film seconds), derived from the voice timing (assets/timing.js) so a re-voice re-slots
+     every scene: each scene opens on its first line's start, s1 at 0, s7 runs to the end of the film. */
+  B.SCENES = (function () {
+    var R = window.R05, st = function (id) { return R.lines.filter(function (l) { return l.id === id; })[0].start; };
+    var cut = [0, st("L02"), st("L03"), st("L04"), st("L06"), st("L07"), st("L09"), R.total];
+    var meta = [
+      { id: "s1", line: "L01", kicker: "01 — The myth" },
+      { id: "s2", line: "L02", kicker: "02 — The truth" },
+      { id: "s3", line: "L03", kicker: "03 — Inside the slab" },
+      { id: "s4", line: "L04+L05", kicker: "04 — What goes wrong" },
+      { id: "s5", line: "L06", kicker: "05 — How to cure" },
+      { id: "s6", line: "L07+L08", kicker: "06 — How long" },
+      { id: "s7", line: "L09", kicker: "07 — Keep this" },
+    ];
+    return meta.map(function (m, i) { m.start = +cut[i].toFixed(3); m.dur = +(cut[i + 1] - cut[i]).toFixed(3); return m; });
+  })();
+  /* Brand end card: the full BNB logo holds for the last 2.5 s; the corner mark leaves as it arrives. */
+  B.ENDCARD = +(window.R05.total - 2.5).toFixed(3);
   B.STAGE = {
     m: 72, col: 936, safeTop: 230, safeBottom: 1340, capTop: 1380, capBottom: 1560,
     slab: { x0: 132, x1: 948, top: 830, th: 150, ground: 1166 },

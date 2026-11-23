@@ -77,7 +77,7 @@
   }
 
   SCENES.push({
-    id: 's2', start: 9.165, end: 15.225,
+    id: 's2', start: L.cut(window.T, 'L03'), end: L.cut(window.T, 'L04'),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L03', w);
       const t0 = this.start, tSmall = W('small'), tCubes = W('cubes'), tConc = W('concrete'), tTest = W('tested');

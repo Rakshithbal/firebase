@@ -25,7 +25,7 @@
   }
 
   SCENES.push({
-    id: 's5', start: 25.71, end: 29.0,
+    id: 's5', start: RT(25.71), end: RT(29.0),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L07', w);
       const tMark = W('mark'), tChalk = W('chalk'), tTake = W('take'), tPhoto = W('photo');

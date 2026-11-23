@@ -2,7 +2,7 @@
 // Left: house builds floor by floor (plinth, slab, walls, finishing). Right: stage track; each stage gets a check
 // (inspection lens) and only then a packet leaves the bank and lands in that stage's slot.
 (function () {
-  const START = 3.85, END = 15.2;
+  const START = RT(3.85), END = RT(15.2);
   const BANK = { x: 820, y: 500, s: 1.0 };
   const VAULT = { xs: [690, 776, 862, 948], y: 585, s: 0.5 };
   const RAIL_X = 650, SLOT_X = 963;
@@ -12,7 +12,7 @@
     { name: 'WALLS', y: 890, word: 'walls', lens: [240, 1150] },
     { name: 'FINISHING', y: 740, word: 'finishing', lens: [430, 1110] },
   ];
-  const CHECK = [11.46, 12.2, 12.95, 13.7];   // check -> release cycle per stage (last packet lands on "released")
+  const CHECK = [11.46, 12.2, 12.95, 13.7].map(RT);   // check -> release cycle per stage (last packet lands on "released")
   const GROUND = 1265, HX0 = 110, HX1 = 570;
   const COLS = [152, 340, 528];
 

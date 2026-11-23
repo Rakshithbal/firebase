@@ -26,7 +26,7 @@
   }
 
   SCENES.push({
-    id: 's6', start: 29.0, end: 35.24,
+    id: 's6', start: RT(29.0), end: RT(35.24),
     draw(ctx, t, lt, T) {
       const W = (w) => L.wordTime(T, 'L08', w);
       const tShow = W('show'), tEng = W('engineer'), tBefore = W('before'), tRains = W('rains'), tAsk = W('ask'), tWhich = W('which');

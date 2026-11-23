@@ -1,7 +1,13 @@
 <!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
 <body><canvas id="c" width="1080" height="1920"></canvas>
 <script src="lib.js"></script>
-<script>window.T = __TIMING__;</script>
+<script>window.T = __TIMING__; window.T0 = __TIMING0__; window.BRAND = __BRAND__;
+// RT: remap a time on the original (timing.json) timeline onto the current timing, piecewise-linear through line starts/ends.
+(function(){ const A=[[0,0]]; T0.lines.forEach((l,i)=>{ const n=T.lines[i]; A.push([l.start,n.start],[l.end,n.end]); }); A.push([T0.total,T.total]);
+  window.RT = (x) => { for (let i=0;i<A.length-1;i++){ const [a0,b0]=A[i],[a1,b1]=A[i+1]; if (x<=a1) return a1===a0?b1:b0+(x-a0)*(b1-b0)/(a1-a0); } return x-T0.total+T.total; };
+  if (BRAND) { window.IMG_MARK=new Image(); IMG_MARK.src='__MARK__'; window.IMG_LOGO=new Image(); IMG_LOGO.src='__LOGO__';
+    window.BRAND_READY=Promise.all([IMG_MARK.decode(),IMG_LOGO.decode()]); } else window.BRAND_READY=Promise.resolve();
+})();</script>
 <script src="scenes/common.js"></script>
 <script src="scenes/s1.js"></script><script src="scenes/s2.js"></script><script src="scenes/s3.js"></script><script src="scenes/s4.js"></script>
 <script src="scenes/s5.js"></script><script src="scenes/s6.js"></script><script src="scenes/s7.js"></script>
@@ -36,6 +42,15 @@ function captions(t){
   parts.forEach((p,i)=>{ const w=ch[i]; const on = t>=w.s && t<w.e+0.05; ctx.fillStyle = on? P.accent : (t>=w.s? P.line : 'rgba(234,242,255,0.55)'); ctx.textAlign='left'; ctx.fillText(p,x,y+2); x+=widths[i]+sp; });
   ctx.restore();
 }
+function brand(t){
+  if(!BRAND) return;
+  const t0 = T.total - 2.5;                                   // end card: final 2.5 s
+  const ec = L.easeOut(L.prog(t, t0, t0 + 0.9));
+  const wa = 0.85 * L.easeOut(L.prog(t, 0.3, 0.9)) * (1 - L.prog(t, t0 - 0.2, t0 + 0.4));
+  if (wa > 0) { const w = 90, h = w * IMG_MARK.height / IMG_MARK.width; ctx.save(); ctx.globalAlpha = wa; ctx.drawImage(IMG_MARK, 900, 156, w, h); ctx.restore(); }
+  if (ec > 0) { const w = 450 * L.lerp(0.9, 1, ec), h = w * IMG_LOGO.height / IMG_LOGO.width, cy = 1335 + (1 - ec) * 14;
+    ctx.save(); ctx.globalAlpha = ec; ctx.drawImage(IMG_LOGO, 540 - w / 2, cy - h / 2, w, h); ctx.restore(); }
+}
 window.renderAt = function(t){
   bg(t);
   const S = SCENES.slice().sort((a,b)=>a.start-b.start);
@@ -44,6 +59,6 @@ window.renderAt = function(t){
     let a = 1; if(t < s.start) a = (t-(s.start-FADE))/FADE; if(t > s.end) a = 1-(t-s.end)/FADE;
     ctx.save(); ctx.globalAlpha = Math.max(0,Math.min(1,a)); s.draw(ctx, t, t - s.start, T); ctx.restore();
   }
-  header(t); captions(t);
+  header(t); captions(t); brand(t);
 };
 </script></body></html>

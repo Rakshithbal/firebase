@@ -28,6 +28,8 @@ window.L = {
   rng: (seed) => { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); },
   // time of word index i of line id (from timing.json) — use to land visuals on the spoken word
   wordAt: (T, lineId, i) => { const l = T.lines.find((x) => x.id === lineId); return l.words[Math.min(i, l.words.length - 1)].s; },
+  // scene cut before a line: midpoint of the breath between the previous line's end and this line's start
+  cut: (T, lineId) => { const i = T.lines.findIndex((x) => x.id === lineId); return +((T.lines[i - 1].end + T.lines[i].start) / 2).toFixed(3); },
   // find first word matching text in a line (case-insensitive, punctuation ignored)
   wordTime: (T, lineId, word) => { const l = T.lines.find((x) => x.id === lineId); const w = l.words.find((x) => x.w.toLowerCase().replace(/\W/g, '') === word.toLowerCase()); return w ? w.s : l.start; },
   text: (ctx, s, x, y, size, color = P.line, weight = 800, align = 'center', alpha = 1) => {

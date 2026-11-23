@@ -1,12 +1,12 @@
 // s3 — L04+L05: bills keep coming (orange, continuous) while the bank releases in steps (green).
 // Where bills run ahead of releases, the area shades orange: THE GAP.
 (function () {
-  const START = 15.2, END = 23.75;
+  const START = RT(15.2), END = RT(23.75);
   const X0 = 150, X1 = 960, YB = 1190, VH = 500;
   const xf = (f) => L.lerp(X0, X1, f), yv = (v) => YB - v * VH;
   const bills = (f) => f + 0.012 * Math.sin(f * 26);
   const rel = (f) => (f >= 1 ? 1 : Math.floor(f * 4 + 1e-9) / 4);
-  const CUR0 = 16.0, CUR1 = 19.3;
+  const CUR0 = RT(16.0), CUR1 = RT(19.3);
   const fAt = (t) => L.prog(t, CUR0, CUR1);
   const tAt = (f) => CUR0 + f * (CUR1 - CUR0);
   const BILLS = Array.from({ length: 12 }, (_, j) => 0.04 + j * 0.083);

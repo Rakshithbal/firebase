@@ -1,6 +1,6 @@
 // s4 — L06+L07: "Before you sign" → ASK YOUR BANK card; three questions pop in on their words.
 (function () {
-  const START = 23.75, END = 32.35;
+  const START = RT(23.75), END = RT(32.35);
   const CX0 = 90, CX1 = 990, CY0 = 370, CY1 = 1320;
   const ROWY = [680, 900, 1130], ICX = 185, TX = 268;
 
