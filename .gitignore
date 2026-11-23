@@ -9,3 +9,4 @@ bnb-videos/**/.hyperframes/
 bnb-videos/**/__pycache__/
 **/__pycache__/
 bnb-videos/**/frames_*/
+bnb-videos/r05-curing-v2/out/R05_curing_v2_michael.mp4
