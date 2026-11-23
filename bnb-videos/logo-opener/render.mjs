@@ -3,7 +3,7 @@ import { createRequire } from 'module'; const { chromium } = createRequire(proce
 import fs from 'fs'; import path from 'path';
 const dir = path.dirname(new URL(import.meta.url).pathname);
 const [w, h, out] = process.argv.slice(2); const si = process.argv.indexOf('--stills');
-const FPS = 30, DUR = 2.0;
+const FPS = +(process.env.FPS||30), DUR = 2.0;
 const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: +w, height: +h } });
 await p.goto(`file://${dir}/${process.env.PAGE||'index.html'}?w=${w}&h=${h}`); await p.evaluate(() => window.ready);
 fs.mkdirSync(out, { recursive: true });
