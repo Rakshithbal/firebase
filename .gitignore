@@ -8,3 +8,4 @@ bnb-videos/skill-demo/out/BNB_skill_demo_30s.mp4
 bnb-videos/**/.hyperframes/
 bnb-videos/**/__pycache__/
 **/__pycache__/
+bnb-videos/**/frames_*/
