@@ -1,0 +1,173 @@
+[
+ {
+  "type": "pop",
+  "t": 0.15,
+  "gain": 0.7
+ },
+ {
+  "type": "pencil",
+  "t": 0.925,
+  "gain": 0.6,
+  "dur": 0.5
+ },
+ {
+  "type": "whoosh",
+  "t": 1.633,
+  "gain": 0.52
+ },
+ {
+  "type": "pop",
+  "t": 2.715,
+  "gain": 0.8
+ },
+ {
+  "type": "pencil",
+  "t": 3.906,
+  "gain": 0.6,
+  "dur": 0.45
+ },
+ {
+  "type": "marker",
+  "t": 9.542,
+  "gain": 0.8
+ },
+ {
+  "type": "marker",
+  "t": 10.116,
+  "gain": 0.8
+ },
+ {
+  "type": "pencil",
+  "t": 11.396,
+  "gain": 0.6,
+  "dur": 0.5
+ },
+ {
+  "type": "pencil",
+  "t": 15.651,
+  "gain": 0.6,
+  "dur": 0.45
+ },
+ {
+  "type": "slide",
+  "t": 15.881,
+  "gain": 0.6
+ },
+ {
+  "type": "pencil",
+  "t": 17.057,
+  "gain": 0.6,
+  "dur": 0.45
+ },
+ {
+  "type": "slide",
+  "t": 17.287,
+  "gain": 0.6
+ },
+ {
+  "type": "whoosh",
+  "t": 18.0,
+  "gain": 0.47
+ },
+ {
+  "type": "pop",
+  "t": 18.178,
+  "gain": 0.8
+ },
+ {
+  "type": "marker",
+  "t": 19.128,
+  "gain": 0.8
+ },
+ {
+  "type": "marker",
+  "t": 19.558,
+  "gain": 0.8
+ },
+ {
+  "type": "slide",
+  "t": 19.708,
+  "gain": 0.5
+ },
+ {
+  "type": "marker",
+  "t": 20.274,
+  "gain": 0.8
+ },
+ {
+  "type": "marker",
+  "t": 20.847,
+  "gain": 0.8
+ },
+ {
+  "type": "tick",
+  "t": 21.448,
+  "gain": 0.8
+ },
+ {
+  "type": "tick",
+  "t": 21.698,
+  "gain": 0.8
+ },
+ {
+  "type": "whoosh",
+  "t": 22.8,
+  "gain": 0.6
+ },
+ {
+  "type": "pencil",
+  "t": 25.677,
+  "gain": 0.6,
+  "dur": 0.45
+ },
+ {
+  "type": "slide",
+  "t": 25.927,
+  "gain": 0.6
+ },
+ {
+  "type": "stamp",
+  "t": 26.042,
+  "gain": 1.0
+ },
+ {
+  "type": "whoosh",
+  "t": 27.133,
+  "gain": 0.65
+ },
+ {
+  "type": "slide",
+  "t": 27.813,
+  "gain": 0.5
+ },
+ {
+  "type": "pop",
+  "t": 28.54,
+  "gain": 0.8
+ },
+ {
+  "type": "pop",
+  "t": 29.632,
+  "gain": 0.7
+ },
+ {
+  "type": "slide",
+  "t": 30.297,
+  "gain": 0.8
+ },
+ {
+  "type": "whoosh",
+  "t": 30.9,
+  "gain": 0.46
+ },
+ {
+  "type": "pop",
+  "t": 30.922,
+  "gain": 0.7
+ },
+ {
+  "type": "whoosh",
+  "t": 35.933,
+  "gain": 0.57
+ }
+]

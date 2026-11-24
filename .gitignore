@@ -16,3 +16,6 @@ bnb-videos/r08-written-quote/audio/sfx.wav
 bnb-videos/r13-quotes-differ/audio/music.wav
 bnb-videos/r13-quotes-differ/audio/sfx.wav
 bnb-videos/**/chunks.txt
+bnb-videos/r12-encumbrance/_chunk*.mp4
+bnb-videos/r12-encumbrance/_chunks.txt
+bnb-videos/r16-soil-test/chunks.txt

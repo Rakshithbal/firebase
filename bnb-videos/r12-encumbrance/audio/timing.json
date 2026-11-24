@@ -1,0 +1,53 @@
+{
+ "total_duration": 40.4,
+ "segments": [
+  {
+   "id": 1,
+   "start": 0.4,
+   "end": 4.99,
+   "vo": "Paying a token for a property? Ask for the encumbrance certificate first."
+  },
+  {
+   "id": 2,
+   "start": 5.34,
+   "end": 12.635,
+   "vo": "It's a record of registered transactions on that property, like sales or mortgages, for the period you ask for."
+  },
+  {
+   "id": 3,
+   "start": 13.035,
+   "end": 17.878,
+   "vo": "It can show you if the property is already mortgaged, or has been sold before."
+  },
+  {
+   "id": 4,
+   "start": 18.328,
+   "end": 22.698,
+   "vo": "Check that the owner's name and the property details match your agreement."
+  },
+  {
+   "id": 5,
+   "start": 22.998,
+   "end": 27.031,
+   "vo": "If something doesn't match, or the record has gaps, stop and ask why."
+  },
+  {
+   "id": 6,
+   "start": 27.531,
+   "end": 30.672,
+   "vo": "Then show it to your advocate before any money moves."
+  },
+  {
+   "id": 7,
+   "start": 31.022,
+   "end": 36.063,
+   "vo": "This is general guidance. Your advocate will tell you what applies to your property."
+  },
+  {
+   "id": 8,
+   "start": 36.463,
+   "end": 38.458,
+   "vo": "Save this before you pay a token."
+  }
+ ]
+}

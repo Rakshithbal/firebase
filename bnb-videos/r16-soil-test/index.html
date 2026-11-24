@@ -1,0 +1,371 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fraunces;src:url(fonts/Fraunces-var.woff2) format('woff2');font-weight:100 900;font-style:normal}
+@font-face{font-family:Fraunces;src:url(fonts/Fraunces-var-italic.woff2) format('woff2');font-weight:100 900;font-style:italic}
+@font-face{font-family:Inter;src:url(fonts/Inter-var.woff2) format('woff2');font-weight:100 900}
+@font-face{font-family:Plex;src:url(fonts/IBMPlexMono-500.woff2) format('woff2');font-weight:500}
+@font-face{font-family:Plex;src:url(fonts/IBMPlexMono-600.woff2) format('woff2');font-weight:600}
+html,body{margin:0;background:#000}canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// R16 · Mistake of the Week · "Skipping the soil test". BNB editorial house style (R05 v2 DESIGN.md) drawn on canvas:
+// navy blueprint grid, Fraunces headline + Plex Mono kicker, one orange (#EF4B06) idea per scene, one slam (s5 stamp).
+// Pure renderAt(t); every beat is tied to a spoken word through W(lineId, word).
+window.T = __TIMING__;
+window.IMG_MARK = new Image(); IMG_MARK.src = '__MARK__';
+window.IMG_LOGO = new Image(); IMG_LOGO.src = '__LOGO__';
+window.READY = Promise.all([IMG_MARK.decode(), IMG_LOGO.decode(),
+  document.fonts.load('560 104px Fraunces'), document.fonts.load('italic 500 104px Fraunces'),
+  document.fonts.load('500 44px Inter'), document.fonts.load('500 28px Plex'), document.fonts.load('600 28px Plex')]);
+
+const C = { ground:'#0b2139', ink:'#06162a', ground2:'#10294a', chalk:'#eef3fa', chalk2:'rgba(238,243,250,0.74)',
+  chalk3:'rgba(238,243,250,0.44)', chalk4:'rgba(238,243,250,0.16)', blue:'#8fb3da', point:'#EF4B06',
+  concrete:'#627387', concreteDry:'#a7b3c1', aggregate:'#3e4d60', brick:'rgba(160,98,78,0.34)', water:'#4fc3f7',
+  green:'#7ce0a3', red:'#ff5a5a', heat:'#f2c08a', soil:'#5a4a3c', soilFirm:'#6b5a46', cotton:'#2c2a30', capMuted:'rgba(238,243,250,0.42)' };
+const SERIF = 'Fraunces', SANS = 'Inter', MONO = 'Plex';
+const ctx = document.getElementById('c').getContext('2d');
+const clamp = (x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const prog = (t,a,b)=>clamp((t-a)/(b-a));
+const eo = x=>1-Math.pow(1-x,3);
+const eio = x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const lerp = (a,b,x)=>a+(b-a)*x;
+const rng = s=>{ s>>>=0; return ()=>((s=(s*1664525+1013904223)>>>0)/4294967296); };
+const LINE = id => T.lines.find(l=>l.id===id);
+function W(id, word, nth=0){ const l=LINE(id); let k=0; for(const w of l.words){ if(w.w.toLowerCase().replace(/[^a-z']/g,'')===word){ if(k===nth) return w.s; k++; } } throw new Error('word '+word+' not in '+id); }
+const LW = { hair:1.5, std:3, heavy:5 };
+
+// ---------- primitives ----------
+function line(pts, color=C.chalk, w=LW.std, p=1, dash=null){
+  if(p<=0) return; let tot=0; const seg=[]; for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);tot+=d;}
+  let rem=tot*clamp(p); ctx.save(); ctx.strokeStyle=color; ctx.lineWidth=w; ctx.lineCap='round'; ctx.lineJoin='round'; if(dash) ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(...pts[0]);
+  for(let i=1;i<pts.length;i++){ if(rem<=0) break; const f=Math.min(1,rem/seg[i-1]); ctx.lineTo(lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f)); rem-=seg[i-1]; }
+  ctx.stroke(); ctx.restore();
+}
+function txt(s,x,y,font,color,align='left',ls=0,alpha=1){ ctx.save(); ctx.globalAlpha*=alpha; ctx.font=font; ctx.fillStyle=color; ctx.textAlign=align; ctx.textBaseline='alphabetic'; ctx.letterSpacing=ls+'px'; ctx.fillText(s,x,y); ctx.restore(); }
+function mono(s,x,y,size=24,color=C.blue,align='left',alpha=1,weight=500){ txt(s.toUpperCase(),x,y,`${weight} ${size}px ${MONO}`,color,align,size*0.13,alpha); }
+function hatch(x,y,w,h,color=C.chalk4,step=8,dir=1,lw=LW.hair){
+  ctx.save(); ctx.beginPath(); ctx.rect(x,y,w,h); ctx.clip(); ctx.strokeStyle=color; ctx.lineWidth=lw; ctx.beginPath();
+  for(let k=-h;k<w+h;k+=step){ if(dir>0){ctx.moveTo(x+k,y+h);ctx.lineTo(x+k+h,y);} else {ctx.moveTo(x+k,y);ctx.lineTo(x+k+h,y+h);} }
+  ctx.stroke(); ctx.restore();
+}
+// soil block: fill + speckle + 45° earth ticks on the surface line
+function soil(x0,x1,top,bot,fill,seed=3,alpha=1, surfColor=C.chalk){
+  ctx.save(); ctx.globalAlpha*=alpha; ctx.fillStyle=fill; ctx.fillRect(x0,top,x1-x0,bot-top);
+  hatch(x0,top,x1-x0,bot-top,'rgba(238,243,250,0.08)',14,1);
+  const r=rng(seed); ctx.fillStyle='rgba(238,243,250,0.22)';
+  for(let i=0;i<(x1-x0)*(bot-top)/900;i++){ ctx.beginPath(); ctx.arc(x0+r()*(x1-x0), top+6+r()*(bot-top-6), 1.2+r()*2.2,0,7); ctx.fill(); }
+  line([[x0,top],[x1,top]],surfColor,LW.heavy);
+  ctx.strokeStyle=surfColor; ctx.lineWidth=LW.hair; ctx.beginPath();
+  for(let x=x0+10;x<x1;x+=22){ ctx.moveTo(x,top+2); ctx.lineTo(x-12,top+14); } ctx.stroke();
+  ctx.restore();
+}
+function concrete(x,y,w,h,seed=5,alpha=1){
+  ctx.save(); ctx.globalAlpha*=alpha; ctx.fillStyle=C.concrete; ctx.fillRect(x,y,w,h);
+  const r=rng(seed); ctx.fillStyle=C.aggregate; for(let i=0;i<w*h/260;i++){ ctx.beginPath(); ctx.arc(x+r()*w,y+r()*h,1.5+r()*3,0,7); ctx.fill(); }
+  ctx.fillStyle='rgba(167,179,193,0.55)'; for(let i=0;i<w*h/180;i++){ ctx.fillRect(x+r()*w,y+r()*h,1.6,1.6); }
+  ctx.strokeStyle=C.chalk; ctx.lineWidth=LW.std; ctx.strokeRect(x,y,w,h); ctx.restore();
+}
+// footing + column: (cx, ground y, footing top y, footing w, footing h, column w)
+function foundation(cx, gy, ft, fw, fh, cw=56, colTop=null, seed=7, alpha=1, outline=null){
+  const top = colTop==null ? gy-90 : colTop;
+  concrete(cx-cw/2, top, cw, ft-top, seed, alpha);
+  concrete(cx-fw/2, ft, fw, fh, seed+1, alpha);
+  if(outline){ ctx.save(); ctx.globalAlpha*=alpha*outline.a; ctx.strokeStyle=outline.c; ctx.lineWidth=LW.heavy+1; ctx.strokeRect(cx-fw/2-6,ft-6,fw+12,fh+12); ctx.restore(); }
+}
+function arrow(x0,y0,x1,y1,color,w=4,p=1){
+  if(p<=0) return; const x=lerp(x0,x1,p), y=lerp(y0,y1,p); line([[x0,y0],[x,y]],color,w);
+  const a=Math.atan2(y-y0,x-x0), k=16; ctx.save(); ctx.fillStyle=color; ctx.beginPath(); ctx.moveTo(x+Math.cos(a)*4,y+Math.sin(a)*4);
+  ctx.lineTo(x-Math.cos(a-0.5)*k,y-Math.sin(a-0.5)*k); ctx.lineTo(x-Math.cos(a+0.5)*k,y-Math.sin(a+0.5)*k); ctx.closePath(); ctx.fill(); ctx.restore();
+}
+// dimension line with a word label (never numbers)
+function dim(x0,y0,x1,y1,label,p=1,side=1){
+  if(p<=0) return; ctx.save(); ctx.globalAlpha*=p;
+  const vert = Math.abs(x1-x0)<1;
+  line([[x0,y0],[x1,y1]],C.blue,2);
+  const tick=(x,y)=>line([[x-7,y+7],[x+7,y-7]],C.blue,2); tick(x0,y0); tick(x1,y1);
+  const mx=(x0+x1)/2, my=(y0+y1)/2;
+  ctx.font=`500 24px ${MONO}`; ctx.letterSpacing='3px'; const tw=ctx.measureText(label).width;
+  ctx.fillStyle=C.ground; if(vert) ctx.fillRect(mx-tw/2-10,my-17,tw+20,34); else ctx.fillRect(mx-tw/2-10,my-17,tw+20,34);
+  mono(label,mx,my+8,24,C.blue,'center');
+  ctx.restore();
+}
+function drop(x,y,r,color=C.water,a=1){ if(a<=0) return; ctx.save(); ctx.globalAlpha*=a; ctx.fillStyle=color; ctx.beginPath(); ctx.moveTo(x,y-1.8*r); ctx.arc(x,y,r,-Math.PI/2+0.98,-Math.PI/2-0.98+Math.PI*2); ctx.closePath(); ctx.fill(); ctx.restore(); }
+function sun(x,y,r,t,a=1){ if(a<=0) return; ctx.save(); ctx.globalAlpha*=a; ctx.strokeStyle=C.heat; ctx.lineWidth=4; ctx.lineCap='round';
+  for(let i=0;i<10;i++){ const an=i/10*Math.PI*2+t*0.3; ctx.beginPath(); ctx.moveTo(x+Math.cos(an)*r*1.35,y+Math.sin(an)*r*1.35); ctx.lineTo(x+Math.cos(an)*r*1.8,y+Math.sin(an)*r*1.8); ctx.stroke(); }
+  ctx.fillStyle=C.heat; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); ctx.restore(); }
+function tagBox(s,x,y,color,fg=C.ground,size=24,p=1){ if(p<=0) return; ctx.save(); ctx.globalAlpha*=clamp(p*1.6);
+  ctx.font=`600 ${size}px ${MONO}`; ctx.letterSpacing=(size*0.14)+'px'; const w=ctx.measureText(s).width+size*1.2, h=size*1.8;
+  ctx.translate(x,y); const k=lerp(0.85,1,eo(p)); ctx.scale(k,k);
+  ctx.fillStyle=color; ctx.beginPath(); ctx.roundRect(-w/2,-h/2,w,h,4); ctx.fill(); ctx.restore();
+  mono(s,x,y+size*0.36,size,fg,'center',clamp(p*1.6),600); }
+// callout: dot on subject, leader to shoulder, mono head + optional Inter body
+function callout(x,y,lx,ly,head,p=1,color=C.chalk,align='left'){
+  if(p<=0) return; ctx.save(); ctx.globalAlpha*=clamp(p*1.5);
+  ctx.fillStyle=C.ground; ctx.beginPath(); ctx.arc(x,y,11,0,7); ctx.fill(); ctx.fillStyle=color; ctx.beginPath(); ctx.arc(x,y,6.5,0,7); ctx.fill();
+  const sh = align==='left'? 120 : -120;
+  line([[x,y],[lx,ly],[lx+sh,ly]],color,2,eo(p));
+  mono(head, align==='left'? lx : lx+sh, ly-12, 26, color, align==='left'?'left':'left', eo(prog(p,0.4,1)), 600);
+  ctx.restore();
+}
+// engineer icon: hard hat, plain round head (no face), shoulders with vest
+function engineer(x,y,s,a=1){ if(a<=0) return; ctx.save(); ctx.globalAlpha*=a; ctx.translate(x,y); ctx.scale(s,s);
+  ctx.beginPath(); ctx.moveTo(-120,190); ctx.bezierCurveTo(-120,90,-70,72,0,72); ctx.bezierCurveTo(70,72,120,90,120,190); ctx.closePath();
+  ctx.fillStyle=C.ground2; ctx.fill(); ctx.strokeStyle=C.chalk; ctx.lineWidth=5; ctx.stroke();
+  ctx.save(); ctx.clip(); ctx.strokeStyle=C.blue; ctx.lineWidth=14; ctx.beginPath(); ctx.moveTo(-58,78); ctx.lineTo(-40,200); ctx.moveTo(58,78); ctx.lineTo(40,200); ctx.stroke(); ctx.restore();
+  ctx.beginPath(); ctx.arc(0,0,58,0,7); ctx.fillStyle=C.concrete; ctx.fill(); ctx.strokeStyle=C.chalk; ctx.lineWidth=5; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-66,-14); ctx.bezierCurveTo(-66,-92,66,-92,66,-14); ctx.closePath(); ctx.fillStyle=C.chalk; ctx.fill();
+  ctx.beginPath(); ctx.roundRect(-88,-20,176,20,10); ctx.fill(); ctx.restore(); }
+// simple house elevation (walls + roof) above ground gy
+function house(x0,x1,gy,hgt,p=1,a=1){ if(a<=0) return; ctx.save(); ctx.globalAlpha*=a;
+  const top=gy-hgt; line([[x0,gy],[x0,top],[x1,top],[x1,gy]],C.chalk,LW.std,p);
+  line([[x0-24,top],[(x0+x1)/2,top-hgt*0.55],[x1+24,top],[x0-24,top]],C.chalk,LW.std,p);
+  const ww=(x1-x0)*0.18; line([[x0+(x1-x0)*0.18,gy-hgt*0.62],[x0+(x1-x0)*0.18+ww,gy-hgt*0.62],[x0+(x1-x0)*0.18+ww,gy-hgt*0.3],[x0+(x1-x0)*0.18,gy-hgt*0.3],[x0+(x1-x0)*0.18,gy-hgt*0.62]],C.chalk3,LW.std,p);
+  line([[x1-(x1-x0)*0.32,gy],[x1-(x1-x0)*0.32,gy-hgt*0.58],[x1-(x1-x0)*0.12,gy-hgt*0.58],[x1-(x1-x0)*0.12,gy]],C.chalk3,LW.std,p);
+  ctx.restore(); }
+
+// ---------- headline with <em> ----------
+function headline(parts, t, t0, size=104, lh=100, y0=470, hero=false){
+  // parts: [[text, em], ...]; wraps to 888 px, max 2 lines (3 for hero)
+  const words=[]; parts.forEach(([s,em])=>s.split(' ').filter(Boolean).forEach(w=>words.push({w,em})));
+  const fontOf=em=> em? `italic 500 ${size}px ${SERIF}` : `560 ${size}px ${SERIF}`;
+  ctx.save(); ctx.letterSpacing=(-0.025*size)+'px';
+  const sp=size*0.26, lines=[[]]; let x=0;
+  for(const o of words){ ctx.font=fontOf(o.em); o.wd=ctx.measureText(o.w).width; if(x>0 && x+o.wd>888){ lines.push([]); x=0; } lines[lines.length-1].push(o); x+=o.wd+sp; }
+  lines.forEach((ln,i)=>{ const p=eo(prog(t,t0+0.08*i,t0+0.08*i+0.55)); let xx=72; const y=y0+i*lh+(1-p)*26;
+    for(const o of ln){ ctx.font=fontOf(o.em); ctx.fillStyle=o.em?C.point:C.chalk; ctx.globalAlpha=p; ctx.fillText(o.w,xx,y); xx+=o.wd+sp; } });
+  ctx.restore(); return lines.length;
+}
+function kicker(n,label,t,t0){ const p=eo(prog(t,t0,t0+0.4)); mono(n,72,360,28,C.chalk,'left',p,600); ctx.font=`600 28px ${MONO}`; ctx.letterSpacing='4.5px'; const w=ctx.measureText(n).width; mono('— '+label,72+w+14,360,28,C.blue,'left',p,500); }
+function figcap(n,s,t,t0,y=1222){ const p=eo(prog(t,t0,t0+0.4)); if(p<=0) return; mono('FIG. '+n,72,y,24,C.chalk,'left',p,600); txt(s,72+118,y,`400 28px ${SANS}`,C.chalk2,'left',0,p); }
+
+// ---------- scenes (start/end in seconds; s.draw(t)) ----------
+const SC=[]; const S=(id,a,b,draw)=>SC.push({id,a,b,draw});
+const st = id => LINE(id).start;
+const B = [0, st('L02')-0.25, st('L03')-0.25, st('L04')-0.25, st('L05')-0.25, st('L06')-0.25, st('L07')-0.25, st('L08')-0.25, T.total];
+
+// s1 — L01: the mistake. A soil-test tag gets crossed out on "skipping".
+S('s1',B[0],B[1],t=>{
+  kicker('01','This week’s mistake',t,0.2);
+  headline([['Skipping the ',false],['soil test.',true]],t,0.35);
+  const gy=850; soil(72,1008,gy,1190,C.soil,11,eo(prog(t,0.2,0.8)));
+  // borehole probe that never goes in
+  const tp=W('L01','soil')-0.3, pr=eo(prog(t,0.6,1.3));
+  ctx.save(); ctx.globalAlpha*=pr; line([[540,gy-220],[540,gy-40]],C.chalk,LW.heavy); line([[500,gy-220],[580,gy-220]],C.chalk,LW.heavy); line([[520,gy-40],[540,gy-10],[560,gy-40]],C.chalk,LW.std); ctx.restore();
+  line([[540,gy+10],[540,1170]],C.chalk3,LW.std,eo(prog(t,0.9,1.8)),[10,10]);
+  tagBox('SOIL TEST',540,gy-290,C.chalk,C.ground,28,prog(t,tp-0.4,tp));
+  const ts=W('L01','skipping'); const sp=eo(prog(t,ts,ts+0.35));
+  if(sp>0){ ctx.save(); ctx.font=`600 28px ${MONO}`; ctx.letterSpacing='4px'; const w=ctx.measureText('SOIL TEST').width+50; ctx.restore();
+    line([[540-w/2-14,gy-284],[540+w/2+14,gy-296]],C.point,7,sp); }
+  const tm=W('L01','money'); tagBox('TO SAVE MONEY',540,gy+170,C.ground2,C.chalk2,26,prog(t,tm-0.35,tm+0.1));
+  figcap(1,'A plot, before anything is built.',t,0.9);
+});
+
+// s2 — L02: the soil decides the design. Footings sit in soil; WIDTH / DEPTH labels appear (orange = the footing).
+S('s2',B[1],B[2],t=>{
+  kicker('02','The ground decides',t,B[1]+0.2);
+  headline([['The soil sets the ',false],['design.',true]],t,B[1]+0.3);
+  const gy=800, tf=W('L02','foundation'), ts=W('L02','soil'), td=W('L02','designed');
+  soil(72,1008,gy,1190,C.soil,12,eo(prog(t,ts-0.3,ts+0.2)));
+  house(300,780,gy,150,eo(prog(t,B[1]+0.2,B[1]+1.0)),1);
+  const fp=eo(prog(t,tf-0.1,tf+0.5)), fy=1010;
+  for(const cx of [380,700]) foundation(cx,gy,fy,190,70,52,gy,9+cx,fp,{c:C.point,a:eo(prog(t,td-0.5,td-0.1))});
+  dim(700-95,fy+108,700+95,fy+108,'WIDTH',eo(prog(t,td-0.3,td+0.2)));
+  dim(860,gy,860,fy+70,'DEPTH',eo(prog(t,td-0.1,td+0.4)));
+  callout(220,1100,170,960,'SOIL',eo(prog(t,ts,ts+0.5)),C.chalk);
+  figcap(2,'Footings take their shape from the ground.',t,tf);
+});
+
+// s3 — L03: firm soil vs black cotton soil (swells when wet, shrinks when dry). Orange = the movement arrows.
+S('s3',B[2],B[3],t=>{
+  kicker('03','Two kinds of ground',t,B[2]+0.2);
+  headline([['Firm, or ',false],['on the move.',true]],t,B[2]+0.3);
+  const tf=W('L03','firm'), tb=W('L03','black'), tw=W('L03','swell'), td=W('L03','shrink');
+  const gy=880, bot=1170;
+  // left: firm
+  const la=eo(prog(t,B[2]+0.1,B[2]+0.6));
+  soil(80,510,gy,bot,C.soilFirm,21,la); foundation(295,gy,1030,150,56,46,gy-120,31,la);
+  mono('FIRM SOIL',295,gy-150,26,C.chalk,'center',eo(prog(t,tf-0.2,tf+0.2)),600);
+  // right: black cotton soil, moves with water
+  const ra=eo(prog(t,tb-0.3,tb+0.2));
+  let off=0; // +up
+  if(t>tw){ off = 22*eo(prog(t,tw,tw+0.8)); }
+  if(t>td){ off = lerp(22,-16,eio(prog(t,td,td+0.8))); }
+  if(t>td+0.9){ off = 3 + 19*Math.cos((t-td-0.9)*2.6); }
+  ctx.save(); ctx.beginPath(); ctx.rect(560,gy-260,440,bot-gy+260); ctx.clip();
+  soil(570,1000,gy-off,bot,C.cotton,22,ra);
+  foundation(785,gy-off,1030-off*0.9,150,56,46,gy-120-off*0.9,41,ra);
+  ctx.restore();
+  mono('BLACK COTTON SOIL',785,gy-150-Math.max(0,off),26,C.chalk,'center',ra,600);
+  // wet: drops
+  const wp=prog(t,tw-0.25,td-0.1);
+  if(wp>0 && wp<1){ const r=rng(4); for(let i=0;i<9;i++){ const x=600+r()*370, ph=r(); const y=gy-230+((wp*2.2+ph)%1)*200; drop(x,y,9,C.water,0.9*Math.sin(Math.PI*wp)); } }
+  // dry: sun + surface cracks
+  const dp=eo(prog(t,td-0.2,td+0.3)); sun(950,gy-235,24,t,dp*(1-prog(t,B[3]-0.4,B[3])));
+  if(t>td+0.2){ const r=rng(9); for(let i=0;i<6;i++){ const x=600+i*62+r()*20; line([[x,gy-off],[x+r()*10-5,gy-off+22],[x+r()*12-6,gy-off+44]],C.chalk2,2,prog(t,td+0.2+i*0.05,td+0.6+i*0.05)); } }
+  // arrows (the one orange idea)
+  const up=eo(prog(t,tw,tw+0.4))*(1-prog(t,td-0.1,td)), dn=eo(prog(t,td,td+0.4));
+  if(up>0){ ctx.save(); ctx.globalAlpha*=up; arrow(650,gy+40,650,gy-30,C.point,5); arrow(920,gy+40,920,gy-30,C.point,5); ctx.restore(); }
+  if(dn>0){ ctx.save(); ctx.globalAlpha*=dn; arrow(650,gy-60,650,gy+10,C.point,5); arrow(920,gy-60,920,gy+10,C.point,5); ctx.restore(); }
+  mono('SWELLS WHEN WET',785,1222+0,24,C.water,'center',eo(prog(t,tw,tw+0.3))*(1-prog(t,td-0.1,td+0.1)),600);
+  mono('SHRINKS WHEN DRY',785,1222,24,C.heat,'center',eo(prog(t,td,td+0.3)),600);
+  line([[540,gy-200],[540,bot]],C.chalk4,LW.hair);
+});
+
+// s4 — L04: designed without knowing -> too weak, or costlier than needed. Orange = the "?" over the unknown soil.
+S('s4',B[3],B[4],t=>{
+  kicker('04','Designing blind',t,B[3]+0.2);
+  headline([['Guessing costs ',false],['either way.',true]],t,B[3]+0.3);
+  const tk=W('L04','without'), tw=W('L04','too'), tc=W('L04','costlier'), gy=830, bot=1170;
+  soil(72,1008,gy,bot,C.soil,31,eo(prog(t,B[3]-0.1,B[3]+0.4)));
+  // unknown soil: dark veil + "?"
+  const q=eo(prog(t,tk-0.1,tk+0.35));
+  ctx.save(); ctx.globalAlpha*=0.55*q; ctx.fillStyle=C.ink; ctx.fillRect(72,gy+4,936,bot-gy-4); ctx.restore();
+  if(q>0){ ctx.save(); ctx.globalAlpha*=q; ctx.font=`italic 500 ${150}px ${SERIF}`; ctx.fillStyle=C.point; ctx.textAlign='center'; ctx.fillText('?',470,gy+200+(1-q)*20); ctx.restore(); }
+  // left: too weak (small footing, settles)
+  const lp=eo(prog(t,tw-0.2,tw+0.3)), sink=12*eo(prog(t,tw+0.2,tw+1.2));
+  foundation(260,gy,960+sink,110,36,40,gy-130+sink,51,lp);
+  if(lp>0){ ctx.save(); ctx.globalAlpha*=lp; arrow(260,1030+sink,260,1080+sink,C.chalk2,4); ctx.restore(); }
+  mono('TOO WEAK',260,gy-160,26,C.chalk,'center',lp,600);
+  // right: costlier than needed (oversized footing)
+  const rp=eo(prog(t,tc-0.2,tc+0.3));
+  foundation(780,gy,975,330,120,64,gy-130,61,rp);
+  mono('COSTLIER THAN',780,gy-178,26,C.chalk,'center',rp,600); mono('IT NEEDS TO BE',780,gy-144,26,C.chalk,'center',rp,600);
+  figcap(4,'Same house, two wrong guesses.',t,tw);
+});
+
+// s5 — L05: years later, a crack. The film's one slam: HARDER TO FIX stamp (orange).
+S('s5',B[4],B[5],t=>{
+  kicker('05','Years later',t,B[4]+0.2);
+  headline([['Cracks come ',false],['later.',true]],t,B[4]+0.3);
+  const tc=W('L05','cracks'), ty=W('L05','years'), th=W('L05','harder');
+  // open-ended time tape (no countable strip), faded at both ends
+  const yy=640, tp=eo(prog(t,B[4],B[4]+0.5)); const dx=-((t-B[4])*160)%60;
+  ctx.save(); ctx.globalAlpha*=tp; const g=ctx.createLinearGradient(72,0,1008,0); g.addColorStop(0,'rgba(143,179,218,0)'); g.addColorStop(.2,C.blue); g.addColorStop(.8,C.blue); g.addColorStop(1,'rgba(143,179,218,0)');
+  ctx.strokeStyle=g; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(72,yy); ctx.lineTo(1008,yy); for(let x=72+dx;x<1008;x+=60){ ctx.moveTo(x,yy-10); ctx.lineTo(x,yy+10);} ctx.stroke(); ctx.restore();
+  mono('YEARS LATER',540,yy-26,24,C.blue,'center',eo(prog(t,ty-0.2,ty+0.2)));
+  // wall elevation on its footing
+  const gy=1110, x0=230, x1=850, top=720;
+  soil(72,1008,gy,1190,C.cotton,41,1);
+  ctx.save(); ctx.fillStyle=C.brick; ctx.fillRect(x0,top,x1-x0,gy-top); ctx.strokeStyle='rgba(238,243,250,0.16)'; ctx.lineWidth=LW.hair; ctx.beginPath();
+  for(let y=top+24,k=0;y<gy;y+=24,k++){ ctx.moveTo(x0,y); ctx.lineTo(x1,y); for(let x=x0+(k%2?30:0);x<x1;x+=60){ ctx.moveTo(x,y-24); ctx.lineTo(x,y);} } ctx.stroke(); ctx.restore();
+  ctx.save(); ctx.strokeStyle=C.chalk; ctx.lineWidth=LW.heavy; ctx.strokeRect(x0,top,x1-x0,gy-top); ctx.fillStyle=C.ground; ctx.fillRect(560,800,170,150); ctx.lineWidth=LW.std; ctx.strokeRect(560,800,170,150); ctx.restore();
+  // crack from the window corner down to the ground (red = damage)
+  const cr=[[560,950],[540,980],[548,1004],[522,1032],[530,1058],[506,1084],[512,1110]];
+  const cp=eo(prog(t,tc,tc+0.9)); line(cr,C.red,5,cp);
+  const cr2=[[730,800],[748,776],[742,752],[764,720]]; line(cr2,C.red,4,eo(prog(t,ty,ty+0.6)));
+  // slam
+  const sp=prog(t,th-0.05,th+0.12);
+  if(sp>0){ const s=lerp(1.7,1,eo(sp)); ctx.save(); ctx.translate(700,1040); ctx.rotate(-0.12); ctx.scale(s,s); ctx.globalAlpha*=clamp(sp*3);
+    ctx.font=`600 46px ${MONO}`; ctx.letterSpacing='7px'; const w=ctx.measureText('HARDER TO FIX').width+60;
+    ctx.fillStyle=C.ground; ctx.fillRect(-w/2,-44,w,88); ctx.strokeStyle=C.point; ctx.lineWidth=6; ctx.strokeRect(-w/2,-44,w,88);
+    ctx.fillStyle=C.point; ctx.textAlign='center'; ctx.fillText('HARDER TO FIX',0,16); ctx.restore(); }
+  figcap(5,'Movement below can show up in the walls above.',t,tc+0.4);
+});
+
+// s6 — L06: ask your engineer (question card). Orange = the card's edge bar.
+S('s6',B[5],B[6],t=>{
+  kicker('06','Ask first',t,B[5]+0.2);
+  headline([['Ask your ',false],['engineer.',true]],t,B[5]+0.3);
+  const te=W('L06','engineer'), tn=W('L06','need'), tt=W('L06','tell');
+  const ta=W('L06','ask'); const ea=eo(prog(t,B[5]+0.3,B[5]+0.9)); engineer(230,860,1.05,ea);
+  mono('YOUR ENGINEER',230,1130,24,C.blue,'center',ea);
+  const cp=eo(prog(t,ta-0.25,ta+0.3)); if(cp>0){
+    const x=400,y=640+(1-cp)*30,w=548,h=520; ctx.save(); ctx.globalAlpha*=cp; ctx.fillStyle=C.ground2; ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle=C.chalk3; ctx.lineWidth=2; ctx.strokeRect(x,y,w,h); ctx.fillStyle=C.point; ctx.fillRect(x,y,10,h); ctx.restore();
+    mono('BEFORE THE DESIGN, ASK',x+44,y+66,24,C.blue,'left',cp,600);
+    const q=(s,yy,t0)=>{ const p=eo(prog(t,t0-0.15,t0+0.3)); if(p<=0) return; const lines=s; lines.forEach((ln,i)=>txt(ln,x+44,yy+i*52+(1-p)*14,`500 40px ${SANS}`,C.chalk,'left',0,p)); };
+    q(['Do we need a soil','test here?'],y+160,tn);
+    line([[x+44,y+290],[x+w-44,y+290]],C.chalk4,LW.hair,eo(prog(t,tn+0.3,tn+0.8)));
+    q(['What will it','tell us?'],y+370,tt-0.35);
+  }
+  line([[330,880],[392,880]],C.chalk3,2,eo(prog(t,ta,ta+0.4)),[6,8]);
+});
+
+// s7 — L07: a small step before the biggest part. Orange = the small step.
+S('s7',B[6],B[7],t=>{
+  kicker('07','Before you dig',t,B[6]+0.2);
+  headline([['A small step, ',false],['first.',true]],t,B[6]+0.3);
+  const ts=W('L07','small'), tb=W('L07','biggest'), gy=900;
+  const sp=eo(prog(t,ts-0.1,ts+0.3));
+  if(sp>0){ ctx.save(); ctx.globalAlpha*=sp; ctx.fillStyle=C.point; ctx.fillRect(130,gy-60,60,60); ctx.restore(); }
+  mono('SOIL TEST',160,gy+52,24,C.chalk,'center',sp,600);
+  arrow(220,gy-30,320,gy-30,C.chalk3,3,eo(prog(t,ts+0.3,tb)));
+  const bp=eo(prog(t,tb-0.2,tb+0.4));
+  soil(360,1000,gy,1180,C.soil,71,bp); house(450,900,gy,190,bp,bp);
+  for(const cx of [520,830]) foundation(cx,gy,1060,180,64,50,gy,81+cx,bp);
+  mono('FOUNDATION',675,1222-60,24,C.blue,'center',bp);
+  // education-only line (house disclaimer)
+  const dp=eo(prog(t,B[6]+0.4,B[6]+0.9)); if(dp>0){ txt('General guidance. Confirm with your structural engineer.',72,1232,`400 28px ${SANS}`,C.chalk2,'left',0,dp); }
+});
+
+// s8 — L08: save CTA (hero headline + bookmark); logo end card is drawn by brand()
+S('s8',B[7],B[8],t=>{
+  const t0=B[7];
+  headline([['Save this before you ',false],['start digging.',true]],t,t0+0.2,132,124,560,true);
+  const ts=W('L08','save'), p=eo(prog(t,ts-0.1,ts+0.35));
+  if(p>0){ ctx.save(); ctx.translate(540,960); ctx.scale(lerp(.7,1,p),lerp(.7,1,p)); ctx.globalAlpha*=p; ctx.beginPath(); ctx.moveTo(-60,-90); ctx.lineTo(60,-90); ctx.lineTo(60,90); ctx.lineTo(0,50); ctx.lineTo(-60,90); ctx.closePath(); ctx.fillStyle=C.point; ctx.fill(); ctx.restore(); }
+  txt('General guidance. Confirm with your structural engineer.',72,1232,`400 28px ${SANS}`,C.chalk2,'left',0,eo(prog(t,t0,t0+0.4)));
+});
+
+// ---------- background, chrome, captions, brand ----------
+const GR = (()=>{ const out=[]; const r=rng(99); for(let k=0;k<6;k++){ const c=document.createElement('canvas'); c.width=540; c.height=960; const g=c.getContext('2d'); const im=g.createImageData(540,960);
+  for(let i=0;i<im.data.length;i+=4){ const v=128+(r()-0.5)*90; im.data[i]=im.data[i+1]=im.data[i+2]=v; im.data[i+3]=255; } g.putImageData(im,0,0); out.push(c);} return out; })();
+function bg(t){
+  ctx.fillStyle=C.ground; ctx.fillRect(0,0,1080,1920);
+  const lift=ctx.createRadialGradient(540,905,80,540,905,760); lift.addColorStop(0,'rgba(30,70,120,0.35)'); lift.addColorStop(1,'rgba(30,70,120,0)'); ctx.fillStyle=lift; ctx.fillRect(0,0,1080,1920);
+  const d=(t*4)%24; ctx.lineWidth=1;
+  for(let x=72-96*3+d;x<1080;x+=24){ ctx.strokeStyle=(Math.round((x-72-d)/24)%4===0)?'rgba(238,243,250,0.055)':'rgba(238,243,250,0.026)'; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,1920); ctx.stroke(); }
+  for(let y=-96+d;y<1920;y+=24){ ctx.strokeStyle=(Math.round((y-d)/24)%4===0)?'rgba(238,243,250,0.055)':'rgba(238,243,250,0.026)'; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(1080,y); ctx.stroke(); }
+}
+function vignetteGrain(t){
+  const v=ctx.createRadialGradient(540,900,500,540,900,1250); v.addColorStop(0,'rgba(6,22,42,0)'); v.addColorStop(1,'rgba(6,22,42,0.75)'); ctx.fillStyle=v; ctx.fillRect(0,0,1080,1920);
+  const k=Math.floor(t*15)%GR.length; ctx.save(); ctx.globalCompositeOperation='soft-light'; ctx.globalAlpha=0.07; ctx.drawImage(GR[k],0,0,1080,1920); ctx.restore();
+}
+const END0 = T.total-2.5;
+function chrome(t){
+  const a=eo(prog(t,0.1,0.6))*(1-prog(t,END0-0.2,END0+0.3)); if(a<=0) return;
+  mono('MISTAKE OF THE WEEK',72,296,22,C.chalk,'left',a,600);
+  ctx.font=`600 22px ${MONO}`; ctx.letterSpacing='4.4px'; const w=ctx.measureText('MISTAKE OF THE WEEK').width;
+  mono('·  SOIL TEST',72+w+12,296,22,C.blue,'left',a,500);
+  // chapter progress (one segment per scene), right of the rail
+  const n=SC.length, x0=640, x1=1008, gap=6, sw=(x1-x0-gap*(n-1))/n;
+  for(let i=0;i<n;i++){ const s=SC[i]; const f=clamp((t-s.a)/(s.b-s.a)); ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=C.chalk4; ctx.fillRect(x0+i*(sw+gap),286,sw,4); ctx.fillStyle=C.chalk2; ctx.fillRect(x0+i*(sw+gap),286,sw*f,4); ctx.restore(); }
+  // BNB watermark (top right)
+  const mw=90, mh=mw*IMG_MARK.height/IMG_MARK.width; ctx.save(); ctx.globalAlpha=0.85*a; ctx.drawImage(IMG_MARK,900,150,mw,mh); ctx.restore();
+}
+// captions: sentence chunks, Inter 44/56, unspoken muted -> spoken chalk, band y 1396-1550
+const CH=(()=>{ const out=[]; ctx.font=`500 44px ${SANS}`;
+  for(const l of T.lines){ let cur=[]; l.words.forEach((w,i)=>{ cur.push(w); const end=i===l.words.length-1; if(end || (cur.length>=6 && /[,.:?]$/.test(w.w)) || cur.length>=11){ out.push(cur); cur=[]; } }); }
+  return out.map((ch,i)=>({ch, s:ch[0].s-0.1, e:(i+1<out.length? Math.min(ch[ch.length-1].e+0.5, out[i+1][0].s-0.1) : ch[ch.length-1].e+0.6)})); })();
+function captions(t){
+  const c=CH.find(c=>t>=c.s && t<c.e); if(!c) return;
+  const a=eo(prog(t,c.s,c.s+0.15))*(1-prog(t,c.e-0.12,c.e));
+  ctx.save(); ctx.font=`500 44px ${SANS}`; ctx.letterSpacing='-0.5px'; const sp=ctx.measureText(' ').width+2;
+  const ws=c.ch.map(w=>({w:w.w,s:w.s,wd:ctx.measureText(w.w).width})); const lines=[[]]; let x=0;
+  for(const o of ws){ if(x>0 && x+o.wd>880){ lines.push([]); x=0; } lines[lines.length-1].push(o); x+=o.wd+sp; }
+  const y0 = lines.length===1? 1490 : 1462;
+  lines.forEach((ln,i)=>{ const lw=ln.reduce((s,o)=>s+o.wd,0)+sp*(ln.length-1); let xx=540-lw/2;
+    for(const o of ln){ ctx.globalAlpha=a; ctx.fillStyle= t>=o.s? C.chalk : C.capMuted; ctx.fillText(o.w,xx,y0+i*56); xx+=o.wd+sp; } });
+  ctx.restore();
+}
+function brand(t){
+  const u=eo(prog(t,END0,END0+0.8)); if(u<=0) return;
+  ctx.save(); ctx.globalAlpha=u; ctx.fillStyle=C.ground; ctx.fillRect(0,0,1080,1390); ctx.restore();
+  const w=560*lerp(.92,1,u), h=w*IMG_LOGO.height/IMG_LOGO.width; ctx.save(); ctx.globalAlpha=u; ctx.drawImage(IMG_LOGO,540-w/2,800-h/2+(1-u)*16,w,h); ctx.restore();
+  const a2=eo(prog(t,END0+0.4,END0+1.0)); mono('BUYNBUILD  ·  MISTAKE OF THE WEEK',540,800+h/2+80,24,C.chalk2,'center',a2,600);
+  ctx.save(); ctx.globalAlpha=a2; ctx.fillStyle=C.point; ctx.fillRect(510,800+h/2+30,60,5); ctx.restore();
+}
+const SLAM = W('L05','harder');
+const FADE=0.3;
+window.renderAt = function(t){
+  ctx.save();
+  const sh = (t>=SLAM+0.05 && t<SLAM+0.15) ? [[0,0],[7,-5],[-6,4],[4,3]][Math.floor((t-SLAM-0.05)*30)+1]||[0,0] : [0,0];
+  bg(t); ctx.translate(sh[0],sh[1]);
+  for(const s of SC){ if(t<s.a-FADE || t>s.b+FADE) continue; let a=1; if(s.id!=='s1' && t<s.a+FADE) a=clamp((t-(s.a-FADE))/(2*FADE)); if(s.id!=='s8' && t>s.b-FADE) a=Math.min(a,clamp(1-(t-(s.b-FADE))/(2*FADE)));
+    if(a<=0) continue; ctx.save(); ctx.globalAlpha=a; s.draw(t); ctx.restore(); }
+  ctx.restore();
+  chrome(t); brand(t); captions(t); vignetteGrain(t);
+};
+</script></body></html>
