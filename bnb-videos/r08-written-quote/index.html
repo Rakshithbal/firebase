@@ -1,0 +1,157 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>R08 Written Quote</title>
+<style>
+@font-face{font-family:Kalam;font-weight:700;src:url(../style-samples/fonts/Kalam-700.woff)}
+@font-face{font-family:Inter;font-weight:100 900;src:url(../style-samples/fonts/Inter-var.woff)}
+@font-face{font-family:Bebas;src:url(../style-samples/fonts/BebasNeue-Regular.ttf)}
+html,body{margin:0;background:#222}canvas{display:block}
+</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+window.T = __TIMING__;
+window.CFG = { series: 'MISTAKE OF THE WEEK', sub: 'BUYNBUILD · ENGINEER’S NOTEBOOK' };
+window.IMG_MARK = new Image(); IMG_MARK.src = '__MARK__'; window.IMG_LOGO = new Image(); IMG_LOGO.src = '__LOGO__';
+</script>
+<script src="../style-samples/tools/lib.js"></script>
+<script src="../tools/notebook/engine.js"></script>
+<script>
+// R08 "Mistake of the Week: no written quote". One page per line; one orange idea per page; the slam is IN WRITING (L05).
+function build() {
+  const END = T.total - 2.5;
+  // ---- p1 · L01: the mistake: work starts, the quote sheet stays blank -> orange "no" sign
+  scene(0, () => {
+    const h = Wr(.45, 'Mistake of the week', 150, 370, { size: 78, cps: 20 });
+    S(1.35, 1.6, [[150, 398], [150 + h.width * .5, 404], [150 + h.width, 396]], { w: 7 });
+    const ts = wt('L01', 'starting');
+    bricks(ts, .7, 170, 1030, 4, 3);
+    Wr(ts + .55, 'work starts', 168, 1100, { size: 46 });
+    const tq = wt('L01', 'written') - .5;
+    sheet(tq - .3, .45, 570, 560, 350, 470);
+    Wr(tq, 'Quote', 610, 645, { size: 54 });
+    [730, 800, 870, 940].forEach((y, i) => dashed(tq + .2 + i * .08, .25, [610, y], [880, y], { n: 6, w: 4 }));
+    const tn = wt('L01', 'no');
+    ell(tn, .38, 745, 795, 228, 228, { col: OR, w: 15, a0: -2.2, a1: 4.15 });
+    line(tn + .4, .2, [585, 955], [905, 635], { col: OR, w: 15 });
+  });
+  // ---- p2 · L02: feels quicker: handshake + a number said on the phone (orange) -> work begins
+  scene(3.9, () => {
+    Wr(4.12, 'Feels quicker…', 150, 360, { size: 74, cps: 20 });
+    [[0, 0], [12, 30], [-6, 60]].forEach(([dx, dy], i) => line(4.95 + i * .06, .1, [700 + dx, 300 + dy], [790 + dx, 300 + dy], { w: 5 }));
+    handshake(wt('L02', 'handshake') - .15, .85, 360, 640, .85);
+    const tn = wt('L02', 'number');
+    phone(tn - .15, .5, 810, 720, 1);
+    bubble(tn + .25, .4, 690, 480, 120, 62, [780, 585]);
+    squig(tn + .55, .45, 620, 482, 140, { col: OR, w: 7, amp: 1.3 });
+    [0, 1].forEach(i => S(tn + .9 + i * .08, tn + 1 + i * .08, L.arcPts(810, 720, 100 + i * 26, 100 + i * 26, -.5, .5, 10), { w: 4, quiet: true }));
+    const tw = wt('L02', 'work');
+    arrow(tw - .2, .35, [[560, 840], [545, 930], [575, 1000]]);
+    bricks(tw, .55, 400, 1230, 5, 3);
+    Wr(tw + .2, 'work begins', 740, 1210, { size: 46, cps: 26 });
+  });
+  // ---- p3 · L03: the bill arrives; the number on it is not the number on the phone (orange =/=); material not what you thought
+  scene(8.66, () => {
+    const tb = wt('L03', 'bill');
+    sheet(tb - .2, .5, 240, 330, 480, 650);
+    Wr(tb + .1, 'Bill', 285, 425, { size: 70 });
+    [505, 570, 635].forEach((y, i) => squig(tb + .45 + i * .12, .2, 290, y, 300 - i * 40, { quiet: i > 0 }));
+    phone(tb + .3, .35, 880, 540, .6);
+    bubble(tb + .55, .3, 880, 385, 80, 42, [880, 452]);
+    squig(tb + .8, .25, 830, 386, 100, { w: 4, quiet: true });
+    const tt = wt('L03', 'number');
+    Wr(tt - .2, 'Total', 285, 800, { size: 52 });
+    squig(tt + .1, .3, 450, 790, 200, { w: 5 });
+    const tc = wt('L03', 'changed');
+    line(tc, .12, [762, 760], [846, 760], { col: OR, w: 13 });
+    line(tc + .12, .12, [762, 796], [846, 796], { col: OR, w: 13 });
+    line(tc + .26, .12, [826, 728], [784, 830], { col: OR, w: 13 });
+    dashed(tc + .3, .3, [880, 620], [830, 715], { n: 4, w: 4 });
+    const tm = wt('L03', 'material');
+    Wr(tm - .15, 'Material', 285, 905, { size: 52 });
+    squig(tm + .3, .3, 490, 895, 180, { w: 5 });
+    S(wt('L03', 'what') - .1, wt('L03', 'what'), L.arcPts(390, 1010, 10, 10, 0, 6.3, 12), { w: 5, smooth: false });
+    cloud(wt('L03', 'what'), .5, 560, 1175, 220, 100);
+    squig(wt('L03', 'you'), .35, 420, 1175, 230, { w: 5, amp: 1.8 });
+    Wr(wt('L03', 'thought'), '?', 830, 1215, { size: 120 });
+  });
+  // ---- p4 · L04: without paper: two memories, orange "vs"
+  scene(14.27, () => {
+    Wr(14.5, 'Without paper…', 150, 360, { size: 74, cps: 20 });
+    const tp = wt('L04', 'paper');
+    [[[440, 1000], [660, 1000]], [[660, 1000], [660, 1290]], [[660, 1290], [440, 1290]], [[440, 1290], [440, 1000]]].forEach((s, i) => dashed(tp + i * .15, .18, s[0], s[1], { n: 5, w: 5 }));
+    Wr(tp + .7, 'nothing to check', 700, 1160, { size: 42 });
+    const ty = wt('L04', 'your');
+    cloud(ty - .1, .45, 310, 700, 170, 120);
+    squig(ty + .35, .35, 210, 700, 200, { w: 5 });
+    Wr(ty + .3, 'your memory', 175, 890, { size: 46 });
+    Wr(wt('L04', 'against') - .05, 'vs', 550, 735, { size: 96, col: OR, align: 'center', cps: 10 });
+    const tt = wt('L04', 'theirs');
+    cloud(tt - .3, .45, 790, 700, 170, 120);
+    squig(tt + .05, .35, 690, 700, 200, { w: 5, amp: 2.2 });
+    Wr(tt - .25, 'theirs', 720, 890, { size: 46, cps: 24 });
+  });
+  // ---- p5 · L05: THE SLAM: a quote sheet, stamped IN WRITING
+  scene(17.54, () => {
+    Wr(17.8, 'Before work starts:', 150, 360, { size: 74, cps: 20 });
+    const ta = wt('L05', 'ask');
+    sheet(ta - .25, .45, 270, 470, 540, 720);
+    Wr(ta + .05, 'Quote', 320, 575, { size: 72 });
+    [680, 760, 840, 920, 1000, 1080].forEach((y, i) => line(ta + .3 + i * .05, .08, [320, y], [760 - (i % 3) * 50, y], { w: 4, quiet: i > 0 }));
+    stamp(wt('L05', 'written'), 'IN WRITING', 540, 860, { size: 150, rot: -.1 });
+  });
+  // ---- p6 · L06: what goes in it: line items tick on; payments tied to stages (orange ties)
+  scene(20.58, () => {
+    sheet(20.65, .45, 150, 262, 790, 1062);
+    Wr(20.8, 'Quote', 200, 352, { size: 72 });
+    S(21.15, 21.35, [[200, 372], [330, 376], [395, 370]], { w: 6, quiet: true });
+    const row = (tw, ttk, y, label) => { cbox(tw - .15, 200, y - 34, 36); Wr(tw, label, 262, y, { size: 52, cps: 20 }); tick(ttk, 222, y - 18, 1.05); };
+    row(wt('L06', 'work'), wt('L06', 'included'), 470, 'Work included');
+    Wr(wt('L06', 'included') + .2, 'item · item · item', 300, 532, { size: 38, col: '#4a4a52', cps: 26 });
+    row(wt('L06', 'materials') - .25, wt('L06', 'and'), 625, 'Materials');
+    row(wt('L06', 'grade') - .2, wt('L06', 'type'), 720, 'Grade / type');
+    row(wt('L06', 'payments') - .3, wt('L06', 'payments') + .45, 815, 'Payments by stage');
+    const xs = [200, 440, 680], tpay = wt('L06', 'payments') + .05;
+    xs.forEach((x, i) => { rect(tpay + i * .14, .16, x, 1140, 210, 92, { w: 6, quiet: i > 0 }); Wr(tpay + .1 + i * .14, 'Payment', x + 105, 1200, { size: 40, align: 'center', cps: 30 }); });
+    const tst = wt('L06', 'are');
+    xs.forEach((x, i) => { rect(tst + i * .12, .14, x, 900, 210, 92, { w: 6, quiet: i > 0 }); Wr(tst + .08 + i * .12, 'Stage ' + (i + 1), x + 105, 960, { size: 44, align: 'center', cps: 30 }); });
+    [0, 1].forEach(i => arrow(tst + .4 + i * .08, .1, [[xs[i] + 214, 946], [xs[i + 1] - 6, 946]], { w: 5, head: 14 }));
+    const tt = wt('L06', 'tied');
+    xs.forEach((x, i) => { S(tt + i * .16, tt + .14 + i * .16, [[x + 105, 996], [x + 98, 1050], [x + 112, 1090], [x + 105, 1136]], { col: OR, w: 12 });
+      S(tt + .1 + i * .16, tt + .2 + i * .16, L.arcPts(x + 105, 1066, 16, 16, 0, 6.3, 14), { col: OR, w: 7, smooth: false, quiet: true }); });
+  });
+  // ---- p7 · L07: read it, ask about anything missing, keep a signed copy (orange tick on your copy)
+  scene(27.92, () => {
+    Wr(wt('L07', 'read'), 'Read.', 150, 360, { size: 74 });
+    Wr(wt('L07', 'ask'), 'Ask.', 380, 360, { size: 74 });
+    Wr(wt('L07', 'keep') - .1, 'Keep a signed copy.', 150, 455, { size: 60, cps: 20 });
+    sheet(28.0, .4, 170, 540, 470, 650);
+    [620, 690, 760].forEach((y, i) => squig(28.2 + i * .1, .12, 220, y, 330 - i * 30, { w: 4, quiet: i > 0 }));
+    [900, 970].forEach((y, i) => squig(28.5 + i * .1, .12, 220, y, 300, { w: 4, quiet: true }));
+    dashed(28.6, .3, [220, 830], [560, 830], { n: 7, w: 4 });
+    magnifier(wt('L07', 'read') + .2, .4, 420, 690, 66);
+    const tm = wt('L07', 'missing');
+    ell(tm - .35, .3, 390, 830, 200, 40, { w: 6 });
+    Wr(tm - .05, 'missing?', 660, 850, { size: 52 });
+    const ts = wt('L07', 'signed');
+    line(ts - .15, .15, [210, 1130], [440, 1130], { w: 4 });
+    signature(ts, .4, 215, 1105, 210);
+    const tc = wt('L07', 'copy');
+    sheet(tc - .3, .3, 690, 930, 270, 360, {});
+    [1010, 1060, 1110].forEach((y, i) => squig(tc - .15 + i * .05, .08, 720, y, 170, { w: 3.5, quiet: true }));
+    signature(tc - .05, .2, 730, 1220, 120, { w: 3.5 });
+    Wr(tc - .25, 'your copy', 700, 1328, { size: 40, cps: 26 });
+    tick(tc + .05, 805, 1130, 2.4, { col: OR });
+  });
+  // ---- p8 · L08: send this: orange paper plane to a house about to be built
+  scene(32.0, () => {
+    Wr(32.2, 'Send this', 150, 380, { size: 80 });
+    dashed(32.3, .35, [190, 900], [480, 700], { n: 6, w: 5 });
+    plane(wt('L08', 'this'), .35, 580, 650, 1.15, { col: OR, w: 9 });
+    const ts = wt('L08', 'someone');
+    arrow(ts, .4, [[690, 700], [790, 770], [800, 870]], { w: 6 });
+    line(ts + .3, .25, [520, 1200], [1000, 1200], { w: 6 });
+    house(wt('L08', 'start'), .6, 770, 1200, 1.1, {});
+    [[600, 1200, 600, 930], [940, 1200, 940, 930], [600, 1010, 940, 1010]].forEach(([a, b, c, d], i) => dashed(wt('L08', 'building') + i * .1, .2, [a, b], [c, d], { n: 6, w: 4, col: BLUE }));
+  });
+  endCard(END);
+}
+window.ready = boot(build);
+</script></body></html>

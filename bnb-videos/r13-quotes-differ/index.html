@@ -1,0 +1,149 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>R13 Quotes Differ</title>
+<style>
+@font-face{font-family:Kalam;font-weight:700;src:url(../style-samples/fonts/Kalam-700.woff)}
+@font-face{font-family:Inter;font-weight:100 900;src:url(../style-samples/fonts/Inter-var.woff)}
+@font-face{font-family:Bebas;src:url(../style-samples/fonts/BebasNeue-Regular.ttf)}
+html,body{margin:0;background:#222}canvas{display:block}
+</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+window.T = __TIMING__;
+window.CFG = { series: 'ASK BNB', sub: 'BUYNBUILD · ENGINEER’S NOTEBOOK' };
+window.IMG_MARK = new Image(); IMG_MARK.src = '__MARK__'; window.IMG_LOGO = new Image(); IMG_LOGO.src = '__LOGO__';
+</script>
+<script src="../style-samples/tools/lib.js"></script>
+<script src="../tools/notebook/engine.js"></script>
+<script>
+// R13 "Ask BNB: why do quotes differ". One page per line; one orange idea per page; the slam is LINE BY LINE (L05).
+function hat(t0, d, cx, cy, s = 1, o = {}) { // hard hat, no face
+  S(t0, t0 + d * .6, L.arcPts(cx, cy, 52 * s, 46 * s, Math.PI, Math.PI * 2, 20), Object.assign({ w: 7 }, o));
+  S(t0 + d * .6, t0 + d * .85, [[cx - 74 * s, cy + 2], [cx + 74 * s, cy]], Object.assign({ w: 8, smooth: false, quiet: true }, o));
+  S(t0 + d * .85, t0 + d, [[cx, cy - 46 * s], [cx + 2, cy - 4]], Object.assign({ w: 5, smooth: false, quiet: true }, o));
+}
+function build() {
+  const END = T.total - 2.5;
+  // ---- p1 · L01: the question; one house, three quotes; orange "?"
+  scene(0, () => {
+    Wr(.42, 'Someone asked us:', 150, 340, { size: 48, col: BLUE, cps: 22 });
+    Wr(wt('L01', 'why') - .05, 'Why does the same house', 150, 450, { size: 66, cps: 22 });
+    Wr(wt('L01', 'get') - .05, 'get such different quotes?', 150, 540, { size: 66, cps: 24 });
+    house(wt('L01', 'house'), .55, 540, 880, 1.05);
+    const td = wt('L01', 'different');
+    [[300, 1000], [540, 1000], [780, 1000]].forEach((p, i) => arrow(td - .25 + i * .08, .2, [[540 + (i - 1) * 40, 900], p], { w: 5, head: 16, quiet: i > 0 }));
+    [190, 430, 670].forEach((x, i) => { const t0 = td + i * .14; sheet(t0, .25, x, 1015, 220, 270);
+      [1075, 1120].forEach((y, k) => squig(t0 + .15 + k * .06, .1, x + 25, y, 150 - k * 30, { w: 3.5, quiet: true }));
+      line(t0 + .3, .08, [x + 25, 1180], [x + 195, 1180], { w: 3.5, quiet: true });
+      squig(t0 + .35, .15, x + 25, 1225, [80, 170, 120][i], { w: 6, quiet: true }); });
+    Wr(wt('L01', 'quotes') - .1, '?', 800, 880, { size: 190, col: OR, cps: 6 });
+  });
+  // ---- p2 · L02: not the same house: three different houses on three quotes; orange =/=
+  scene(4.65, () => {
+    Wr(4.85, 'Usually…', 150, 350, { size: 74 });
+    const xs = [150, 425, 700], tq = wt('L02', 'quotes');
+    xs.forEach((x, i) => { sheet(tq - .5 + i * .12, .3, x, 450, 230, 600); Wr(tq - .35 + i * .12, 'Quote ' + 'ABC'[i], x + 24, 520, { size: 44, cps: 26 }); });
+    const th = tq + .1;
+    house(th, .4, 265, 760, .7);
+    rect(th + .2, .2, 495, 700, 140, 62); house(th + .3, .35, 565, 700, .7, { nowin: true });
+    S(th + .4, th + .6, [[730, 760], [730, 690], [870, 690], [870, 760], [722, 761]], { smooth: false, w: 7 }); dashed(th + .6, .3, [714, 694], [800, 625], { n: 4, w: 5 }); dashed(th + .75, .3, [800, 625], [886, 694], { n: 4, w: 5 });
+    [4, 2, 3].forEach((n, i) => { for (let k = 0; k < n; k++) squig(th + .5 + i * .1 + k * .06, .1, xs[i] + 28, 840 + k * 55, 160 - (k % 2) * 40, { w: 3.5, quiet: true }); });
+    const ta = wt('L02', "aren't");
+    [[400, 640], [675, 640]].forEach(([x, y], i) => { const t0 = ta + i * .7;
+      line(t0, .1, [x - 32, y - 14], [x + 32, y - 14], { col: OR, w: 11 }); line(t0 + .1, .1, [x - 32, y + 16], [x + 32, y + 16], { col: OR, w: 11, quiet: true });
+      line(t0 + .2, .1, [x + 16, y - 44], [x - 16, y + 46], { col: OR, w: 11, quiet: true }); });
+  });
+  // ---- p3 · L03: one includes materials, the other only labour (orange: the row that is missing)
+  scene(7.88, () => {
+    sheet(8.0, .35, 170, 330, 340, 680); sheet(8.15, .35, 570, 330, 340, 680);
+    Wr(8.1, 'Quote A', 210, 420, { size: 54 }); Wr(8.3, 'Quote B', 610, 420, { size: 54 });
+    const row = (x, y, label, tw, tk) => { cbox(tw - .1, x + 30, y - 32, 34); Wr(tw, label, x + 82, y, { size: 48, cps: 22 }); if (tk) tick(tk, x + 50, y - 16); };
+    const ti = wt('L03', 'include');
+    row(170, 540, 'Labour', ti - .2, ti + .2); row(170, 640, 'Materials', wt('L03', 'materials') - .2, wt('L03', 'materials') + .25);
+    hat(ti + .1, .3, 260, 860, .9); bricks(wt('L03', 'materials'), .4, 330, 900, 3, 3);
+    const tn = wt('L03', 'another');
+    row(570, 540, 'Labour', tn, wt('L03', 'labour')); row(570, 640, 'Materials', tn + .35, 0);
+    hat(wt('L03', 'only'), .3, 660, 860, .9);
+    [[[730, 830], [880, 830]], [[880, 830], [880, 905]], [[880, 905], [730, 905]], [[730, 905], [730, 830]]].forEach((s, i) => dashed(wt('L03', 'labour') + i * .08, .1, s[0], s[1], { n: 3, w: 4, quiet: i > 0 }));
+    hl(wt('L03', 'labour') + .1, .35, 594, 626, 300, 52);
+    Wr(wt('L03', 'labour') + .05, 'not included', 680, 760, { size: 38, col: OR, cps: 34 });
+  });
+  // ---- p4 · L04: three quotes, row by row; mismatches highlighted orange (steel / cement type; missing plastering, plumbing, electricals)
+  scene(11.48, () => {
+    const xs = [150, 415, 680], SW = 250;
+    xs.forEach((x, i) => { sheet(11.62 + i * .14, .3, x, 300, SW, 900); Wr(11.75 + i * .14, 'Quote ' + 'ABC'[i], x + 22, 375, { size: 44, cps: 26 }); });
+    const rows = [
+      { y: 490, label: 'Steel', w: 'steel', amp: [1, 2.2, 1], hl: true },
+      { y: 650, label: 'Cement', w: 'cement', amp: [1, 1, 2.2], hl: true },
+      { y: 820, label: 'Plastering', w: 'plastering', miss: 2 },
+      { y: 950, label: 'Plumbing', w: 'plumbing', miss: 1 },
+      { y: 1080, label: 'Electricals', w: 'electricals', miss: 0 },
+    ];
+    // steel/cement rows are written while "assume a different type" is spoken, then lit on the noun
+    rows.forEach((r, ri) => {
+      const tw = wt('L04', r.w), t0 = r.hl ? (ri === 0 ? wt('L04', 'different') : wt('L04', 'or') - .15) : tw - .3;
+      xs.forEach((x, i) => {
+        if (r.miss === i) { dashed(t0 + i * .06, .25, [x + 22, r.y - 10], [x + SW - 24, r.y - 10], { n: 6, w: 4, quiet: true }); return; }
+        Wr(t0 + i * .06, r.label, x + 22, r.y, { size: 40, cps: 30 });
+        if (r.hl) squig(t0 + .25 + i * .06, .2, x + 26, r.y + 50, 150, { w: 4, amp: r.amp[i], quiet: true });
+      });
+      if (r.hl) hl(tw + .02, .35, 160, r.y + 46, 760, 46);
+      else ell(tw + .05, .3, xs[r.miss] + SW / 2, r.y - 12, 112, 38, { col: OR, w: 9 });
+    });
+  });
+  // ---- p5 · L05: THE SLAM: totals crossed out, LINE BY LINE
+  scene(18.40, () => {
+    Wr(wt('L05', "don't") - .1, 'Don’t compare totals.', 150, 355, { size: 66, cps: 22 });
+    const xs = [160, 420, 680];
+    xs.forEach((x, i) => { sheet(18.6 + i * .1, .25, x, 450, 240, 280); Wr(18.75 + i * .1, 'Total', x + 24, 560, { size: 44, cps: 26 }); squig(18.95 + i * .1, .2, x + 30, 640, [100, 170, 130][i], { w: 6, quiet: true }); });
+    const tt = wt('L05', 'totals');
+    xs.forEach((x, i) => line(tt + i * .1, .12, [x + 18, 655], [x + 222, 585], { w: 9, kind: 'cross' }));
+    stamp(wt('L05', 'line'), 'LINE BY LINE', 540, 940, { size: 150, rot: -.08 });
+    [1130, 1200, 1270].forEach((y, k) => { dashed(wt('L05', 'line') + .35 + k * .06, .3, [170, y], [910, y], { n: 10, w: 4, col: BLUE, quiet: k > 0 });
+      [300, 540, 780].forEach((x, i) => tick(wt('L05', 'line') + .6 + k * .08 + i * .03, x, y - 20, .7, { quiet: true })); });
+  });
+  // ---- p6 · L06: same list, same drawing: an aligned table (orange: one drawing feeds every column)
+  scene(21.84, () => {
+    Wr(wt('L06', 'ask') - .05, 'Ask each contractor', 150, 350, { size: 60, cps: 24 });
+    const cxs = [545, 715, 885], top = 690, rh = 110;
+    cxs.forEach((x, i) => { hat(wt('L06', 'contractor') + i * .1, .25, x, 600, .55); Wr(wt('L06', 'contractor') + .2 + i * .1, 'ABC'[i], x, 670, { size: 48, align: 'center', cps: 20 }); });
+    const tg = wt('L06', 'quote');
+    for (let k = 0; k <= 4; k++) line(tg + k * .06, .12, [150, top + k * rh], [965, top + k * rh], { w: 4, quiet: k > 0 });
+    [460, 630, 800].forEach((x, i) => line(tg + .3 + i * .05, .12, [x, top - 20], [x, top + 4 * rh], { w: 4, quiet: true }));
+    Wr(wt('L06', 'same') - .05, 'same list,', 168, 465, { size: 50, cps: 24 });
+    const labels = [['Work', wt('L06', 'list')], ['Materials', wt('L06', 'materials') - .3], ['Grade / type', wt('L06', 'materials') + .1], ['Item', wt('L06', 'from') - .1]];
+    labels.forEach(([lb, t0], k) => { const y = top + k * rh + 70; Wr(t0, lb, 168, y, { size: 44, cps: 26 }); cxs.forEach((x, i) => tick(t0 + .25 + i * .07, x, y - 18, .9, { quiet: i > 0 })); });
+    const tdw = wt('L06', 'drawing');
+    plan(tdw - .55, .5, 650, 395, 230, 150);
+    Wr(tdw - .25, 'same drawing', 168, 540, { size: 50, cps: 26 });
+    cxs.forEach((x, i) => arrow(tdw + .05 + i * .12, .2, [[765 + (i - 1) * 50, 548], [x, 575]], { col: OR, w: 8, head: 18 }));
+  });
+  // ---- p7 · L07: aligned, the real difference stands out (orange: that one row)
+  scene(27.51, () => {
+    sheet(27.6, .3, 160, 420, 340, 640); sheet(27.7, .3, 560, 420, 340, 640);
+    Wr(27.72, 'Quote A', 196, 500, { size: 48, cps: 26 }); Wr(27.82, 'Quote B', 596, 500, { size: 48, cps: 26 });
+    ['Work', 'Materials', 'Grade / type', 'Item'].forEach((lb, k) => { const y = 600 + k * 120;
+      [160, 560].forEach((x, i) => { Wr(27.85 + k * .07 + i * .03, lb, x + 30, y, { size: 40, cps: 40 });
+        squig(28.0 + k * .07 + i * .03, .12, x + 34, y + 44, 200, { w: 4, amp: (k === 2 && i === 1) ? 2.4 : 1, quiet: true }); }); });
+    const td = wt('L07', 'difference');
+    hl(td, .35, 170, 885, 720, 50);
+    S(td + .35, td + .6, [[925, 830], [945, 836], [946, 930], [925, 936]], { col: OR, w: 9, smooth: false });
+    bulb(wt('L07', 'make') - .1, .4, 540, 320, .85);
+  });
+  // ---- p8 · L08: got a question? comment it (orange: the comment box)
+  scene(29.87, () => {
+    const tq = wt('L08', 'question');
+    bubble(30.1, .45, 410, 610, 250, 170, [290, 820]);
+    Wr(tq - .1, '?', 410, 680, { size: 200, align: 'center', cps: 8 });
+    const tc = wt('L08', 'comment');
+    S(tc - .1, tc + .35, [[190, 980], [890, 978], [902, 990], [900, 1084], [888, 1094], [192, 1096], [180, 1084], [178, 992], [192, 980]], { col: OR, w: 9, smooth: false });
+    Wr(tc + .25, 'your question…', 220, 1052, { size: 46, col: '#55555c', cps: 22 });
+    S(tc + .9, tc + 1.0, [[580, 1010], [580, 1066]], { w: 5, smooth: false, quiet: true });
+    const ta = wt('L08', 'answer');
+    sheet(ta - .2, .3, 720, 470, 200, 260);
+    [540, 590, 640].forEach((y, i) => squig(ta + .05 + i * .06, .1, 745, y, 140, { w: 3.5, quiet: true }));
+    dashed(ta - .1, .3, [860, 975], [840, 745], { n: 5, w: 4 });
+    tick(wt('L08', 'next'), 820, 690, 1.3);
+  });
+  endCard(END);
+}
+window.ready = boot(build);
+</script></body></html>

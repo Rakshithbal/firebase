@@ -10,3 +10,9 @@ bnb-videos/**/__pycache__/
 **/__pycache__/
 bnb-videos/**/frames_*/
 bnb-videos/r05-curing-v2/out/R05_curing_v2_michael.mp4
+# engineer's-notebook reels: regenerable audio stems + render scratch
+bnb-videos/r08-written-quote/audio/music.wav
+bnb-videos/r08-written-quote/audio/sfx.wav
+bnb-videos/r13-quotes-differ/audio/music.wav
+bnb-videos/r13-quotes-differ/audio/sfx.wav
+bnb-videos/**/chunks.txt
