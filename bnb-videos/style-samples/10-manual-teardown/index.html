@@ -1,0 +1,225 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Manual + Teardown</title>
+<style>
+@font-face{font-family:Inter;font-weight:100 900;src:url(Inter-var.woff)}
+@font-face{font-family:Plex;font-weight:500;src:url(IBMPlexMono-Medium.ttf)}
+html,body{margin:0;background:#222}canvas{display:block}</style>
+</head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+// STYLE 10 · Manual + Teardown. A flat instruction-manual page; the camera pushes into one panel,
+// the wall in it turns 3D and opens up to show the hidden layer, then folds back into the flat panel.
+import * as THREE from './three.module.js';
+const TM = await (await fetch('timing.json')).json();
+const W = 1080, H = 1920;
+const PAL = { paper: '#F4F1EA', ink: '#1E1D1B', w0: '#FFFFFF', w1: '#ECE8DF', w2: '#DCD7CC', g1: '#9C988F', g2: '#6B6862', org: '#EF4B06', red: '#D23A2E', blue: '#2C66AC' };
+const cl = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lin = (t, a, b) => cl((t - a) / (b - a));
+const eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eback = x => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const F = (w, s, f = 'Inter') => `${w} ${s}px ${f}, sans-serif`;
+const WD = TM.lines[0].words, wt = k => WD.find(w => w.w.toLowerCase().startsWith(k)).s;
+const tHollow = wt('hollow');
+
+// ---------- layout (page space) ----------
+const PANELS = [[90, 380], [535, 380], [90, 885], [535, 885]], PW = 415, PH = 470;
+const ZP = 1;                                 // panel we push into
+const pcx = PANELS[ZP][0] + PW / 2, pcy = PANELS[ZP][1] + PH / 2;
+const ZS = 2.3, ZX = 540, ZY = 800;           // zoomed: panel centre lands at (540,800) at 2.3x
+
+// ---------- 3D ----------
+const RW = Math.round(PW * ZS), RH = Math.round(PH * ZS), SS = 1.25;
+const gl = document.createElement('canvas'); gl.width = RW * SS; gl.height = RH * SS;
+const R = new THREE.WebGLRenderer({ canvas: gl, antialias: true, alpha: true, preserveDrawingBuffer: true });
+R.setPixelRatio(1); R.setSize(RW * SS, RH * SS, false); R.setClearColor(0, 0);
+R.toneMapping = THREE.NeutralToneMapping; R.toneMappingExposure = 1.05;
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8d2c6, 1.5));
+const key = new THREE.DirectionalLight(0xfff4e8, 2.2); key.position.set(-2.4, 4, 3.2); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -2, right: 2, top: 2, bottom: -2, near: .5, far: 12 }); key.shadow.radius = 6; key.shadow.bias = -.0006;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xffffff, .7); fill.position.set(3, 1.5, 2); scene.add(fill);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(12, 12), new THREE.ShadowMaterial({ opacity: .18 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const M = {
+  plaster: new THREE.MeshStandardMaterial({ color: 0xfbfaf6, roughness: .95 }),
+  mortar: new THREE.MeshStandardMaterial({ color: 0xc4bfb6, roughness: .95 }),
+  brick: new THREE.MeshStandardMaterial({ color: 0xe9cfc2, roughness: .9 }),
+  gap: new THREE.MeshStandardMaterial({ color: 0xef4b06, emissive: 0xef4b06, emissiveIntensity: .55, roughness: .6, transparent: true, opacity: 1 }),
+};
+const UB = new THREE.BoxGeometry(1, 1, 1);
+const bx = (mat, x, y, z, sx, sy, sz, p) => { const m = new THREE.Mesh(UB, mat); m.position.set(x, y, z); m.scale.set(sx, sy, sz); m.castShadow = m.receiveShadow = true; p.add(m); return m; };
+const WW = 1.0, HH = 1.15, T = .2, PL = .04;
+const wallG = new THREE.Group(); scene.add(wallG);
+const Lp = new THREE.Group(), Lg = new THREE.Group(), Lb = new THREE.Group(); wallG.add(Lp, Lg, Lb);
+bx(M.plaster, 0, HH / 2, 0, WW, HH, PL, Lp);
+{ const uh = .075, ul = .22, j = .014, rows = Math.round(HH / (uh + j));
+  for (let r = 0; r < rows; r++) { const y0 = r * (uh + j) + j; bx(M.mortar, 0, y0 - j / 2, 0, WW, j, T, Lb);
+    let x = -WW / 2 - (r % 2 ? (ul + j) / 2 : 0);
+    while (x < WW / 2) { const a = Math.max(x, -WW / 2), b = Math.min(x + ul, WW / 2);
+      if (b - a > .01) bx(M.brick, (a + b) / 2, y0 + uh / 2, 0, b - a, uh, T - .004, Lb);
+      const pa = x + ul, pb = pa + j; if (pa > -WW / 2 && pb < WW / 2) bx(M.mortar, (pa + pb) / 2, y0 + uh / 2, 0, j, uh, T, Lb);
+      x += ul + j; } } }
+// the hollow pocket: a soft lens shape between plaster and brick
+const gapMesh = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 24), M.gap); gapMesh.scale.set(.24, .17, .02); gapMesh.position.set(-.12, .66, 0); Lg.add(gapMesh);
+const BASE = { p: T / 2 + PL / 2, g: T / 2 + .012, b: 0 }, OFF = { p: .55, g: .02, b: 0 };
+const cam = new THREE.PerspectiveCamera(22, RW / RH, .1, 50);
+function setCam(t) {
+  const u = eio(lin(t, 1.0, 4.4));
+  const az = THREE.MathUtils.degToRad(-34 - 10 * u), el = THREE.MathUtils.degToRad(16 + 3 * u), d = 5.0 - .25 * u;
+  const tg = new THREE.Vector3(0, .58, .2);
+  cam.position.set(tg.x + d * Math.cos(el) * Math.sin(az), tg.y + d * Math.sin(el), tg.z + d * Math.cos(el) * Math.cos(az)); cam.lookAt(tg);
+  cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+}
+const P = new THREE.Vector3();
+const scr = (o, x, y, z) => { P.set(x, y, z); o.localToWorld(P); P.project(cam); return [(P.x + 1) / 2 * RW, (1 - P.y) / 2 * RH]; };
+const openP = t => eio(lin(t, 1.65, 2.75)) * (1 - eio(lin(t, 4.15, 4.6)));
+function pose(t) {
+  const p = openP(t), fl = .004 * Math.sin(t * 2);
+  Lp.position.z = BASE.p + OFF.p * p; Lp.position.x = .42 * p; Lg.position.z = BASE.g + OFF.g * p; Lb.position.z = BASE.b;
+  Lp.position.y = fl * p;
+  // the gap only shows once the plaster has lifted off; it pulses on "hollow"
+  const pulse = 1 + .14 * Math.sin(lin(t, tHollow, tHollow + .5) * Math.PI);
+  gapMesh.visible = p > .05; M.gap.opacity = lin(p, .5, .9) * lin(t, tHollow - .35, tHollow + .05);
+  gapMesh.scale.set(.2 * pulse, .14 * pulse, .02);
+}
+
+// ---------- 2D ----------
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const mark = new Image(); mark.src = 'bnb_mark_orange.png'; await mark.decode();
+let paper;
+function bakePaper() {
+  paper = document.createElement('canvas'); paper.width = W; paper.height = H; const q = paper.getContext('2d');
+  q.fillStyle = PAL.paper; q.fillRect(0, 0, W, H);
+  let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  q.strokeStyle = 'rgba(120,110,95,.08)'; q.lineWidth = .8;
+  for (let i = 0; i < 900; i++) { const x = r() * W, y = r() * H, a = r() * 6.28, l = 3 + r() * 9; q.beginPath(); q.moveTo(x, y); q.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); q.stroke(); }
+}
+bakePaper();
+function txt(s, x, y, font, col, align = 'left', track = 0) { g.font = font; g.textAlign = align; g.textBaseline = 'middle'; g.letterSpacing = track + 'px'; g.fillStyle = col; g.fillText(s, x, y); g.letterSpacing = '0px'; }
+function rr(x, y, w, h, r) { g.beginPath(); g.roundRect(x, y, w, h, r); }
+// flat isometric wall slab in a panel (manual pictogram), top-left anchored at panel coords
+function flatWall(x, y, s = 1, alpha = 1) {
+  g.save(); g.globalAlpha *= alpha; g.translate(x, y); g.scale(s, s);
+  g.lineJoin = 'round'; g.lineWidth = 2.6; g.strokeStyle = PAL.ink;
+  g.fillStyle = PAL.w1; g.beginPath(); g.moveTo(150, 60); g.lineTo(330, 20); g.lineTo(330, 300); g.lineTo(150, 380); g.closePath(); g.fill(); g.stroke();
+  g.fillStyle = PAL.w2; g.beginPath(); g.moveTo(150, 60); g.lineTo(130, 52); g.lineTo(130, 372); g.lineTo(150, 380); g.closePath(); g.fill(); g.stroke();
+  g.fillStyle = PAL.w0; g.beginPath(); g.moveTo(130, 52); g.lineTo(310, 12); g.lineTo(330, 20); g.lineTo(150, 60); g.closePath(); g.fill(); g.stroke();
+  g.restore();
+}
+function figure(x, y, s, tapK) {    // pictogram person, arm reaching right
+  g.save(); g.translate(x, y); g.scale(s, s); g.fillStyle = PAL.g2; g.strokeStyle = PAL.g2; g.lineCap = 'round';
+  g.beginPath(); g.arc(0, 0, 20, 0, 7); g.fill();
+  rr(-20, 26, 40, 96, 12); g.fill();
+  g.lineWidth = 15; g.beginPath(); g.moveTo(-9, 120); g.lineTo(-13, 200); g.moveTo(9, 120); g.lineTo(15, 200); g.stroke();
+  const ax = 78 + 8 * tapK; g.beginPath(); g.moveTo(10, 44); g.lineTo(ax, 30); g.stroke();
+  g.fillStyle = PAL.org; g.beginPath(); g.arc(ax + 6, 30, 9, 0, 7); g.fill();
+  g.restore();
+}
+function ripple(x, y, p, n = 3, col = PAL.ink) {
+  if (p <= 0 || p >= 1) return; g.save(); g.strokeStyle = col; g.lineWidth = 2.4; g.lineCap = 'round';
+  for (let i = 0; i < n; i++) { const k = cl(p * 1.4 - i * .2); if (k <= 0) continue; g.globalAlpha = (1 - k) * .9;
+    g.beginPath(); g.arc(x, y, 14 + 34 * k, -.7, .7); g.stroke(); }
+  g.restore();
+}
+function soundIcon(x, y, kind, p) {   // •))) drum ✗  vs  •)— dull ✓
+  if (p <= 0) return; g.save(); g.globalAlpha = eo(p); const sc = .85 + .15 * eback(cl(p)); g.translate(x, y); g.scale(sc, sc);
+  g.fillStyle = PAL.ink; g.beginPath(); g.arc(0, 0, 7, 0, 7); g.fill(); g.strokeStyle = PAL.ink; g.lineWidth = 3; g.lineCap = 'round';
+  if (kind === 'drum') { for (let i = 0; i < 3; i++) { g.beginPath(); g.moveTo(16 + i * 12, -14); for (let k = 0; k <= 8; k++) g.lineTo(16 + i * 12 + 4 * Math.sin(k * 1.6), -14 + k * 3.5); g.stroke(); }
+    g.fillStyle = PAL.org; g.beginPath(); g.arc(84, 0, 22, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 4.5; g.beginPath(); g.moveTo(75, -9); g.lineTo(93, 9); g.moveTo(93, -9); g.lineTo(75, 9); g.stroke(); }
+  else { g.beginPath(); g.arc(10, 0, 12, -1, 1); g.stroke(); g.beginPath(); g.moveTo(28, 0); g.lineTo(50, 0); g.stroke();
+    g.strokeStyle = PAL.blue; g.lineWidth = 3; g.beginPath(); g.arc(80, 0, 21, 0, 7); g.stroke(); g.lineWidth = 4.5; g.beginPath(); g.moveTo(70, 0); g.lineTo(78, 8); g.lineTo(92, -9); g.stroke(); }
+  g.restore();
+}
+function chalk(x, y, rx, ry, p) {   // orange chalk ring drawn on
+  if (p <= 0) return; g.save(); g.strokeStyle = PAL.org; g.lineWidth = 6; g.lineCap = 'round'; g.globalAlpha = .95;
+  g.beginPath(); const n = 60, end = Math.floor(n * 1.1 * eo(p));
+  for (let i = 0; i <= end; i++) { const a = -2.4 + i / n * 6.6, w = 1 + .05 * Math.sin(i * 1.7); const px = x + rx * w * Math.cos(a), py = y + ry * w * Math.sin(a); i ? g.lineTo(px, py) : g.moveTo(px, py); }
+  g.stroke(); g.restore();
+}
+// one panel's frame + number
+function panelFrame(i, act) {
+  const [x, y] = PANELS[i]; g.save(); g.fillStyle = 'rgba(255,255,255,.55)'; g.strokeStyle = PAL.ink; g.lineWidth = 2.4; rr(x, y, PW, PH, 18); g.fill(); g.stroke();
+  txt(String(i + 1), x + 26, y + 46, F(800, 50), act ? PAL.org : PAL.ink); g.restore();
+}
+// contents of the four panels in the flat manual
+function panelArt(i, t, flatAlpha) {
+  const [x, y] = PANELS[i];
+  g.save(); rr(x, y, PW, PH, 18); g.clip();
+  if (i === 0) { flatWall(x + 20, y + 70, .95); figure(x + 110, y + 190, .95, 0); }
+  if (i === 1) { flatWall(x + 20, y + 70, .95, flatAlpha); g.globalAlpha = flatAlpha;
+    const tk = Math.max(0, Math.sin(lin(t, .15, .55) * Math.PI)); figure(x + 110, y + 190, .95, tk);
+    ripple(x + 205, y + 219, lin(t, .3, 1.0), 3, PAL.ink);
+    chalk(x + 250, y + 250, 50, 38, lin(t, 4.62, 4.95)); }
+  if (i === 2) { soundIcon(x + 70, y + 190, 'drum', 1); soundIcon(x + 70, y + 300, 'dull', 1); }
+  if (i === 3) { g.strokeStyle = PAL.ink; g.lineWidth = 2.6; g.fillStyle = PAL.w0; rr(x + 70, y + 110, 280, 200, 14); g.fill(); g.stroke();
+    txt('?', x + 210, y + 210, F(800, 110), PAL.org, 'center');
+    g.beginPath(); g.moveTo(x + 120, y + 310); g.lineTo(x + 104, y + 350); g.lineTo(x + 160, y + 310); g.fillStyle = PAL.w0; g.fill(); g.stroke(); }
+  g.restore();
+}
+function page(t, flatAlpha) {
+  g.drawImage(paper, 0, 0);
+  txt('CHECK BEFORE YOU PAY', 90, 250, F(600, 24, 'Plex'), PAL.g2, 'left', 2);
+  txt('TAP TEST · BEFORE PAINT', 90, 305, F(800, 52), PAL.ink);
+  g.fillStyle = PAL.org; g.fillRect(90, 340, 64, 5);
+  for (let i = 0; i < 4; i++) { panelFrame(i, i === ZP); panelArt(i, t, flatAlpha); }
+  // step dots
+  for (let i = 0; i < 4; i++) { const x = 432 + i * 72, y = 1410; g.strokeStyle = PAL.g1; g.lineWidth = 2;
+    if (i) { g.beginPath(); g.moveTo(x - 54, y); g.lineTo(x - 18, y); g.stroke(); }
+    g.beginPath(); g.arc(x, y, 18, 0, 7); g.fillStyle = i === ZP ? PAL.ink : 'rgba(0,0,0,0)'; g.fill(); g.stroke();
+    txt(String(i + 1), x, y + 1, F(600, 20), i === ZP ? '#fff' : PAL.g1, 'center'); }
+}
+// label plate in screen space with leader: manual style (ink line, orange dot, white plate)
+function plate(a, b, name, p, hot) {
+  if (p <= 0) return; const e = eo(cl(p / .5));
+  g.save(); g.strokeStyle = PAL.ink; g.lineWidth = 2.2; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e); g.stroke();
+  g.fillStyle = hot ? PAL.org : PAL.ink; g.beginPath(); g.arc(a[0], a[1], 7 * cl(p / .2), 0, 7); g.fill();
+  const tp = lin(p, .4, 1); if (tp > 0) { const sc = hot ? eback(tp) : 1; g.globalAlpha = eo(tp); g.font = F(700, hot ? 34 : 29); const w = g.measureText(name).width + 34, hgt = hot ? 58 : 50;
+    g.translate(b[0], b[1]); g.scale(sc, sc);
+    g.fillStyle = hot ? PAL.org : '#fff'; g.strokeStyle = PAL.ink; g.lineWidth = 2.2; rr(0, -hgt / 2, w, hgt, 10); g.fill(); if (!hot) g.stroke();
+    txt(name, 17, 1, F(700, hot ? 34 : 29), hot ? '#fff' : PAL.ink, 'left', hot ? 1.5 : .5); }
+  g.restore();
+}
+function caption(t) {
+  const ws = WD, cut = 7, chunks = [ws.slice(0, cut), ws.slice(cut)];
+  const spans = [[chunks[0][0].s - .1, chunks[1][0].s - .1], [chunks[1][0].s - .1, 99]];
+  for (let i = 0; i < 2; i++) { const [a, b] = spans[i]; if (t < a || t > b) continue;
+    const al = Math.min(lin(t, a, a + .15), 1 - lin(t, b - .12, b));
+    g.save(); g.globalAlpha = al; g.font = F(600, 44); const s = chunks[i].map(w => w.w).join(' '), tw = g.measureText(s).width;
+    g.fillStyle = 'rgba(255,255,255,.92)'; rr(540 - tw / 2 - 28, 1484, tw + 56, 84, 14); g.fill(); g.strokeStyle = 'rgba(30,29,27,.18)'; g.lineWidth = 2; g.stroke();
+    let x = 540 - tw / 2; g.textAlign = 'left'; g.textBaseline = 'middle';
+    for (const w of chunks[i]) { const hot = w.w.toLowerCase().startsWith('hollow');
+      g.fillStyle = t >= w.s - .04 ? (hot ? PAL.org : PAL.ink) : 'rgba(30,29,27,.32)'; g.fillText(w.w, x, 1527); x += g.measureText(w.w + ' ').width; }
+    g.restore(); }
+}
+window.renderAt = t => {
+  const zin = eio(lin(t, .55, 1.55)), zout = eio(lin(t, 4.3, 4.95)), z = zin * (1 - zout);
+  const s = 1 + (ZS - 1) * z, ox = (ZX - pcx * s) * z / (z || 1), oy = (ZY - pcy * s) * z / (z || 1);
+  const tx = z ? ZX - pcx * s : 0, ty = z ? ZY - pcy * s : 0;
+  // blend: flat pictogram <-> 3D model inside panel 2
+  const d3 = lin(t, 1.15, 1.6) * (1 - lin(t, 4.45, 4.8));
+  g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = PAL.paper; g.fillRect(0, 0, W, H);
+  g.setTransform(s, 0, 0, s, tx, ty); page(t, 1 - d3);
+  { const k = lin(z, .55, 1); if (k > 0) { const [x, y] = PANELS[ZP]; g.save(); g.globalAlpha = k; g.beginPath(); g.rect(-50, -50, W + 100, H + 100); g.roundRect(x - 3, y - 3, PW + 6, PH + 6, 20); g.fillStyle = PAL.paper; g.fill('evenodd'); g.restore(); } }
+  let labels = [];
+  if (d3 > 0) {
+    pose(t); setCam(t); scene.updateMatrixWorld(true); R.render(scene, cam);
+    const [x, y] = PANELS[ZP]; g.save(); rr(x + 2, y + 2, PW - 4, PH - 4, 16); g.clip(); g.globalAlpha = d3;
+    g.drawImage(gl, x, y, PW, PH); g.restore();
+    const op = openP(t), toS = q => [tx + (x + q[0] / RW * PW) * s, ty + (y + q[1] / RH * PH) * s];
+    labels = [
+      [toS(scr(Lp, -WW / 2 + .06, HH * .86, PL / 2)), 'Plaster', lin(t, 2.35, 3.0) * lin(op, .5, .9), false, [-1, -120]],
+      [toS(scr(Lb, -WW / 2 + .08, HH * .32, T / 2)), 'Brick wall', lin(t, 2.6, 3.2) * lin(op, .5, .9), false, [-1, 150]],
+      [toS(scr(Lg, -.12, .66, .02)), 'HOLLOW GAP', lin(t, tHollow - .05, tHollow + .45) * lin(op, .6, .95), true, [1, -170]],
+    ];
+  }
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  for (const [a, name, p, hot, [side, dy]] of labels) { const b = hot ? [a[0] + 110, a[1] + 230] : [Math.max(70, a[0] - 230), a[1] + dy]; plate(a, b, name, p, hot); }
+  // drum icon lands after "hollow", in screen space under the zoomed panel
+  if (d3 > 0) { const k = lin(t, tHollow + .35, tHollow + .75) * (1 - lin(t, 4.2, 4.45)); g.save(); g.globalAlpha = k > 0 ? 1 : 0; soundIcon(420, 1395, 'drum', k); g.restore(); }
+  g.drawImage(mark, 900, 156, 92, 92 * 431 / 945);
+  caption(t);
+};
+await document.fonts.load('800 50px Inter'); await document.fonts.load('600 24px Plex');
+window.renderAt(0); window.ready = Promise.resolve();
+</script></body></html>
