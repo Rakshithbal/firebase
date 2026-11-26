@@ -1,0 +1,3 @@
+cond.ttf: Bebas Neue, SIL Open Font License 1.1, from https://raw.githubusercontent.com/google/fonts/main/ofl/bebasneue/BebasNeue-Regular.ttf
+hand.ttf: Homemade Apple, Apache License 2.0, from https://raw.githubusercontent.com/google/fonts/main/apache/homemadeapple/HomemadeApple-Regular.ttf
+label.ttf / labelm.ttf: Montserrat (static instances at weight 800 / 600 of the variable font), SIL Open Font License 1.1, from https://raw.githubusercontent.com/google/fonts/main/ofl/montserrat/Montserrat%5Bwght%5D.ttf

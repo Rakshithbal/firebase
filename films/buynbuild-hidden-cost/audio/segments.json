@@ -1,0 +1,585 @@
+{
+ "segments": [
+  {
+   "id": 1,
+   "scene": "T01_cold_open",
+   "caption": "A family in Karnataka asks a contractor one simple question: how much will our house cost?",
+   "vo": "A family in Karnataka asks a contractor one simple question: how much will our house cost?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 2,
+   "scene": "T01_cold_open",
+   "caption": "He says \u20b925 lakh.",
+   "vo": "He says twenty-five lakh rupees.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 3,
+   "scene": "T01_cold_open",
+   "caption": "Eighteen months later, they've spent about \u20b930 lakh.",
+   "vo": "Eighteen months later, they've spent about thirty lakh.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 4,
+   "scene": "T01_cold_open",
+   "caption": "Here's the strange part. Nobody lied to them. Nobody ran away with the money.",
+   "vo": "Here's the strange part. Nobody lied to them. Nobody ran away with the money.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 5,
+   "scene": "T01_cold_open",
+   "caption": "So where did \u20b95 lakh go?",
+   "vo": "So where did five lakh rupees go?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 6,
+   "scene": "T01_cold_open",
+   "caption": "Today we're going to find every rupee. There are seven leaks.",
+   "vo": "Today we're going to find every rupee. There are seven leaks.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 7,
+   "scene": "T01_cold_open",
+   "caption": "And leak number seven isn't made of cement or steel. It's made of paper, and it can stop your bank loan cold.",
+   "vo": "And leak number seven isn't made of cement or steel. It's made of paper, and it can stop your bank loan cold.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 8,
+   "scene": "T01_cold_open",
+   "caption": "Stay till the end, because we'll give you the six questions that plug every one of them.",
+   "vo": "Stay till the end, because we'll give you the six questions that plug every one of them.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 9,
+   "scene": "T02_quote",
+   "caption": "Every house quote in India starts with one formula.",
+   "vo": "Every house quote in India starts with one formula.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 10,
+   "scene": "T02_quote",
+   "caption": "Built-up area, times a rate per square foot.",
+   "vo": "Built-up area, times a rate per square foot.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 11,
+   "scene": "T02_quote",
+   "caption": "1,000 sq ft, at \u20b92,500 a square foot. \u20b925 lakh.",
+   "vo": "A thousand square feet, at two thousand five hundred rupees a square foot. Twenty-five lakh.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 12,
+   "scene": "T02_quote",
+   "caption": "Basic homes are often quoted around \u20b91,800 to \u20b92,300 a square foot.",
+   "vo": "Basic homes are often quoted around eighteen hundred to twenty-three hundred a square foot.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 13,
+   "scene": "T02_quote",
+   "caption": "Standard, up to about \u20b92,900. Premium, above that.",
+   "vo": "Standard, up to about twenty-nine hundred. Premium, above that.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 14,
+   "scene": "T02_quote",
+   "caption": "That number feels like the price of your house.",
+   "vo": "That number feels like the price of your house.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 15,
+   "scene": "T02_quote",
+   "caption": "It isn't. It's the price of what's inside the contractor's rate. And a lot of your house lives outside it.",
+   "vo": "It isn't. It's the price of what's inside the contractor's rate. And a lot of your house lives outside it.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 16,
+   "scene": "T03_leak1_area",
+   "caption": "Leak one is hiding in the word area.",
+   "vo": "Leak one is hiding in the word area.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 17,
+   "scene": "T03_leak1_area",
+   "caption": "Contractors usually quote on built-up area: every floor, including the walls, the balcony and the staircase.",
+   "vo": "Contractors usually quote on built-up area: every floor, including the walls, the balcony and the staircase.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 18,
+   "scene": "T03_leak1_area",
+   "caption": "But you live in carpet area, the floor you can actually walk on. And it's always smaller.",
+   "vo": "But you live in carpet area, the floor you can actually walk on. And it's always smaller.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 19,
+   "scene": "T03_leak1_area",
+   "caption": "So when two quotes say the same rate, ask: rate on which area? Get the answer in writing.",
+   "vo": "So when two quotes say the same rate, ask: rate on which area? Get the answer in writing.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 20,
+   "scene": "T03_leak1_area",
+   "caption": "It sounds small. On a full house, it changes the total by lakhs.",
+   "vo": "It sounds small. On a full house, it changes the total by lakhs.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 21,
+   "scene": "T04_leak2_list",
+   "caption": "Leak two is the biggest, and it's a list.",
+   "vo": "Leak two is the biggest, and it's a list.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 22,
+   "scene": "T04_leak2_list",
+   "caption": "Plan approval fees. Before anyone digs, the plan has to be sanctioned, and that costs money.",
+   "vo": "Plan approval fees. Before anyone digs, the plan has to be sanctioned, and that costs money.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 23,
+   "scene": "T04_leak2_list",
+   "caption": "Soil test and structural design. Someone has to check the ground, and design what stands on it.",
+   "vo": "Soil test and structural design. Someone has to check the ground, and design what stands on it.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 24,
+   "scene": "T04_leak2_list",
+   "caption": "Compound wall and gate. Borewell, sump and overhead tank.",
+   "vo": "Compound wall and gate. Borewell, sump and overhead tank.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 25,
+   "scene": "T04_leak2_list",
+   "caption": "Every plot needs them. But none of them are rooms, so none of them fit in a rate per square foot.",
+   "vo": "Every plot needs them. But none of them are rooms, so none of them fit in a rate per square foot.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 26,
+   "scene": "T04_leak2_list",
+   "caption": "Electricity and water connections.",
+   "vo": "Electricity and water connections.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 27,
+   "scene": "T04_leak2_list",
+   "caption": "You can't live in a house without them. They still sit outside the rate.",
+   "vo": "You can't live in a house without them. They still sit outside the rate.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 28,
+   "scene": "T04_leak2_list",
+   "caption": "Interiors: the modular kitchen, the wardrobes. The things that make it feel like home.",
+   "vo": "Interiors: the modular kitchen, the wardrobes. The things that make it feel like home.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 29,
+   "scene": "T04_leak2_list",
+   "caption": "And GST, if it wasn't already in the quote.",
+   "vo": "And GST, if it wasn't already in the quote.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 30,
+   "scene": "T04_leak2_list",
+   "caption": "None of these are tricks. They're just not inside the per-square-foot rate.",
+   "vo": "None of these are tricks. They're just not inside the per-square-foot rate.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 31,
+   "scene": "T04_leak2_list",
+   "caption": "And most quotes simply don't mention them, so nobody counts them until the bills arrive.",
+   "vo": "And most quotes simply don't mention them, so nobody counts them until the bills arrive.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 32,
+   "scene": "T04_leak2_list",
+   "caption": "In our example, they add up to about \u20b93 lakh.",
+   "vo": "In our example, they add up to about three lakh.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 33,
+   "scene": "T04_leak2_list",
+   "caption": "Three lakh that was never in the quote.",
+   "vo": "Three lakh that was never in the quote.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 34,
+   "scene": "T04_leak2_list",
+   "caption": "And then there's the money every builder needs and almost nobody budgets: a contingency.",
+   "vo": "And then there's the money every builder needs and almost nobody budgets: a contingency.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 35,
+   "scene": "T04_leak2_list",
+   "caption": "Usually 5 to 10 percent, for price rises and the changes you'll make along the way.",
+   "vo": "Usually five to ten percent, for price rises and the changes you'll make along the way.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 36,
+   "scene": "T04_leak2_list",
+   "caption": "Because you will make changes. A bigger window here. Better tiles there.",
+   "vo": "Because you will make changes. A bigger window here. Better tiles there.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 37,
+   "scene": "T04_leak2_list",
+   "caption": "At 8 percent, that's another \u20b92,24,000.",
+   "vo": "At eight percent, that's another two lakh twenty-four thousand.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 38,
+   "scene": "T04_leak2_list",
+   "caption": "\u20b925 lakh just became \u20b930 lakh.",
+   "vo": "Twenty-five lakh just became thirty.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 39,
+   "scene": "T05_leak3_soil",
+   "caption": "Now the leaks that can push you past thirty.",
+   "vo": "Now the leaks that can push you past thirty.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 40,
+   "scene": "T05_leak3_soil",
+   "caption": "Leak three is the soil.",
+   "vo": "Leak three is the soil.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 41,
+   "scene": "T05_leak3_soil",
+   "caption": "Across north Karnataka, a lot of land sits on black cotton soil. It swells when it's wet and shrinks when it's dry.",
+   "vo": "Across north Karnataka, a lot of land sits on black cotton soil. It swells when it's wet and shrinks when it's dry.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 42,
+   "scene": "T05_leak3_soil",
+   "caption": "Build on it like normal ground, and you get cracks. Build on it properly, and the foundation costs more.",
+   "vo": "Build on it like normal ground, and you get cracks. Build on it properly, and the foundation costs more.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 43,
+   "scene": "T05_leak3_soil",
+   "caption": "That's why a soil test isn't paperwork. It's the cheapest insurance in the whole project.",
+   "vo": "That's why a soil test isn't paperwork. It's the cheapest insurance in the whole project.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 44,
+   "scene": "T06_leak4_materials",
+   "caption": "Leak four happens quietly, at the material yard.",
+   "vo": "Leak four happens quietly, at the material yard.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 45,
+   "scene": "T06_leak4_materials",
+   "caption": "Nobody hides anything. The quote is just vague.",
+   "vo": "Nobody hides anything. The quote is just vague.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 46,
+   "scene": "T06_leak4_materials",
+   "caption": "Your quote says cement. But which cement? 33, 43 or 53 grade? OPC or PPC?",
+   "vo": "Your quote says cement. But which cement? Thirty-three, forty-three or fifty-three grade? O P C or P P C?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 47,
+   "scene": "T06_leak4_materials",
+   "caption": "PPC is usually a little cheaper per bag, and both are fine when used right.",
+   "vo": "P P C is usually a little cheaper per bag, and both are fine when used right.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 48,
+   "scene": "T06_leak4_materials",
+   "caption": "Your quote says steel. But which TMT? Fe 500 or 500D? Which brand?",
+   "vo": "Your quote says steel. But which T M T? F E five hundred, or five hundred D? Which brand?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 49,
+   "scene": "T06_leak4_materials",
+   "caption": "Each choice changes the price. And a quote that just says cement and steel doesn't tell you which one you're getting.",
+   "vo": "Each choice changes the price. And a quote that just says cement and steel doesn't tell you which one you're getting.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 50,
+   "scene": "T06_leak4_materials",
+   "caption": "And it doesn't stop at cement and steel. Tiles, paint, wires and pipes all come in cheap and costly versions.",
+   "vo": "And it doesn't stop at cement and steel. Tiles, paint, wires and pipes all come in cheap and costly versions.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 51,
+   "scene": "T06_leak4_materials",
+   "caption": "Once they're inside a wall or under a floor, they look the same. Until one of them fails.",
+   "vo": "Once they're inside a wall or under a floor, they look the same. Until one of them fails.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 52,
+   "scene": "T06_leak4_materials",
+   "caption": "If the quote doesn't name the brand and grade, two contractors can quote the same price for two very different houses.",
+   "vo": "If the quote doesn't name the brand and grade, two contractors can quote the same price for two very different houses.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 53,
+   "scene": "T06_leak4_materials",
+   "caption": "Same rate on paper. Not the same house.",
+   "vo": "Same rate on paper. Not the same house.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 54,
+   "scene": "T06_leak4_materials",
+   "caption": "So ask for an itemised quote: brand and grade of cement, steel, tiles, paint, wiring and plumbing.",
+   "vo": "So ask for an itemised quote: brand and grade of cement, steel, tiles, paint, wiring and plumbing.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 55,
+   "scene": "T06_leak4_materials",
+   "caption": "Line by line, so every number has a name next to it.",
+   "vo": "Line by line, so every number has a name next to it.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 56,
+   "scene": "T06_leak4_materials",
+   "caption": "Now you're comparing the same house.",
+   "vo": "Now you're comparing the same house.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 57,
+   "scene": "T07_leak5_concrete",
+   "caption": "Leak five is the most painful, because you pay for it twice.",
+   "vo": "Leak five is the most painful, because you pay for it twice.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 58,
+   "scene": "T07_leak5_concrete",
+   "caption": "When concrete isn't vibrated properly, it leaves gaps and pockets. Engineers call it honeycombing.",
+   "vo": "When concrete isn't vibrated properly, it leaves gaps and pockets. Engineers call it honeycombing.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 59,
+   "scene": "T07_leak5_concrete",
+   "caption": "And concrete that dries too fast never reaches its full strength.",
+   "vo": "And concrete that dries too fast never reaches its full strength.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 60,
+   "scene": "T07_leak5_concrete",
+   "caption": "That's why it has to be cured, kept wet, for days.",
+   "vo": "That's why it has to be cured, kept wet, for days.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 61,
+   "scene": "T07_leak5_concrete",
+   "caption": "India's concrete code asks for at least 7 days with ordinary cement, and 10 with blended cements like PPC.",
+   "vo": "India's concrete code asks for at least seven days with ordinary cement, and ten with blended cements like P P C.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 62,
+   "scene": "T07_leak5_concrete",
+   "caption": "Skip it, and the repair bill arrives later. With interest.",
+   "vo": "Skip it, and the repair bill arrives later. With interest.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 63,
+   "scene": "T08_leak6_wall",
+   "caption": "Leak six shows up a year after you move in.",
+   "vo": "Leak six shows up a year after you move in.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 64,
+   "scene": "T08_leak6_wall",
+   "caption": "White, powdery patches on the walls. It's called efflorescence: salts carried up by moisture.",
+   "vo": "White, powdery patches on the walls. It's called efflorescence: salts carried up by moisture.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 65,
+   "scene": "T08_leak6_wall",
+   "caption": "A thin damp-proof course at plinth level helps stop that moisture.",
+   "vo": "A thin damp-proof course at plinth level helps stop that moisture.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 66,
+   "scene": "T08_leak6_wall",
+   "caption": "Leave it out, and you'll be repainting the same wall again and again.",
+   "vo": "Leave it out, and you'll be repainting the same wall again and again.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 67,
+   "scene": "T09_leak7_paper",
+   "caption": "And now, leak seven. The one made of paper.",
+   "vo": "And now, leak seven. The one made of paper.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 68,
+   "scene": "T09_leak7_paper",
+   "caption": "In Karnataka, the khata says your property is on the books.",
+   "vo": "In Karnataka, the khata says your property is on the books.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 69,
+   "scene": "T09_leak7_paper",
+   "caption": "An A-khata is what banks are most comfortable lending against. B-khata properties can run into trouble with loans and approvals.",
+   "vo": "An A-khata is what banks are most comfortable lending against. B-khata properties can run into trouble with loans and approvals.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 70,
+   "scene": "T09_leak7_paper",
+   "caption": "In Bengaluru, an e-khata is now needed to register a property.",
+   "vo": "In Bengaluru, an e-khata is now needed to register a property.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 71,
+   "scene": "T09_leak7_paper",
+   "caption": "Then comes the sanctioned plan. And at the end, the occupancy certificate.",
+   "vo": "Then comes the sanctioned plan. And at the end, the occupancy certificate.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 72,
+   "scene": "T09_leak7_paper",
+   "caption": "Many cities ask for it before they give you permanent connections.",
+   "vo": "Many cities ask for it before they give you permanent connections.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 73,
+   "scene": "T09_leak7_paper",
+   "caption": "Get the paper wrong, and the cheapest house in the world can become the one you can't finance.",
+   "vo": "Get the paper wrong, and the cheapest house in the world can become the one you can't finance.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 74,
+   "scene": "T09_leak7_paper",
+   "caption": "Can't sell. And can't finish.",
+   "vo": "Can't sell. And can't finish.",
+   "gap_after": 1.7
+  },
+  {
+   "id": 75,
+   "scene": "T10_fix",
+   "caption": "So here are the six questions that plug every leak.",
+   "vo": "So here are the six questions that plug every leak.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 76,
+   "scene": "T10_fix",
+   "caption": "One: rate on built-up or carpet area?",
+   "vo": "One: rate on built-up or carpet area?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 77,
+   "scene": "T10_fix",
+   "caption": "Two: what's not included in this rate?",
+   "vo": "Two: what's not included in this rate?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 78,
+   "scene": "T10_fix",
+   "caption": "Three: has the soil been tested?",
+   "vo": "Three: has the soil been tested?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 79,
+   "scene": "T10_fix",
+   "caption": "Four: which brand and grade of every material?",
+   "vo": "Four: which brand and grade of every material?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 80,
+   "scene": "T10_fix",
+   "caption": "Five: who checks the concrete and the curing?",
+   "vo": "Five: who checks the concrete and the curing?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 81,
+   "scene": "T10_fix",
+   "caption": "Six: are the khata and the plan sanction clear?",
+   "vo": "Six: are the khata and the plan sanction clear?",
+   "gap_after": 0.45
+  },
+  {
+   "id": 82,
+   "scene": "T10_fix",
+   "caption": "Ask these before you sign, and \u20b925 lakh stays closer to \u20b925 lakh.",
+   "vo": "Ask these before you sign, and twenty-five lakh stays closer to twenty-five lakh.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 83,
+   "scene": "T10_fix",
+   "caption": "Prices, calculators and checklists for your district are on buynbuild.blog.",
+   "vo": "Prices, calculators and checklists for your district are on buy n build dot blog.",
+   "gap_after": 1.5
+  }
+ ]
+}
