@@ -1,0 +1,102 @@
+{
+ "HOUSE": {
+  "w": 1376,
+  "h": 768,
+  "kind": "photo"
+ },
+ "BREAKDOWN": {
+  "w": 1104,
+  "h": 798,
+  "kind": "color"
+ },
+ "CARPETHERO": {
+  "w": 688,
+  "h": 537,
+  "kind": "photo"
+ },
+ "CARPET": {
+  "w": 1200,
+  "h": 896,
+  "kind": "color"
+ },
+ "SANCTION": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "SOIL": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "FOOTING": {
+  "w": 1200,
+  "h": 896,
+  "kind": "color"
+ },
+ "GRADES": {
+  "w": 1200,
+  "h": 896,
+  "kind": "color"
+ },
+ "PPC": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "TMT": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "STEELWT": {
+  "w": 1200,
+  "h": 896,
+  "kind": "color"
+ },
+ "HONEY": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "CURING": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "CURINGDIA": {
+  "w": 1200,
+  "h": 591,
+  "kind": "color"
+ },
+ "EFFLO": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "DPC": {
+  "w": 888,
+  "h": 789,
+  "kind": "color"
+ },
+ "KHATA": {
+  "w": 1200,
+  "h": 896,
+  "kind": "color"
+ },
+ "EKHATA": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ },
+ "OC": {
+  "w": 624,
+  "h": 591,
+  "kind": "photo"
+ },
+ "BOQ": {
+  "w": 1200,
+  "h": 896,
+  "kind": "photo"
+ }
+}

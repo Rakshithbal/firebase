@@ -1,0 +1,218 @@
+{
+ "grade": "natural",
+ "photos": [
+  {
+   "id": "HOUSE",
+   "what": "house cost hero",
+   "kind": "photo",
+   "file": "house-cost-hero.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "BREAKDOWN",
+   "what": "cost per sqft formula diagram",
+   "kind": "color",
+   "file": "cost-per-sqft-formula-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images",
+   "crop": [
+    0.04,
+    0.08,
+    0.96,
+    0.97
+   ]
+  },
+  {
+   "id": "CARPETHERO",
+   "what": "carpet area hero",
+   "kind": "photo",
+   "file": "carpet-area-hero.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images",
+   "crop": [
+    0.12,
+    0.25,
+    0.62,
+    0.95
+   ],
+   "note": "cropped away the AI-garbled legend text"
+  },
+  {
+   "id": "CARPET",
+   "what": "carpet area formula diagram",
+   "kind": "color",
+   "file": "carpet-area-formula-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "SANCTION",
+   "what": "building plan sanction bbmp bda featured",
+   "kind": "photo",
+   "file": "building-plan-sanction-bbmp-bda-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "SOIL",
+   "what": "soil testing featured",
+   "kind": "photo",
+   "file": "soil-testing-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "FOOTING",
+   "what": "footing foundation diagram",
+   "kind": "color",
+   "file": "footing-foundation-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "GRADES",
+   "what": "cement grades 33 43 53 diagram",
+   "kind": "color",
+   "file": "cement-grades-33-43-53-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "PPC",
+   "what": "ppc cement portland pozzolana cement featured",
+   "kind": "photo",
+   "file": "ppc-cement-portland-pozzolana-cement-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "TMT",
+   "what": "tmt bar thermo mechanically treated featured",
+   "kind": "photo",
+   "file": "tmt-bar-thermo-mechanically-treated-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "STEELWT",
+   "what": "steel weight formula diagram",
+   "kind": "color",
+   "file": "steel-weight-formula-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "HONEY",
+   "what": "honeycombing in concrete featured",
+   "kind": "photo",
+   "file": "honeycombing-in-concrete-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "CURING",
+   "what": "curing of concrete featured",
+   "kind": "photo",
+   "file": "curing-of-concrete-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "CURINGDIA",
+   "what": "curing of concrete diagram",
+   "kind": "color",
+   "file": "curing-of-concrete-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images",
+   "crop": [
+    0,
+    0,
+    1,
+    0.66
+   ],
+   "note": "cropped to the two methods: the printed legend below misspells Pozzolanic as 'PoZZolaric'; 7/10 days are drawn in code instead"
+  },
+  {
+   "id": "EFFLO",
+   "what": "efflorescence featured",
+   "kind": "photo",
+   "file": "efflorescence-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "DPC",
+   "what": "damp proof course dpc diagram",
+   "kind": "color",
+   "file": "damp-proof-course-dpc-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images",
+   "crop": [
+    0.18,
+    0.05,
+    0.92,
+    0.93
+   ]
+  },
+  {
+   "id": "KHATA",
+   "what": "a khata vs b khata diagram",
+   "kind": "color",
+   "file": "a-khata-vs-b-khata-diagram.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "EKHATA",
+   "what": "e khata karnataka featured",
+   "kind": "photo",
+   "file": "e-khata-karnataka-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  },
+  {
+   "id": "OC",
+   "what": "occupancy certificate oc featured",
+   "kind": "photo",
+   "file": "occupancy-certificate-oc-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images",
+   "crop": [
+    0.48,
+    0.22,
+    1.0,
+    0.88
+   ],
+   "note": "cropped to the right side: the folder's Kannada text is AI-garbled"
+  },
+  {
+   "id": "BOQ",
+   "what": "boq bill of quantities featured",
+   "kind": "photo",
+   "file": "boq-bill-of-quantities-featured.png",
+   "credit": "BuyNBuild (own image)",
+   "license": "AI-style illustration owned by BuyNBuild (user supplied)",
+   "source": "User's Google Drive: BUYNBUILD images"
+  }
+ ]
+}

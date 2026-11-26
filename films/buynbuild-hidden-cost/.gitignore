@@ -8,3 +8,5 @@ audio/takes/
 audio/lines/
 audio/trimmed/
 audio/*.wav
+out/sheets/
+out/gate1/*.png
