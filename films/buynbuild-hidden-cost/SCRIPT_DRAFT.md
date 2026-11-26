@@ -1,4 +1,4 @@
-# "The ₹5 Lakh Nobody Told You About" — BuyNBuild explainer (draft for approval)
+# "The ₹5 Lakh Nobody Told You About" — BuyNBuild explainer (APPROVED, extend to 7 min)
 
 **Format:** 16:9 YouTube explainer, about 7:00 (≈1,050 spoken words at ~150 words/min)
 **Style:** cinematic-film skill: one camera gliding over one "site board" of BuyNBuild photos, diagrams, price cards, counters and stamps, with every number landing on the narrator's word. Burned-in captions, sound effects, chapter cards.
