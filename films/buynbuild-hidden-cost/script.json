@@ -1,0 +1,655 @@
+{
+ "title": "The ₹5 Lakh Nobody Told You About",
+ "takes": [
+  {
+   "take": "T01_cold_open",
+   "lines": [
+    {
+     "id": 1,
+     "text": "A family in Karnataka asks a contractor one simple question: how much will our house cost?",
+     "spoken": "A family in Karnataka asks a contractor one simple question: how much will our house cost?",
+     "hero": "house-cost-hero; ILLUSTRATIVE EXAMPLE label",
+     "typed": "ILLUSTRATIVE EXAMPLE"
+    },
+    {
+     "id": 2,
+     "text": "He says ₹25 lakh.",
+     "spoken": "He says twenty-five lakh rupees.",
+     "hero": "counter slams ₹25,00,000",
+     "typed": "₹25,00,000"
+    },
+    {
+     "id": 3,
+     "text": "Eighteen months later, they've spent about ₹30 lakh.",
+     "spoken": "Eighteen months later, they've spent about thirty lakh.",
+     "hero": "red LEAK METER starts to roll",
+     "typed": "LEAK METER"
+    },
+    {
+     "id": 4,
+     "text": "Here's the strange part. Nobody lied to them. Nobody ran away with the money.",
+     "spoken": "Here's the strange part. Nobody lied to them. Nobody ran away with the money.",
+     "hero": "the house again, stamp NOBODY LIED",
+     "typed": "NOBODY LIED"
+    },
+    {
+     "id": 5,
+     "text": "So where did ₹5 lakh go?",
+     "spoken": "So where did five lakh rupees go?",
+     "hero": "the meter freezes on ?",
+     "typed": "₹ ?"
+    },
+    {
+     "id": 6,
+     "text": "Today we're going to find every rupee. There are seven leaks.",
+     "spoken": "Today we're going to find every rupee. There are seven leaks.",
+     "hero": "seven leak markers along the board",
+     "typed": "7 LEAKS"
+    },
+    {
+     "id": 7,
+     "text": "And leak number seven isn't made of cement or steel. It's made of paper, and it can stop your bank loan cold.",
+     "spoken": "And leak number seven isn't made of cement or steel. It's made of paper, and it can stop your bank loan cold.",
+     "hero": "marker 7 glows; a paper silhouette",
+     "typed": "LEAK #7: ?"
+    },
+    {
+     "id": 8,
+     "text": "Stay till the end, because we'll give you the six questions that plug every one of them.",
+     "spoken": "Stay till the end, because we'll give you the six questions that plug every one of them.",
+     "hero": "title card",
+     "typed": "THE ₹5 LAKH NOBODY TOLD YOU ABOUT",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T02_quote",
+   "lines": [
+    {
+     "id": 9,
+     "text": "Every house quote in India starts with one formula.",
+     "spoken": "Every house quote in India starts with one formula.",
+     "hero": "formula card appears",
+     "typed": ""
+    },
+    {
+     "id": 10,
+     "text": "Built-up area, times a rate per square foot.",
+     "spoken": "Built-up area, times a rate per square foot.",
+     "hero": "formula card terms light up",
+     "typed": "BUILT-UP AREA × RATE / SQ FT"
+    },
+    {
+     "id": 11,
+     "text": "1,000 sq ft, at ₹2,500 a square foot. ₹25 lakh.",
+     "spoken": "A thousand square feet, at two thousand five hundred rupees a square foot. Twenty-five lakh.",
+     "hero": "numbers drop into the formula",
+     "typed": "1,000 × ₹2,500 = ₹25 L"
+    },
+    {
+     "id": 12,
+     "text": "Basic homes are often quoted around ₹1,800 to ₹2,300 a square foot.",
+     "spoken": "Basic homes are often quoted around eighteen hundred to twenty-three hundred a square foot.",
+     "hero": "rate card BASIC",
+     "typed": "BASIC ₹1,800–2,300"
+    },
+    {
+     "id": 13,
+     "text": "Standard, up to about ₹2,900. Premium, above that.",
+     "spoken": "Standard, up to about twenty-nine hundred. Premium, above that.",
+     "hero": "rate cards STANDARD, PREMIUM; indicative, Oct 2026",
+     "typed": "STANDARD · PREMIUM"
+    },
+    {
+     "id": 14,
+     "text": "That number feels like the price of your house.",
+     "spoken": "That number feels like the price of your house.",
+     "hero": "cost breakdown diagram",
+     "typed": ""
+    },
+    {
+     "id": 15,
+     "text": "It isn't. It's the price of what's inside the contractor's rate. And a lot of your house lives outside it.",
+     "spoken": "It isn't. It's the price of what's inside the contractor's rate. And a lot of your house lives outside it.",
+     "hero": "a box drawn round the diagram; stamp OUTSIDE THE RATE",
+     "typed": "INSIDE THE RATE",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T03_leak1_area",
+   "lines": [
+    {
+     "id": 16,
+     "text": "Leak one is hiding in the word area.",
+     "spoken": "Leak one is hiding in the word area.",
+     "hero": "chapter card LEAK 1 · THE AREA",
+     "typed": "LEAK 1"
+    },
+    {
+     "id": 17,
+     "text": "Contractors usually quote on built-up area: every floor, including the walls, the balcony and the staircase.",
+     "spoken": "Contractors usually quote on built-up area: every floor, including the walls, the balcony and the staircase.",
+     "hero": "carpet-area diagram, the dashed outline",
+     "typed": "BUILT-UP AREA"
+    },
+    {
+     "id": 18,
+     "text": "But you live in carpet area, the floor you can actually walk on. And it's always smaller.",
+     "spoken": "But you live in carpet area, the floor you can actually walk on. And it's always smaller.",
+     "hero": "the teal carpet area",
+     "typed": "CARPET AREA"
+    },
+    {
+     "id": 19,
+     "text": "So when two quotes say the same rate, ask: rate on which area? Get the answer in writing.",
+     "spoken": "So when two quotes say the same rate, ask: rate on which area? Get the answer in writing.",
+     "hero": "stamp WHICH AREA?",
+     "typed": "WHICH AREA?"
+    },
+    {
+     "id": 20,
+     "text": "It sounds small. On a full house, it changes the total by lakhs.",
+     "spoken": "It sounds small. On a full house, it changes the total by lakhs.",
+     "hero": "pen mark on the wall thickness",
+     "typed": "",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T04_leak2_list",
+   "lines": [
+    {
+     "id": 21,
+     "text": "Leak two is the biggest, and it's a list.",
+     "spoken": "Leak two is the biggest, and it's a list.",
+     "hero": "chapter card LEAK 2 · THE LIST; paper checklist",
+     "typed": "LEAK 2"
+    },
+    {
+     "id": 22,
+     "text": "Plan approval fees. Before anyone digs, the plan has to be sanctioned, and that costs money.",
+     "spoken": "Plan approval fees. Before anyone digs, the plan has to be sanctioned, and that costs money.",
+     "hero": "item ticks on; plan-sanction photo",
+     "typed": "PLAN APPROVAL"
+    },
+    {
+     "id": 23,
+     "text": "Soil test and structural design. Someone has to check the ground, and design what stands on it.",
+     "spoken": "Soil test and structural design. Someone has to check the ground, and design what stands on it.",
+     "hero": "item ticks on; soil-testing photo",
+     "typed": "SOIL TEST · DESIGN"
+    },
+    {
+     "id": 24,
+     "text": "Compound wall and gate. Borewell, sump and overhead tank.",
+     "spoken": "Compound wall and gate. Borewell, sump and overhead tank.",
+     "hero": "items tick on",
+     "typed": "COMPOUND WALL · BOREWELL · SUMP"
+    },
+    {
+     "id": 25,
+     "text": "Every plot needs them. But none of them are rooms, so none of them fit in a rate per square foot.",
+     "spoken": "Every plot needs them. But none of them are rooms, so none of them fit in a rate per square foot.",
+     "hero": "pen bracket on the three items",
+     "typed": ""
+    },
+    {
+     "id": 26,
+     "text": "Electricity and water connections.",
+     "spoken": "Electricity and water connections.",
+     "hero": "item ticks on",
+     "typed": "CONNECTIONS"
+    },
+    {
+     "id": 27,
+     "text": "You can't live in a house without them. They still sit outside the rate.",
+     "spoken": "You can't live in a house without them. They still sit outside the rate.",
+     "hero": "item ticks on",
+     "typed": ""
+    },
+    {
+     "id": 28,
+     "text": "Interiors: the modular kitchen, the wardrobes. The things that make it feel like home.",
+     "spoken": "Interiors: the modular kitchen, the wardrobes. The things that make it feel like home.",
+     "hero": "item ticks on",
+     "typed": "INTERIORS"
+    },
+    {
+     "id": 29,
+     "text": "And GST, if it wasn't already in the quote.",
+     "spoken": "And GST, if it wasn't already in the quote.",
+     "hero": "item ticks on",
+     "typed": "GST"
+    },
+    {
+     "id": 30,
+     "text": "None of these are tricks. They're just not inside the per-square-foot rate.",
+     "spoken": "None of these are tricks. They're just not inside the per-square-foot rate.",
+     "hero": "the full list",
+     "typed": ""
+    },
+    {
+     "id": 31,
+     "text": "And most quotes simply don't mention them, so nobody counts them until the bills arrive.",
+     "spoken": "And most quotes simply don't mention them, so nobody counts them until the bills arrive.",
+     "hero": "bracket round the list",
+     "typed": ""
+    },
+    {
+     "id": 32,
+     "text": "In our example, they add up to about ₹3 lakh.",
+     "spoken": "In our example, they add up to about three lakh.",
+     "hero": "LEAK METER +₹3,00,000",
+     "typed": "+₹3,00,000"
+    },
+    {
+     "id": 33,
+     "text": "Three lakh that was never in the quote.",
+     "spoken": "Three lakh that was never in the quote.",
+     "hero": "meter holds at ₹28,00,000",
+     "typed": ""
+    },
+    {
+     "id": 34,
+     "text": "And then there's the money every builder needs and almost nobody budgets: a contingency.",
+     "spoken": "And then there's the money every builder needs and almost nobody budgets: a contingency.",
+     "hero": "card CONTINGENCY",
+     "typed": "CONTINGENCY"
+    },
+    {
+     "id": 35,
+     "text": "Usually 5 to 10 percent, for price rises and the changes you'll make along the way.",
+     "spoken": "Usually five to ten percent, for price rises and the changes you'll make along the way.",
+     "hero": "card body 5–10%",
+     "typed": "5–10%"
+    },
+    {
+     "id": 36,
+     "text": "Because you will make changes. A bigger window here. Better tiles there.",
+     "spoken": "Because you will make changes. A bigger window here. Better tiles there.",
+     "hero": "card",
+     "typed": ""
+    },
+    {
+     "id": 37,
+     "text": "At 8 percent, that's another ₹2,24,000.",
+     "spoken": "At eight percent, that's another two lakh twenty-four thousand.",
+     "hero": "LEAK METER +₹2,24,000 = ₹30,24,000",
+     "typed": "+₹2,24,000"
+    },
+    {
+     "id": 38,
+     "text": "₹25 lakh just became ₹30 lakh.",
+     "spoken": "Twenty-five lakh just became thirty.",
+     "hero": "stamp ₹25 L → ₹30 L",
+     "typed": "₹25 L → ₹30 L",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T05_leak3_soil",
+   "lines": [
+    {
+     "id": 39,
+     "text": "Now the leaks that can push you past thirty.",
+     "spoken": "Now the leaks that can push you past thirty.",
+     "hero": "the meter, then move on",
+     "typed": ""
+    },
+    {
+     "id": 40,
+     "text": "Leak three is the soil.",
+     "spoken": "Leak three is the soil.",
+     "hero": "chapter card LEAK 3 · THE SOIL",
+     "typed": "LEAK 3"
+    },
+    {
+     "id": 41,
+     "text": "Across north Karnataka, a lot of land sits on black cotton soil. It swells when it's wet and shrinks when it's dry.",
+     "spoken": "Across north Karnataka, a lot of land sits on black cotton soil. It swells when it's wet and shrinks when it's dry.",
+     "hero": "map card: Kalaburagi, Raichur",
+     "typed": "KALABURAGI · RAICHUR"
+    },
+    {
+     "id": 42,
+     "text": "Build on it like normal ground, and you get cracks. Build on it properly, and the foundation costs more.",
+     "spoken": "Build on it like normal ground, and you get cracks. Build on it properly, and the foundation costs more.",
+     "hero": "footing diagram; pen mark",
+     "typed": ""
+    },
+    {
+     "id": 43,
+     "text": "That's why a soil test isn't paperwork. It's the cheapest insurance in the whole project.",
+     "spoken": "That's why a soil test isn't paperwork. It's the cheapest insurance in the whole project.",
+     "hero": "soil-testing photo; stamp CHEAPEST INSURANCE",
+     "typed": "CHEAPEST INSURANCE",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T06_leak4_materials",
+   "lines": [
+    {
+     "id": 44,
+     "text": "Leak four happens quietly, at the material yard.",
+     "spoken": "Leak four happens quietly, at the material yard.",
+     "hero": "chapter card LEAK 4 · THE BAG AND THE BAR",
+     "typed": "LEAK 4"
+    },
+    {
+     "id": 45,
+     "text": "Nobody hides anything. The quote is just vague.",
+     "spoken": "Nobody hides anything. The quote is just vague.",
+     "hero": "a blank quote card",
+     "typed": ""
+    },
+    {
+     "id": 46,
+     "text": "Your quote says cement. But which cement? 33, 43 or 53 grade? OPC or PPC?",
+     "spoken": "Your quote says cement. But which cement? Thirty-three, forty-three or fifty-three grade? O P C or P P C?",
+     "hero": "cement-grades diagram",
+     "typed": "33 · 43 · 53"
+    },
+    {
+     "id": 47,
+     "text": "PPC is usually a little cheaper per bag, and both are fine when used right.",
+     "spoken": "P P C is usually a little cheaper per bag, and both are fine when used right.",
+     "hero": "PPC photo",
+     "typed": "OPC · PPC"
+    },
+    {
+     "id": 48,
+     "text": "Your quote says steel. But which TMT? Fe 500 or 500D? Which brand?",
+     "spoken": "Your quote says steel. But which T M T? F E five hundred, or five hundred D? Which brand?",
+     "hero": "TMT photo, steel-weight diagram",
+     "typed": "FE 500 · FE 500D"
+    },
+    {
+     "id": 49,
+     "text": "Each choice changes the price. And a quote that just says cement and steel doesn't tell you which one you're getting.",
+     "spoken": "Each choice changes the price. And a quote that just says cement and steel doesn't tell you which one you're getting.",
+     "hero": "quote card: CEMENT ___ STEEL ___",
+     "typed": ""
+    },
+    {
+     "id": 50,
+     "text": "And it doesn't stop at cement and steel. Tiles, paint, wires and pipes all come in cheap and costly versions.",
+     "spoken": "And it doesn't stop at cement and steel. Tiles, paint, wires and pipes all come in cheap and costly versions.",
+     "hero": "card: TILES · PAINT · WIRING · PLUMBING",
+     "typed": "TILES · PAINT · WIRING · PLUMBING"
+    },
+    {
+     "id": 51,
+     "text": "Once they're inside a wall or under a floor, they look the same. Until one of them fails.",
+     "spoken": "Once they're inside a wall or under a floor, they look the same. Until one of them fails.",
+     "hero": "card",
+     "typed": ""
+    },
+    {
+     "id": 52,
+     "text": "If the quote doesn't name the brand and grade, two contractors can quote the same price for two very different houses.",
+     "spoken": "If the quote doesn't name the brand and grade, two contractors can quote the same price for two very different houses.",
+     "hero": "two quote cards side by side; highlighter on BRAND: ___",
+     "typed": "BRAND: ___"
+    },
+    {
+     "id": 53,
+     "text": "Same rate on paper. Not the same house.",
+     "spoken": "Same rate on paper. Not the same house.",
+     "hero": "stamp SAME PRICE?",
+     "typed": "SAME PRICE?"
+    },
+    {
+     "id": 54,
+     "text": "So ask for an itemised quote: brand and grade of cement, steel, tiles, paint, wiring and plumbing.",
+     "spoken": "So ask for an itemised quote: brand and grade of cement, steel, tiles, paint, wiring and plumbing.",
+     "hero": "itemised quote card",
+     "typed": "ITEMISED QUOTE"
+    },
+    {
+     "id": 55,
+     "text": "Line by line, so every number has a name next to it.",
+     "spoken": "Line by line, so every number has a name next to it.",
+     "hero": "itemised quote card fills",
+     "typed": ""
+    },
+    {
+     "id": 56,
+     "text": "Now you're comparing the same house.",
+     "spoken": "Now you're comparing the same house.",
+     "hero": "tick",
+     "typed": "",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T07_leak5_concrete",
+   "lines": [
+    {
+     "id": 57,
+     "text": "Leak five is the most painful, because you pay for it twice.",
+     "spoken": "Leak five is the most painful, because you pay for it twice.",
+     "hero": "chapter card LEAK 5 · PAID TWICE",
+     "typed": "LEAK 5"
+    },
+    {
+     "id": 58,
+     "text": "When concrete isn't vibrated properly, it leaves gaps and pockets. Engineers call it honeycombing.",
+     "spoken": "When concrete isn't vibrated properly, it leaves gaps and pockets. Engineers call it honeycombing.",
+     "hero": "honeycombing photo; pen ellipse",
+     "typed": "HONEYCOMBING"
+    },
+    {
+     "id": 59,
+     "text": "And concrete that dries too fast never reaches its full strength.",
+     "spoken": "And concrete that dries too fast never reaches its full strength.",
+     "hero": "curing photo",
+     "typed": ""
+    },
+    {
+     "id": 60,
+     "text": "That's why it has to be cured, kept wet, for days.",
+     "spoken": "That's why it has to be cured, kept wet, for days.",
+     "hero": "curing diagram (methods)",
+     "typed": "CURING"
+    },
+    {
+     "id": 61,
+     "text": "India's concrete code asks for at least 7 days with ordinary cement, and 10 with blended cements like PPC.",
+     "spoken": "India's concrete code asks for at least seven days with ordinary cement, and ten with blended cements like P P C.",
+     "hero": "counters 7 DAYS · OPC / 10 DAYS · PPC",
+     "typed": "7 DAYS · OPC · 10 DAYS · PPC"
+    },
+    {
+     "id": 62,
+     "text": "Skip it, and the repair bill arrives later. With interest.",
+     "spoken": "Skip it, and the repair bill arrives later. With interest.",
+     "hero": "stamp PAID TWICE",
+     "typed": "PAID TWICE",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T08_leak6_wall",
+   "lines": [
+    {
+     "id": 63,
+     "text": "Leak six shows up a year after you move in.",
+     "spoken": "Leak six shows up a year after you move in.",
+     "hero": "chapter card LEAK 6 · THE WHITE WALL",
+     "typed": "LEAK 6"
+    },
+    {
+     "id": 64,
+     "text": "White, powdery patches on the walls. It's called efflorescence: salts carried up by moisture.",
+     "spoken": "White, powdery patches on the walls. It's called efflorescence: salts carried up by moisture.",
+     "hero": "efflorescence photo",
+     "typed": "EFFLORESCENCE"
+    },
+    {
+     "id": 65,
+     "text": "A thin damp-proof course at plinth level helps stop that moisture.",
+     "spoken": "A thin damp-proof course at plinth level helps stop that moisture.",
+     "hero": "DPC diagram; pen arrow on DPC layer",
+     "typed": "DAMP-PROOF COURSE"
+    },
+    {
+     "id": 66,
+     "text": "Leave it out, and you'll be repainting the same wall again and again.",
+     "spoken": "Leave it out, and you'll be repainting the same wall again and again.",
+     "hero": "back to the wall photo",
+     "typed": "",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T09_leak7_paper",
+   "lines": [
+    {
+     "id": 67,
+     "text": "And now, leak seven. The one made of paper.",
+     "spoken": "And now, leak seven. The one made of paper.",
+     "hero": "chapter card LEAK 7 · PAPER",
+     "typed": "LEAK 7"
+    },
+    {
+     "id": 68,
+     "text": "In Karnataka, the khata says your property is on the books.",
+     "spoken": "In Karnataka, the khata says your property is on the books.",
+     "hero": "A-khata vs B-khata diagram",
+     "typed": "KHATA"
+    },
+    {
+     "id": 69,
+     "text": "An A-khata is what banks are most comfortable lending against. B-khata properties can run into trouble with loans and approvals.",
+     "spoken": "An A-khata is what banks are most comfortable lending against. B-khata properties can run into trouble with loans and approvals.",
+     "hero": "highlight both columns",
+     "typed": "A-KHATA · B-KHATA"
+    },
+    {
+     "id": 70,
+     "text": "In Bengaluru, an e-khata is now needed to register a property.",
+     "spoken": "In Bengaluru, an e-khata is now needed to register a property.",
+     "hero": "e-khata photo",
+     "typed": "E-KHATA"
+    },
+    {
+     "id": 71,
+     "text": "Then comes the sanctioned plan. And at the end, the occupancy certificate.",
+     "spoken": "Then comes the sanctioned plan. And at the end, the occupancy certificate.",
+     "hero": "plan sanction photo, then OC photo",
+     "typed": "SANCTIONED PLAN · OC"
+    },
+    {
+     "id": 72,
+     "text": "Many cities ask for it before they give you permanent connections.",
+     "spoken": "Many cities ask for it before they give you permanent connections.",
+     "hero": "OC photo; pen underline",
+     "typed": "PERMANENT CONNECTIONS"
+    },
+    {
+     "id": 73,
+     "text": "Get the paper wrong, and the cheapest house in the world can become the one you can't finance.",
+     "spoken": "Get the paper wrong, and the cheapest house in the world can become the one you can't finance.",
+     "hero": "stamp LEAK #7: PAPER",
+     "typed": "LEAK #7: PAPER"
+    },
+    {
+     "id": 74,
+     "text": "Can't sell. And can't finish.",
+     "spoken": "Can't sell. And can't finish.",
+     "hero": "two more stamps",
+     "typed": "",
+     "gap_after": 1.7
+    }
+   ]
+  },
+  {
+   "take": "T10_fix",
+   "lines": [
+    {
+     "id": 75,
+     "text": "So here are the six questions that plug every leak.",
+     "spoken": "So here are the six questions that plug every leak.",
+     "hero": "checklist card; SCREENSHOT THIS",
+     "typed": "SCREENSHOT THIS"
+    },
+    {
+     "id": 76,
+     "text": "One: rate on built-up or carpet area?",
+     "spoken": "One: rate on built-up or carpet area?",
+     "hero": "item 1 ticks",
+     "typed": "1"
+    },
+    {
+     "id": 77,
+     "text": "Two: what's not included in this rate?",
+     "spoken": "Two: what's not included in this rate?",
+     "hero": "item 2 ticks",
+     "typed": "2"
+    },
+    {
+     "id": 78,
+     "text": "Three: has the soil been tested?",
+     "spoken": "Three: has the soil been tested?",
+     "hero": "item 3 ticks",
+     "typed": "3"
+    },
+    {
+     "id": 79,
+     "text": "Four: which brand and grade of every material?",
+     "spoken": "Four: which brand and grade of every material?",
+     "hero": "item 4 ticks",
+     "typed": "4"
+    },
+    {
+     "id": 80,
+     "text": "Five: who checks the concrete and the curing?",
+     "spoken": "Five: who checks the concrete and the curing?",
+     "hero": "item 5 ticks",
+     "typed": "5"
+    },
+    {
+     "id": 81,
+     "text": "Six: are the khata and the plan sanction clear?",
+     "spoken": "Six: are the khata and the plan sanction clear?",
+     "hero": "item 6 ticks",
+     "typed": "6"
+    },
+    {
+     "id": 82,
+     "text": "Ask these before you sign, and ₹25 lakh stays closer to ₹25 lakh.",
+     "spoken": "Ask these before you sign, and twenty-five lakh stays closer to twenty-five lakh.",
+     "hero": "pull back over the whole board",
+     "typed": ""
+    },
+    {
+     "id": 83,
+     "text": "Prices, calculators and checklists for your district are on buynbuild.blog.",
+     "spoken": "Prices, calculators and checklists for your district are on buy n build dot blog.",
+     "hero": "end card buynbuild.blog",
+     "typed": "BUYNBUILD.BLOG",
+     "gap_after": 1.5
+    }
+   ]
+  }
+ ],
+ "fact_notes": [
+  "All rates and the worked example (1,000 sq ft x ₹2,500 = ₹25 L; extras ₹3 L; 8% contingency on ₹28 L = ₹2.24 L; total ₹30.24 L) come from the buynbuild.blog house cost calculator post. Shown on screen as indicative, Oct 2026.",
+  "Extras list (approvals, soil test and design, compound wall, borewell/sump/tank, connections, interiors, GST) from the same post.",
+  "PPC usually slightly cheaper than OPC: buynbuild.blog PPC cement post. Itemised quote with brand and grade: cost calculator post.",
+  "Curing minimum 7 days OPC, 10 days blended (IS 456:2000 cl. 13.5.1). Approved by the user.",
+  "e-khata needed for registration in Bengaluru; banks prefer A-khata; OC before permanent connections in many cities. Approved by the user with this cautious wording.",
+  "Lines added for the 7-minute cut (Leak 2 and Leak 4) explain the approved items; they add no new numbers or claims.",
+  "The family is an illustrative example built from the blog's worked example, labelled ILLUSTRATIVE EXAMPLE on screen."
+ ]
+}

@@ -1,0 +1,10 @@
+out/chunks/
+out/probe/
+out/burn/
+out/*.log
+out/*1080p*.mp4
+out/final*.mp4
+audio/takes/
+audio/lines/
+audio/trimmed/
+audio/*.wav
