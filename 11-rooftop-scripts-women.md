@@ -84,7 +84,7 @@ Some scripts need to be posted before the 3 Dec soundcheck, so there are two sho
 | 3 Dec, 11 pm, then **4 Dec Story** | R3 · Mid-sentence, then the answer | Mechanism (the loop gets closed) |
 
 **Wardrobe:** black, ivory, burnt orange. Bring a shawl or blazer, because it's about 16 °C at night (check the forecast).
-**Kannada lines** are written plainly. The creator should say them in her own Uttara Karnataka Kannada, not read them word for word.
+**All lines are in English.** Creators can say them in their own words. They don't need to be read word for word.
 
 ---
 
@@ -94,7 +94,7 @@ Some scripts need to be posted before the 3 Dec soundcheck, so there are two sho
 **Job:** show the category exists here. **Before:** "This kind of place doesn't exist in Hubballi." **After:** "It does, and it's ours." **Frame:** identity and pride.
 
 **Hooks written (top 2 kept ★):**
-1. ★ *"Guess maadi, naanu ellidini. Say Bengaluru and I'll block you."* (callout + curiosity)
+1. ★ *"Guess where I am. Say Bengaluru and I'll block you."* (callout + curiosity)
 2. ★ Silent: a face in the wind, and only the text *"Guess the city. Wrong answers only."* (pattern interrupt)
 3. *"This view costs an 8-hour drive. Or ten minutes."* (contrast)
 4. *"My cousin in Dubai thinks this is Dubai."* (specificity, but only use it if it's true)
@@ -102,10 +102,10 @@ Some scripts need to be posted before the 3 Dec soundcheck, so there are two sho
 
 | Time | Shot | Audio / line | On-screen text |
 |---|---|---|---|
-| 0–3 s | **Hook.** Tight on her face, wind in her hair, sun flare. Straight into the lens. | *"Guess maadi, naanu ellidini. Bengaluru anta helidre, block maadtini."* (Guess where I am. Say Bengaluru and I'll block you.) | *"Guess the city 👀"* |
+| 0–3 s | **Hook.** Tight on her face, wind in her hair, sun flare. Straight into the lens. | *"Guess where I am. Say Bengaluru and I'll block you."* | *"Guess the city 👀"* |
 | 3–8 s | Slow pull back. The skyline appears but is still hard to place. One eyebrow up. | Approved track fades in, low. | Guesses pop up: *"Dubai?" "Goa?" "Mumbai?"* |
-| 8–13 s | She turns and points down at Airport Road. A plane comes in to Hubballi airport (time it). | *"Aa plane eega Hubballi airport ge land aaytu."* (That plane just landed at Hubballi airport.) | *"Hubballi. Airport Road."* |
-| 13–18 s | She sits, knees up, as the sun touches the horizon. | *"Bengaluru ge eight hours. Manege ten minutes. Ee view namdu."* (Bengaluru's eight hours away. Home is ten minutes. This view is ours.) | — |
+| 8–13 s | She turns and points down at Airport Road. A plane comes in to Hubballi airport (time it). | *"That plane just landed at Hubballi airport."* | *"Hubballi. Airport Road."* |
+| 13–18 s | She sits, knees up, as the sun touches the horizon. | *"Bengaluru is eight hours away. Home is ten minutes. This view is ours."* | — |
 | 18–20 s | End frame over the sunset. | Track swells. | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
 
 **Caption:** *"#collab Wrong answers only 🤍 I'll pick my favourite guess at 9 pm on 3 Dec and give them a pass."* Code goes in the Story sticker. The giveaway has to be real, and the winner announced in Stories.
@@ -175,13 +175,13 @@ Some scripts need to be posted before the 3 Dec soundcheck, so there are two sho
 | Time | Shot | Audio / line | On-screen text |
 |---|---|---|---|
 | 0–3 s | **Hook.** A and B mid-selfie at sunset, laughing. A WhatsApp ping, then another, then five more. Both freeze. | *Ping ×7.* A: *"…Amma."* | *"Amma · 7 voice notes"* |
-| 3–8 s | A plays the first one between them. B grins at camera. | **Amma:** *"Elli iddira?"* (Where are you two?) | Subtitle |
+| 3–8 s | A plays the first one between them. B grins at camera. | **Amma:** *"Where are you two?"* | Subtitle |
 | 8–11 s | B flips the camera to the skyline. | A: *"Hubballi, Amma. Airport Road."* | — |
-| 11–15 s | Voice note 2. The camera finds the women security staff at the door (with consent), who give a small wave. | **Amma:** *"Alli yaaryaaru iddare?"* (Who's there?) | *"✓ women on security"* |
-| 15–18 s | Voice note 3. B holds up the event's safety card: the close time and Regenta's name. | **Amma:** *"Tumba late aagatta?"* (Will it go very late?) | *"✓ closes at [close time]"* |
-| 18–21 s | Voice note 4. B points at the help desk and the **[cab partner name]** sign. | **Amma:** *"Vaapas hege bartira?"* (How will you come back?) | *"✓ help desk ✓ [cab partner] cabs"* |
-| 21–24 s | Voice note 5. Both hold up their shawls at once, deadpan. | **Amma:** *"Chali ide, shawl tagondiddira?"* (It's cold, did you take shawls?) | *"✓ 16 °C, yes Amma"* |
-| 24–28 s | Voice note 6, and a pause. They lean in. | **Amma:** *"…Naanu bartini."* (…I'm coming too.) | — |
+| 11–15 s | Voice note 2. The camera finds the women security staff at the door (with consent), who give a small wave. | **Amma:** *"Who else is there?"* | *"✓ women on security"* |
+| 15–18 s | Voice note 3. B holds up the event's safety card: the close time and Regenta's name. | **Amma:** *"Will it go very late?"* | *"✓ closes at [close time]"* |
+| 18–21 s | Voice note 4. B points at the help desk and the **[cab partner name]** sign. | **Amma:** *"How are you getting back?"* | *"✓ help desk ✓ [cab partner] cabs"* |
+| 21–24 s | Voice note 5. Both hold up their shawls at once, deadpan. | **Amma:** *"It's cold. Did you take your shawls?"* | *"✓ 16 °C, yes Amma"* |
+| 24–28 s | Voice note 6, and a pause. They lean in. | **Amma:** *"…I'm coming too."* | — |
 | 28–30 s | They look at each other in silence, then burst out laughing. End frame. | Track kicks in. | *"Amma wants in."* → *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
 
 **Caption:** *"#ad Tag the friend whose Amma sends 7 voice notes. Or forward this to Amma directly 😌"* The Story link goes to a one-page **parent card** with the safety details.
