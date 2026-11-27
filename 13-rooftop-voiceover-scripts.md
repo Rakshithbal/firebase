@@ -1,6 +1,6 @@
 # 13 · 5 voice-over scripts for women creators: rooftop B-roll with VO
 
-**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec · Bullzeye**
+**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec, 4 PM onwards · STOKED with Vinzula, Sachin and Blacout**
 These follow R1–R10 in [11](11-rooftop-scripts-women.md) and [12](12-rooftop-scripts-women-set2.md), with the same brief, specs and rules: 9:16, warm sunset grade, the end frame *"#OPEN AIR · 05.12 · Regenta Rooftop"*, and the Paid partnership label plus **#ad** or **#collab** on every post. They never say "book", "tickets", "buy" or a price, and never show bottles, labels or Terrace guests' faces.
 
 **What's different here:** the voice carries the video. The creator is mostly *not* talking to camera. She's in the shots, living the rooftop, while her voice tells the story over the top. That lets you use the most cinematic B-roll from both shoot days.
@@ -77,7 +77,7 @@ These follow R1–R10 in [11](11-rooftop-scripts-women.md) and [12](12-rooftop-s
 ---
 
 ## R13 · "This is your cabin crew" · Solo · 25 s · ~62 words
-**Job:** explain what the night actually is (sunset, the cold, Bullzeye, the view) in a format that sticks. It plays on Airport Road and on C03's "Gate: Rooftop" boarding pass. **Before:** "I don't know what this event even is." **After:** "Sunset, Bullzeye, sixteen degrees. Got it." **Frame:** simplicity plus fun.
+**Job:** explain what the night actually is (sunset, the cold, STOKED, the view) in a format that sticks. It plays on Airport Road and on C03's "Gate: Rooftop" boarding pass. **Before:** "I don't know what this event even is." **After:** "Sunset, STOKED, sixteen degrees. Got it." **Frame:** simplicity plus fun.
 **Delivery:** a bright, crisp cabin-crew voice, slightly too formal. Add a soft *"ding"* chime before the first line. Don't name or imitate any real airline.
 
 **Hooks written:**
@@ -93,7 +93,7 @@ These follow R1–R10 in [11](11-rooftop-scripts-women.md) and [12](12-rooftop-s
 | 4–8 s | She walks out holding the black boarding-pass invite. | *"We're departing Hubballi at golden hour. Cruising altitude: rooftop."* |
 | 8–12 s | Her hand points out the skyline, cabin-crew style, two fingers. | *"Please note the view on both sides of the aircraft."* |
 | 12–16 s | She pulls on a shawl. | *"Temperature at destination: sixteen degrees. Keep your shawl within reach."* |
-| 16–20 s | The soundcheck: the booth (with consent), the bass hits and she grins. | *"Your captain this evening is Bullzeye."* |
+| 16–20 s | The soundcheck: the booth (with consent), the bass hits and she grins. | *"Your captain this evening is STOKED."* |
 | 20–23 s | Her phone filming the sunset, battery at 100%. | *"Please make sure your phone is fully charged."* |
 | 23–25 s | She looks into the lens and smiles. End frame. | *"Cabin crew, doors to manual. See you at Gate: Rooftop."* |
 
@@ -194,6 +194,6 @@ These are my editorial judgment, same gate as before: 40 or more to publish. Re-
 ## Before shooting
 1. Send each creator **only her own script** plus the specs in file 10.
 2. Drafts go to the coordinator **12 hours before** posting.
-3. Written consent: **Regenta** (all five), **Bullzeye** (R13, R15 booth shots), the **Dollu kunitha group** (R15), **security and help-desk staff** if they're in shot (R14), and **friends' voices** (R14, R15).
+3. Written consent: **Regenta** (all five), **STOKED** (R13, R15 booth shots), the **Dollu kunitha group** (R15), **security and help-desk staff** if they're in shot (R14), and **friends' voices** (R14, R15).
 4. Fill in **[cab partner]** and **[close time]**, and confirm the 10 pm moment and the drummers are booked before recording R15.
 5. Paid partnership label plus #ad or #collab on every post.

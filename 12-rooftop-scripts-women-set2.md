@@ -1,6 +1,6 @@
 # 12 · 5 more rooftop scripts for women creators (set 2): 3 solo, 1 duo, 1 trio
 
-**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec · Bullzeye**
+**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec, 4 PM onwards · STOKED with Vinzula, Sachin and Blacout**
 These follow on from R1–R5 in [11-rooftop-scripts-women.md](11-rooftop-scripts-women.md) and use the same decision brief, specs and rules: 9:16, warm sunset grade, captions on, all lines in English, the end frame *"#OPEN AIR · 05.12 · Regenta Rooftop"*, and the Paid partnership label plus **#ad** or **#collab** on every post. They never say "book", "tickets", "buy" or a price, and never show bottles, labels or Terrace guests' faces.
 
 Each one uses a format that none of the 55 briefs or R1–R5 use.
@@ -47,7 +47,7 @@ Each one uses a format that none of the 55 briefs or R1–R5 use.
 | 0–3 s | **Hook.** Over her shoulder: she holds a small handheld mic, very serious, pointed at the sun just above the skyline. | *"First question. How long have you been doing this?"* | *"Every evening. Since forever."* |
 | 3–8 s | Close on her nodding like a journalist. | *"And who usually watches you?"* | *"Mostly people stuck at the Airport Road signal."* |
 | 8–13 s | A wide shot: just her and the sun on the empty rooftop. Softer now. | *"When did a girl last watch you from up here?"* | *"…Never."* |
-| 13–18 s | She leans in, conspiratorial. | *"I hear Saturday's different."* | *"Someone's playing music for me. Bullzeye, I think."* |
+| 13–18 s | She leans in, conspiratorial. | *"I hear Saturday's different."* | *"Someone's playing music for me. STOKED, I think."* |
 | 18–22 s | The sun touches the horizon and she checks her watch. | *"Any advice for people coming?"* | *"Get here before 6. I don't wait for anyone."* |
 | 22–25 s | The sun disappears. She lowers the mic and speaks quietly to camera. End frame. | *"…Iconic."* | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
 
@@ -190,6 +190,6 @@ These are my editorial judgment, same gate as before: 40 or more to publish. Re-
 ## Before shooting
 1. Send each creator **only her own script** plus the specs in file 10.
 2. Drafts go to the coordinator **12 hours before** posting.
-3. Written consent: **Regenta** (all five), **Ajji and Amma** (R10), **security staff on camera** (R7, R10), **Bullzeye** for any booth shot (R8).
+3. Written consent: **Regenta** (all five), **Ajji and Amma** (R10), **security staff on camera** (R7, R10), **STOKED** for any booth shot (R8).
 4. Fill in **[cab partner]**, **[age]** and the **5 Dec sunset time** before the shoot. Use "eight floors" only if it's true.
 5. Paid partnership label plus #ad or #collab on every post. R8 is never posted as a real review.

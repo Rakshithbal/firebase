@@ -1,6 +1,6 @@
 # 14 · Scripts for women creators aged 18–23, across four hotel locations
 
-**Bi Ki BOO presents #OPEN AIR · Regenta, Airport Road · Sat 5 Dec · Bullzeye**
+**Bi Ki BOO presents #OPEN AIR · Regenta, Airport Road · Sat 5 Dec, 4 PM onwards · STOKED with Vinzula, Sachin and Blacout**
 This is a shortlist of the 15 scripts in [11](11-rooftop-scripts-women.md), [12](12-rooftop-scripts-women-set2.md) and [13](13-rooftop-voiceover-scripts.md), picked and rewritten for **women creators aged 18–23**. Some now use the **lobby, pool or garden** instead of the rooftop. All other specs and rules from those files still apply.
 
 ---
@@ -66,7 +66,7 @@ I kept the ten where an 18–23 voice is the most natural fit: college, exams, A
 | 4–8 s | **Lobby** | She hands her pass across the welcome desk. A smiling staff member (with consent) "stamps" it with a wristband. | *"Please have your boarding pass ready at check-in."* |
 | 8–12 s | **Lobby** | She walks to the lift, which works as the gate. The doors open. | *"Now boarding at Gate: Rooftop. Cruising altitude, well… up."* |
 | 12–16 s | **Rooftop** | The lift opens onto the skyline. She pulls on a shawl. | *"Temperature at destination: sixteen degrees. Keep your shawl within reach."* |
-| 16–20 s | **Rooftop** | The soundcheck: the bass hits and she grins. | *"Your captain this evening is Bullzeye."* |
+| 16–20 s | **Rooftop** | The soundcheck: the bass hits and she grins. | *"Your captain this evening is STOKED."* |
 | 20–25 s | **Rooftop** | She films the sunset, then looks into the lens. End frame. | *"Please make sure your phone is fully charged. Cabin crew, doors to manual."* |
 
 **Caption:** *"#collab Now boarding. 05.12 🛫"*
@@ -133,7 +133,7 @@ I kept the ten where an 18–23 voice is the most natural fit: college, exams, A
 | 0–3 s | **Poolside** | **Hook.** Three on loungers, C in the middle, sunglasses on, judging-panel faces, the pool glowing behind them. | C: *"We're rating this place like it's a first date."* | *"rating a hotel like a first date"* |
 | 3–8 s | **Poolside** | D crosses her arms. | D: *"Techno. Hotel. Hubballi. That's three red flags already."* E: *"Give him a chance."* | — |
 | 8–12 s | **Poolside** | **Flag 1.** The sunset reflected in the water. | C: *"Good-looking. Even his reflection."* | *"🟢 good-looking"* |
-| 12–17 s | **Poolside** | **Flag 2.** The soundcheck bass rumbles down from above, the water ripples, and all three look up. | D, despite herself: *"Okay… good taste in music."* | *"🟢 bringing Bullzeye"* |
+| 12–17 s | **Poolside** | **Flag 2.** The soundcheck bass rumbles down from above, the water ripples, and all three look up. | D, despite herself: *"Okay… good taste in music."* | *"🟢 bringing STOKED"* |
 | 17–21 s | **Lobby** (quick cut) | **Flag 3.** The help desk and the women security staff. | C: *"Your parents would actually like him."* | *"🟢 parents approve"* |
 | 21–26 s | **Rooftop** | **Flag 4.** The lift opens onto the skyline and all three go "ohhh". | E: *"And he has a* rooftop*."* | *"🟢 tall"* |
 | 26–31 s | **Rooftop** | D lifts a finger. | D: *"One real red flag. He's only free on the 5th."* C and E stare. D shrugs: *"…I can work with that."* | *"🚩 only free Saturday"* |
@@ -217,7 +217,7 @@ Both need the rooftop: R1 needs the skyline and the plane landing, and R3 needs 
 ## Before shooting
 1. **Confirm the entry age.** If it's 21+, cast only creators aged 21–23.
 2. **Confirm Regenta has a pool and a garden you can use**, and book the closed-pool slot with a lifeguard.
-3. Written consent: Regenta, the lobby and security staff on camera, Bullzeye, the Dollu kunitha group, and every friend's voice and face.
+3. Written consent: Regenta, the lobby and security staff on camera, STOKED, the Dollu kunitha group, and every friend's voice and face.
 4. No other hotel guests' faces in the lobby or at the pool. Creators stay dressed at the pool.
 5. Fill in **[cab partner]** and **[close time]**. Only say there's an ID check if there is one.
 6. Paid partnership label plus #ad or #collab on every post.

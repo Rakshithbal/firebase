@@ -1,9 +1,12 @@
 # 15 · Girls chatting, yapping and gossiping: 8 voice-over scripts, 4 hotel locations
 
-**Bi Ki BOO presents #OPEN AIR · Regenta, Airport Road · Sat 5 Dec · Bullzeye**
+**Bi Ki BOO presents #OPEN AIR · Regenta, Airport Road · Sat 5 Dec, 4 PM onwards · STOKED with Vinzula, Sachin and Blacout**
 Eight scripts, two for each location: **lobby, pool, garden and rooftop**. **Only the girls are in them.** There's no home, car, family, staff or anyone else speaking or acting. Every scene can be shot inside the hotel.
 
 Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OPEN AIR · 05.12 · Regenta Rooftop"*, and the Paid partnership label plus #ad or #collab. They never say "book", "tickets", "buy" or a price. No bottles, labels or other guests' faces. Casting age: see the warning at the top of [file 14](14-scripts-for-creators-18-23.md). If entry is 21+, cast 21–23.
+
+
+> **Approved final versions of Y1–Y8 live in the Claude Doc "#OPEN AIR · 8 Girls' Chat Scripts" (https://claude.ai/artifact/692JfFwDfADy6WoUxc37ku). That doc supersedes the drafts below.**
 
 ---
 
@@ -34,7 +37,7 @@ Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OP
 | 0–4 s | **Hook.** Two girls on a lobby sofa, heads close, one glancing around as if someone might hear. | **A:** ★ *"Okay, don't tell anyone. But I heard what he's doing at ten."* | *"lobby gossip 🤫"* |
 | 4–8 s | B's face: scandalised, hand over her mouth. | **B:** *"Ten?* At night*? Who does he think he is?"* | — |
 | 8–13 s | B-roll: A walking across the lobby, looking up at the ceiling. | **A:** *"Apparently he's been planning it for weeks. Sunset first. Then the drums."* **B:** *"Drums?"* | — |
-| 13–18 s | Back on the sofa. B leans in. | **B:** *"Is he… cute?"* **A:** ★ *"He's eight floors tall and he's got Bullzeye."* | — |
+| 13–18 s | Back on the sofa. B leans in. | **B:** *"Is he… cute?"* **A:** ★ *"He's eight floors tall and he's got STOKED."* | — |
 | 18–22 s | B-roll: the lift doors closing on them, then opening onto the rooftop. | **B:** *"Wait. You're talking about the* rooftop*?"* **A:** *"Who else would I be talking about?"* | — |
 | 22–25 s | Both on the rooftop, laughing. End frame. | **B:** *"I'm free Saturday, by the way."* | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
 
@@ -85,7 +88,7 @@ Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OP
 | Time | Shot | Chat | On-screen text |
 |---|---|---|---|
 | 0–4 s | **Hook.** A on a poolside lounger, very composed. B beside her, looking straight into the lens. | **A:** ★ *"I'm just going for an hour on Saturday."* **B, to camera:** *"Translation: she's staying till close."* | *"what she said vs what she meant"* |
-| 4–9 s | A adjusts her sunglasses. | **A:** *"I'm not really a techno person."* **B:** *"She's been playing Bullzeye on loop since Monday."* | *"🎧 on loop"* |
+| 4–9 s | A adjusts her sunglasses. | **A:** *"I'm not really a techno person."* **B:** *"She's been playing STOKED on loop since Monday."* | *"🎧 on loop"* |
 | 9–14 s | A sips water from a glass (water only). | **A:** *"I'll just take a few photos."* **B:** *"Four hundred. Minimum."* | *"📸 400+"* |
 | 14–19 s | A gestures at the pool. | **A:** *"I don't even care about the sunset."* **B:** *"She's checked the sunset time six times today."* | *"🌅 x6"* |
 | 19–23 s | A finally breaks, laughs and covers her face. | **A:** *"Okay, fine. I'm excited."* **B:** ★ *"Translation: she's* very *excited."* | — |
@@ -122,7 +125,7 @@ Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OP
 | 0–4 s | **Hook.** Overhead: three girls cross-legged in a circle on the grass, one reading off her phone. | **C:** ★ *"Would you rather. Saturday edition. No skipping."* **D:** *"I'm skipping."* | *"would you rather: Saturday edition"* |
 | 4–8 s | Quick reaction cuts. | **C:** *"Sunset or the 10 pm thing?"* **D and E:** *"Both."* **C:** *"You can't say both."* **D and E:** *"Both."* | *"🌅 or 🎧?"* |
 | 8–13 s | E thinks hard. | **C:** *"Heels and suffer, or flats and dance all night?"* **E:** *"Heels for the photo. Flats for everything after."* **C:** *"Wise."* | *"👠 or 🥿?"* |
-| 13–18 s | D, dramatic. | **C:** *"Never see a sunset again, or never hear Bullzeye live?"* **D:** *"That's evil. Why would you ask that?"* | — |
+| 13–18 s | D, dramatic. | **C:** *"Never see a sunset again, or never hear STOKED live?"* **D:** *"That's evil. Why would you ask that?"* | — |
 | 18–23 s | C turns the phone to D. | **C:** *"Stay home Saturday, or—"* **D and E:** ★ *"NO."* **C:** *"I didn't even finish."* | *"🏠 or 🌇?"* |
 | 23–27 s | All three lie back on the grass, laughing. | **E:** *"That one wasn't a question. That was a threat."* | — |
 | 27–30 s | Overhead of the three on the grass. End frame. | — | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
@@ -139,7 +142,7 @@ Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OP
 | 0–4 s | **Hook.** Both lean into their mics at the same time, deadpan, podcast-intro style. | **A:** ★ *"Welcome back to Two Girls, One Rooftop."* **B:** *"It's our first episode."* **A:** *"Welcome back anyway."* | *"🎙️ Two Girls, One Rooftop · Ep. 1"* |
 | 4–8 s | Wide: both on loungers, the sunset behind. | **A:** *"Today: how to survive your first rooftop night."* **B:** *"Tip one. It's sixteen degrees. Bring a shawl. Don't argue with me."* | *"1 · shawl"* |
 | 8–13 s | A holds up flats like evidence. | **A:** *"Tip two. Heels for the entrance, flats in the bag."* **B:** *"Your feet will thank you at eleven."* | *"2 · flats"* |
-| 13–19 s | B-roll: an empty dance floor at soundcheck, the lights coming on. | **B:** *"Tip three. Nobody is watching you dance. Everyone's looking at the sky."* **A:** *"Or at Bullzeye."* **B:** *"Or at Bullzeye."* | *"3 · just dance"* |
+| 13–19 s | B-roll: an empty dance floor at soundcheck, the lights coming on. | **B:** *"Tip three. Nobody is watching you dance. Everyone's looking at the sky."* **A:** *"Or at STOKED."* **B:** *"Or at STOKED."* | *"3 · just dance"* |
 | 19–25 s | Back to the mics, more serious for a second. | **A:** ★ *"Tip four. There's a help desk, women on security at the door, and a cab desk for going home."* **B:** *"So relax. It's sorted."* | *"4 · sorted"* |
 | 25–30 s | B leans into the mic, conspiratorial. | **B:** *"Tip five. Be up here before sunset. It doesn't wait."* **A:** *"Neither do we."* | *"5 · before 6"* |
 | 30–35 s | Both lean back on their loungers and lower the mics. End frame. | **A:** *"That's the episode."* **B:** *"See you on the rooftop."* | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
@@ -157,7 +160,7 @@ Same rules as before: 9:16, 15–35 s, English, captions on, the end frame *"#OP
 | 0–4 s | **Hook.** Close on her, eyes shut, hands in a prayer pose, the sunset behind. | ★ *"Okay, manifesting Saturday. Universe, please listen."* | *"manifesting ✨"* |
 | 4–8 s | She counts on her fingers, eyes open now. | *"One. The perfect sunset photo. First try."* | *"1 · 📸"* |
 | 8–11 s | A quick cut: her pretending to dance. | *"Two. I actually dance. In public."* | *"2 · 💃"* |
-| 11–14 s | A quick cut: her hand over her heart. | *"Three. Bullzeye plays* that *track."* | *"3 · 🎧"* |
+| 11–14 s | A quick cut: her hand over her heart. | *"Three. STOKED plays* that *track."* | *"3 · 🎧"* |
 | 14–17 s | Back to close. | ★ *"Four. My whole group is there. Nobody bails."* | *"4 · 👯‍♀️"* |
 | 17–20 s | She opens her eyes, smiles at the lens. End frame. | *"Send this to the one who's going to bail."* | *"#OPEN AIR · 05.12 · Regenta Rooftop"* |
 

@@ -1,6 +1,6 @@
 # 11 · 5 rooftop scripts for women creators: 3 solo, 1 duo, 1 trio
 
-**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec · Bullzeye**
+**Bi Ki BOO presents #OPEN AIR · Regenta rooftop, Airport Road · Sat 5 Dec, 4 PM onwards · STOKED with Vinzula, Sachin and Blacout**
 All five are shot on the Regenta rooftop. They follow the specs in [10-video-briefs-55.md](10-video-briefs-55.md): 9:16, warm sunset grade, captions on, no bottles or labels, no guests' faces on the Terrace, and the end frame *"#OPEN AIR · 05.12 · Regenta Rooftop"*.
 
 This version has been run through the Content Influence OS: a decision brief first, then each script tied to one belief it has to change, then a score out of 50 before anything is posted.
@@ -13,7 +13,7 @@ This version has been run through the Content Influence OS: a decision brief fir
 |---|---|
 | **Audience** | Women aged 21–35 in Hubballi–Dharwad, plus Hubballi women working in Bengaluru or Pune who come home at weekends |
 | **Awareness stage** | **Problem-aware.** They feel there's nowhere to go out here, but they don't know a night like this exists in their own city. So the first piece has to show the category exists ("there's a better way"), not push the event. |
-| **Message saturation** | **Level 2 locally, Level 5 for the "party" promise.** "Rooftop party" and "the biggest night" are worn-out claims. Lead with **identity and experience** (pride, friendship, Amma) and the **mechanism** (sunset → drummers → Bullzeye → 10 pm headphones), never with hype. |
+| **Message saturation** | **Level 2 locally, Level 5 for the "party" promise.** "Rooftop party" and "the biggest night" are worn-out claims. Lead with **identity and experience** (pride, friendship, Amma) and the **mechanism** (sunset → drummers → STOKED → 10 pm headphones), never with hype. |
 | **Decision equation** | *"A proper night out means Bengaluru, and it isn't really for girls like me here"* → *"There's one here, it's safe, my friends are going, and Amma would say yes"* → **use a creator's code to get on the guest list with my squad or partner before Saturday.** |
 | **Primary barrier** | **Don't trust**: safety, what parents will say, "will there be other women?" Second: **don't care**: "techno isn't my thing." |
 | **Frames** | Identity (R1, R2), Social (R5), Simplicity and reassurance (R4), Curiosity, an open loop that does get closed (R3) |
@@ -40,7 +40,7 @@ This version has been run through the Content Influence OS: a decision brief fir
 | Problem | "We leave, or we stay home. Hubballi women go without." | **R2** |
 | Cause | "It's not that we don't want it. Nobody built one that felt safe, tasteful and *ours*." | **R2** |
 | Solution | "That kind of night can exist here. It does." | **R1** |
-| Mechanism | "Sunset, then drummers, then Bullzeye, then something at 10 pm you have to be there for." | **R3** (+ R5 flag 3) |
+| Mechanism | "Sunset, then drummers, then STOKED, then something at 10 pm you have to be there for." | **R3** (+ R5 flag 3) |
 | Brand | "#OPEN AIR does it properly, and even Amma would approve." | **R4** |
 | Action | "My squad is going. Saturday's the only date. Get the code." | **R5** |
 
@@ -208,7 +208,7 @@ Some scripts need to be posted before the 3 Dec soundcheck, so there are two sho
 | 3–8 s | D crosses her arms. | D: *"Techno. Rooftop. Hubballi. That's three red flags already."* E: *"Give him a chance."* | — |
 | 8–12 s | **Flag 1.** The sun sinking behind the skyline. | C: *"Shows up on time. Every single evening."* | *"🟢 punctual"* |
 | 12–16 s | **Flag 2.** A low angle out over the city. | E: *"Tall. Like, the-whole-city-below-you tall."* | *"🟢 tall"* |
-| 16–21 s | **Flag 3.** Cut to the booth (with Bullzeye's consent): the soundcheck bass hits and all three jump. | D, despite herself: *"Okay… good taste in music."* | *"🟢 bringing Bullzeye"* |
+| 16–21 s | **Flag 3.** Cut to the booth (with STOKED's consent): the soundcheck bass hits and all three jump. | D, despite herself: *"Okay… good taste in music."* | *"🟢 bringing STOKED"* |
 | 21–25 s | **Flag 4.** A quick look at the help desk and the women security staff. | C: *"Your parents would actually like him."* | *"🟢 parents approve"* |
 | 25–29 s | **Flag 5.** Shawls on, the lights coming up. | E: *"And he doesn't make you drive to Bengaluru."* | *"🟢 lives in Hubballi"* |
 | 29–33 s | D lifts a finger. | D: *"One real red flag. He's only free on the 5th."* C and E stare. D shrugs: *"…I can work with that."* | *"🚩 only free Saturday"* |
@@ -272,7 +272,7 @@ The gate is **40 to publish**, 30–39 to revise, and under 30 to rebuild. These
 ## Before shooting
 1. Send each creator **only her own script** plus the specs in file 10.
 2. Drafts go to the coordinator **12 hours before** posting.
-3. Written consent: **Regenta** (all five, plus the Day A shoot on 30 Nov), **Bullzeye** (R5), **security staff on camera** (R4, R5), **Amma's voice** (R4), **the friend's reply voice** (R2), **R3's second dancer**.
+3. Written consent: **Regenta** (all five, plus the Day A shoot on 30 Nov), **STOKED** (R5), **security staff on camera** (R4, R5), **Amma's voice** (R4), **the friend's reply voice** (R2), **R3's second dancer**.
 4. Fill in **[close time]**, **[cab partner name]** and **R3's 10 pm format** before the shoot.
 5. Paid partnership label plus #ad or #collab on every post.
 6. None of the five can show bottles, labels, Terrace guests' faces, "girls free", "BUY NOW", or say "full" without real numbers.
