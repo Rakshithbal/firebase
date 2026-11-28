@@ -1,0 +1,185 @@
+{
+ "duration": 37.3,
+ "cues": [
+  {
+   "type": "slide",
+   "t": 6.21,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 8.93,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 12.88,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 17.76,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 19.71,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 23.15,
+   "gain": 0.45
+  },
+  {
+   "type": "slide",
+   "t": 30.14,
+   "gain": 0.45
+  },
+  {
+   "type": "pop",
+   "t": 4.59,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 2.5,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 7.41,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 8.98,
+   "gain": 0.8
+  },
+  {
+   "type": "shimmer",
+   "t": 10.23,
+   "gain": 0.35
+  },
+  {
+   "type": "pop",
+   "t": 12.28,
+   "gain": 0.8
+  },
+  {
+   "type": "stamp",
+   "t": 14.38,
+   "gain": 1.0
+  },
+  {
+   "type": "marker",
+   "t": 16.3,
+   "gain": 0.6
+  },
+  {
+   "type": "pop",
+   "t": 17.81,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 18.36,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 18.06,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 18.21,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 18.36,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 19.76,
+   "gain": 0.8
+  },
+  {
+   "type": "tick",
+   "t": 21.7,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 21.82,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 21.94,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 22.06,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 22.18,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 22.3,
+   "gain": 0.6
+  },
+  {
+   "type": "tick",
+   "t": 22.42,
+   "gain": 0.6
+  },
+  {
+   "type": "marker",
+   "t": 24.7,
+   "gain": 0.6
+  },
+  {
+   "type": "marker",
+   "t": 25.1,
+   "gain": 0.6
+  },
+  {
+   "type": "pop",
+   "t": 26.29,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 27.42,
+   "gain": 0.8
+  },
+  {
+   "type": "stamp",
+   "t": 28.12,
+   "gain": 1.0
+  },
+  {
+   "type": "pop",
+   "t": 30.19,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 30.59,
+   "gain": 0.8
+  },
+  {
+   "type": "pop",
+   "t": 31.8,
+   "gain": 0.8
+  }
+ ]
+}
